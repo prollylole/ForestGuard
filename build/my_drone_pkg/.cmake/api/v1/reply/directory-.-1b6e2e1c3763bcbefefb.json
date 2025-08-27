@@ -235,7 +235,10 @@
 			"destination" : "share/my_drone_pkg/launch",
 			"paths" : 
 			[
-				"launch"
+				{
+					"from" : "launch",
+					"to" : "."
+				}
 			],
 			"type" : "directory"
 		},
@@ -245,7 +248,10 @@
 			"destination" : "share/my_drone_pkg/urdf",
 			"paths" : 
 			[
-				"urdf"
+				{
+					"from" : "urdf",
+					"to" : "."
+				}
 			],
 			"type" : "directory"
 		},

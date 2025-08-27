@@ -43,11 +43,11 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_drone_pkg/launch" TYPE DIRECTORY FILES "/home/claudia/ForestGuard/src/my_drone_pkg/launch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_drone_pkg/launch" TYPE DIRECTORY FILES "/home/claudia/ForestGuard/src/my_drone_pkg/launch/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_drone_pkg/urdf" TYPE DIRECTORY FILES "/home/claudia/ForestGuard/src/my_drone_pkg/urdf")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_drone_pkg/urdf" TYPE DIRECTORY FILES "/home/claudia/ForestGuard/src/my_drone_pkg/urdf/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)

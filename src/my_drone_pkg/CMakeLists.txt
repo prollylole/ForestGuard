@@ -24,12 +24,12 @@ if(BUILD_TESTING)
 endif()
 
 # install launch files
-install(DIRECTORY launch
+install(DIRECTORY launch/
   DESTINATION share/${PROJECT_NAME}/launch
 )
 
 # Install urdf files
-install(DIRECTORY urdf
+install(DIRECTORY urdf/
   DESTINATION share/${PROJECT_NAME}/urdf
 )
 ament_package()
