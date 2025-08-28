@@ -1,7 +1,7 @@
 name: Notify Discord on push
 on:
   push:
-    branches: ["**"]         # all branches
+    branches: ["*"]         # all branches
   workflow_dispatch:         # lets you run it manually from Actions
 
 jobs:
