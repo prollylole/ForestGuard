@@ -19,4 +19,3 @@ T4:
 ## Save map
   ros2 run nav2_map_server map_saver_cli -f $(pwd)/maps/office
 
-  ## Testing webhook
