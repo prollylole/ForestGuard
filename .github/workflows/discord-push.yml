@@ -1,36 +1,29 @@
 name: Notify Discord on push
 on:
   push:
-    branches: [""]        # all branches
-  workflow_dispatch:        # lets you run it manually from Actions
+    branches: ["**"]         # all branches
+  workflow_dispatch:         # lets you run it manually from Actions
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      
-name: Ensure jq is available
-      run: |
-        if ! command -v jq >/dev/null 2>&1; then
-          sudo apt-get update && sudo apt-get install -y jq
-        fi
+      - name: Ensure jq is available
+        run: |
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update && sudo apt-get install -y jq
+          fi
 
-      
-name: Send message to Discord
-      env:
-        WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        REPO: ${{ github.repository }}
-        BRANCH: ${{ github.ref_name }}
-        ACTOR: ${{ github.actor }}
-      run: |# Read GitHub event JSON
-        COUNT=$(jq '.commits | length' "$GITHUB_EVENT_PATH")
-        COMMITS=$(jq -r '[.commits[] | "- " + .message + " (by " + ((.author.username // .author.name) // "unknown") + ")"] | .[0:5] | join("\n")' "$GITHUB_EVENT_PATH")
-        COMPARE=$(jq -r '.compare' "$GITHUB_EVENT_PATH")
-
-          CONTENT="🚀 $ACTOR pushed $COUNT commit(s) to $REPO on $BRANCH**\n${COMMITS}\n🔗 Diff: ${COMPARE}"
-
-          # Post to Discord (204 = success)
+      - name: Send message to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          COUNT=$(jq '.commits | length' "$GITHUB_EVENT_PATH")
+          COMMITS=$(jq -r '[.commits[] | "- " + .message + " (by " + ((.author.username // .author.name) // "unknown") + ")"] | .[0:5] | join("\n")' "$GITHUB_EVENT_PATH")
+          COMPARE=$(jq -r '.compare' "$GITHUB_EVENT_PATH")
+          CONTENT="🚀 **$ACTOR** pushed **$COUNT** commit(s) to **$REPO** on **$BRANCH**\n${COMMITS}\n🔗 Diff: ${COMPARE}"
           printf '%s' "$(jq -Rn --arg c "$CONTENT" '{content: $c}')" \
           | curl -fsS -H "Content-Type: application/json" -d @- "$WEBHOOK"
-
-          add discord push notifier
