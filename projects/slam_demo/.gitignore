@@ -1,0 +1,7 @@
+logs/
+*.pgm
+*.db3
+*.bag
+*.yaml
+*.pyc
+__pycache__/
