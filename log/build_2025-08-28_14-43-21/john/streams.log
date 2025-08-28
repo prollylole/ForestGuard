@@ -1,0 +1,5 @@
+[0.007s] Invoking command in '/home/john/ForestGuard/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/john/ForestGuard/build/john -- -j20 -l20
+[0.026s] [0mCMake Error: The source directory "/home/john/ForestGuard/john" does not exist.
+[0.026s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.027s] gmake: *** [Makefile:226: cmake_check_build_system] Error 1
+[0.029s] Invoked command in '/home/john/ForestGuard/build/john' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/john/ForestGuard/build/john -- -j20 -l20
