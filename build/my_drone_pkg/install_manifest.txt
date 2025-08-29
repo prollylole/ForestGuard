@@ -1,6 +1,5 @@
 /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch/display.launch.py
-/home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/urdf/my_drone.xacro
-/home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/urdf/my_drone.urdf
+/home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds/world_demo.sdf
 /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/package_run_dependencies/my_drone_pkg
 /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/parent_prefix_path/my_drone_pkg
 /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.sh

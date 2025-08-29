@@ -29,7 +29,7 @@ install(DIRECTORY launch/
 )
 
 # Install urdf files
-install(DIRECTORY urdf/
-  DESTINATION share/${PROJECT_NAME}/urdf
+install(DIRECTORY worlds/
+  DESTINATION share/${PROJECT_NAME}/worlds
 )
 ament_package()

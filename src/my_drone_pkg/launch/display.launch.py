@@ -7,9 +7,9 @@ def generate_launch_description():
 
     # Locate the urdf file inside your package
     pkg_share = get_package_share_directory('my_drone_pkg')
-    urdf_file = os.path.join(pkg_share, 'urdf', 'my_drone.urdf')
+    world_file = os.path.join(pkg_share, 'worlds', 'world_demo.sdf')
 
-    with open(urdf_file, 'r') as infp:
+    with open(world_file, 'r') as infp:
         robot_desc = infp.read()
 
     return LaunchDescription([

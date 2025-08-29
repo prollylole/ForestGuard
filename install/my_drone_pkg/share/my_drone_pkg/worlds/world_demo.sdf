@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+    <world name="demo_world">
+        <include>
+            <uri>model://sun
+            </uri>
+        </include>
+        <include>
+            <uri>model://ground_plane
+            </uri>
+        </include>
+        <include>
+            <uri>model://X4_GPS_LIDAR_RGBD</uri>
+            <pose>0 0 0.1 0 0 0</pose>
+        </include>
+    </world>
+</sdf>
