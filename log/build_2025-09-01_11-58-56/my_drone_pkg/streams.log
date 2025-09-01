@@ -1,0 +1,50 @@
+[0.019s] Invoking command in '/home/claudia/ForestGuard/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/my_drone_pkg -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/my_drone_pkg
+[0.133s] -- The C compiler identification is GNU 11.4.0
+[0.237s] -- The CXX compiler identification is GNU 11.4.0
+[0.252s] -- Detecting C compiler ABI info
+[0.336s] -- Detecting C compiler ABI info - done
+[0.346s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.346s] -- Detecting C compile features
+[0.347s] -- Detecting C compile features - done
+[0.351s] -- Detecting CXX compiler ABI info
+[0.452s] -- Detecting CXX compiler ABI info - done
+[0.462s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.462s] -- Detecting CXX compile features
+[0.463s] -- Detecting CXX compile features - done
+[0.472s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.642s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.812s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.931s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.933s] -- Added test 'lint_cmake' to check CMake code style
+[0.934s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.939s] -- Added test 'xmllint' to check XML markup files
+[0.941s] -- Configuring done
+[0.945s] -- Generating done
+[0.948s] -- Build files have been written to: /home/claudia/ForestGuard/build/my_drone_pkg
+[0.953s] Invoked command in '/home/claudia/ForestGuard/build/my_drone_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/my_drone_pkg -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/my_drone_pkg
+[0.956s] Invoking command in '/home/claudia/ForestGuard/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/my_drone_pkg -- -j16 -l16
+[0.984s] Invoked command in '/home/claudia/ForestGuard/build/my_drone_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/my_drone_pkg -- -j16 -l16
+[0.992s] Invoking command in '/home/claudia/ForestGuard/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/my_drone_pkg
+[0.995s] -- Install configuration: ""
+[0.996s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch
+[0.996s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch/display.launch.py
+[0.996s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds
+[0.996s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds/world_demo.sdf
+[0.996s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models
+[0.997s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/world_demo.sdf
+[0.997s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/package_run_dependencies/my_drone_pkg
+[0.997s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/parent_prefix_path/my_drone_pkg
+[0.997s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.sh
+[0.998s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.dsv
+[0.998s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/path.sh
+[0.998s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/path.dsv
+[0.998s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.bash
+[0.999s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.sh
+[0.999s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.zsh
+[0.999s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.dsv
+[0.999s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/package.dsv
+[0.999s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/packages/my_drone_pkg
+[1.000s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig.cmake
+[1.000s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig-version.cmake
+[1.000s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/package.xml
+[1.003s] Invoked command in '/home/claudia/ForestGuard/build/my_drone_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/my_drone_pkg
