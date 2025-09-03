@@ -1,0 +1,2 @@
+Invoking command in '/home/yut/ForestGuard/build/john': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/yut/ForestGuard/ForestGuard-john_branch/john -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/yut/ForestGuard/install/john
+Invoked command in '/home/yut/ForestGuard/build/john' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/yut/ForestGuard/ForestGuard-john_branch/john -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/yut/ForestGuard/install/john
