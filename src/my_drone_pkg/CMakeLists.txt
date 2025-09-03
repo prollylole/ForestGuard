@@ -32,4 +32,9 @@ install(DIRECTORY launch/
 install(DIRECTORY worlds/
   DESTINATION share/${PROJECT_NAME}/worlds
 )
+
+# Install model files
+install(DIRECTORY models/
+  DESTINATION share/${PROJECT_NAME}/models
+)
 ament_package()
