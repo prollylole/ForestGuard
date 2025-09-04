@@ -9,6 +9,7 @@
         "/home/claudia/rs1_ws/install/turtlesim/include/**",
         "/opt/ros/humble/include/**",
         "/home/claudia/ForestGuard/src/my_drone_pkg/include/**",
+        "/home/claudia/ForestGuard/src/sdf_to_urdf_converter/include/**",
         "/usr/include/**"
       ],
       "name": "ROS",

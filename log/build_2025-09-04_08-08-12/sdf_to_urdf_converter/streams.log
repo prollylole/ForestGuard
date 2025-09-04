@@ -1,0 +1,27 @@
+[0.036s] Invoking command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/sdf_to_urdf_converter -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/sdf_to_urdf_converter
+[0.053s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.286s] -- Found rcutils: 5.1.6 (/opt/ros/humble/share/rcutils/cmake)
+[0.334s] -- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") 
+[0.335s] -- Checking for module 'tinyxml2'
+[0.363s] --   Found tinyxml2, version 9.0.0
+[0.796s] -- Configuring done
+[0.818s] -- Generating done
+[0.825s] -- Build files have been written to: /home/claudia/ForestGuard/build/sdf_to_urdf_converter
+[0.838s] Invoked command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/sdf_to_urdf_converter -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/sdf_to_urdf_converter
+[0.842s] Invoking command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/sdf_to_urdf_converter -- -j16 -l16
+[0.899s] [ 20%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf.cpp.o[0m
+[0.900s] [ 40%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o[0m
+[0.968s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf_plugin.cpp:17:10:[m[K [01;31m[Kfatal error: [m[Kurdf_parser_plugin/parser.h: No such file or directory
+[0.969s]    17 | #include [01;31m[K<urdf_parser_plugin/parser.h>[m[K
+[0.969s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.969s] compilation terminated.
+[0.971s] gmake[2]: *** [CMakeFiles/sdformat_urdf.dir/build.make:90: CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o] Error 1
+[0.971s] gmake[2]: *** Waiting for unfinished jobs....
+[1.198s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:34:10:[m[K [01;31m[Kfatal error: [m[Ksdformat_urdf/sdformat_urdf.hpp: No such file or directory
+[1.198s]    34 | #include [01;31m[K"sdformat_urdf/sdformat_urdf.hpp"[m[K
+[1.198s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[1.198s] compilation terminated.
+[1.204s] gmake[2]: *** [CMakeFiles/sdformat_urdf.dir/build.make:76: CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf.cpp.o] Error 1
+[1.205s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/sdformat_urdf.dir/all] Error 2
+[1.206s] gmake: *** [Makefile:146: all] Error 2
+[1.210s] Invoked command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/sdf_to_urdf_converter -- -j16 -l16

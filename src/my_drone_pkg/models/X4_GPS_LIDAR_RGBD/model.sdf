@@ -33,14 +33,8 @@
             </ode>
         </physics>
     <model name="X4">
-        <pose>0 0 0.121078 0 0 0
-        </pose>
         <link name="base_link">
-            <pose frame="">0 0 0 0 -0 0
-            </pose>
             <inertial>
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <mass>3.42
                 </mass>
                 <inertia>
@@ -59,8 +53,6 @@
                 </inertia>
             </inertial>
             <collision name="base_link_inertia_collision">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <box>
                         <size>0.3 0.3 0.25
@@ -69,8 +61,6 @@
                 </geometry>
             </collision>
             <visual name="base_link_inertia_visual">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -81,8 +71,6 @@
                 </geometry>
             </visual>
             <visual name="marker_visual_1">
-                <pose frame="">-0.1 0 0.077 0 -0.1 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -93,8 +81,6 @@
                 </geometry>
             </visual>
             <visual name="marker_visual_2">
-                <pose frame="">-0.09 0.059 0.059 -0.785397 -0 0.2
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -104,9 +90,7 @@
                     </mesh>
                 </geometry>
             </visual>
-            <visual name="marker_visual_3">
-                <pose frame="">-0.09 -0.059 0.059 0.785397 -0 -0.2
-                </pose>
+            <visual name="marker_visual_3">          
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -117,8 +101,6 @@
                 </geometry>
             </visual>
             <visual name="downward_flashlight_visual">
-                <pose frame="">-0.043704 0 0.102914 -0.2 0.000158 -1.57002
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>0.01 0.01 0.01
@@ -129,8 +111,6 @@
                 </geometry>
             </visual>
             <visual name="left_flashlight_visual">
-                <pose frame="">-0.071985 0.090826 0.066102 0.06 -4.8e-05 -1.27
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>0.01 0.01 0.01
@@ -141,8 +121,6 @@
                 </geometry>
             </visual>
             <visual name="right_flashlight_visual">
-                <pose frame="">-0.071985 -0.090826 0.066102 0.06 -4.8e-05 -1.87
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>0.01 0.01 0.01
@@ -153,329 +131,264 @@
                 </geometry>
             </visual>
             
-            <light name="right_light_source" type="spot">
-                <pose frame="">-0.0 -0.11 0.07 3.131592653589795 -1.5107899999999999 2.841592653589791
-                </pose>
-                <attenuation>
-                    <range>15
-                    </range>
-                    <linear>0
-                    </linear>
-                    <constant>0.1
-                    </constant>
-                    <quadratic>0.01
-                    </quadratic>
-                </attenuation>
-                <diffuse>0.8 0.8 0.5 1
-                </diffuse>
-                <specular>0.8 0.8 0.5 1
-                </specular>
-                <spot>
-                    <inner_angle>1
-                    </inner_angle>
-                    <outer_angle>1.1
-                    </outer_angle>
-                    <falloff>1
-                    </falloff>
-                </spot>
-                <direction>0 0 -1
-                </direction>
-                <cast_shadows>1
-                </cast_shadows>
-            </light>
-            <light name="downward_flashlight_source" type="spot">
-                <pose frame="">0.03 0 0.09 -0.01 -1.3708026535897933 0
-                </pose>
-                <attenuation>
-                    <range>15
-                    </range>
-                    <linear>0
-                    </linear>
-                    <constant>0.1
-                    </constant>
-                    <quadratic>0.01
-                    </quadratic>
-                </attenuation>
-                <diffuse>0.8 0.8 0.5 1
-                </diffuse>
-                <specular>0.8 0.8 0.5 1
-                </specular>
-                <spot>
-                    <inner_angle>1
-                    </inner_angle>
-                    <outer_angle>1.1
-                    </outer_angle>
-                    <falloff>1
-                    </falloff>
-                </spot>
-                <direction>0 0 -1
-                </direction>
-                <cast_shadows>1
-                </cast_shadows>
-            </light>
-            <light name="left_flashlight_source" type="spot">
-                <pose frame="">-0.0 0.11 0.07 3.131592653589795 -1.5107899999999999 -2.841592653589791
-                </pose>
-                <attenuation>
-                    <range>15
-                    </range>
-                    <linear>0
-                    </linear>
-                    <constant>0.1
-                    </constant>
-                    <quadratic>0.01
-                    </quadratic>
-                </attenuation>
-                <diffuse>0.8 0.8 0.5 1
-                </diffuse>
-                <specular>0.8 0.8 0.5 1
-                </specular>
-                <spot>
-                    <inner_angle>1
-                    </inner_angle>
-                    <outer_angle>1.1
-                    </outer_angle>
-                    <falloff>1
-                    </falloff>
-                </spot>
-                <direction>0 0 -1
-                </direction>
-                <cast_shadows>1
-                </cast_shadows>
-            </light>
+            <!-- ====================== -->
+            <!-- ADDED SENSORS & PLUGINS -->
+            <!-- ====================== -->
             
+            <!-- IMU Sensor with Plugin -->
             <sensor name="imu_sensor" type="imu">
-                <always_on>1
-                </always_on>
-                <update_rate>250
-                </update_rate>
+                <always_on>1</always_on>
+                <update_rate>250</update_rate>
                 <imu>
-                    <enable_orientation>0
-                    </enable_orientation>
+                    <enable_orientation>0</enable_orientation>
                     <angular_velocity>
                         <x>
                             <noise type="gaussian">
-                                <mean>0
-                                </mean>
-                                <stddev>0.009
-                                </stddev>
-                                <bias_mean>0.00075
-                                </bias_mean>
-                                <bias_stddev>0.005
-                                </bias_stddev>
-                                <dynamic_bias_stddev>0.00002
-                                </dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>400.0
-                                </dynamic_bias_correlation_time>
-                                <precision>0.00025
-                                </precision>
+                                <mean>0</mean>
+                                <stddev>0.009</stddev>
+                                <bias_mean>0.00075</bias_mean>
+                                <bias_stddev>0.005</bias_stddev>
+                                <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
+                                <precision>0.00025</precision>
                             </noise>
                         </x>
                         <y>
                             <noise type="gaussian">
-                                <mean>0
-                                </mean>
-                                <stddev>0.009
-                                </stddev>
-                                <bias_mean>0.00075
-                                </bias_mean>
-                                <bias_stddev>0.005
-                                </bias_stddev>
-                                <dynamic_bias_stddev>0.00002
-                                </dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>400.0
-                                </dynamic_bias_correlation_time>
-                                <precision>0.00025
-                                </precision>
+                                <mean>0</mean>
+                                <stddev>0.009</stddev>
+                                <bias_mean>0.00075</bias_mean>
+                                <bias_stddev>0.005</bias_stddev>
+                                <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
+                                <precision>0.00025</precision>
                             </noise>
                         </y>
                         <z>
                             <noise type="gaussian">
-                                <mean>0
-                                </mean>
-                                <stddev>0.009
-                                </stddev>
-                                <bias_mean>0.00075
-                                </bias_mean>
-                                <bias_stddev>0.005
-                                </bias_stddev>
-                                <dynamic_bias_stddev>0.00002
-                                </dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>400.0
-                                </dynamic_bias_correlation_time>
-                                <precision>0.00025
-                                </precision>
+                                <mean>0</mean>
+                                <stddev>0.009</stddev>
+                                <bias_mean>0.00075</bias_mean>
+                                <bias_stddev>0.005</bias_stddev>
+                                <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
+                                <precision>0.00025</precision>
                             </noise>
                         </z>
                     </angular_velocity>
                     <linear_acceleration>
                         <x>
                             <noise type="gaussian">
-                                <mean>0
-                                </mean>
-                                <stddev>0.021
-                                </stddev>
-                                <bias_mean>0.05
-                                </bias_mean>
-                                <bias_stddev>0.0075
-                                </bias_stddev>
-                                <dynamic_bias_stddev>0.000375
-                                </dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>175.0
-                                </dynamic_bias_correlation_time>
-                                <precision>0.005
-                                </precision>
+                                <mean>0</mean>
+                                <stddev>0.021</stddev>
+                                <bias_mean>0.05</bias_mean>
+                                <bias_stddev>0.0075</bias_stddev>
+                                <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
+                                <precision>0.005</precision>
                             </noise>
                         </x>
                         <y>
                             <noise type="gaussian">
-                                <mean>0
-                                </mean>
-                                <stddev>0.021
-                                </stddev>
-                                <bias_mean>0.05
-                                </bias_mean>
-                                <bias_stddev>0.0075
-                                </bias_stddev>
-                                <dynamic_bias_stddev>0.000375
-                                </dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>175.0
-                                </dynamic_bias_correlation_time>
-                                <precision>0.005
-                                </precision>
+                                <mean>0</mean>
+                                <stddev>0.021</stddev>
+                                <bias_mean>0.05</bias_mean>
+                                <bias_stddev>0.0075</bias_stddev>
+                                <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
+                                <precision>0.005</precision>
                             </noise>
                         </y>
                         <z>
                             <noise type="gaussian">
-                                <mean>0
-                                </mean>
-                                <stddev>0.021
-                                </stddev>
-                                <bias_mean>0.05
-                                </bias_mean>
-                                <bias_stddev>0.0075
-                                </bias_stddev>
-                                <dynamic_bias_stddev>0.000375
-                                </dynamic_bias_stddev>
-                                <dynamic_bias_correlation_time>175.0
-                                </dynamic_bias_correlation_time>
-                                <precision>0.005
-                                </precision>
+                                <mean>0</mean>
+                                <stddev>0.021</stddev>
+                                <bias_mean>0.05</bias_mean>
+                                <bias_stddev>0.0075</bias_stddev>
+                                <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
+                                <precision>0.005</precision>
                             </noise>
                         </z>
                     </linear_acceleration>
                 </imu>
-                
-            </sensor>
-            <sensor name="air_pressure" type="air_pressure">
-                <always_on>1
-                </always_on>
-                <update_rate>20
-                </update_rate>
-                <air_pressure>
-                    <reference_altitude>0
-                    </reference_altitude>
-                    <noise type="gaussian">
-                        <mean>0.00000008
-                        </mean>
-                    </noise>
-                </air_pressure>
+                <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                    <ros>
+                        <namespace>/X4</namespace>
+                    </ros>
+                    <topic_name>imu</topic_name>
+                    <bodyName>base_link</bodyName>
+                    <updateRate>250</updateRate>
+                    <gaussianNoise>0.0</gaussianNoise>
+                    <alwaysOn>true</alwaysOn>
+                </plugin>
             </sensor>
             
-            <sensor name="gps" type="navsat">
-                 <always_on>1
-                </always_on>
-                <update_rate>1
-                </update_rate>
-            </sensor>
-            <sensor name="magnetometer" type="magnetometer">
-                <always_on>1
-                </always_on>
-                <update_rate>20
-                </update_rate>
-                <magnetometer>
-                    <x>
-                        <noise type="gaussian">
-                            <mean>0.000000080
-                            </mean>
-                            <bias_mean>0.000000400
-                            </bias_mean>
-                        </noise>
-                    </x>
-                    <y>
-                        <noise type="gaussian">
-                            <mean>0.000000080
-                            </mean>
-                            <bias_mean>0.000000400
-                            </bias_mean>
-                        </noise>
-                    </y>
-                    <z>
-                        <noise type="gaussian">
-                            <mean>0.000000080
-                            </mean>
-                            <bias_mean>0.000000400
-                            </bias_mean>
-                        </noise>
-                    </z>
-                </magnetometer>
-            </sensor>
-            
+            <!-- LIDAR Sensor with Plugin -->
             <sensor name="scan_omni" type="gpu_lidar">
-                <pose>-0.1855 0 0.5318 0 0 0
-                </pose>
-                <update_rate>10
-                </update_rate>
+                <pose>-0.1855 0 0.5318 0 0 0</pose>
+                <update_rate>10</update_rate>
                 <lidar>
                     <scan>
                         <horizontal>
-                            <!-- Real samples value is 1800 -->
-                            <samples>1800
-                            </samples>
-                            <resolution>1
-                            </resolution>
-                            <min_angle>-3.141592654
-                            </min_angle>
-                            <max_angle>3.141592654
-                            </max_angle>
+                            <samples>1800</samples>
+                            <resolution>1</resolution>
+                            <min_angle>-3.141592654</min_angle>
+                            <max_angle>3.141592654</max_angle>
                         </horizontal>
                         <vertical>
-                            <samples>16
-                            </samples>
-                            <resolution>1
-                            </resolution>
-                            <min_angle>-0.261799388
-                            </min_angle>
-                            <max_angle>0.261799388
-                            </max_angle>
+                            <samples>16</samples>
+                            <resolution>1</resolution>
+                            <min_angle>-0.261799388</min_angle>
+                            <max_angle>0.261799388</max_angle>
                         </vertical>
                     </scan>
                     <range>
-                        <min>0.2
-                        </min>
-                        <max>100.0
-                        </max>
-                        <resolution>0.01
-                        </resolution>
+                        <min>0.2</min>
+                        <max>100.0</max>
+                        <resolution>0.01</resolution>
                     </range>
                     <noise>
-                        <type>gaussian
-                        </type>
-                        <mean>0
-                        </mean>
-                        <!-- Change the sdfdev value to 0.01 to add noise in to the sensor. You can set other values if you want. -->
-                        <stddev>0.01
-                        </stddev>
+                        <type>gaussian</type>
+                        <mean>0</mean>
+                        <stddev>0.01</stddev>
                     </noise>
                 </lidar>
-                <always_on>false
-                </always_on>
-                <visualize>false
-                </visualize>
+                <always_on>false</always_on>
+                <visualize>false</visualize>
+                <plugin filename="libgazebo_ros_ray_sensor.so" name="lidar_plugin">
+                    <ros>
+                        <namespace>/X4</namespace>
+                        <remapping>~/out:=scan</remapping>
+                    </ros>
+                    <topicName>scan</topicName>
+                    <frameName>base_link</frameName>
+                    <alwaysOn>false</alwaysOn>
+                    <updateRate>10</updateRate>
+                </plugin>
             </sensor>
+            
+            <!-- RGBD Camera Sensor with Plugin -->
+            <sensor name="camera_front" type="rgbd_camera">
+                <pose>0.2 0 0 0 0.785 0</pose>
+                <always_on>1</always_on>
+                <update_rate>20</update_rate>
+                <camera name="camera_front">
+                    <horizontal_fov>1.0472</horizontal_fov>
+                    <lens>
+                        <intrinsics>
+                            <fx>277.1</fx>
+                            <fy>277.1</fy>
+                            <cx>160.5</cx>
+                            <cy>120.5</cy>
+                            <s>0</s>
+                        </intrinsics>
+                    </lens>
+                    <distortion>
+                        <k1>0.0</k1>
+                        <k2>0.0</k2>
+                        <k3>0.0</k3>
+                        <p1>0.0</p1>
+                        <p2>0.0</p2>
+                        <center>0.5 0.5</center>
+                    </distortion>
+                    <image>
+                        <width>320</width>
+                        <height>240</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.01</near>
+                        <far>300</far>
+                    </clip>
+                    <depth_camera>
+                        <clip>
+                            <near>0.1</near>
+                            <far>10</far>
+                        </clip>
+                    </depth_camera>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0</mean>
+                        <stddev>0.007</stddev>
+                    </noise>
+                </camera>
+                <plugin filename="libgazebo_ros_camera.so" name="camera_plugin">
+                    <ros>
+                        <namespace>/X4</namespace>
+                    </ros>
+                    <cameraName>camera_front</cameraName>
+                    <imageTopicName>image_raw</imageTopicName>
+                    <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                    <frameName>camera_front</frameName>
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>20</updateRate>
+                    <hfov>1.0472</hfov>
+                </plugin>
+                <plugin filename="libgazebo_ros_depth_camera.so" name="depth_camera_plugin">
+                    <ros>
+                        <namespace>/X4</namespace>
+                    </ros>
+                    <depthImageTopicName>depth/image_raw</depthImageTopicName>
+                    <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+                    <pointCloudTopicName>points</pointCloudTopicName>
+                    <frameName>camera_front</frameName>
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>20</updateRate>
+                    <hfov>1.0472</hfov>
+                </plugin>
+            </sensor>
+            
+            <!-- Thermal Camera (New Addition) -->
+            <visual name="thermal_camera_visual">
+                <pose>0.12 0 -0.08 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.02 0.025 0.025</size>
+                    </box>
+                </geometry>
+            </visual>
+            
+            <sensor name="thermal_camera" type="camera">
+                <pose>0.12 0 -0.08 0 0 0</pose>
+                <camera name="thermal_camera">
+                    <horizontal_fov>1.0472</horizontal_fov>
+                    <image>
+                        <width>320</width>
+                        <height>240</height>
+                        <format>L8</format>
+                    </image>
+                    <clip>
+                        <near>0.1</near>
+                        <far>100</far>
+                    </clip>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0</mean>
+                        <stddev>0.007</stddev>
+                    </noise>
+                    <thermal>
+                        <min_temp>253.15</min_temp>  <!-- -20°C -->
+                        <max_temp>313.15</max_temp>  <!-- 40°C -->
+                        <resolution>0.1</resolution>
+                    </thermal>
+                </camera>
+                <always_on>true</always_on>
+                <update_rate>10</update_rate>
+                <plugin filename="libgazebo_ros_thermal_camera.so" name="thermal_camera_plugin">
+                    <ros>
+                        <namespace>/X4</namespace>
+                    </ros>
+                    <cameraName>thermal_camera</cameraName>
+                    <imageTopicName>thermal_image</imageTopicName>
+                    <cameraInfoTopicName>thermal_camera_info</cameraInfoTopicName>
+                    <frameName>thermal_camera</frameName>
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>10</updateRate>
+                </plugin>
+            </sensor>
+            
             <visual name="camera_mount_base_visual">
-                <pose>0.05 0 -0.030 0 0.0 0
-                </pose>
                 <geometry>
                     <box>
                         <size>0.06 0.06 0.006
@@ -484,8 +397,6 @@
                 </geometry>
             </visual>
             <visual name="camera_mount_arm_visual">
-                <pose>0.08 0 -0.040 0 0.0 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <radius>0.005
@@ -496,8 +407,6 @@
                 </geometry>
             </visual>
             <visual name="camera_mount_arm2_visual">
-                <pose>0.08 0 -0.08 0 1.57 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <radius>0.01
@@ -508,8 +417,6 @@
                 </geometry>
             </visual>
             <visual name="camera_visual">
-                <pose>0.1 0 -0.08 0 0 0
-                </pose>
                 <geometry>
                     <box>
                         <size>0.02 0.025 0.025
@@ -517,86 +424,9 @@
                     </box>
                 </geometry>
             </visual>
-            <sensor name="camera_front" type="rgbd_camera">
-                <pose>0.2 0 0 0 +.785 0 
-                </pose>
-                <always_on>1
-                </always_on>
-                <update_rate>20
-                </update_rate>
-                <camera name="camera_front">
-                    <horizontal_fov>1.0472
-                    </horizontal_fov>
-                    <lens>
-                        <intrinsics>
-                            <!-- fx = fy = width / ( 2 * tan (hfov / 2 ) ) -->
-                            <fx>277.1
-                            </fx>
-                            <fy>277.1
-                            </fy>
-                            <!-- cx = ( width + 1 ) / 2 -->
-                            <cx>160.5
-                            </cx>
-                            <!-- cy = ( height + 1 ) / 2 -->
-                            <cy>120.5
-                            </cy>
-                            <s>0
-                            </s>
-                        </intrinsics>
-                    </lens>
-                    <distortion>
-                        <k1>0.0
-                        </k1>
-                        <k2>0.0
-                        </k2>
-                        <k3>0.0
-                        </k3>
-                        <p1>0.0
-                        </p1>
-                        <p2>0.0
-                        </p2>
-                        <center>0.5 0.5
-                        </center>
-                    </distortion>
-                    <image>
-                        <width>320
-                        </width>
-                        <height>240
-                        </height>
-                        <format>R8G8B8
-                        </format>
-                    </image>
-                    <clip>
-                        <near>0.01
-                        </near>
-                        <far>300
-                        </far>
-                    </clip>
-                    <depth_camera>
-                        <clip>
-                            <near>0.1
-                            </near>
-                            <far>10
-                            </far>
-                        </clip>
-                    </depth_camera>
-                    <noise>
-                        <type>gaussian
-                        </type>
-                        <mean>0
-                        </mean>
-                        <stddev>0.007
-                        </stddev>
-                    </noise>
-                </camera>
-            </sensor>
         </link>
         <link name="rotor_0">
-            <pose frame="">0.247 0.1506 0.028 0.087267 0 0.523599
-            </pose>
             <inertial>
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <mass>0.005
                 </mass>
                 <inertia>
@@ -615,8 +445,6 @@
                 </inertia>
             </inertial>
             <collision name="rotor_0_collision">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <length>0.005
@@ -635,8 +463,6 @@
                 </surface>
             </collision>
             <visual name="rotor_0_visual">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -645,16 +471,6 @@
                         </uri>
                     </mesh>
                 </geometry>
-                <!-- <material>
-                    <diffuse>1 0 0 1
-                    </diffuse>
-                    <script>
-                        <name>Gazebo/Red
-                        </name>
-                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
-                        </uri>
-                    </script>
-                </material> -->
                 <cast_shadows>0
                 </cast_shadows>
             </visual>
@@ -687,11 +503,7 @@
             </axis>
         </joint>
         <link name="rotor_1">
-            <pose frame="">-0.00067 0.28929 0.028 0 -0.087267 0
-            </pose>
             <inertial>
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <mass>0.005
                 </mass>
                 <inertia>
@@ -710,8 +522,6 @@
                 </inertia>
             </inertial>
             <collision name="rotor_1_collision">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <length>0.005
@@ -730,8 +540,6 @@
                 </surface>
             </collision>
             <visual name="rotor_1_visual">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -740,16 +548,6 @@
                         </uri>
                     </mesh>
                 </geometry>
-                <!-- <material>
-                    <diffuse>0 0 1 1
-                    </diffuse>
-                    <script>
-                        <name>Gazebo/Blue
-                        </name>
-                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
-                        </uri>
-                    </script>
-                </material> -->
                 <cast_shadows>0
                 </cast_shadows>
             </visual>
@@ -782,11 +580,7 @@
             </axis>
         </joint>
         <link name="rotor_2">
-            <pose frame="">-0.2501 0.1454 0.028 0.087267 -0 2.61799
-            </pose>
             <inertial>
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <mass>0.005
                 </mass>
                 <inertia>
@@ -805,8 +599,6 @@
                 </inertia>
             </inertial>
             <collision name="rotor_2_collision">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <length>0.005
@@ -825,8 +617,6 @@
                 </surface>
             </collision>
             <visual name="rotor_2_visual">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -835,16 +625,6 @@
                         </uri>
                     </mesh>
                 </geometry>
-                <!-- <material>
-                    <diffuse>0 0 1 1
-                    </diffuse>
-                    <script>
-                        <name>Gazebo/Blue
-                        </name>
-                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
-                        </uri>
-                    </script>
-                </material> -->
                 <cast_shadows>0
                 </cast_shadows>
             </visual>
@@ -877,11 +657,7 @@
             </axis>
         </joint>
         <link name="rotor_3">
-            <pose frame="">-0.2501 -0.1454 0.028 -0.087267 -0 -2.61799
-            </pose>
             <inertial>
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <mass>0.005
                 </mass>
                 <inertia>
@@ -900,8 +676,6 @@
                 </inertia>
             </inertial>
             <collision name="rotor_3_collision">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <length>0.005
@@ -920,8 +694,6 @@
                 </surface>
             </collision>
             <visual name="rotor_3_visual">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -930,16 +702,6 @@
                         </uri>
                     </mesh>
                 </geometry>
-                <!-- <material>
-                    <diffuse>0 0 1 1
-                    </diffuse>
-                    <script>
-                        <name>Gazebo/Blue
-                        </name>
-                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
-                        </uri>
-                    </script>
-                </material> -->
                 <cast_shadows>0
                 </cast_shadows>
             </visual>
@@ -972,11 +734,7 @@
             </axis>
         </joint>
         <link name="rotor_4">
-            <pose frame="">-0.00067 -0.28929 0.028 -0 0.087267 -3.14159
-            </pose>
             <inertial>
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <mass>0.005
                 </mass>
                 <inertia>
@@ -995,8 +753,6 @@
                 </inertia>
             </inertial>
             <collision name="rotor_4_collision">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <length>0.005
@@ -1015,8 +771,6 @@
                 </surface>
             </collision>
             <visual name="rotor_4_visual">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -1025,16 +779,6 @@
                         </uri>
                     </mesh>
                 </geometry>
-                <!-- <material>
-                    <diffuse>0 0 1 1
-                    </diffuse>
-                    <script>
-                        <name>Gazebo/Blue
-                        </name>
-                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
-                        </uri>
-                    </script>
-                </material> -->
                 <cast_shadows>0
                 </cast_shadows>
             </visual>
@@ -1067,11 +811,7 @@
             </axis>
         </joint>
         <link name="rotor_5">
-            <pose frame="">0.247 -0.1506 0.028 -0.087267 0 -0.523599
-            </pose>
             <inertial>
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <mass>0.005
                 </mass>
                 <inertia>
@@ -1084,8 +824,6 @@
                 </inertia>
             </inertial>
             <collision name="rotor_5_collision">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <cylinder>
                         <length>0.005
@@ -1104,8 +842,6 @@
                 </surface>
             </collision>
             <visual name="rotor_5_visual">
-                <pose frame="">0 0 0 0 -0 0
-                </pose>
                 <geometry>
                     <mesh>
                         <scale>1 1 1
@@ -1114,16 +850,6 @@
                         </uri>
                     </mesh>
                 </geometry>
-                <!-- <material>
-                    <diffuse>1 0 0 1
-                    </diffuse>
-                    <script>
-                        <name>Gazebo/Red
-                        </name>
-                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
-                        </uri>
-                    </script>
-                </material> -->
                 <cast_shadows>0
                 </cast_shadows>
             </visual>
@@ -1404,102 +1130,6 @@
             <!-- linearVelocityNoiseStdDev based on error values reported in the paper Shen et. al., -->
             <!-- Vision-Based State Estimation and Trajectory Control Towards High-Speed Flight with a Quadrotor -->
             <!-- http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.490.7958&rep=rep1&type=pdf -->
-            <linearVelocityNoiseStdDev>0.1105 0.1261 0.0947
-            </linearVelocityNoiseStdDev>
-            <angularVelocityNoiseMean>0 0 0
-            </angularVelocityNoiseMean>
-            <!-- angularVelocityNoiseStdDev values based on ADIS16448's Rate Noise Density with a sample  -->
-            <!-- time of 0.004 ms. -->
-            <angularVelocityNoiseStdDev>0.004 0.004 0.004
-            </angularVelocityNoiseStdDev>
-            
-            <rotorConfiguration>
-                <rotor>
-                    <jointName>rotor_0_joint
-                    </jointName>
-                    <forceConstant>1.269e-05
-                    </forceConstant>
-                    <momentConstant>1.6754e-2
-                    </momentConstant>
-                    <direction>1
-                    </direction>
-                </rotor>
-                <rotor>
-                    <jointName>rotor_1_joint
-                    </jointName>
-                    <forceConstant>1.269e-05
-                    </forceConstant>
-                    <momentConstant>1.6754e-2
-                    </momentConstant>
-                    <direction>-1
-                    </direction>
-                </rotor>
-                <rotor>
-                    <jointName>rotor_2_joint
-                    </jointName>
-                    <forceConstant>1.269e-05
-                    </forceConstant>
-                    <momentConstant>1.6754e-2
-                    </momentConstant>
-                    <direction>1
-                    </direction>
-                </rotor>
-                <rotor>
-                    <jointName>rotor_3_joint
-                    </jointName>
-                    <forceConstant>1.269e-05
-                    </forceConstant>
-                    <momentConstant>1.6754e-2
-                    </momentConstant>
-                    <direction>-1
-                    </direction>
-                </rotor>
-                <rotor>
-                    <jointName>rotor_4_joint
-                    </jointName>
-                    <forceConstant>1.269e-05
-                    </forceConstant>
-                    <momentConstant>1.6754e-2
-                    </momentConstant>
-                    <direction>1
-                    </direction>
-                </rotor>
-                <rotor>
-                    <jointName>rotor_5_joint
-                    </jointName>
-                    <forceConstant>1.269e-05
-                    </forceConstant>
-                    <momentConstant>1.6754e-2
-                    </momentConstant>
-                    <direction>-1
-                    </direction>
-                </rotor>
-            </rotorConfiguration>
         </plugin>
-        <plugin  filename="ignition-gazebo-odometry-publisher-system"  name="ignition::gazebo::systems::OdometryPublisher">
-            <dimensions>3
-            </dimensions>
-            <odom_frame>X4/odom
-            </odom_frame>
-            <robot_base_frame>X4/base_footprint
-            </robot_base_frame>
-        </plugin>
-        <plugin filename="ignition-gazebo-navsat-system"  name="ignition::gazebo::systems::NavSat">
-        </plugin>
-        
-          <plugin name="ignition::gazebo::systems::PosePublisher" filename="ignition-gazebo-pose-publisher-system">
-            <publish_link_pose>true
-            </publish_link_pose>
-            <publish_collision_pose>false
-            </publish_collision_pose>
-            <publish_visual_pose>false
-            </publish_visual_pose>
-            <publish_nested_model_pose>true
-            </publish_nested_model_pose>
-            <update_frequency>20
-            </update_frequency>
-        </plugin>
-        
-        
     </model>
 </sdf>

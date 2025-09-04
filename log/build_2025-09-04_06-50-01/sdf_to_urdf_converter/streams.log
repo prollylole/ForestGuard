@@ -1,0 +1,23 @@
+[0.011s] Invoking command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/sdf_to_urdf_converter -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/sdf_to_urdf_converter
+[0.017s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.096s] -- Found rcutils: 5.1.6 (/opt/ros/humble/share/rcutils/cmake)
+[0.136s] [31mCMake Error at CMakeLists.txt:13 (find_package):
+[0.136s]   By not providing "Findsdformat.cmake" in CMAKE_MODULE_PATH this project has
+[0.136s]   asked CMake to find a package configuration file provided by "sdformat",
+[0.136s]   but CMake did not find one.
+[0.136s] 
+[0.136s]   Could not find a package configuration file provided by "sdformat" with any
+[0.136s]   of the following names:
+[0.136s] 
+[0.136s]     sdformatConfig.cmake
+[0.136s]     sdformat-config.cmake
+[0.136s] 
+[0.136s]   Add the installation prefix of "sdformat" to CMAKE_PREFIX_PATH or set
+[0.137s]   "sdformat_DIR" to a directory containing one of the above files.  If
+[0.137s]   "sdformat" provides a separate development package or SDK, be sure it has
+[0.137s]   been installed.
+[0.137s] 
+[0.137s] [0m
+[0.137s] -- Configuring incomplete, errors occurred!
+[0.137s] See also "/home/claudia/ForestGuard/build/sdf_to_urdf_converter/CMakeFiles/CMakeOutput.log".
+[0.139s] Invoked command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/sdf_to_urdf_converter -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/sdf_to_urdf_converter

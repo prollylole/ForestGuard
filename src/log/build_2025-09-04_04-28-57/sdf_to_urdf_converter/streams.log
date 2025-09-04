@@ -1,0 +1,36 @@
+[0.033s] Invoking command in '/home/claudia/ForestGuard/src/build/sdf_to_urdf_converter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/sdf_to_urdf_converter -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/sdf_to_urdf_converter
+[0.190s] -- The C compiler identification is GNU 11.4.0
+[0.353s] -- The CXX compiler identification is GNU 11.4.0
+[0.380s] -- Detecting C compiler ABI info
+[0.525s] -- Detecting C compiler ABI info - done
+[0.542s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.544s] -- Detecting C compile features
+[0.544s] -- Detecting C compile features - done
+[0.552s] -- Detecting CXX compiler ABI info
+[0.722s] -- Detecting CXX compiler ABI info - done
+[0.740s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.741s] -- Detecting CXX compile features
+[0.742s] -- Detecting CXX compile features - done
+[0.780s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.086s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.407s] -- Found rcutils: 5.1.6 (/opt/ros/humble/share/rcutils/cmake)
+[1.478s] [31mCMake Error at CMakeLists.txt:7 (find_package):
+[1.479s]   By not providing "Findtinyxml2.cmake" in CMAKE_MODULE_PATH this project has
+[1.479s]   asked CMake to find a package configuration file provided by "tinyxml2",
+[1.479s]   but CMake did not find one.
+[1.479s] 
+[1.479s]   Could not find a package configuration file provided by "tinyxml2" with any
+[1.479s]   of the following names:
+[1.480s] 
+[1.480s]     tinyxml2Config.cmake
+[1.480s]     tinyxml2-config.cmake
+[1.480s] 
+[1.480s]   Add the installation prefix of "tinyxml2" to CMAKE_PREFIX_PATH or set
+[1.480s]   "tinyxml2_DIR" to a directory containing one of the above files.  If
+[1.480s]   "tinyxml2" provides a separate development package or SDK, be sure it has
+[1.481s]   been installed.
+[1.481s] 
+[1.481s] [0m
+[1.481s] -- Configuring incomplete, errors occurred!
+[1.481s] See also "/home/claudia/ForestGuard/src/build/sdf_to_urdf_converter/CMakeFiles/CMakeOutput.log".
+[1.490s] Invoked command in '/home/claudia/ForestGuard/src/build/sdf_to_urdf_converter' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/sdf_to_urdf_converter -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/sdf_to_urdf_converter

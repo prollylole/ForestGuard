@@ -1,0 +1,72 @@
+[0.011s] Invoking command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/sdf_to_urdf_converter -- -j16 -l16
+[0.042s] [ 20%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o[0m
+[0.042s] [ 40%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf.cpp.o[0m
+[0.909s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:[m[K In function ‘[01m[Kurdf::ModelInterfaceSharedPtr sdformat_urdf::convert_model(const sdf::v14::Model&, sdf::v14::Errors&)[m[K’:
+[0.909s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:118:48:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ChildLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[0.909s]   118 |       if (sdf_joint && [01;35m[Ksdf_joint->ChildLinkName()[m[K == sdf_link->Name()) {
+[0.909s]       |                        [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[0.909s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[0.910s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:145:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[0.910s]   145 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KChildLinkName[m[K() const;
+[0.910s]       |                                                  [01;36m[K^~~~~~~~~~~~~[m[K
+[0.916s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:215:36:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ParentLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[0.916s]   215 |       if ([01;35m[Ksdf_joint->ParentLinkName()[m[K == sdf_parent_link->Name()) {
+[0.916s]       |           [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[0.917s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[0.917s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:135:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[0.917s]   135 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KParentLinkName[m[K() const;
+[0.917s]       |                                                  [01;36m[K^~~~~~~~~~~~~~[m[K
+[0.918s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:272:42:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ChildLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[0.918s]   272 |       } else if ([01;35m[Ksdf_joint->ChildLinkName()[m[K == sdf_parent_link->Name()) {
+[0.918s]       |                  [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[0.918s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[0.918s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:145:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[0.918s]   145 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KChildLinkName[m[K() const;
+[0.918s]       |                                                  [01;36m[K^~~~~~~~~~~~~[m[K
+[0.931s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:[m[K In function ‘[01m[Kurdf::JointSharedPtr sdformat_urdf::convert_joint(const sdf::v14::Joint&, sdf::v14::Errors&)[m[K’:
+[0.931s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:576:56:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ChildLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[0.931s]   576 |   urdf_joint->child_link_name = [01;35m[Ksdf_joint.ChildLinkName()[m[K;
+[0.931s]       |                                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[0.932s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[0.932s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:145:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[0.932s]   145 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KChildLinkName[m[K() const;
+[0.932s]       |                                                  [01;36m[K^~~~~~~~~~~~~[m[K
+[0.932s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:577:58:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ParentLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[0.932s]   577 |   urdf_joint->parent_link_name = [01;35m[Ksdf_joint.ParentLinkName()[m[K;
+[0.932s]       |                                  [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[0.932s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[0.932s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:135:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[0.932s]   135 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KParentLinkName[m[K() const;
+[0.932s]       |                                                  [01;36m[K^~~~~~~~~~~~~~[m[K
+[1.937s] [ 60%] [32m[1mLinking CXX shared library libsdformat_urdf.so[0m
+[2.032s] [ 60%] Built target sdformat_urdf
+[2.044s] [ 80%] [32mBuilding CXX object CMakeFiles/convert_sdf_to_urdf.dir/src/convert_sdf_to_urdf.cpp.o[0m
+[2.963s] [100%] [32m[1mLinking CXX executable convert_sdf_to_urdf[0m
+[3.045s] [100%] Built target convert_sdf_to_urdf
+[3.049s] Invoked command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/sdf_to_urdf_converter -- -j16 -l16
+[3.050s] Invoking command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/sdf_to_urdf_converter
+[3.052s] -- Install configuration: ""
+[3.053s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/lib/sdf_to_urdf_converter/libsdformat_urdf.so
+[3.054s] -- Set runtime path of "/home/claudia/ForestGuard/install/sdf_to_urdf_converter/lib/sdf_to_urdf_converter/libsdformat_urdf.so" to ""
+[3.054s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/lib/sdf_to_urdf_converter/convert_sdf_to_urdf
+[3.054s] -- Set runtime path of "/home/claudia/ForestGuard/install/sdf_to_urdf_converter/lib/sdf_to_urdf_converter/convert_sdf_to_urdf" to ""
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/include
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/include/sdf_to_urdf_converter
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/include/sdformat_urdf
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/include/sdformat_urdf/sdformat_urdf.hpp
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/ament_index/resource_index/package_run_dependencies/sdf_to_urdf_converter
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/ament_index/resource_index/parent_prefix_path/sdf_to_urdf_converter
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/environment/ament_prefix_path.sh
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/environment/ament_prefix_path.dsv
+[3.055s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/environment/path.sh
+[3.056s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/environment/path.dsv
+[3.056s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/local_setup.bash
+[3.056s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/local_setup.sh
+[3.056s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/local_setup.zsh
+[3.056s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/local_setup.dsv
+[3.056s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/package.dsv
+[3.057s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/ament_index/resource_index/packages/sdf_to_urdf_converter
+[3.057s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/cmake/sdf_to_urdf_converterConfig.cmake
+[3.057s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/cmake/sdf_to_urdf_converterConfig-version.cmake
+[3.057s] -- Installing: /home/claudia/ForestGuard/install/sdf_to_urdf_converter/share/sdf_to_urdf_converter/package.xml
+[3.059s] Invoked command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/sdf_to_urdf_converter

@@ -1,0 +1,9 @@
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/uninstall.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/my_drone_pkg_uninstall.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/test.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/edit_cache.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/rebuild_cache.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/list_install_components.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/install.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/install/local.dir
+/home/claudia/ForestGuard/src/build/my_drone_pkg/CMakeFiles/install/strip.dir

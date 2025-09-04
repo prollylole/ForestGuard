@@ -1,0 +1,57 @@
+[0.010s] Invoking command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/sdf_to_urdf_converter -- -j16 -l16
+[0.021s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.092s] -- Found rcutils: 5.1.6 (/opt/ros/humble/share/rcutils/cmake)
+[0.106s] -- Found urdf_parser_plugin: 2.6.1 (/opt/ros/humble/share/urdf_parser_plugin/cmake)
+[0.111s] -- Checking for module 'tinyxml2'
+[0.120s] --   Found tinyxml2, version 9.0.0
+[0.229s] -- Configuring done
+[0.236s] -- Generating done
+[0.239s] -- Build files have been written to: /home/claudia/ForestGuard/build/sdf_to_urdf_converter
+[0.256s] [ 20%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf.cpp.o[0m
+[0.256s] [ 40%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o[0m
+[0.351s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf_plugin.cpp:73:10:[m[K [01;31m[Kfatal error: [m[Kpluginlib/class_list_macros.hpp: No such file or directory
+[0.351s]    73 | #include [01;31m[K<pluginlib/class_list_macros.hpp>[m[K  // NOLINT
+[0.351s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.351s] compilation terminated.
+[0.353s] gmake[2]: *** [CMakeFiles/sdformat_urdf.dir/build.make:90: CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o] Error 1
+[0.353s] gmake[2]: *** Waiting for unfinished jobs....
+[1.005s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:[m[K In function ‘[01m[Kurdf::ModelInterfaceSharedPtr sdformat_urdf::convert_model(const sdf::v14::Model&, sdf::v14::Errors&)[m[K’:
+[1.005s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:118:48:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ChildLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[1.005s]   118 |       if (sdf_joint && [01;35m[Ksdf_joint->ChildLinkName()[m[K == sdf_link->Name()) {
+[1.005s]       |                        [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[1.005s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[1.005s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:145:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[1.005s]   145 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KChildLinkName[m[K() const;
+[1.005s]       |                                                  [01;36m[K^~~~~~~~~~~~~[m[K
+[1.012s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:215:36:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ParentLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[1.012s]   215 |       if ([01;35m[Ksdf_joint->ParentLinkName()[m[K == sdf_parent_link->Name()) {
+[1.012s]       |           [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[1.012s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[1.012s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:135:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[1.012s]   135 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KParentLinkName[m[K() const;
+[1.012s]       |                                                  [01;36m[K^~~~~~~~~~~~~~[m[K
+[1.013s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:272:42:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ChildLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[1.013s]   272 |       } else if ([01;35m[Ksdf_joint->ChildLinkName()[m[K == sdf_parent_link->Name()) {
+[1.013s]       |                  [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[1.013s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[1.013s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:145:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[1.014s]   145 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KChildLinkName[m[K() const;
+[1.014s]       |                                                  [01;36m[K^~~~~~~~~~~~~[m[K
+[1.023s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:[m[K In function ‘[01m[Kurdf::JointSharedPtr sdformat_urdf::convert_joint(const sdf::v14::Joint&, sdf::v14::Errors&)[m[K’:
+[1.023s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:576:56:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ChildLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[1.023s]   576 |   urdf_joint->child_link_name = [01;35m[Ksdf_joint.ChildLinkName()[m[K;
+[1.023s]       |                                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[1.023s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[1.023s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:145:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[1.023s]   145 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KChildLinkName[m[K() const;
+[1.023s]       |                                                  [01;36m[K^~~~~~~~~~~~~[m[K
+[1.024s] [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:577:58:[m[K [01;35m[Kwarning: [m[K‘[01m[Kconst string& sdf::v14::Joint::ParentLinkName() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[1.024s]   577 |   urdf_joint->parent_link_name = [01;35m[Ksdf_joint.ParentLinkName()[m[K;
+[1.024s]       |                                  [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+[1.024s] In file included from [01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:28[m[K:
+[1.024s] [01m[K/usr/include/gz/sdformat14/sdf/Joint.hh:135:50:[m[K [01;36m[Knote: [m[Kdeclared here
+[1.024s]   135 |     public: GZ_DEPRECATED(13) const std::string &[01;36m[KParentLinkName[m[K() const;
+[1.024s]       |                                                  [01;36m[K^~~~~~~~~~~~~~[m[K
+[1.929s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/sdformat_urdf.dir/all] Error 2
+[1.929s] gmake: *** [Makefile:146: all] Error 2
+[1.930s] Invoked command in '/home/claudia/ForestGuard/build/sdf_to_urdf_converter' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/sdf_to_urdf_converter -- -j16 -l16

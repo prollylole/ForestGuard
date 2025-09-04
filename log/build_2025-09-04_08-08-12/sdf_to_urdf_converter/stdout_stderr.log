@@ -1,0 +1,23 @@
+-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rcutils: 5.1.6 (/opt/ros/humble/share/rcutils/cmake)
+-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") 
+-- Checking for module 'tinyxml2'
+--   Found tinyxml2, version 9.0.0
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/claudia/ForestGuard/build/sdf_to_urdf_converter
+[ 20%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o[0m
+[01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf_plugin.cpp:17:10:[m[K [01;31m[Kfatal error: [m[Kurdf_parser_plugin/parser.h: No such file or directory
+   17 | #include [01;31m[K<urdf_parser_plugin/parser.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/sdformat_urdf.dir/build.make:90: CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+[01m[K/home/claudia/ForestGuard/src/sdf_to_urdf_converter/src/sdformat_urdf.cpp:34:10:[m[K [01;31m[Kfatal error: [m[Ksdformat_urdf/sdformat_urdf.hpp: No such file or directory
+   34 | #include [01;31m[K"sdformat_urdf/sdformat_urdf.hpp"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/sdformat_urdf.dir/build.make:76: CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/sdformat_urdf.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

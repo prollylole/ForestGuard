@@ -1,0 +1,14 @@
+-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rcutils: 5.1.6 (/opt/ros/humble/share/rcutils/cmake)
+-- Found urdf_parser_plugin: 2.6.1 (/opt/ros/humble/share/urdf_parser_plugin/cmake)
+-- Found pluginlib: 5.1.0 (/opt/ros/humble/share/pluginlib/cmake)
+-- Checking for module 'tinyxml2'
+--   Found tinyxml2, version 9.0.0
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/claudia/ForestGuard/build/sdf_to_urdf_converter
+[ 20%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf_plugin.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/sdformat_urdf.dir/src/sdformat_urdf.cpp.o[0m
+[ 60%] [32m[1mLinking CXX shared library libsdformat_urdf.so[0m
+[ 60%] Built target sdformat_urdf
+[ 80%] [32mBuilding CXX object CMakeFiles/convert_sdf_to_urdf.dir/src/convert_sdf_to_urdf.cpp.o[0m

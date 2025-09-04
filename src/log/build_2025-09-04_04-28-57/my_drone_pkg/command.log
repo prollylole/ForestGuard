@@ -1,0 +1,1 @@
+Invoking command in '/home/claudia/ForestGuard/src/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/my_drone_pkg -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/my_drone_pkg
