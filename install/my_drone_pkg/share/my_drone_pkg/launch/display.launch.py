@@ -27,9 +27,3 @@ def generate_launch_description():
             output='screen'
         )
     ])
-
-# - urdf is to control the drone 
-# - if static stuff use stl file
-# - insert sensors on either urdf or sdf
-# - topic are from node opened by launch File
-# - msg types are from cpp file
