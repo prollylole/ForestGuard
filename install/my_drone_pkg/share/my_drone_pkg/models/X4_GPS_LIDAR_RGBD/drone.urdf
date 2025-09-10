@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<robot name="X4">
-  <link name="base_link"/>
-</robot>

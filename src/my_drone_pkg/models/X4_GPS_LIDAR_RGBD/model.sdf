@@ -308,7 +308,7 @@
                                 <dynamic_bias_stddev>0.000375
                                 </dynamic_bias_stddev>
                                 <dynamic_bias_correlation_time>175.0
-                                </dynamic_bias_correlation_time>
+                                </dynamic_bias_correlation_time>    
                                 <precision>0.005
                                 </precision>
                             </noise>
