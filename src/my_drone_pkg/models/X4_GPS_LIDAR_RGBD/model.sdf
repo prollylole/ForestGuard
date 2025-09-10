@@ -335,7 +335,6 @@
                 </imu>
                 
             </sensor>
-            
             <sensor name="gps" type="navsat">
                  <always_on>1
                 </always_on>
@@ -492,15 +491,15 @@
                         <stddev>0.007</stddev>
                     </noise>
                 </camera>
-                <plugin filename="libgazebo_ros_camera.so" name="left_camera_plugin">
-                    <ros>
+                <!-- <plugin filename="libgazebo_ros_camera.so" name="left_camera_plugin"> -->
+                    <!-- <ros>
                         <namespace>/X4</namespace>
                     </ros>
                     <camera_name>left_camera</camera_name>
                     <image_topic_name>left/image_raw</image_topic_name>
                     <camera_info_topic_name>left/camera_info</camera_info_topic_name>
                     <frame_name>left_camera</frame_name>
-                </plugin>
+                </plugin> -->
             </sensor>
 
             <visual name="right_camera_visual">
@@ -532,15 +531,15 @@
                         <stddev>0.007</stddev>
                     </noise>
                 </camera>
-                <plugin filename="libgazebo_ros_camera.so" name="right_camera_plugin">
-                    <ros>
+                <!-- <plugin filename="libgazebo_ros_camera.so" name="right_camera_plugin"> -->
+                    <!-- <ros>
                         <namespace>/X4</namespace>
                     </ros>
                     <camera_name>right_camera</camera_name>
                     <image_topic_name>right/image_raw</image_topic_name>
                     <camera_info_topic_name>right/camera_info</camera_info_topic_name>
                     <frame_name>right_camera</frame_name>
-                </plugin>
+                </plugin> -->
             </sensor>
 
             <!-- Thermal Camera -->
@@ -574,15 +573,15 @@
                         <far>100</far>
                     </clip>
                 </camera>
-                <plugin filename="libgazebo_ros_camera.so" name="thermal_camera_plugin">
-                    <ros>
+                <!-- <plugin filename="libgazebo_ros_camera.so" name="thermal_camera_plugin"> -->
+                    <!-- <ros>
                         <namespace>/X4</namespace>
                     </ros>
                     <camera_name>thermal_camera</camera_name>
                     <image_topic_name>thermal/image_raw</image_topic_name>
                     <camera_info_topic_name>thermal/camera_info</camera_info_topic_name>
                     <frame_name>thermal_camera</frame_name>
-                </plugin>
+                </plugin> -->
             </sensor>
         </link>
 

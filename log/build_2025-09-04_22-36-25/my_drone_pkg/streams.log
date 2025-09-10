@@ -1,0 +1,87 @@
+[0.019s] Invoking command in '/home/claudia/ForestGuard/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/my_drone_pkg -- -j16 -l16
+[0.043s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.170s] -- Found rclcpp: 16.0.14 (/opt/ros/humble/share/rclcpp/cmake)
+[0.200s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.203s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.208s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.217s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.230s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.261s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.263s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.393s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.440s] -- Found gazebo_ros_pkgs: 3.9.0 (/opt/ros/humble/share/gazebo_ros_pkgs/cmake)
+[0.441s] -- Found gazebo_plugins: 3.9.0 (/opt/ros/humble/share/gazebo_plugins/cmake)
+[0.473s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[0.500s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[0.503s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.507s] -- Searching for dependencies of ignition-math6
+[0.508s] -- Looking for OGRE...
+[0.513s] -- Found Ogre Ghadamon (1.9.0)
+[0.513s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[0.523s] -- Looking for OGRE_Paging...
+[0.523s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[0.523s] -- Looking for OGRE_Terrain...
+[0.523s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[0.523s] -- Looking for OGRE_Property...
+[0.523s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[0.523s] -- Looking for OGRE_RTShaderSystem...
+[0.524s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[0.524s] -- Looking for OGRE_Volume...
+[0.524s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[0.524s] -- Looking for OGRE_Overlay...
+[0.524s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[0.695s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.695s] -- Looking for ignition-transport8 -- found version 8.2.1
+[0.696s] -- Searching for dependencies of ignition-transport8
+[0.720s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") 
+[0.735s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[0.740s] -- Checking for module 'libzmq >= 4'
+[0.753s] --   Found libzmq , version 4.3.4
+[0.792s] -- Checking for module 'uuid'
+[0.806s] --   Found uuid, version 2.37.2
+[0.837s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.837s] -- Searching for dependencies of ignition-msgs5
+[0.861s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.866s] -- Checking for module 'tinyxml2'
+[0.880s] --   Found tinyxml2, version 9.0.0
+[0.912s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.912s] -- Looking for ignition-common3 -- found version 3.14.0
+[0.913s] -- Searching for dependencies of ignition-common3
+[0.913s] -- Looking for dlfcn.h - found
+[0.913s] -- Looking for libdl - found
+[0.927s] -- Searching for <ignition-common3> component [graphics]
+[0.927s] -- Looking for ignition-common3-graphics -- found version 3.14.0
+[0.927s] -- Searching for dependencies of ignition-common3-graphics
+[0.928s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.928s] -- Looking for ignition-fuel_tools4 -- found version 4.4.0
+[0.929s] -- Searching for dependencies of ignition-fuel_tools4
+[0.978s] -- Checking for module 'jsoncpp'
+[0.992s] --   Found jsoncpp, version 1.9.5
+[1.027s] -- Checking for module 'libzip'
+[1.041s] --   Found libzip, version 1.7.3
+[1.072s] -- Looking for ignition-common3 -- found version 3.14.0
+[1.073s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.073s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.074s] -- Gazebo version: 11.14
+[1.125s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.195s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.195s] -- Added test 'lint_cmake' to check CMake code style
+[1.196s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.198s] -- Added test 'xmllint' to check XML markup files
+[1.199s] -- Configuring done
+[1.205s] [31mCMake Error at CMakeLists.txt:15 (add_executable):
+[1.205s]   Cannot find source file:
+[1.205s] 
+[1.205s]     src/drone_controller.cpp
+[1.205s] 
+[1.205s]   Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+[1.205s]   .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+[1.205s] 
+[1.205s] [0m
+[1.205s] [31mCMake Error at CMakeLists.txt:15 (add_executable):
+[1.205s]   No SOURCES given to target: drone_controller
+[1.205s] 
+[1.206s] [0m
+[1.206s] [0mCMake Generate step failed.  Build files cannot be regenerated correctly.[0m
+[1.215s] gmake: *** [Makefile:226: cmake_check_build_system] Error 1
+[1.217s] Invoked command in '/home/claudia/ForestGuard/build/my_drone_pkg' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/my_drone_pkg -- -j16 -l16
