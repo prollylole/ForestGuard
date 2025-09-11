@@ -1,85 +1,96 @@
-# #!/usr/bin/env python3
+# -- Full simulation in Gazebo (gz_sim is included)
+# -- ROS–Gazebo bridge (ros_gz_bridge) to convert topics/messages between ROS 2 and Gazebo
+# -- Robot state publisher to publish transforms of robot links
+# -- Optional RViz visualization
+# -- Uses a config file for bridging topics (YAML)
 
-# import os
-# from ament_index_python.packages import get_package_share_directory
-# from launch import LaunchDescription
-# from launch.actions import ExecuteProcess, SetEnvironmentVariable
-# from launch_ros.actions import Node
-
-# def generate_launch_description():
-#     # Get package share directory
-#     pkg_share = get_package_share_directory('my_drone_pkg')
-    
-#     # Get ROS distribution
-#     ros_distro = os.environ.get('ROS_DISTRO', 'humble')
-#     ros_lib_path = f"/opt/ros/{ros_distro}/lib"
-    
-#     # Set the necessary environment variables
-#     env_vars = [
-#         # Set GAZEBO_PLUGIN_PATH to include ROS 2 plugins
-#         SetEnvironmentVariable(
-#             'GAZEBO_PLUGIN_PATH',
-#             ros_lib_path + ':' + os.environ.get('GAZEBO_PLUGIN_PATH', '')
-#         ),
-        
-#         # Set model path
-#         SetEnvironmentVariable(
-#             'GAZEBO_MODEL_PATH',
-#             os.path.join(pkg_share, 'models') + 
-#             ':' + os.environ.get('GAZEBO_MODEL_PATH', '')
-#         ),
-        
-#         # Set resource path (for Ignition Gazebo)
-#         SetEnvironmentVariable(
-#             'GZ_SIM_RESOURCE_PATH',
-#             os.path.join(pkg_share, 'models') + 
-#             ':' + os.environ.get('GZ_SIM_RESOURCE_PATH', '')
-#         ),
-#     ]
-    
-#     # Gazebo process
-
-#     gazebo_process = ExecuteProcess(
-#         cmd=['gz', 'sim', '--verbose', os.path.join(pkg_share, 'worlds', 'world_demo.sdf')],
-#         output='screen'
-#     )
-    
-#     # Optional: Add ROS 2 nodes if needed
-#     # For example, a node to interface with the drone
-#     drone_node = Node(
-#         package='my_drone_pkg',
-#         executable='drone_controller',
-#         output='screen'
-#     )
-    
-#     return LaunchDescription(env_vars + [gazebo_process, drone_node])
+# ** Launches Gazebo simulation with the diff_drive.sdf world.
+# ** Bridges topics like /cmd_vel, /odom, etc. so that ROS 2 nodes can talk to Gazebo.
+# ** Publishes TF for RViz visualization.
+# ** Can run autonomous control or teleop because the bridge exposes control topics.
 
 from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
+from launch.substitutions import Command, PathJoinSubstitution
 import os
+import xacro
 
 def generate_launch_description():
+    # Configure ROS nodes for launch
 
-    # Locate the urdf file inside your package
+    # Setup project paths
+    pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_share = get_package_share_directory('my_drone_pkg')
+
+    #  Path to urdf and sdf files inside package
+    xacro_file = os.path.join(pkg_share, 'urdf', 'X4.urdf.xacro')
     world_file = os.path.join(pkg_share, 'models', 'X4_GPS_LIDAR_RGBD', 'model.sdf')
 
-    with open(world_file, 'r') as infp:
-        robot_desc = infp.read()
+    # Process the Xacro file
+    robot_description_config = xacro.process_file(xacro_file)
+    robot_description = robot_description_config.toxml()
 
+    # Load the SDF file from "description" package
+    # with open(world_file, 'r') as infp:
+    #     robot_desc = infp.read()
+    
+    # Setup to launch the simulator and Gazebo world
+    gz_sim = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),
+        launch_arguments={'gz_args': os.path.join(pkg_share, 'worlds', 'world_demo.sdf')}.items(),
+    )
+
+    # -- this is for robot control in rviz, can either use sdf through sdformat or urdf through xacro
+
+    # Takes the description and joint angles as inputs and publishes the 3D poses of the robot links
+    joint_state_publisher = Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        name='joint_state_publisher_gui',
+        parameters=[{'use_sim_time': True}],
+        output='screen'
+    )
+
+    robot_state_publisher = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='both',
+        parameters=[
+            {'use_sim_time': True},
+            {'robot_description': robot_description},
+        ]
+    )
+
+    # Bridge ROS topics and Gazebo messages for establishing communication
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        parameters=[{
+            'config_file': os.path.join(pkg_share, 'config', 'ros_gz_bridge_config.yaml')
+        }],
+        output='screen'
+    )
+
+    # Visualize in RViz
+    rviz = Node(
+        package='rviz2',
+        executable='rviz2',
+        arguments=['-d', os.path.join(pkg_share, 'config', 'drone.rviz')]
+    )
+
+    # -- if uses robot_state_publisher add it to the return list like this
     return LaunchDescription([
-        Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            name='robot_state_publisher',
-            output='screen',
-            parameters=[{'robot_description': robot_desc}]
-        ),
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            output='screen'
-        )
+        gz_sim,
+        DeclareLaunchArgument('rviz', default_value='true',
+                              description='Open RViz.'),
+        bridge,
+        joint_state_publisher,
+        robot_state_publisher,
+        rviz
     ])

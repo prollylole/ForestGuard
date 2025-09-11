@@ -40,7 +40,7 @@ install(DIRECTORY launch/
   DESTINATION share/${PROJECT_NAME}/launch
 )
 
-# Install urdf files
+# Install world files
 install(DIRECTORY worlds/
   DESTINATION share/${PROJECT_NAME}/worlds
 )
@@ -48,5 +48,15 @@ install(DIRECTORY worlds/
 # Install model files
 install(DIRECTORY models/
   DESTINATION share/${PROJECT_NAME}/models
+)
+
+# Install urdf files
+install(DIRECTORY urdf/
+  DESTINATION share/${PROJECT_NAME}/urdf
+)
+
+# Install config files
+install(DIRECTORY config/
+  DESTINATION share/${PROJECT_NAME}/config
 )
 ament_package()

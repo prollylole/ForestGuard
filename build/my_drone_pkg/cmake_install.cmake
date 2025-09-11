@@ -79,6 +79,14 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_drone_pkg/urdf" TYPE DIRECTORY FILES "/home/claudia/ForestGuard/src/my_drone_pkg/urdf/")
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_drone_pkg/config" TYPE DIRECTORY FILES "/home/claudia/ForestGuard/src/my_drone_pkg/config/")
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/claudia/ForestGuard/build/my_drone_pkg/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/my_drone_pkg")
 endif()
 

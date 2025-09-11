@@ -1,1 +1,1 @@
-ament_lint_auto;ament_lint_common
+gazebo_ros_pkgs;gazebo_plugins;ros_gz;ament_lint_auto;ament_lint_common

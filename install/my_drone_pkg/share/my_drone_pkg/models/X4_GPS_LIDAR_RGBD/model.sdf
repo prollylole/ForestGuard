@@ -1,5 +1,37 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
+        <physics name="default_physics" type="ode">
+            <max_step_size>0.001
+            </max_step_size>
+            <real_time_factor>1
+            </real_time_factor>
+            <real_time_update_rate>1000
+            </real_time_update_rate>
+            <ode>
+                <solver>
+                    <type>quick
+                    </type>
+                    <iters>100
+                    </iters>
+                    <sor>1.3
+                    </sor>
+                </solver>
+                <constraints>
+                    <cfm>0
+                    </cfm>
+                    <erp>0.2
+                    </erp>
+                    <contact_max_correcting_vel>100
+                    </contact_max_correcting_vel>
+                    <contact_surface_layer>0.001
+                    </contact_surface_layer>
+                </constraints>
+                <gravity>0 0 -9.81
+                </gravity>
+                <magnetic_field>4.892e-05 1.378e-05 -4.916e-05
+                </magnetic_field>
+            </ode>
+        </physics>
     <model name="X4">
         <pose>0 0 0.121078 0 0 0
         </pose>
@@ -43,7 +75,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/x4.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/x4.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -55,7 +87,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/led.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/led.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -67,7 +99,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/led.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/led.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -79,7 +111,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/led.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/led.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -91,7 +123,7 @@
                     <mesh>
                         <scale>0.01 0.01 0.01
                         </scale>
-                        <uri>meshes/spotlight.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -103,7 +135,7 @@
                     <mesh>
                         <scale>0.01 0.01 0.01
                         </scale>
-                        <uri>meshes/spotlight.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -115,7 +147,7 @@
                     <mesh>
                         <scale>0.01 0.01 0.01
                         </scale>
-                        <uri>meshes/spotlight.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -335,6 +367,21 @@
                 </imu>
                 
             </sensor>
+            <sensor name="air_pressure" type="air_pressure">
+                <always_on>1
+                </always_on>
+                <update_rate>20
+                </update_rate>
+                <air_pressure>
+                    <reference_altitude>0
+                    </reference_altitude>
+                    <noise type="gaussian">
+                        <mean>0.00000008
+                        </mean>
+                    </noise>
+                </air_pressure>
+            </sensor>
+            
             <sensor name="gps" type="navsat">
                  <always_on>1
                 </always_on>
@@ -460,7 +507,7 @@
                     </cylinder>
                 </geometry>
             </visual>
-            <visual name="left_camera_visual">
+            <visual name="camera_visual">
                 <pose>0.1 0 -0.08 0 0 0
                 </pose>
                 <geometry>
@@ -470,121 +517,80 @@
                     </box>
                 </geometry>
             </visual>
-            <sensor name="left_rgbd_camera" type="rgbd_camera">
-                <pose>0.1 -0.05 -0.08 0 0 0</pose>
-                <always_on>true</always_on>
-                <update_rate>20</update_rate>
-                <camera name="left_camera">
-                    <horizontal_fov>1.0472</horizontal_fov>
+            <sensor name="camera_front" type="rgbd_camera">
+                <pose>0.2 0 0 0 +.785 0 
+                </pose>
+                <always_on>1
+                </always_on>
+                <update_rate>20
+                </update_rate>
+                <camera name="camera_front">
+                    <horizontal_fov>1.0472
+                    </horizontal_fov>
+                    <lens>
+                        <intrinsics>
+                            <!-- fx = fy = width / ( 2 * tan (hfov / 2 ) ) -->
+                            <fx>277.1
+                            </fx>
+                            <fy>277.1
+                            </fy>
+                            <!-- cx = ( width + 1 ) / 2 -->
+                            <cx>160.5
+                            </cx>
+                            <!-- cy = ( height + 1 ) / 2 -->
+                            <cy>120.5
+                            </cy>
+                            <s>0
+                            </s>
+                        </intrinsics>
+                    </lens>
+                    <distortion>
+                        <k1>0.0
+                        </k1>
+                        <k2>0.0
+                        </k2>
+                        <k3>0.0
+                        </k3>
+                        <p1>0.0
+                        </p1>
+                        <p2>0.0
+                        </p2>
+                        <center>0.5 0.5
+                        </center>
+                    </distortion>
                     <image>
-                        <width>320</width>
-                        <height>240</height>
-                        <format>R8G8B8</format>
+                        <width>320
+                        </width>
+                        <height>240
+                        </height>
+                        <format>R8G8B8
+                        </format>
                     </image>
                     <clip>
-                        <near>0.01</near>
-                        <far>300</far>
+                        <near>0.01
+                        </near>
+                        <far>300
+                        </far>
                     </clip>
+                    <depth_camera>
+                        <clip>
+                            <near>0.1
+                            </near>
+                            <far>10
+                            </far>
+                        </clip>
+                    </depth_camera>
                     <noise>
-                        <type>gaussian</type>
-                        <mean>0</mean>
-                        <stddev>0.007</stddev>
+                        <type>gaussian
+                        </type>
+                        <mean>0
+                        </mean>
+                        <stddev>0.007
+                        </stddev>
                     </noise>
                 </camera>
-                <!-- <plugin filename="libgazebo_ros_camera.so" name="left_camera_plugin"> -->
-                    <!-- <ros>
-                        <namespace>/X4</namespace>
-                    </ros>
-                    <camera_name>left_camera</camera_name>
-                    <image_topic_name>left/image_raw</image_topic_name>
-                    <camera_info_topic_name>left/camera_info</camera_info_topic_name>
-                    <frame_name>left_camera</frame_name>
-                </plugin> -->
-            </sensor>
-
-            <visual name="right_camera_visual">
-                <pose>0.1 0.05 -0.08 0 0 0</pose>
-                <geometry>
-                    <box>
-                        <size>0.02 0.025 0.025</size>
-                    </box>
-                </geometry>
-            </visual>
-            <sensor name="right_rgbd_camera" type="rgbd_camera">
-                <pose>0.1 0.05 -0.08 0 0 0</pose>
-                <always_on>true</always_on>
-                <update_rate>20</update_rate>
-                <camera name="right_camera">
-                    <horizontal_fov>1.0472</horizontal_fov>
-                    <image>
-                        <width>320</width>
-                        <height>240</height>
-                        <format>R8G8B8</format>
-                    </image>
-                    <clip>
-                        <near>0.01</near>
-                        <far>300</far>
-                    </clip>
-                    <noise>
-                        <type>gaussian</type>
-                        <mean>0</mean>
-                        <stddev>0.007</stddev>
-                    </noise>
-                </camera>
-                <!-- <plugin filename="libgazebo_ros_camera.so" name="right_camera_plugin"> -->
-                    <!-- <ros>
-                        <namespace>/X4</namespace>
-                    </ros>
-                    <camera_name>right_camera</camera_name>
-                    <image_topic_name>right/image_raw</image_topic_name>
-                    <camera_info_topic_name>right/camera_info</camera_info_topic_name>
-                    <frame_name>right_camera</frame_name>
-                </plugin> -->
-            </sensor>
-
-            <!-- Thermal Camera -->
-            <visual name="thermal_camera_visual">
-                <pose>0.1 0 -0.08 0 0 0</pose>
-                <geometry>
-                    <box>
-                        <size>0.02 0.025 0.025</size>
-                    </box>
-                </geometry>
-                <material>
-                    <script>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                        <name>Gazebo/Black</name>
-                    </script>
-                </material>
-            </visual>
-            <sensor name="thermal_camera" type="camera">
-                <pose>0.1 0 -0.08 0 0 0</pose>
-                <always_on>true</always_on>
-                <update_rate>10</update_rate>
-                <camera name="thermal_camera">
-                    <horizontal_fov>1.0472</horizontal_fov>
-                    <image>
-                        <width>320</width>
-                        <height>240</height>
-                        <format>L8</format>
-                    </image>
-                    <clip>
-                        <near>0.05</near>
-                        <far>100</far>
-                    </clip>
-                </camera>
-                <!-- <plugin filename="libgazebo_ros_camera.so" name="thermal_camera_plugin"> -->
-                    <!-- <ros>
-                        <namespace>/X4</namespace>
-                    </ros>
-                    <camera_name>thermal_camera</camera_name>
-                    <image_topic_name>thermal/image_raw</image_topic_name>
-                    <camera_info_topic_name>thermal/camera_info</camera_info_topic_name>
-                    <frame_name>thermal_camera</frame_name>
-                </plugin> -->
             </sensor>
         </link>
-
         <link name="rotor_0">
             <pose frame="">0.247 0.1506 0.028 0.087267 0 0.523599
             </pose>
@@ -635,7 +641,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/neo11_propeller_ccw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -645,7 +651,7 @@
                     <script>
                         <name>Gazebo/Red
                         </name>
-                        <uri>file:///media/materials/scripts/gazebo.material
+                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
                         </uri>
                     </script>
                 </material> -->
@@ -730,7 +736,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/neo11_propeller_cw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -740,7 +746,7 @@
                     <script>
                         <name>Gazebo/Blue
                         </name>
-                        <uri>file://media/materials/scripts/gazebo.material
+                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
                         </uri>
                     </script>
                 </material> -->
@@ -825,7 +831,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/neo11_propeller_ccw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -835,7 +841,7 @@
                     <script>
                         <name>Gazebo/Blue
                         </name>
-                        <uri>file://media/materials/scripts/gazebo.material
+                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
                         </uri>
                     </script>
                 </material> -->
@@ -920,7 +926,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/neo11_propeller_cw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -930,7 +936,7 @@
                     <script>
                         <name>Gazebo/Blue
                         </name>
-                        <uri>file://media/materials/scripts/gazebo.material
+                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
                         </uri>
                     </script>
                 </material> -->
@@ -1015,7 +1021,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/neo11_propeller_ccw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -1025,7 +1031,7 @@
                     <script>
                         <name>Gazebo/Blue
                         </name>
-                        <uri>file://media/materials/scripts/gazebo.material
+                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
                         </uri>
                     </script>
                 </material> -->
@@ -1104,7 +1110,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>meshes/neo11_propeller_cw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -1114,7 +1120,7 @@
                     <script>
                         <name>Gazebo/Red
                         </name>
-                        <uri>file://media/materials/scripts/gazebo.material
+                        <uri>model://X4_GPS_LIDAR_RGBD/materials/scripts
                         </uri>
                     </script>
                 </material> -->
