@@ -1,10 +1,45 @@
 ---
+# Joint states → for TF
+# - ros_topic_name: "/joint_states"
+#   gz_topic_name: "/world/world_demo/model/X4/joint_state"
+#   ros_type_name: "sensor_msgs/msg/JointState"
+#   gz_type_name: "ignition.msgs.Model"
+#   direction: GZ_TO_ROS
+
+# # TF → dynamic transforms (if Gazebo publishes them)
+# - ros_topic_name: "/tf"
+#   gz_topic_name: "/world/world_demo/dynamic_frame_tf"
+#   ros_type_name: "tf2_msgs/msg/TFMessage"
+#   gz_type_name: "ignition.msgs.Pose_V"
+#   direction: GZ_TO_ROS
+
+# # TF Static → static transforms
+# - ros_topic_name: "/tf"
+#   gz_topic_name: "/tf"
+#   ros_type_name: "tf2_msgs/msg/TFMessage"
+#   gz_type_name: "ignition.msgs.Pose_V"
+#   direction: GZ_TO_ROS
+
+# - ros_topic_name: "/tf_static"
+#   gz_topic_name: "/tf_static"
+#   ros_type_name: "tf2_msgs/msg/TFMessage"
+#   gz_type_name: "ignition.msgs.Pose_V"
+#   direction: GZ_TO_ROS
+
 - ros_topic_name: "/X4/cmd_vel"
   gz_topic_name: "/X4/cmd_vel"
   ros_type_name: "geometry_msgs/msg/Twist"
   gz_type_name: "ignition.msgs.Twist"
   direction: ROS_TO_GZ
 
+- ros_topic_name: "/X4/odom"
+  gz_topic_name: "/model/X4/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "ignition.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+
+# IMU, GPS, LIDAR, RGBD camera → sensors data
 - ros_topic_name: "/X4/imu"
   gz_topic_name: "/X4/imu"
   ros_type_name: "sensor_msgs/msg/Imu"

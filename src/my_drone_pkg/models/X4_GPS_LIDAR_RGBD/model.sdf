@@ -33,6 +33,17 @@
             </ode>
         </physics>
     <model name="X4">
+        <plugin name="ros_gz_pose_publisher" filename="gz-sim-ros-pose-publisher-system">
+            <ros>
+                <namespace>X4</namespace>
+            </ros>
+            <publish_tf>true</publish_tf>
+            <publish_tf_static>true</publish_tf_static>
+            <publish_pose>true</publish_pose>
+            <publish_link_pose>true</publish_link_pose>
+            <publish_nested_model_pose>true</publish_nested_model_pose>
+        </plugin>
+
         <pose>0 0 0.121078 0 0 0
         </pose>
         <link name="base_link">

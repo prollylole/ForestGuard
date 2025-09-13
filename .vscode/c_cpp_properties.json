@@ -9,6 +9,7 @@
         "/home/claudia/ForestGuard/install/sdf_to_urdf_converter/include/**",
         "/home/claudia/rs1_ws/install/turtlesim/include/**",
         "/opt/ros/humble/include/**",
+        "/home/claudia/ForestGuard/src/controller_pkg/include/**",
         "/home/claudia/ForestGuard/src/sdf_to_urdf_converter/include/**",
         "/usr/include/**"
       ],

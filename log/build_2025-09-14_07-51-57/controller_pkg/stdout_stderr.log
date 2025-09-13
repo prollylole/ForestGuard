@@ -1,0 +1,26 @@
+[ 28%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/controller.cpp.o[0m
+[ 28%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/main_quadcopter.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o[0m
+[ 85%] Built target vismarker
+In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:15[m[K:
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:20:10:[m[K [01;31m[Kfatal error: [m[Kpfms_types.h: No such file or directory
+   20 | #include [01;31m[K<pfms_types.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:104: CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:20:10:[m[K [01;31m[Kfatal error: [m[Kpfms_types.h: No such file or directory
+   20 | #include [01;31m[K<pfms_types.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:90: CMakeFiles/quadcopter.dir/src/controller.cpp.o] Error 1
+In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:18[m[K,
+                 from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/main_quadcopter.cpp:6[m[K:
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:20:10:[m[K [01;31m[Kfatal error: [m[Kpfms_types.h: No such file or directory
+   20 | #include [01;31m[K<pfms_types.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:76: CMakeFiles/quadcopter.dir/src/main_quadcopter.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/quadcopter.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

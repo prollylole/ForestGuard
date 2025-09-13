@@ -1,0 +1,90 @@
+[0.033s] Invoking command in '/home/claudia/ForestGuard/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
+[0.064s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.252s] -- Found rclcpp: 16.0.14 (/opt/ros/humble/share/rclcpp/cmake)
+[0.304s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.308s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.339s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.356s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.376s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.429s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.432s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.615s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.687s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.726s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.749s] -- Found tf2: 0.25.16 (/opt/ros/humble/share/tf2/cmake)
+[0.755s] -- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.873s] -- Found tf2_geometry_msgs: 0.25.16 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[0.908s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.910s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[0.910s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.912s] -- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+[0.933s] -- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)
+[0.963s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.989s] -- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)
+[1.072s] -- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built
+[1.155s] -- Configuring done
+[1.161s] [31mCMake Error at CMakeLists.txt:29 (add_library):
+[1.161s]   Cannot find source file:
+[1.161s] 
+[1.161s]     src/laserprocessing.cpp
+[1.161s] 
+[1.161s]   Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+[1.161s]   .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+[1.162s] 
+[1.162s] [0m
+[1.163s] [31mCMake Error at CMakeLists.txt:34 (add_executable):
+[1.163s]   Cannot find source file:
+[1.163s] 
+[1.163s]     src/main_quadcopter.cpp
+[1.163s] 
+[1.163s]   Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+[1.163s]   .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+[1.163s] 
+[1.164s] [0m
+[1.164s] [31mCMake Error at CMakeLists.txt:51 (add_executable):
+[1.164s]   Cannot find source file:
+[1.164s] 
+[1.164s]     src/main_vismarker.cpp
+[1.164s] 
+[1.164s]   Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+[1.164s]   .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+[1.165s] 
+[1.165s] [0m
+[1.165s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:50 (add_executable):
+[1.165s]   Cannot find source file:
+[1.165s] 
+[1.165s]     test/utest.cpp
+[1.165s] 
+[1.165s]   Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+[1.165s]   .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+[1.165s] Call Stack (most recent call first):
+[1.165s]   /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:37 (_ament_add_gtest_executable)
+[1.165s]   /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest.cmake:68 (ament_add_gtest_executable)
+[1.165s]   /opt/ros/humble/share/ament_cmake_ros/cmake/ament_add_ros_isolated_gtest.cmake:33 (ament_add_gtest)
+[1.166s]   CMakeLists.txt:76 (ament_add_ros_isolated_gtest)
+[1.166s] 
+[1.166s] [0m
+[1.166s] [31mCMake Error at CMakeLists.txt:29 (add_library):
+[1.166s]   No SOURCES given to target: laserprocessing
+[1.166s] 
+[1.166s] [0m
+[1.166s] [31mCMake Error at CMakeLists.txt:34 (add_executable):
+[1.166s]   No SOURCES given to target: quadcopter
+[1.166s] 
+[1.166s] [0m
+[1.166s] [31mCMake Error at CMakeLists.txt:51 (add_executable):
+[1.166s]   No SOURCES given to target: vismarker
+[1.167s] 
+[1.167s] [0m
+[1.167s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:50 (add_executable):
+[1.167s]   No SOURCES given to target: test_laserprocessing
+[1.167s] Call Stack (most recent call first):
+[1.167s]   /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest_executable.cmake:37 (_ament_add_gtest_executable)
+[1.167s]   /opt/ros/humble/share/ament_cmake_gtest/cmake/ament_add_gtest.cmake:68 (ament_add_gtest_executable)
+[1.167s]   /opt/ros/humble/share/ament_cmake_ros/cmake/ament_add_ros_isolated_gtest.cmake:33 (ament_add_gtest)
+[1.167s]   CMakeLists.txt:76 (ament_add_ros_isolated_gtest)
+[1.167s] 
+[1.167s] [0m
+[1.167s] [0mCMake Generate step failed.  Build files cannot be regenerated correctly.[0m
+[1.176s] gmake: *** [Makefile:226: cmake_check_build_system] Error 1
+[1.179s] Invoked command in '/home/claudia/ForestGuard/build/controller_pkg' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
