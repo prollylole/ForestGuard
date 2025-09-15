@@ -26,8 +26,8 @@ find_package(gtest_vendor REQUIRED)
 # find_package(pfms2ros 3.0.7 REQUIRED)
 
 # The library we are developing will be called laserprocessing
-# add_library(laserprocessing src/laserprocessing.cpp)
-# ament_target_dependencies(laserprocessing rclcpp std_msgs sensor_msgs nav_msgs geometry_msgs tf2 tf2_geometry_msgs)
+add_library(laserprocessing src/laserprocessing.cpp)
+ament_target_dependencies(laserprocessing rclcpp std_msgs sensor_msgs nav_msgs geometry_msgs tf2 tf2_geometry_msgs)
 
 ## This is the executable
 # add "quadcopter" node 
@@ -47,9 +47,15 @@ ament_target_dependencies(quadcopter
   std_srvs
   visualization_msgs
 )
-# target_link_libraries(quadcopter laserprocessing)
+  
+target_link_libraries(quadcopter laserprocessing)
 
 target_include_directories(quadcopter PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+target_include_directories(laserprocessing PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
@@ -75,19 +81,24 @@ target_include_directories(vismarker PUBLIC
 
 install(TARGETS
   quadcopter
-  # laserprocessing
+  laserprocessing
   vismarker
+  EXPORT export_${PROJECT_NAME}
   DESTINATION lib/${PROJECT_NAME})
+
+# makes sure your library is properly exported so executables can find it.
+ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
+ament_export_dependencies(rclcpp std_msgs sensor_msgs nav_msgs tf2 tf2_geometry_msgs)
 
 install(
   DIRECTORY include/
   DESTINATION include
 )
 
-install(
-  DIRECTORY data
-  DESTINATION share/${PROJECT_NAME}
-)
+# install(
+#   DIRECTORY data
+#   DESTINATION share/${PROJECT_NAME}
+# )
 
 if(BUILD_TESTING)
 

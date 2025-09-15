@@ -289,32 +289,32 @@ void Quadcopter::sendLanding(void) {
 
     switch(status_){
         // if idle
-        case pfms::PlatformStatus::IDLE:
+        case IDLE:
             // if goal is set, set status run
             if(goalSet_){
-                status_=pfms::PlatformStatus::RUNNING;
+                status_= RUNNING;
             }
             return false;
         // if takeoff
-        case pfms::PlatformStatus::TAKEOFF:
+        case TAKEOFF:
             // publish takeoff, publish takeoff
             sendTakeOff();
             // if goal is set, keep running
             if(goalSet_){
-                status_=pfms::PlatformStatus::RUNNING;
+                status_= RUNNING;
             }
             else{
                 // if goal is not set, status idle
-                status_=pfms::PlatformStatus::IDLE;
+                status_= IDLE;
             }
             return true;
             // if land, send publish land
-        case pfms::PlatformStatus::LANDING:
+        case LANDING:
             sendLanding();
             // then turn idle
-            status_=pfms::PlatformStatus::IDLE;
+            status_= IDLE;
             return true;
-        case pfms::PlatformStatus::RUNNING:
+        case RUNNING:
             break;
     }
 
@@ -407,7 +407,7 @@ void Quadcopter::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> 
         if (goalSet_) 
         {
             // set status takeoff
-            status_ = pfms::PlatformStatus::TAKEOFF;
+            status_ = TAKEOFF;
             // calculate status
             double percentageCompletion = status();
             // perform detect human
@@ -437,7 +437,7 @@ void Quadcopter::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> 
     }
     else
     {
-        status_ = pfms::PlatformStatus::LANDING;
+        status_ = LANDING;
         // call for statuss
         double percentageCompletion = status();
         // check for humans before landing (optional—depends on your requirements)

@@ -1,5 +1,6 @@
 /home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/uninstall.dir
 /home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/controller_pkg_uninstall.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/laserprocessing.dir
 /home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/quadcopter.dir
 /home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/vismarker.dir
 /home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/test.dir

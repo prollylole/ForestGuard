@@ -26,7 +26,7 @@ Controller::Controller()  :
   current_goal_idx_(0),
   tolerance_(0.5),
   laserDataReceived_(false),
-  status_(pfms::PlatformStatus::IDLE) 
+  status_(IDLE) 
 {
    // Laser subscriber: Processes environmental data for obstacle detection
    laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
@@ -217,16 +217,16 @@ std::string Controller::getInfoString()
     switch(status_)
     {
         // Platform waiting for commands
-        case pfms::PlatformStatus::IDLE   : ss << "IDLE ";    break;
+        case IDLE   : ss << "IDLE ";    break;
 
         // Platform actively executing goals
-        case pfms::PlatformStatus::RUNNING : ss << "RUNNING ";  break;
+        case RUNNING : ss << "RUNNING ";  break;
 
         // Platform initiating flight
-        case pfms::PlatformStatus::TAKEOFF : ss << "TAKEOFF ";  break;
+        case TAKEOFF : ss << "TAKEOFF ";  break;
 
         // Platform performing landing sequence
-        case pfms::PlatformStatus::LANDING : ss << "LANDING ";  break;
+        case LANDING : ss << "LANDING ";  break;
     }
     return ss.str(); // This command convertes trsingstream to string
 }

@@ -1,0 +1,215 @@
+[0.058s] Invoking command in '/home/claudia/ForestGuard/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
+[0.150s] [ 33%] Built target vismarker
+[0.167s] [ 44%] [32mBuilding CXX object CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o[0m
+[5.176s] [ 55%] [32m[1mLinking CXX shared library liblaserprocessing.so[0m
+[5.397s] [ 55%] Built target laserprocessing
+[5.425s] [ 66%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/main_quadcopter.cpp.o[0m
+[5.425s] [ 77%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/controller.cpp.o[0m
+[5.426s] [ 88%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o[0m
+[7.726s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:18[m[K,
+[7.726s]                  from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/main_quadcopter.cpp:6[m[K:
+[7.726s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:115:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ does not name a type
+[7.726s]   115 |   [01;31m[Kpfms[m[K::PlatformStatus status_; //!< The current platform stats
+[7.726s]       |   [01;31m[K^~~~[m[K
+[7.735s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:19:[m[K [01;31m[Kerror: [m[K‘[01m[KLaserProcessing[m[K’ was not declared in this scope
+[7.735s]   120 |   std::unique_ptr<[01;31m[KLaserProcessing[m[K> laserProcessingPtr_; //!< Pointer to the laser processing object
+[7.735s]       |                   [01;31m[K^~~~~~~~~~~~~~~[m[K
+[7.735s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:34:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[7.735s]   120 |   std::unique_ptr<LaserProcessing[01;31m[K>[m[K laserProcessingPtr_; //!< Pointer to the laser processing object
+[7.735s]       |                                  [01;31m[K^[m[K
+[7.735s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:34:[m[K [01;31m[Kerror: [m[Ktemplate argument 2 is invalid
+[7.787s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:15[m[K:
+[7.787s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:115:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ does not name a type
+[7.787s]   115 |   [01;31m[Kpfms[m[K::PlatformStatus status_; //!< The current platform stats
+[7.787s]       |   [01;31m[K^~~~[m[K
+[7.793s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:19:[m[K [01;31m[Kerror: [m[K‘[01m[KLaserProcessing[m[K’ was not declared in this scope
+[7.793s]   120 |   std::unique_ptr<[01;31m[KLaserProcessing[m[K> laserProcessingPtr_; //!< Pointer to the laser processing object
+[7.793s]       |                   [01;31m[K^~~~~~~~~~~~~~~[m[K
+[7.793s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:34:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[7.793s]   120 |   std::unique_ptr<LaserProcessing[01;31m[K>[m[K laserProcessingPtr_; //!< Pointer to the laser processing object
+[7.793s]       |                                  [01;31m[K^[m[K
+[7.793s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:34:[m[K [01;31m[Kerror: [m[Ktemplate argument 2 is invalid
+[7.807s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[7.807s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:115:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ does not name a type
+[7.807s]   115 |   [01;31m[Kpfms[m[K::PlatformStatus status_; //!< The current platform stats
+[7.807s]       |   [01;31m[K^~~~[m[K
+[7.813s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:19:[m[K [01;31m[Kerror: [m[K‘[01m[KLaserProcessing[m[K’ was not declared in this scope
+[7.813s]   120 |   std::unique_ptr<[01;31m[KLaserProcessing[m[K> laserProcessingPtr_; //!< Pointer to the laser processing object
+[7.814s]       |                   [01;31m[K^~~~~~~~~~~~~~~[m[K
+[7.814s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:34:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[7.814s]   120 |   std::unique_ptr<LaserProcessing[01;31m[K>[m[K laserProcessingPtr_; //!< Pointer to the laser processing object
+[7.814s]       |                                  [01;31m[K^[m[K
+[7.814s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:120:34:[m[K [01;31m[Kerror: [m[Ktemplate argument 2 is invalid
+[7.922s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:[m[K In constructor ‘[01m[KController::Controller()[m[K’:
+[7.922s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:29:3:[m[K [01;31m[Kerror: [m[Kclass ‘[01m[KController[m[K’ does not have any field named ‘[01m[Kstatus_[m[K’
+[7.922s]    29 |   [01;31m[Kstatus_[m[K(pfms::PlatformStatus::IDLE)
+[7.922s]       |   [01;31m[K^~~~~~~[m[K
+[7.922s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:29:11:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.922s]    29 |   status_([01;31m[Kpfms[m[K::PlatformStatus::IDLE)
+[7.922s]       |           [01;31m[K^~~~[m[K
+[7.922s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[7.922s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:109:8:[m[K [01;35m[Kwarning: [m[K‘[01m[KController::goalSet_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[7.922s]   109 |   bool [01;35m[KgoalSet_[m[K; //!< Flag indicating if a goal has been set
+[7.922s]       |        [01;35m[K^~~~~~~~[m[K
+[7.922s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:105:10:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Ksize_t Controller::current_goal_idx_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[7.922s]   105 |   size_t [01;35m[Kcurrent_goal_idx_[m[K; //!< Track current goal index
+[7.922s]       |          [01;35m[K^~~~~~~~~~~~~~~~~[m[K
+[7.922s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:23:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[7.922s]    23 | [01;35m[KController[m[K::Controller()  :
+[7.923s]       | [01;35m[K^~~~~~~~~~[m[K
+[7.944s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:16[m[K:
+[7.944s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:[m[K In constructor ‘[01m[KQuadcopter::Quadcopter()[m[K’:
+[7.944s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:80:8:[m[K [01;35m[Kwarning: [m[K‘[01m[KQuadcopter::liftoff_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[7.944s]    80 |   bool [01;35m[Kliftoff_[m[K; //<-- indicate if the quadcopter is in the air
+[7.944s]       |        [01;35m[K^~~~~~~~[m[K
+[7.944s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:75:16:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kconst double Quadcopter::TARGET_SPEED[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[7.944s]    75 |   const double [01;35m[KTARGET_SPEED[m[K; //<-- Maximum movement speed
+[7.944s]       |                [01;35m[K^~~~~~~~~~~~[m[K
+[7.944s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:40:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[7.944s]    40 | [01;35m[KQuadcopter[m[K::Quadcopter() :
+[7.944s]       | [01;35m[K^~~~~~~~~~[m[K
+[7.944s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:[m[K In destructor ‘[01m[Kvirtual Controller::~Controller()[m[K’:
+[7.944s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:57:25:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kreset[m[K’ in ‘[01m[K((Controller*)this)->Controller::laserProcessingPtr_[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+[7.944s]    57 |     laserProcessingPtr_.[01;31m[Kreset[m[K();
+[7.945s]       |                         [01;31m[K^~~~~[m[K
+[7.945s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:[m[K In member function ‘[01m[Kvoid Controller::laserCallback(const LaserScan&)[m[K’:
+[7.945s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:140:29:[m[K [01;31m[Kerror: [m[Kinvalid operands of types ‘[01m[Kint[m[K’ and ‘[01m[Kstd::nullptr_t[m[K’ to binary ‘[01m[Koperator==[m[K’
+[7.945s]   140 |     if ([01;31m[KlaserProcessingPtr_ == nullptr[m[K) {
+[7.945s]       |         [01;31m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~[m[K
+[7.951s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:141:48:[m[K [01;31m[Kerror: [m[K‘[01m[KLaserProcessing[m[K’ was not declared in this scope; did you mean ‘[01m[KlaserProcessingPtr_[m[K’?
+[7.952s]   141 |         laserProcessingPtr_ = std::make_unique<[01;31m[KLaserProcessing[m[K>(laserData_);
+[7.952s]       |                                                [01;31m[K^~~~~~~~~~~~~~~[m[K
+[7.952s]       |                                                [32m[KlaserProcessingPtr_[m[K
+[7.952s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:141:64:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kmake_unique<<expression error> >(sensor_msgs::msg::LaserScan&)[m[K’
+[7.952s]   141 |         laserProcessingPtr_ = [01;31m[Kstd::make_unique<LaserProcessing>(laserData_)[m[K;
+[7.952s]       |                               [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[7.952s] In file included from [01m[K/usr/include/c++/11/bits/std_thread.h:44[m[K,
+[7.952s]                  from [01m[K/usr/include/c++/11/thread:43[m[K,
+[7.952s]                  from [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:16[m[K,
+[7.952s]                  from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[7.952s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:961:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class ... _Args> typename std::_MakeUniq<_Tp>::__single_object std::make_unique(_Args&& ...)[m[K’
+[7.952s]   961 |     [01;36m[Kmake_unique[m[K(_Args&&... __args)
+[7.952s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[7.952s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:961:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.952s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:141:64:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[7.952s]   141 |         laserProcessingPtr_ = [01;31m[Kstd::make_unique<LaserProcessing>(laserData_)[m[K;
+[7.952s]       |                               [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[7.952s] In file included from [01m[K/usr/include/c++/11/bits/std_thread.h:44[m[K,
+[7.952s]                  from [01m[K/usr/include/c++/11/thread:43[m[K,
+[7.953s]                  from [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:16[m[K,
+[7.953s]                  from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[7.953s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:967:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> typename std::_MakeUniq<_Tp>::__array std::make_unique(std::size_t)[m[K’
+[7.953s]   967 |     [01;36m[Kmake_unique[m[K(size_t __num)
+[7.953s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[7.953s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:967:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.953s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:141:64:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[7.953s]   141 |         laserProcessingPtr_ = [01;31m[Kstd::make_unique<LaserProcessing>(laserData_)[m[K;
+[7.953s]       |                               [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[7.953s] In file included from [01m[K/usr/include/c++/11/bits/std_thread.h:44[m[K,
+[7.953s]                  from [01m[K/usr/include/c++/11/thread:43[m[K,
+[7.953s]                  from [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:16[m[K,
+[7.953s]                  from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[7.953s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:973:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class ... _Args> typename std::_MakeUniq<_Tp>::__invalid_type std::make_unique(_Args&& ...)[m[K’ (deleted)
+[7.953s]   973 |     [01;36m[Kmake_unique[m[K(_Args&&...) = delete;
+[7.953s]       |     [01;36m[K^~~~~~~~~~~[m[K
+[7.953s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:973:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.953s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:141:64:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[7.953s]   141 |         laserProcessingPtr_ = [01;31m[Kstd::make_unique<LaserProcessing>(laserData_)[m[K;
+[7.953s]       |                               [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[7.953s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:145:28:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ is not a pointer
+[7.954s]   145 |         laserProcessingPtr_[01;31m[K->[m[KnewScan(laserData_);
+[7.954s]       |                            [01;31m[K^~[m[K
+[7.955s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:[m[K In member function ‘[01m[Kvirtual bool Quadcopter::checkOriginToDestination(geometry_msgs::msg::Pose, geometry_msgs::msg::Point, double&, double&, geometry_msgs::msg::Pose&)[m[K’:
+[7.955s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:146:49:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ is not a pointer
+[7.955s]   146 |         bool obstacleExist = laserProcessingPtr_[01;31m[K->[m[KcheckObstruction(distance, angleLocal);
+[7.955s]       |                                                 [01;31m[K^~[m[K
+[7.955s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:149:50:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ is not a pointer
+[7.955s]   149 |         auto detectedHumans = laserProcessingPtr_[01;31m[K->[m[KdetectHumans();
+[7.955s]       |                                                  [01;31m[K^~[m[K
+[7.956s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:[m[K In member function ‘[01m[Kvirtual GoalStats Quadcopter::calcNewGoal()[m[K’:
+[7.956s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[7.956s]   202 |         return GoalStats{[01;35m[K}[m[K;
+[7.956s]       |                          [01;35m[K^[m[K
+[7.956s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[7.956s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[7.956s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[7.956s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[7.956s]   241 |     return GoalStats{[01;35m[K}[m[K;
+[7.956s]       |                      [01;35m[K^[m[K
+[7.956s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[7.957s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[7.957s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[7.957s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:[m[K In member function ‘[01m[Kstd::string Controller::getInfoString()[m[K’:
+[7.957s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:217:12:[m[K [01;31m[Kerror: [m[K‘[01m[Kstatus_[m[K’ was not declared in this scope; did you mean ‘[01m[Kstatus[m[K’?
+[7.957s]   217 |     switch([01;31m[Kstatus_[m[K)
+[7.957s]       |            [01;31m[K^~~~~~~[m[K
+[7.957s]       |            [32m[Kstatus[m[K
+[7.957s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:220:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.957s]   220 |         case [01;31m[Kpfms[m[K::PlatformStatus::IDLE   : ss << "IDLE ";    break;
+[7.957s]       |              [01;31m[K^~~~[m[K
+[7.957s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:223:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.957s]   223 |         case [01;31m[Kpfms[m[K::PlatformStatus::RUNNING : ss << "RUNNING ";  break;
+[7.957s]       |              [01;31m[K^~~~[m[K
+[7.958s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:226:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.958s]   226 |         case [01;31m[Kpfms[m[K::PlatformStatus::TAKEOFF : ss << "TAKEOFF ";  break;
+[7.958s]       |              [01;31m[K^~~~[m[K
+[7.958s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:229:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.958s]   229 |         case [01;31m[Kpfms[m[K::PlatformStatus::LANDING : ss << "LANDING ";  break;
+[7.958s]       |              [01;31m[K^~~~[m[K
+[7.963s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:[m[K In member function ‘[01m[Kbool Quadcopter::reachGoal()[m[K’:
+[7.963s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:290:12:[m[K [01;31m[Kerror: [m[K‘[01m[Kstatus_[m[K’ was not declared in this scope; did you mean ‘[01m[Kstatus[m[K’?
+[7.963s]   290 |     switch([01;31m[Kstatus_[m[K){
+[7.963s]       |            [01;31m[K^~~~~~~[m[K
+[7.963s]       |            [32m[Kstatus[m[K
+[7.964s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:292:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.964s]   292 |         case [01;31m[Kpfms[m[K::PlatformStatus::IDLE:
+[7.964s]       |              [01;31m[K^~~~[m[K
+[7.964s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:295:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.964s]   295 |                 status_=[01;31m[Kpfms[m[K::PlatformStatus::RUNNING;
+[7.964s]       |                         [01;31m[K^~~~[m[K
+[7.964s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:299:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.964s]   299 |         case [01;31m[Kpfms[m[K::PlatformStatus::TAKEOFF:
+[7.964s]       |              [01;31m[K^~~~[m[K
+[7.964s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:304:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.964s]   304 |                 status_=[01;31m[Kpfms[m[K::PlatformStatus::RUNNING;
+[7.964s]       |                         [01;31m[K^~~~[m[K
+[7.964s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:308:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.964s]   308 |                 status_=[01;31m[Kpfms[m[K::PlatformStatus::IDLE;
+[7.964s]       |                         [01;31m[K^~~~[m[K
+[7.964s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:312:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.965s]   312 |         case [01;31m[Kpfms[m[K::PlatformStatus::LANDING:
+[7.965s]       |              [01;31m[K^~~~[m[K
+[7.965s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:315:21:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.965s]   315 |             status_=[01;31m[Kpfms[m[K::PlatformStatus::IDLE;
+[7.965s]       |                     [01;31m[K^~~~[m[K
+[7.965s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:317:14:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.965s]   317 |         case [01;31m[Kpfms[m[K::PlatformStatus::RUNNING:
+[7.965s]       |              [01;31m[K^~~~[m[K
+[7.973s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:[m[K In member function ‘[01m[Kvirtual void Quadcopter::control(std::shared_ptr<std_srvs::srv::SetBool_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::SetBool_Response_<std::allocator<void> > >)[m[K’:
+[7.973s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:410:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kstatus_[m[K’ was not declared in this scope; did you mean ‘[01m[Kstatus[m[K’?
+[7.973s]   410 |             [01;31m[Kstatus_[m[K = pfms::PlatformStatus::TAKEOFF;
+[7.973s]       |             [01;31m[K^~~~~~~[m[K
+[7.974s]       |             [32m[Kstatus[m[K
+[7.974s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:410:23:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.974s]   410 |             status_ = [01;31m[Kpfms[m[K::PlatformStatus::TAKEOFF;
+[7.974s]       |                       [01;31m[K^~~~[m[K
+[7.974s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:414:46:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ is not a pointer
+[7.974s]   414 |             auto humans = laserProcessingPtr_[01;31m[K->[m[KdetectHumans();
+[7.974s]       |                                              [01;31m[K^~[m[K
+[7.978s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:440:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kstatus_[m[K’ was not declared in this scope; did you mean ‘[01m[Kstatus[m[K’?
+[7.978s]   440 |         [01;31m[Kstatus_[m[K = pfms::PlatformStatus::LANDING;
+[7.978s]       |         [01;31m[K^~~~~~~[m[K
+[7.978s]       |         [32m[Kstatus[m[K
+[7.978s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:440:19:[m[K [01;31m[Kerror: [m[K‘[01m[Kpfms[m[K’ has not been declared
+[7.978s]   440 |         status_ = [01;31m[Kpfms[m[K::PlatformStatus::LANDING;
+[7.978s]       |                   [01;31m[K^~~~[m[K
+[7.978s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:444:42:[m[K [01;31m[Kerror: [m[Kbase operand of ‘[01m[K->[m[K’ is not a pointer
+[7.978s]   444 |         auto humans = laserProcessingPtr_[01;31m[K->[m[KdetectHumans();
+[7.978s]       |                                          [01;31m[K^~[m[K
+[8.309s] gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:76: CMakeFiles/quadcopter.dir/src/main_quadcopter.cpp.o] Error 1
+[8.309s] gmake[2]: *** Waiting for unfinished jobs....
+[9.322s] gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:104: CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o] Error 1
+[11.931s] gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:90: CMakeFiles/quadcopter.dir/src/controller.cpp.o] Error 1
+[11.932s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/quadcopter.dir/all] Error 2
+[11.932s] gmake: *** [Makefile:146: all] Error 2
+[11.934s] Invoked command in '/home/claudia/ForestGuard/build/controller_pkg' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16

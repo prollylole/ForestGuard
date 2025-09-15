@@ -198,6 +198,19 @@ controller_pkg_uninstall/fast:
 .PHONY : controller_pkg_uninstall/fast
 
 #=============================================================================
+# Target rules for targets named laserprocessing
+
+# Build rule for target.
+laserprocessing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 laserprocessing
+.PHONY : laserprocessing
+
+# fast build rule for target.
+laserprocessing/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/build
+.PHONY : laserprocessing/fast
+
+#=============================================================================
 # Target rules for targets named quadcopter
 
 # Build rule for target.
@@ -246,6 +259,30 @@ src/controller.s: src/controller.cpp.s
 src/controller.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/quadcopter.dir/build.make CMakeFiles/quadcopter.dir/src/controller.cpp.s
 .PHONY : src/controller.cpp.s
+
+src/laserprocessing.o: src/laserprocessing.cpp.o
+.PHONY : src/laserprocessing.o
+
+# target to build an object file
+src/laserprocessing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o
+.PHONY : src/laserprocessing.cpp.o
+
+src/laserprocessing.i: src/laserprocessing.cpp.i
+.PHONY : src/laserprocessing.i
+
+# target to preprocess a source file
+src/laserprocessing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.i
+.PHONY : src/laserprocessing.cpp.i
+
+src/laserprocessing.s: src/laserprocessing.cpp.s
+.PHONY : src/laserprocessing.s
+
+# target to generate assembly for a file
+src/laserprocessing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.s
+.PHONY : src/laserprocessing.cpp.s
 
 src/main_quadcopter.o: src/main_quadcopter.cpp.o
 .PHONY : src/main_quadcopter.o
@@ -358,11 +395,15 @@ help:
 	@echo "... test"
 	@echo "... controller_pkg_uninstall"
 	@echo "... uninstall"
+	@echo "... laserprocessing"
 	@echo "... quadcopter"
 	@echo "... vismarker"
 	@echo "... src/controller.o"
 	@echo "... src/controller.i"
 	@echo "... src/controller.s"
+	@echo "... src/laserprocessing.o"
+	@echo "... src/laserprocessing.i"
+	@echo "... src/laserprocessing.s"
 	@echo "... src/main_quadcopter.o"
 	@echo "... src/main_quadcopter.i"
 	@echo "... src/main_quadcopter.s"

@@ -1,0 +1,61 @@
+[0.057s] Invoking command in '/home/claudia/ForestGuard/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/my_drone_pkg -- -j16 -l16
+[0.143s] [100%] Built target drone_controller
+[0.162s] Invoked command in '/home/claudia/ForestGuard/build/my_drone_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/my_drone_pkg -- -j16 -l16
+[0.176s] Invoking command in '/home/claudia/ForestGuard/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/my_drone_pkg
+[0.184s] -- Install configuration: ""
+[0.185s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/lib/my_drone_pkg/drone_controller
+[0.185s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/lib/my_drone_pkg/setup_gazebo.sh
+[0.186s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch
+[0.186s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch/drone_launch.py
+[0.186s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch/display.launch.py
+[0.186s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds
+[0.186s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds/world_demo.sdf
+[0.186s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models
+[0.187s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD
+[0.187s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/model.sdf
+[0.187s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials
+[0.187s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures
+[0.187s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures/led.jpg
+[0.188s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures/spotlight.jpg
+[0.188s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/model.config
+[0.188s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes
+[0.188s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
+[0.188s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.dae
+[0.189s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae
+[0.189s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.jpg
+[0.189s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/propeller_cw.dae
+[0.189s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/propeller_ccw.dae
+[0.189s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
+[0.189s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led_lamp.dae
+[0.189s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_sensor.jpg
+[0.190s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_sensor.dae
+[0.190s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_camera.jpg
+[0.190s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/pelican.dae
+[0.191s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_camera.dae
+[0.191s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
+[0.191s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails
+[0.191s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/2.jpg
+[0.191s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/5.jpg
+[0.191s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/1.jpg
+[0.192s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/3.jpg
+[0.192s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/4.jpg
+[0.192s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/urdf
+[0.192s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/urdf/X4.urdf.xacro
+[0.192s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/config
+[0.193s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/config/ros_gz_bridge_config.yaml
+[0.193s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/package_run_dependencies/my_drone_pkg
+[0.197s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/parent_prefix_path/my_drone_pkg
+[0.198s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.sh
+[0.198s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.dsv
+[0.198s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/path.sh
+[0.198s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/path.dsv
+[0.199s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.bash
+[0.199s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.sh
+[0.199s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.zsh
+[0.199s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.dsv
+[0.199s] -- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/package.dsv
+[0.200s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/packages/my_drone_pkg
+[0.200s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig.cmake
+[0.200s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig-version.cmake
+[0.201s] -- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/package.xml
+[0.206s] Invoked command in '/home/claudia/ForestGuard/build/my_drone_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/my_drone_pkg

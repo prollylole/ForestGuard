@@ -1,3 +1,12 @@
+/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter
+/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so
+/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/vismarker
+/home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/library_path.sh
+/home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/library_path.dsv
+/home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/vis_marker.h
+/home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/laserprocessing.h
+/home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/quadcopter.h
+/home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/controller.h
 /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/package_run_dependencies/controller_pkg
 /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/parent_prefix_path/controller_pkg
 /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/ament_prefix_path.sh
@@ -10,6 +19,10 @@
 /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.dsv
 /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/package.dsv
 /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/packages/controller_pkg
+/home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/export_controller_pkgExport.cmake
+/home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/export_controller_pkgExport-noconfig.cmake
+/home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/ament_cmake_export_targets-extras.cmake
+/home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/ament_cmake_export_dependencies-extras.cmake
 /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig.cmake
 /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig-version.cmake
 /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/package.xml

@@ -1,0 +1,33 @@
+[0.061s] Invoking command in '/home/claudia/ForestGuard/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
+[0.172s] [ 33%] Built target vismarker
+[0.199s] [ 44%] [32mBuilding CXX object CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o[0m
+[5.724s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:[m[K In member function ‘[01m[Kbool LaserProcessing::checkObstruction(double&, double&)[m[K’:
+[5.725s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:211:23:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<float, std::allocator<float> >::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[5.725s]   211 |     for (int i = 0; [01;35m[Ki < laserScan_.ranges.size()[m[K; i++) {
+[5.725s]       |                     [01;35m[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[6.720s] [ 55%] [32m[1mLinking CXX shared library liblaserprocessing.so[0m
+[6.922s] [ 55%] Built target laserprocessing
+[6.968s] [ 66%] [32m[1mLinking CXX executable quadcopter[0m
+[7.824s] [100%] Built target quadcopter
+[7.832s] Invoked command in '/home/claudia/ForestGuard/build/controller_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
+[7.833s] Invoking command in '/home/claudia/ForestGuard/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/controller_pkg
+[7.836s] -- Install configuration: ""
+[7.837s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter
+[7.844s] -- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter" to ""
+[7.845s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so
+[7.845s] -- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so" to ""
+[7.845s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/vismarker
+[7.853s] -- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/vismarker" to ""
+[7.853s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include
+[7.853s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg
+[7.854s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/vis_marker.h
+[7.854s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/laserprocessing.h
+[7.854s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/quadcopter.h
+[7.854s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/controller.h
+[7.854s] [31mCMake Error at cmake_install.cmake:113 (file):
+[7.854s]   file INSTALL cannot find
+[7.854s]   "/home/claudia/ForestGuard/src/controller_pkg/data": No such file or
+[7.854s]   directory.
+[7.854s] 
+[7.855s] [0m
+[7.856s] Invoked command in '/home/claudia/ForestGuard/build/controller_pkg' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/controller_pkg

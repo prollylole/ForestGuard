@@ -1,0 +1,19 @@
+[ 33%] Built target vismarker
+[ 44%] [32mBuilding CXX object CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o[0m
+[ 55%] [32m[1mLinking CXX shared library liblaserprocessing.so[0m
+[ 55%] Built target laserprocessing
+[ 66%] [32m[1mLinking CXX executable quadcopter[0m
+[100%] Built target quadcopter
+-- Install configuration: ""
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter
+-- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter" to ""
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so
+-- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so" to ""
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/vismarker
+-- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/vismarker" to ""
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/include
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/vis_marker.h
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/laserprocessing.h
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/quadcopter.h
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/controller.h

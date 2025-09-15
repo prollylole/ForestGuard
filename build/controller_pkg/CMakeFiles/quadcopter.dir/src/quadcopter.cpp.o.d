@@ -762,6 +762,7 @@ CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o: \
  /opt/ros/humble/include/std_srvs/std_srvs/srv/detail/set_bool__traits.hpp \
  /opt/ros/humble/include/std_srvs/std_srvs/srv/detail/set_bool__type_support.hpp \
  /opt/ros/humble/include/std_srvs/std_srvs/msg/rosidl_generator_cpp__visibility_control.hpp \
+ /home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/laserprocessing.h \
  /home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h \
  /home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/empty.hpp \
