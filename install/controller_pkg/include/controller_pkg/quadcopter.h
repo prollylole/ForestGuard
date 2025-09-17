@@ -54,13 +54,6 @@ public:
     double& distance, double& time,
     geometry_msgs::msg::Pose& estimatedGoalPose); 
 
-/**
- * @brief Service callback for controlling quadcopter mission
- * @param req Service request containing control command
- * @param res Service response indicating success/failure
- */
-  void control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,std::shared_ptr<std_srvs::srv::SetBool::Response> res);
-
 protected:
   /**
    * Instructs the underlying platform to recalcuate a goal, and set any internal variables as needed

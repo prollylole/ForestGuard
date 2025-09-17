@@ -197,43 +197,6 @@ my_drone_pkg_uninstall/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_drone_pkg_uninstall.dir/build.make CMakeFiles/my_drone_pkg_uninstall.dir/build
 .PHONY : my_drone_pkg_uninstall/fast
 
-#=============================================================================
-# Target rules for targets named drone_controller
-
-# Build rule for target.
-drone_controller: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 drone_controller
-.PHONY : drone_controller
-
-# fast build rule for target.
-drone_controller/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/drone_controller.dir/build.make CMakeFiles/drone_controller.dir/build
-.PHONY : drone_controller/fast
-
-src/drone_controller.o: src/drone_controller.cpp.o
-.PHONY : src/drone_controller.o
-
-# target to build an object file
-src/drone_controller.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/drone_controller.dir/build.make CMakeFiles/drone_controller.dir/src/drone_controller.cpp.o
-.PHONY : src/drone_controller.cpp.o
-
-src/drone_controller.i: src/drone_controller.cpp.i
-.PHONY : src/drone_controller.i
-
-# target to preprocess a source file
-src/drone_controller.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/drone_controller.dir/build.make CMakeFiles/drone_controller.dir/src/drone_controller.cpp.i
-.PHONY : src/drone_controller.cpp.i
-
-src/drone_controller.s: src/drone_controller.cpp.s
-.PHONY : src/drone_controller.s
-
-# target to generate assembly for a file
-src/drone_controller.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/drone_controller.dir/build.make CMakeFiles/drone_controller.dir/src/drone_controller.cpp.s
-.PHONY : src/drone_controller.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -249,10 +212,6 @@ help:
 	@echo "... test"
 	@echo "... my_drone_pkg_uninstall"
 	@echo "... uninstall"
-	@echo "... drone_controller"
-	@echo "... src/drone_controller.o"
-	@echo "... src/drone_controller.i"
-	@echo "... src/drone_controller.s"
 .PHONY : help
 
 

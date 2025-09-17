@@ -28,20 +28,23 @@ Controller::Controller()  :
   laserDataReceived_(false),
   status_(IDLE) 
 {
-   // Laser subscriber: Processes environmental data for obstacle detection
+  // Initialize laserProcessingPtr_ 
+   laserProcessingPtr_ = std::make_unique<LaserProcessing>();
+
+  // Laser subscriber: Processes environmental data for obstacle detection
    laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-      "drone/laserscan", 10, std::bind(&Controller::laserCallback,this,std::placeholders::_1));    
+      "/X4/scan", 10, std::bind(&Controller::laserCallback,this,std::placeholders::_1));    
    
    // Goal subscriber: Receives navigation waypoints
    goal_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
-      "/drone/goals", 10, std::bind(&Controller::setGoal,this,std::placeholders::_1)); 
+      "/goal_pose", 10, std::bind(&Controller::setGoal,this,std::placeholders::_1)); 
          
    // Odometry subscriber: Tracks robot position and movement
    odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(
-       "/drone/gt_odom", 10, std::bind(&Controller::odoCallback,this,std::placeholders::_1));
+       "/X4/odom", 10, std::bind(&Controller::odoCallback,this,std::placeholders::_1));
    // Mission service: Handles external control commands
    service_ = this->create_service<std_srvs::srv::SetBool>(
-       "/drone/mission", std::bind(&Controller::control,this,std::placeholders::_1, std::placeholders::_2)); 
+       "/X4/mission", std::bind(&Controller::control,this,std::placeholders::_1, std::placeholders::_2)); 
 }
 
 /**
@@ -137,13 +140,13 @@ bool Controller::goalReached() {
    laserDataReceived_ = true;
 
     //If we have not created the laserProcessingPtr object, create it
-    if (laserProcessingPtr_ == nullptr) {
-        laserProcessingPtr_ = std::make_unique<LaserProcessing>(laserData_);
+    if (!laserProcessingPtr_) {
+       RCLCPP_WARN(this->get_logger(), "LaserProcessingPtr should never be null now!");
+       laserProcessingPtr_ = std::make_unique<LaserProcessing>();
     }
-    // otherwise, update laserscan data
-    else {
-        laserProcessingPtr_->newScan(laserData_);
-    }
+    // update laserscan data
+    std::cout << "DEBUG: Updating laser scan" << std::endl;
+    laserProcessingPtr_->newScan(laserData_);
  }
  
  /**
@@ -284,4 +287,81 @@ double Controller::status()
   double percentCompletion = (completed_distance / total_mission_distance_)* 100.0;
   
   return std::min(100.0, std::max(0.0, percentCompletion));
+}
+
+/**
+ * @brief Service callback for controlling quadcopter mission
+ * @param req Service request containing control command
+ * @param res Service response indicating success/failure
+ */
+void Controller::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,
+                        std::shared_ptr<std_srvs::srv::SetBool::Response> res) {
+
+    // Check if laser processing is available
+    if (!laserDataReceived_) {
+       res->success = false;
+       res->message = "Waiting for first laser scan...";
+       RCLCPP_WARN(this->get_logger(), "Mission requested before laser scan arrived");
+       return;
+    }
+
+    // if received request data from service
+    if (req->data) {
+        // if goal is set
+        if (goalSet_) {
+            // set status takeoff
+            status_ = TAKEOFF;
+             
+            // calculate status
+            double percentageCompletion = status();
+            
+            // perform detect human
+            auto humans = laserProcessingPtr_->detectHumans();
+
+            // flag if there is human
+            bool person_visible = !humans.empty();
+            
+            // send flag to response
+            res->success = person_visible;
+            
+            // build response message
+            std::string message;
+            if (person_visible) {
+                message = "Person spotted! Takeoff OK. ";
+            } else {
+                message = "No person detected at current location. ";
+            }
+            message += "Mission completion: " + std::to_string(percentageCompletion) + "%";
+            
+            res->message = message;
+        } else {
+            res->success = false;
+            res->message = "No goal set. Cannot TAKEOFF.";
+        }
+    } else {
+        status_ = LANDING;
+        
+        // call for status
+        double percentageCompletion = status();
+        
+        // check for humans before landing
+        auto humans = laserProcessingPtr_->detectHumans();
+
+        // set flag human detected or not
+        bool person_visible = !humans.empty();
+        
+        // send data to res
+        res->success = person_visible;
+
+        // build response message
+        std::string message;
+        if (person_visible) {
+            message = "Landing initiated, but person still in view! ";
+        } else {
+            message = "Landing initiated. No person detected. ";
+        }
+        message += "Mission completion: " + std::to_string(percentageCompletion) + "%";
+        
+        res->message = message;
+    }
 }

@@ -11,17 +11,6 @@ find_package(rclcpp REQUIRED)
 find_package(gazebo_ros_pkgs REQUIRED)
 find_package(gazebo_plugins REQUIRED)
 
-# Add executable for drone controller
-add_executable(drone_controller src/drone_controller.cpp)
-
-# Link dependencies
-ament_target_dependencies(drone_controller rclcpp)
-
-# Install the executable
-install(TARGETS drone_controller
-  DESTINATION lib/${PROJECT_NAME}
-)
-
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)

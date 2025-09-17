@@ -83,12 +83,8 @@ install(TARGETS
   quadcopter
   laserprocessing
   vismarker
-  EXPORT export_${PROJECT_NAME}
-  DESTINATION lib/${PROJECT_NAME})
-
-# makes sure your library is properly exported so executables can find it.
-ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
-ament_export_dependencies(rclcpp std_msgs sensor_msgs nav_msgs tf2 tf2_geometry_msgs)
+  DESTINATION lib/${PROJECT_NAME} # this will install the executables and library to install/controller_pkg/lib/controller_pkg
+  )
 
 install(
   DIRECTORY include/

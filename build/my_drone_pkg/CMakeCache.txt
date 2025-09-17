@@ -702,9 +702,6 @@ ament_cmake_version_DIR:PATH=/opt/ros/humble/share/ament_cmake_version/cmake
 ament_cmake_xmllint_DIR:PATH=/opt/ros/humble/share/ament_cmake_xmllint/cmake
 
 //Path to a program.
-ament_cppcheck_BIN:FILEPATH=/opt/ros/humble/bin/ament_cppcheck
-
-//Path to a program.
 ament_flake8_BIN:FILEPATH=/opt/ros/humble/bin/ament_flake8
 
 //The directory containing a CMake configuration file for ament_index_cpp.
@@ -721,9 +718,6 @@ ament_lint_common_DIR:PATH=/opt/ros/humble/share/ament_lint_common/cmake
 
 //Path to a program.
 ament_pep257_BIN:FILEPATH=/opt/ros/humble/bin/ament_pep257
-
-//Path to a program.
-ament_uncrustify_BIN:FILEPATH=/opt/ros/humble/bin/ament_uncrustify
 
 //Path to a program.
 ament_xmllint_BIN:FILEPATH=/opt/ros/humble/bin/ament_xmllint
@@ -1224,7 +1218,7 @@ CURL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 DART_DEFINITIONS:INTERNAL=
 DART_INCLUDE_DIRS:INTERNAL=/usr/include
-DART_LIBRARIES:INTERNAL=dart;dart;dart;dart;dart;dart
+DART_LIBRARIES:INTERNAL=dart
 //Boost min version requirement
 DART_MIN_BOOST_VERSION:INTERNAL=1.58.0
 DART_dart_DEFINITIONS:INTERNAL=
@@ -1241,7 +1235,7 @@ FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boo
 //Details about finding CURL
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libcurl.so][/usr/include/x86_64-linux-gnu][c ][v7.81.0()]
 //Details about finding DART
-FIND_PACKAGE_MESSAGE_DETAILS_DART:INTERNAL=[/usr/include][dart;dart;dart;dart;dart;dart][cfound components: dart ][v(6.6)]
+FIND_PACKAGE_MESSAGE_DETAILS_DART:INTERNAL=[/usr/include][dart][cfound components: dart ][v(6.6)]
 //Details about finding DL
 FIND_PACKAGE_MESSAGE_DETAILS_DL:INTERNAL=[true][v()]
 //Details about finding FastRTPS
@@ -1856,8 +1850,6 @@ _Python3_EXECUTABLE:INTERNAL=/usr/bin/python3
 //Python3 Properties
 _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;12;64;;cpython-310-x86_64-linux-gnu;/usr/lib/python3.10;/usr/lib/python3.10;/usr/lib/python3/dist-packages;/usr/lib/python3/dist-packages
 _Python3_INTERPRETER_SIGNATURE:INTERNAL=0f3e53742e142b1d9e50e4ca5b901dd8
-//Interpreter reason failure
-_Python3_Interpreter_REASON_FAILURE:INTERNAL=
 //NumPy reason failure
 _Python3_NumPy_REASON_FAILURE:INTERNAL=
 __pkg_config_arguments_BULLET:INTERNAL=bullet>=2.82

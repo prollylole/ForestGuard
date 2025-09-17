@@ -44,6 +44,9 @@ public:
     std::vector<std::pair<double, double>> centroids;
   };
 
+  // Default constructor
+  LaserProcessing();
+
   /**
    * @brief Constructor initializes laser processing with initial scan
    * @param laserScan Initial laser scan data

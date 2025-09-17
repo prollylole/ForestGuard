@@ -1,0 +1,28 @@
+[ 33%] Built target laserprocessing
+[ 55%] Built target vismarker
+[100%] Built target quadcopter
+-- Install configuration: ""
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/vismarker
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/vis_marker.h
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/laserprocessing.h
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/quadcopter.h
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/controller.h
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/package_run_dependencies/controller_pkg
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/parent_prefix_path/controller_pkg
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/ament_prefix_path.sh
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/path.sh
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/path.dsv
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.bash
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.sh
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.zsh
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.dsv
+-- Installing: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/package.dsv
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/packages/controller_pkg
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig.cmake
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig-version.cmake
+-- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/package.xml

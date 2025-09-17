@@ -102,7 +102,7 @@ public:
  * @param req Service request containing control command
  * @param res Service response indicating success/failure
  */
-  virtual void control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,std::shared_ptr<std_srvs::srv::SetBool::Response> res)=0;
+  void control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,std::shared_ptr<std_srvs::srv::SetBool::Response> res);
 
 
 protected:

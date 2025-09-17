@@ -1,0 +1,326 @@
+[0.000000] (-) TimerEvent: {}
+[0.000460] (controller_pkg) JobQueued: {'identifier': 'controller_pkg', 'dependencies': OrderedDict()}
+[0.000780] (my_drone_pkg) JobQueued: {'identifier': 'my_drone_pkg', 'dependencies': OrderedDict()}
+[0.000893] (controller_pkg) JobStarted: {'identifier': 'controller_pkg'}
+[0.020418] (my_drone_pkg) JobStarted: {'identifier': 'my_drone_pkg'}
+[0.036786] (controller_pkg) JobProgress: {'identifier': 'controller_pkg', 'progress': 'cmake'}
+[0.038641] (controller_pkg) JobProgress: {'identifier': 'controller_pkg', 'progress': 'build'}
+[0.040436] (controller_pkg) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/claudia/ForestGuard/build/controller_pkg', '--', '-j16', '-l16'], 'cwd': '/home/claudia/ForestGuard/build/controller_pkg', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1103'), ('SYSTEMD_EXEC_PID', '1222'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '1770'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:10564'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/1194,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/1194'), ('INVOCATION_ID', '8b6ae3cc1c5a4abbb2b2264048dd39c6'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.PU7MC3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:db678260-3aa1-457c-a060-ea575476aa15'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/build/controller_pkg'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[0.050317] (my_drone_pkg) JobProgress: {'identifier': 'my_drone_pkg', 'progress': 'cmake'}
+[0.052214] (my_drone_pkg) JobProgress: {'identifier': 'my_drone_pkg', 'progress': 'build'}
+[0.054666] (my_drone_pkg) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/claudia/ForestGuard/build/my_drone_pkg', '--', '-j16', '-l16'], 'cwd': '/home/claudia/ForestGuard/build/my_drone_pkg', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1103'), ('SYSTEMD_EXEC_PID', '1222'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '1770'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:10564'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/1194,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/1194'), ('INVOCATION_ID', '8b6ae3cc1c5a4abbb2b2264048dd39c6'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.PU7MC3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:db678260-3aa1-457c-a060-ea575476aa15'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/build/my_drone_pkg'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[0.097686] (-) TimerEvent: {}
+[0.117501] (my_drone_pkg) CommandEnded: {'returncode': 0}
+[0.118923] (my_drone_pkg) JobProgress: {'identifier': 'my_drone_pkg', 'progress': 'install'}
+[0.133994] (my_drone_pkg) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/claudia/ForestGuard/build/my_drone_pkg'], 'cwd': '/home/claudia/ForestGuard/build/my_drone_pkg', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1103'), ('SYSTEMD_EXEC_PID', '1222'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '1770'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:10564'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/1194,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/1194'), ('INVOCATION_ID', '8b6ae3cc1c5a4abbb2b2264048dd39c6'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.PU7MC3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:db678260-3aa1-457c-a060-ea575476aa15'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/build/my_drone_pkg'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[0.140912] (controller_pkg) StdoutLine: {'line': b'[ 33%] Built target vismarker\n'}
+[0.141832] (my_drone_pkg) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.142369] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/lib/my_drone_pkg/setup_gazebo.sh\n'}
+[0.142750] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch\n'}
+[0.143070] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch/drone_launch.py\n'}
+[0.143459] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds\n'}
+[0.143802] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds/world_demo.sdf\n'}
+[0.143979] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models\n'}
+[0.144182] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD\n'}
+[0.144544] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/model.sdf\n'}
+[0.144743] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials\n'}
+[0.144886] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures\n'}
+[0.145029] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures/led.jpg\n'}
+[0.145363] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures/spotlight.jpg\n'}
+[0.145538] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/model.config\n'}
+[0.145709] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes\n'}
+[0.145868] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae\n'}
+[0.146007] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.dae\n'}
+[0.146222] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae\n'}
+[0.146557] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.jpg\n'}
+[0.146883] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/propeller_cw.dae\n'}
+[0.147275] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/propeller_ccw.dae\n'}
+[0.147441] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae\n'}
+[0.147581] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led_lamp.dae\n'}
+[0.147778] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_sensor.jpg\n'}
+[0.147907] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_sensor.dae\n'}
+[0.148060] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_camera.jpg\n'}
+[0.148249] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/pelican.dae\n'}
+[0.148437] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_camera.dae\n'}
+[0.148568] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/spotlight.dae\n'}
+[0.148775] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails\n'}
+[0.149054] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/2.jpg\n'}
+[0.149363] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/5.jpg\n'}
+[0.149661] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/1.jpg\n'}
+[0.150060] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/3.jpg\n'}
+[0.150316] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/4.jpg\n'}
+[0.150489] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/urdf\n'}
+[0.152408] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/urdf/X4.urdf.xacro\n'}
+[0.153568] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/config\n'}
+[0.154019] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/config/ros_gz_bridge_config.yaml\n'}
+[0.154387] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/package_run_dependencies/my_drone_pkg\n'}
+[0.154610] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/parent_prefix_path/my_drone_pkg\n'}
+[0.154847] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.sh\n'}
+[0.155037] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.dsv\n'}
+[0.155221] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/path.sh\n'}
+[0.155453] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/environment/path.dsv\n'}
+[0.155599] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.bash\n'}
+[0.155738] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.sh\n'}
+[0.155876] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.zsh\n'}
+[0.156044] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/local_setup.dsv\n'}
+[0.156637] (my_drone_pkg) StdoutLine: {'line': b'-- Installing: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/package.dsv\n'}
+[0.156888] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/ament_index/resource_index/packages/my_drone_pkg\n'}
+[0.157439] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig.cmake\n'}
+[0.158014] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig-version.cmake\n'}
+[0.158301] (my_drone_pkg) StdoutLine: {'line': b'-- Up-to-date: /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/package.xml\n'}
+[0.158520] (my_drone_pkg) CommandEnded: {'returncode': 0}
+[0.162396] (controller_pkg) StdoutLine: {'line': b'[ 44%] \x1b[32mBuilding CXX object CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o\x1b[0m\n'}
+[0.198175] (-) TimerEvent: {}
+[0.202274] (my_drone_pkg) JobEnded: {'identifier': 'my_drone_pkg', 'rc': 0}
+[0.298463] (-) TimerEvent: {}
+[0.398910] (-) TimerEvent: {}
+[0.499340] (-) TimerEvent: {}
+[0.599862] (-) TimerEvent: {}
+[0.700590] (-) TimerEvent: {}
+[0.801080] (-) TimerEvent: {}
+[0.901655] (-) TimerEvent: {}
+[1.002291] (-) TimerEvent: {}
+[1.102917] (-) TimerEvent: {}
+[1.203472] (-) TimerEvent: {}
+[1.303981] (-) TimerEvent: {}
+[1.404635] (-) TimerEvent: {}
+[1.505154] (-) TimerEvent: {}
+[1.605652] (-) TimerEvent: {}
+[1.706190] (-) TimerEvent: {}
+[1.806710] (-) TimerEvent: {}
+[1.907274] (-) TimerEvent: {}
+[2.007814] (-) TimerEvent: {}
+[2.108400] (-) TimerEvent: {}
+[2.208934] (-) TimerEvent: {}
+[2.309667] (-) TimerEvent: {}
+[2.410452] (-) TimerEvent: {}
+[2.511187] (-) TimerEvent: {}
+[2.611792] (-) TimerEvent: {}
+[2.712433] (-) TimerEvent: {}
+[2.813213] (-) TimerEvent: {}
+[2.913983] (-) TimerEvent: {}
+[3.014609] (-) TimerEvent: {}
+[3.115332] (-) TimerEvent: {}
+[3.216105] (-) TimerEvent: {}
+[3.316797] (-) TimerEvent: {}
+[3.417454] (-) TimerEvent: {}
+[3.518054] (-) TimerEvent: {}
+[3.618740] (-) TimerEvent: {}
+[3.719253] (-) TimerEvent: {}
+[3.819845] (-) TimerEvent: {}
+[3.920364] (-) TimerEvent: {}
+[4.020974] (-) TimerEvent: {}
+[4.121487] (-) TimerEvent: {}
+[4.221943] (-) TimerEvent: {}
+[4.322472] (-) TimerEvent: {}
+[4.422914] (-) TimerEvent: {}
+[4.523362] (-) TimerEvent: {}
+[4.623775] (-) TimerEvent: {}
+[4.724215] (-) TimerEvent: {}
+[4.824645] (-) TimerEvent: {}
+[4.925030] (-) TimerEvent: {}
+[5.025474] (-) TimerEvent: {}
+[5.125866] (-) TimerEvent: {}
+[5.226228] (-) TimerEvent: {}
+[5.326604] (-) TimerEvent: {}
+[5.426935] (-) TimerEvent: {}
+[5.527343] (-) TimerEvent: {}
+[5.550401] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kbool LaserProcessing::checkObstruction(double&, double&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.550667] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:213:23:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kstd::vector<float, std::allocator<float> >::size_type\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.550760] (controller_pkg) StderrLine: {'line': b'  213 |     for (int i = 0; \x1b[01;35m\x1b[Ki < laserScan_.ranges.size()\x1b[m\x1b[K; i++) {\n'}
+[5.550838] (controller_pkg) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.627465] (-) TimerEvent: {}
+[5.727793] (-) TimerEvent: {}
+[5.828185] (-) TimerEvent: {}
+[5.928538] (-) TimerEvent: {}
+[6.028874] (-) TimerEvent: {}
+[6.129199] (-) TimerEvent: {}
+[6.169385] (controller_pkg) StdoutLine: {'line': b'[ 55%] \x1b[32m\x1b[1mLinking CXX shared library liblaserprocessing.so\x1b[0m\n'}
+[6.229333] (-) TimerEvent: {}
+[6.317068] (controller_pkg) StdoutLine: {'line': b'[ 55%] Built target laserprocessing\n'}
+[6.329450] (-) TimerEvent: {}
+[6.349050] (controller_pkg) StdoutLine: {'line': b'[ 66%] \x1b[32mBuilding CXX object CMakeFiles/quadcopter.dir/src/main_quadcopter.cpp.o\x1b[0m\n'}
+[6.349357] (controller_pkg) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding CXX object CMakeFiles/quadcopter.dir/src/controller.cpp.o\x1b[0m\n'}
+[6.349673] (controller_pkg) StdoutLine: {'line': b'[ 88%] \x1b[32mBuilding CXX object CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o\x1b[0m\n'}
+[6.429575] (-) TimerEvent: {}
+[6.529900] (-) TimerEvent: {}
+[6.630217] (-) TimerEvent: {}
+[6.730560] (-) TimerEvent: {}
+[6.830890] (-) TimerEvent: {}
+[6.931218] (-) TimerEvent: {}
+[7.031582] (-) TimerEvent: {}
+[7.132002] (-) TimerEvent: {}
+[7.232360] (-) TimerEvent: {}
+[7.332693] (-) TimerEvent: {}
+[7.433038] (-) TimerEvent: {}
+[7.533376] (-) TimerEvent: {}
+[7.633705] (-) TimerEvent: {}
+[7.734027] (-) TimerEvent: {}
+[7.834371] (-) TimerEvent: {}
+[7.934703] (-) TimerEvent: {}
+[8.035026] (-) TimerEvent: {}
+[8.135381] (-) TimerEvent: {}
+[8.235708] (-) TimerEvent: {}
+[8.336026] (-) TimerEvent: {}
+[8.436395] (-) TimerEvent: {}
+[8.536766] (-) TimerEvent: {}
+[8.637090] (-) TimerEvent: {}
+[8.737436] (-) TimerEvent: {}
+[8.837799] (-) TimerEvent: {}
+[8.842165] (controller_pkg) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:16\x1b[m\x1b[K:\n'}
+[8.842370] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KQuadcopter::Quadcopter()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[8.842449] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:73:8:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KQuadcopter::liftoff_\x1b[m\x1b[K\xe2\x80\x99 will be initialized after [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.842523] (controller_pkg) StderrLine: {'line': b'   73 |   bool \x1b[01;35m\x1b[Kliftoff_\x1b[m\x1b[K; //<-- indicate if the quadcopter is in the air\n'}
+[8.842592] (controller_pkg) StderrLine: {'line': b'      |        \x1b[01;35m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[8.842653] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:68:16:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  \xe2\x80\x98\x1b[01m\x1b[Kconst double Quadcopter::TARGET_SPEED\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.842715] (controller_pkg) StderrLine: {'line': b'   68 |   const double \x1b[01;35m\x1b[KTARGET_SPEED\x1b[m\x1b[K; //<-- Maximum movement speed\n'}
+[8.842777] (controller_pkg) StderrLine: {'line': b'      |                \x1b[01;35m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[8.842836] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:40:1:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  when initialized here [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.842895] (controller_pkg) StderrLine: {'line': b'   40 | \x1b[01;35m\x1b[KQuadcopter\x1b[m\x1b[K::Quadcopter() :\n'}
+[8.842953] (controller_pkg) StderrLine: {'line': b'      | \x1b[01;35m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[8.854754] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual GoalStats Quadcopter::calcNewGoal()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[8.855033] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.855144] (controller_pkg) StderrLine: {'line': b'  202 |         return GoalStats{\x1b[01;35m\x1b[K}\x1b[m\x1b[K;\n'}
+[8.855287] (controller_pkg) StderrLine: {'line': b'      |                          \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[8.855464] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[8.855616] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.855707] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[8.855776] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.855850] (controller_pkg) StderrLine: {'line': b'  241 |     return GoalStats{\x1b[01;35m\x1b[K}\x1b[m\x1b[K;\n'}
+[8.855910] (controller_pkg) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[8.855965] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[8.856020] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.856079] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[8.869357] (controller_pkg) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12\x1b[m\x1b[K:\n'}
+[8.869553] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KController::Controller()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[8.869623] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:116:8:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KController::goalSet_\x1b[m\x1b[K\xe2\x80\x99 will be initialized after [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.869690] (controller_pkg) StderrLine: {'line': b'  116 |   bool \x1b[01;35m\x1b[KgoalSet_\x1b[m\x1b[K; //!< Flag indicating if a goal has been set\n'}
+[8.869764] (controller_pkg) StderrLine: {'line': b'      |        \x1b[01;35m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[8.869821] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:112:10:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  \xe2\x80\x98\x1b[01m\x1b[Ksize_t Controller::current_goal_idx_\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.869878] (controller_pkg) StderrLine: {'line': b'  112 |   size_t \x1b[01;35m\x1b[Kcurrent_goal_idx_\x1b[m\x1b[K; //!< Track current goal index\n'}
+[8.869931] (controller_pkg) StderrLine: {'line': b'      |          \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[8.869981] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:23:1:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  when initialized here [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.870035] (controller_pkg) StderrLine: {'line': b'   23 | \x1b[01;35m\x1b[KController\x1b[m\x1b[K::Controller()  :\n'}
+[8.870104] (controller_pkg) StderrLine: {'line': b'      | \x1b[01;35m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[8.870177] (controller_pkg) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12\x1b[m\x1b[K:\n'}
+[8.870238] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:129:21:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KController::laserDataReceived_\x1b[m\x1b[K\xe2\x80\x99 will be initialized after [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.870305] (controller_pkg) StderrLine: {'line': b'  129 |   std::atomic<bool> \x1b[01;35m\x1b[KlaserDataReceived_\x1b[m\x1b[K ; // Flag to indicate laser data received\n'}
+[8.870360] (controller_pkg) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[8.870412] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:122:18:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  \xe2\x80\x98\x1b[01m\x1b[KPlatformStatus Controller::status_\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.870466] (controller_pkg) StderrLine: {'line': b'  122 |   PlatformStatus \x1b[01;35m\x1b[Kstatus_\x1b[m\x1b[K; //!< The current platform stats\n'}
+[8.870518] (controller_pkg) StderrLine: {'line': b'      |                  \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[8.870570] (controller_pkg) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:23:1:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  when initialized here [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[8.870629] (controller_pkg) StderrLine: {'line': b'   23 | \x1b[01;35m\x1b[KController\x1b[m\x1b[K::Controller()  :\n'}
+[8.870683] (controller_pkg) StderrLine: {'line': b'      | \x1b[01;35m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[8.937943] (-) TimerEvent: {}
+[9.038291] (-) TimerEvent: {}
+[9.138644] (-) TimerEvent: {}
+[9.238977] (-) TimerEvent: {}
+[9.339336] (-) TimerEvent: {}
+[9.439656] (-) TimerEvent: {}
+[9.539966] (-) TimerEvent: {}
+[9.640341] (-) TimerEvent: {}
+[9.740659] (-) TimerEvent: {}
+[9.840995] (-) TimerEvent: {}
+[9.941356] (-) TimerEvent: {}
+[10.041676] (-) TimerEvent: {}
+[10.141986] (-) TimerEvent: {}
+[10.242321] (-) TimerEvent: {}
+[10.342652] (-) TimerEvent: {}
+[10.442969] (-) TimerEvent: {}
+[10.543336] (-) TimerEvent: {}
+[10.643631] (-) TimerEvent: {}
+[10.743945] (-) TimerEvent: {}
+[10.844214] (-) TimerEvent: {}
+[10.944527] (-) TimerEvent: {}
+[11.044832] (-) TimerEvent: {}
+[11.145157] (-) TimerEvent: {}
+[11.245558] (-) TimerEvent: {}
+[11.345907] (-) TimerEvent: {}
+[11.446222] (-) TimerEvent: {}
+[11.546560] (-) TimerEvent: {}
+[11.646871] (-) TimerEvent: {}
+[11.747243] (-) TimerEvent: {}
+[11.847568] (-) TimerEvent: {}
+[11.947914] (-) TimerEvent: {}
+[12.048213] (-) TimerEvent: {}
+[12.148554] (-) TimerEvent: {}
+[12.248874] (-) TimerEvent: {}
+[12.349210] (-) TimerEvent: {}
+[12.449556] (-) TimerEvent: {}
+[12.549873] (-) TimerEvent: {}
+[12.650200] (-) TimerEvent: {}
+[12.750554] (-) TimerEvent: {}
+[12.850879] (-) TimerEvent: {}
+[12.951209] (-) TimerEvent: {}
+[13.051578] (-) TimerEvent: {}
+[13.151906] (-) TimerEvent: {}
+[13.252254] (-) TimerEvent: {}
+[13.352585] (-) TimerEvent: {}
+[13.452902] (-) TimerEvent: {}
+[13.553255] (-) TimerEvent: {}
+[13.653619] (-) TimerEvent: {}
+[13.753949] (-) TimerEvent: {}
+[13.854282] (-) TimerEvent: {}
+[13.954595] (-) TimerEvent: {}
+[14.054899] (-) TimerEvent: {}
+[14.155200] (-) TimerEvent: {}
+[14.255524] (-) TimerEvent: {}
+[14.355836] (-) TimerEvent: {}
+[14.456143] (-) TimerEvent: {}
+[14.556476] (-) TimerEvent: {}
+[14.656784] (-) TimerEvent: {}
+[14.757088] (-) TimerEvent: {}
+[14.857411] (-) TimerEvent: {}
+[14.958502] (-) TimerEvent: {}
+[15.058816] (-) TimerEvent: {}
+[15.159145] (-) TimerEvent: {}
+[15.259508] (-) TimerEvent: {}
+[15.359806] (-) TimerEvent: {}
+[15.460110] (-) TimerEvent: {}
+[15.560472] (-) TimerEvent: {}
+[15.660783] (-) TimerEvent: {}
+[15.761099] (-) TimerEvent: {}
+[15.861436] (-) TimerEvent: {}
+[15.961744] (-) TimerEvent: {}
+[16.062054] (-) TimerEvent: {}
+[16.162373] (-) TimerEvent: {}
+[16.262675] (-) TimerEvent: {}
+[16.362980] (-) TimerEvent: {}
+[16.463295] (-) TimerEvent: {}
+[16.563607] (-) TimerEvent: {}
+[16.663910] (-) TimerEvent: {}
+[16.764210] (-) TimerEvent: {}
+[16.864514] (-) TimerEvent: {}
+[16.964817] (-) TimerEvent: {}
+[17.065110] (-) TimerEvent: {}
+[17.165435] (-) TimerEvent: {}
+[17.265722] (-) TimerEvent: {}
+[17.366009] (-) TimerEvent: {}
+[17.466365] (-) TimerEvent: {}
+[17.566664] (-) TimerEvent: {}
+[17.667023] (-) TimerEvent: {}
+[17.767366] (-) TimerEvent: {}
+[17.867688] (-) TimerEvent: {}
+[17.968017] (-) TimerEvent: {}
+[18.068364] (-) TimerEvent: {}
+[18.168728] (-) TimerEvent: {}
+[18.269197] (-) TimerEvent: {}
+[18.363509] (controller_pkg) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable quadcopter\x1b[0m\n'}
+[18.369270] (-) TimerEvent: {}
+[18.469536] (-) TimerEvent: {}
+[18.569945] (-) TimerEvent: {}
+[18.670603] (-) TimerEvent: {}
+[18.771216] (-) TimerEvent: {}
+[18.871578] (-) TimerEvent: {}
+[18.971988] (-) TimerEvent: {}
+[19.000205] (controller_pkg) StderrLine: {'line': b"/usr/bin/ld: CMakeFiles/quadcopter.dir/src/controller.cpp.o: in function `Controller::laserCallback(sensor_msgs::msg::LaserScan_<std::allocator<void> > const&)':\n"}
+[19.000484] (controller_pkg) StderrLine: {'line': b"controller.cpp:(.text+0x1293): undefined reference to `LaserProcessing::newScan(sensor_msgs::msg::LaserScan_<std::allocator<void> >)'\n"}
+[19.072106] (-) TimerEvent: {}
+[19.090788] (controller_pkg) StderrLine: {'line': b'collect2: error: ld returned 1 exit status\n'}
+[19.092004] (controller_pkg) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:263: quadcopter] Error 1\n'}
+[19.092303] (controller_pkg) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/quadcopter.dir/all] Error 2\n'}
+[19.092603] (controller_pkg) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[19.094012] (controller_pkg) CommandEnded: {'returncode': 2}
+[19.099907] (controller_pkg) JobEnded: {'identifier': 'controller_pkg', 'rc': 2}
+[19.110439] (-) EventReactorShutdown: {}

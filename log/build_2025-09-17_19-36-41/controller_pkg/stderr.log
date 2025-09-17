@@ -1,0 +1,24 @@
+In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:16[m[K:
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:[m[K In constructor ‘[01m[KQuadcopter::Quadcopter()[m[K’:
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:80:8:[m[K [01;35m[Kwarning: [m[K‘[01m[KQuadcopter::liftoff_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+   80 |   bool [01;35m[Kliftoff_[m[K; //<-- indicate if the quadcopter is in the air
+      |        [01;35m[K^~~~~~~~[m[K
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:75:16:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kconst double Quadcopter::TARGET_SPEED[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+   75 |   const double [01;35m[KTARGET_SPEED[m[K; //<-- Maximum movement speed
+      |                [01;35m[K^~~~~~~~~~~~[m[K
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:40:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+   40 | [01;35m[KQuadcopter[m[K::Quadcopter() :
+      | [01;35m[K^~~~~~~~~~[m[K
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:[m[K In member function ‘[01m[Kvirtual GoalStats Quadcopter::calcNewGoal()[m[K’:
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+  202 |         return GoalStats{[01;35m[K}[m[K;
+      |                          [01;35m[K^[m[K
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+  241 |     return GoalStats{[01;35m[K}[m[K;
+      |                      [01;35m[K^[m[K
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit

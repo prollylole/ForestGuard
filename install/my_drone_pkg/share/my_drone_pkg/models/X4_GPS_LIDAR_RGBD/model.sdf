@@ -479,9 +479,9 @@
                         </stddev>
                     </noise>
                 </lidar>
-                <always_on>false
+                <always_on>true
                 </always_on>
-                <visualize>false
+                <visualize>true
                 </visualize>
             </sensor>
             <visual name="camera_mount_base_visual">

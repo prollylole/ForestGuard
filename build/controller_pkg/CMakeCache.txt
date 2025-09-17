@@ -288,12 +288,6 @@ TINYXML2_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libtinyxml2.so
 //The directory containing a CMake configuration file for TinyXML2.
 TinyXML2_DIR:PATH=TinyXML2_DIR-NOTFOUND
 
-//Path to a file.
-_gtest_header_file:FILEPATH=/opt/ros/humble/src/gtest_vendor/include/gtest/gtest.h
-
-//Path to a file.
-_gtest_src_file:FILEPATH=/opt/ros/humble/src/gtest_vendor/src/gtest.cc
-
 //Path to a library.
 _lib:FILEPATH=/opt/ros/humble/lib/librosbag2_storage.so
 
@@ -305,9 +299,6 @@ ament_cmake_DIR:PATH=/opt/ros/humble/share/ament_cmake/cmake
 
 //The directory containing a CMake configuration file for ament_cmake_core.
 ament_cmake_core_DIR:PATH=/opt/ros/humble/share/ament_cmake_core/cmake
-
-//The directory containing a CMake configuration file for ament_cmake_cppcheck.
-ament_cmake_cppcheck_DIR:PATH=/opt/ros/humble/share/ament_cmake_cppcheck/cmake
 
 //The directory containing a CMake configuration file for ament_cmake_export_definitions.
 ament_cmake_export_definitions_DIR:PATH=/opt/ros/humble/share/ament_cmake_export_definitions/cmake
@@ -330,9 +321,6 @@ ament_cmake_export_link_flags_DIR:PATH=/opt/ros/humble/share/ament_cmake_export_
 //The directory containing a CMake configuration file for ament_cmake_export_targets.
 ament_cmake_export_targets_DIR:PATH=/opt/ros/humble/share/ament_cmake_export_targets/cmake
 
-//The directory containing a CMake configuration file for ament_cmake_flake8.
-ament_cmake_flake8_DIR:PATH=/opt/ros/humble/share/ament_cmake_flake8/cmake
-
 //The directory containing a CMake configuration file for ament_cmake_gen_version_h.
 ament_cmake_gen_version_h_DIR:PATH=/opt/ros/humble/share/ament_cmake_gen_version_h/cmake
 
@@ -347,12 +335,6 @@ ament_cmake_include_directories_DIR:PATH=/opt/ros/humble/share/ament_cmake_inclu
 
 //The directory containing a CMake configuration file for ament_cmake_libraries.
 ament_cmake_libraries_DIR:PATH=/opt/ros/humble/share/ament_cmake_libraries/cmake
-
-//The directory containing a CMake configuration file for ament_cmake_lint_cmake.
-ament_cmake_lint_cmake_DIR:PATH=/opt/ros/humble/share/ament_cmake_lint_cmake/cmake
-
-//The directory containing a CMake configuration file for ament_cmake_pep257.
-ament_cmake_pep257_DIR:PATH=/opt/ros/humble/share/ament_cmake_pep257/cmake
 
 //The directory containing a CMake configuration file for ament_cmake_pytest.
 ament_cmake_pytest_DIR:PATH=/opt/ros/humble/share/ament_cmake_pytest/cmake
@@ -369,35 +351,11 @@ ament_cmake_target_dependencies_DIR:PATH=/opt/ros/humble/share/ament_cmake_targe
 //The directory containing a CMake configuration file for ament_cmake_test.
 ament_cmake_test_DIR:PATH=/opt/ros/humble/share/ament_cmake_test/cmake
 
-//The directory containing a CMake configuration file for ament_cmake_uncrustify.
-ament_cmake_uncrustify_DIR:PATH=/opt/ros/humble/share/ament_cmake_uncrustify/cmake
-
 //The directory containing a CMake configuration file for ament_cmake_version.
 ament_cmake_version_DIR:PATH=/opt/ros/humble/share/ament_cmake_version/cmake
 
-//The directory containing a CMake configuration file for ament_cmake_xmllint.
-ament_cmake_xmllint_DIR:PATH=/opt/ros/humble/share/ament_cmake_xmllint/cmake
-
-//Path to a program.
-ament_cppcheck_BIN:FILEPATH=/opt/ros/humble/bin/ament_cppcheck
-
 //The directory containing a CMake configuration file for ament_index_cpp.
 ament_index_cpp_DIR:PATH=/opt/ros/humble/share/ament_index_cpp/cmake
-
-//The directory containing a CMake configuration file for ament_lint_auto.
-ament_lint_auto_DIR:PATH=/opt/ros/humble/share/ament_lint_auto/cmake
-
-//Path to a program.
-ament_lint_cmake_BIN:FILEPATH=/opt/ros/humble/bin/ament_lint_cmake
-
-//The directory containing a CMake configuration file for ament_lint_common.
-ament_lint_common_DIR:PATH=/opt/ros/humble/share/ament_lint_common/cmake
-
-//Path to a program.
-ament_uncrustify_BIN:FILEPATH=/opt/ros/humble/bin/ament_uncrustify
-
-//Path to a program.
-ament_xmllint_BIN:FILEPATH=/opt/ros/humble/bin/ament_xmllint
 
 //The directory containing a CMake configuration file for builtin_interfaces.
 builtin_interfaces_DIR:PATH=/opt/ros/humble/share/builtin_interfaces/cmake
@@ -440,18 +398,6 @@ foonathan_memory_DIR:PATH=/opt/ros/humble/lib/foonathan_memory/cmake
 
 //The directory containing a CMake configuration file for geometry_msgs.
 geometry_msgs_DIR:PATH=/opt/ros/humble/share/geometry_msgs/cmake
-
-//Value Computed by CMake
-gtest_BINARY_DIR:STATIC=/home/claudia/ForestGuard/build/controller_pkg/gtest
-
-//Value Computed by CMake
-gtest_IS_TOP_LEVEL:STATIC=OFF
-
-//Dependencies for the target
-gtest_LIB_DEPENDS:STATIC=general;-pthread;
-
-//Value Computed by CMake
-gtest_SOURCE_DIR:STATIC=/opt/ros/humble/src/gtest_vendor
 
 //The directory containing a CMake configuration file for gtest_vendor.
 gtest_vendor_DIR:PATH=/opt/ros/humble/share/gtest_vendor/cmake
@@ -633,9 +579,6 @@ unique_identifier_msgs_DIR:PATH=/opt/ros/humble/share/unique_identifier_msgs/cma
 //The directory containing a CMake configuration file for visualization_msgs.
 visualization_msgs_DIR:PATH=/opt/ros/humble/share/visualization_msgs/cmake
 
-//Path to a program.
-xmllint_BIN:FILEPATH=/usr/bin/xmllint
-
 //The directory containing a CMake configuration file for yaml-cpp.
 yaml-cpp_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/yaml-cpp
 
@@ -805,12 +748,6 @@ FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libcryp
 FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/usr/bin/python3][cfound components: Interpreter ][v3.10.12()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
-GTEST_FROM_SOURCE_BASE_DIR:INTERNAL=/opt/ros/humble/src/gtest_vendor
-GTEST_FROM_SOURCE_FOUND:INTERNAL=TRUE
-GTEST_FROM_SOURCE_INCLUDE_DIRS:INTERNAL=/opt/ros/humble/src/gtest_vendor/include
-GTEST_FROM_SOURCE_LIBRARIES:INTERNAL=gtest
-GTEST_FROM_SOURCE_LIBRARY_DIRS:INTERNAL=/home/claudia/ForestGuard/build/controller_pkg/gtest
-GTEST_FROM_SOURCE_MAIN_LIBRARIES:INTERNAL=gtest_main
 //ADVANCED property for variable: OPENSSL_CRYPTO_LIBRARY
 OPENSSL_CRYPTO_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENSSL_INCLUDE_DIR
@@ -870,8 +807,6 @@ _Python3_EXECUTABLE:INTERNAL=/usr/bin/python3
 //Python3 Properties
 _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;12;64;;cpython-310-x86_64-linux-gnu;/usr/lib/python3.10;/usr/lib/python3.10;/usr/lib/python3/dist-packages;/usr/lib/python3/dist-packages
 _Python3_INTERPRETER_SIGNATURE:INTERNAL=0f3e53742e142b1d9e50e4ca5b901dd8
-//Interpreter reason failure
-_Python3_Interpreter_REASON_FAILURE:INTERNAL=
 //NumPy reason failure
 _Python3_NumPy_REASON_FAILURE:INTERNAL=
 __pkg_config_arguments__OPENSSL:INTERNAL=QUIET;openssl

@@ -1,0 +1,41 @@
+[0.038s] Invoking command in '/home/claudia/ForestGuard/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
+[0.134s] [ 33%] Built target vismarker
+[0.151s] [ 44%] [32mBuilding CXX object CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o[0m
+[6.158s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:[m[K In member function ‘[01m[Kbool LaserProcessing::checkObstruction(double&, double&)[m[K’:
+[6.159s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:213:23:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<float, std::allocator<float> >::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[6.159s]   213 |     for (int i = 0; [01;35m[Ki < laserScan_.ranges.size()[m[K; i++) {
+[6.159s]       |                     [01;35m[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.253s] [ 55%] [32m[1mLinking CXX shared library liblaserprocessing.so[0m
+[7.460s] [ 55%] Built target laserprocessing
+[7.489s] [ 66%] [32m[1mLinking CXX executable quadcopter[0m
+[8.341s] [100%] Built target quadcopter
+[8.348s] Invoked command in '/home/claudia/ForestGuard/build/controller_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
+[8.354s] Invoking command in '/home/claudia/ForestGuard/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/controller_pkg
+[8.357s] -- Install configuration: ""
+[8.357s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter
+[8.368s] -- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/quadcopter" to ""
+[8.368s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so
+[8.368s] -- Set runtime path of "/home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so" to ""
+[8.368s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/lib/controller_pkg/vismarker
+[8.369s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include
+[8.369s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg
+[8.369s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/vis_marker.h
+[8.369s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/laserprocessing.h
+[8.369s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/quadcopter.h
+[8.369s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/include/controller_pkg/controller.h
+[8.370s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/package_run_dependencies/controller_pkg
+[8.370s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/parent_prefix_path/controller_pkg
+[8.370s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/ament_prefix_path.sh
+[8.370s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/ament_prefix_path.dsv
+[8.370s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/path.sh
+[8.370s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/environment/path.dsv
+[8.370s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.bash
+[8.371s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.sh
+[8.371s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.zsh
+[8.371s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/local_setup.dsv
+[8.371s] -- Installing: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/package.dsv
+[8.371s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/ament_index/resource_index/packages/controller_pkg
+[8.371s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig.cmake
+[8.371s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig-version.cmake
+[8.371s] -- Up-to-date: /home/claudia/ForestGuard/install/controller_pkg/share/controller_pkg/package.xml
+[8.372s] Invoked command in '/home/claudia/ForestGuard/build/controller_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/controller_pkg

@@ -47,11 +47,11 @@ Quadcopter::Quadcopter() :
     tolerance_=0.5;
 
     // Initialise publishers
-    pubCmdVel_  = this->create_publisher<geometry_msgs::msg::Twist>("drone/cmd_vel",3);  
-    pubTakeOff_ = this->create_publisher<std_msgs::msg::Empty>("drone/takeoff",3);  
-    pubLanding_ = this->create_publisher<std_msgs::msg::Empty>("drone/land",3);  
-    PubDoor_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/drone/detected_doors",3);  
-    PubHuman_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/drone/detected_humans",3);  
+    pubCmdVel_  = this->create_publisher<geometry_msgs::msg::Twist>("/X4/cmd_vel",3);  
+    // pubTakeOff_ = this->create_publisher<std_msgs::msg::Empty>("X4/takeoff",3);  
+    // pubLanding_ = this->create_publisher<std_msgs::msg::Empty>("X4/land",3);  
+    PubDoor_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/X4/detected_doors",3);  
+    PubHuman_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/X4/detected_humans",3);  
 
     // Initialize control loop timer
     timer_ = this->create_wall_timer(100ms, std::bind(&Quadcopter::reachGoal, this));
@@ -391,71 +391,4 @@ void Quadcopter::sendLanding(void) {
     }
 
     return reached;
-}
-
-/**
- * @brief Service callback for controlling quadcopter mission
- * @param req Service request containing control command
- * @param res Service response indicating success/failure
- */
-void Quadcopter::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,std::shared_ptr<std_srvs::srv::SetBool::Response> res){
-
-    // if received request data from service
-    if (req->data)
-    {
-        // if goal is set
-        if (goalSet_) 
-        {
-            // set status takeoff
-            status_ = TAKEOFF;
-            // calculate status
-            double percentageCompletion = status();
-            // perform detect human
-            auto humans = laserProcessingPtr_->detectHumans();
-
-            // flag if there is human
-            bool person_visible = !humans.empty();
-            // send flag to response
-            res->success = person_visible; 
-            // if there is human send string detected
-            if (person_visible) {
-                res->message = "Person spotted! Takeoff OK.";
-              } 
-            // otherwise no spotted  
-            else {
-                res->message = "No person detected at current location.";
-              }
-
-            // send status response
-            res->message = "Mission completion: " + std::to_string(percentageCompletion) + "%";
-        }
-        else
-        {
-            res->success = false;
-            res->message = "No goal set. Cannot TAKEOFF.";
-        }
-    }
-    else
-    {
-        status_ = LANDING;
-        // call for statuss
-        double percentageCompletion = status();
-        // check for humans before landing (optional—depends on your requirements)
-        auto humans = laserProcessingPtr_->detectHumans();
-
-        // set flag human detected or not
-        bool person_visible = !humans.empty();
-        // send data to res
-        res->success = person_visible;
-
-        if (person_visible) {
-        res->message = "Landing initiated, but person still in view!";
-        } 
-        else {
-        res->message = "Landing initiated. No person detected.";
-        }
-
-        // send status response
-        res->message = "Landing initiated. Mission completion: " + std::to_string(percentageCompletion) + "%";
-    }
 }

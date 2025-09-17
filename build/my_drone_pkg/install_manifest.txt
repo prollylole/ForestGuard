@@ -1,7 +1,5 @@
-/home/claudia/ForestGuard/install/my_drone_pkg/lib/my_drone_pkg/drone_controller
 /home/claudia/ForestGuard/install/my_drone_pkg/lib/my_drone_pkg/setup_gazebo.sh
 /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch/drone_launch.py
-/home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/launch/display.launch.py
 /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/worlds/world_demo.sdf
 /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/model.sdf
 /home/claudia/ForestGuard/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures/led.jpg

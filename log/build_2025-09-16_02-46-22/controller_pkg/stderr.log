@@ -1,5 +1,0 @@
-[31mCMake Error at CMakeLists.txt:76 (install):
-  install TARGETS given target "laserprocessing" which does not exist.
-
-[0m
-gmake: *** [Makefile:389: cmake_check_build_system] Error 1

@@ -30,11 +30,11 @@ VisualisationMarker::VisualisationMarker() :
   // SUBSCRIBE TO /drone/detected_humans, EXPECT MESSAGE geometry_msgs::msg::PoseArray
   // BIND WIRES std_msgs::msg::String FROM /drone/detected_humans TO humanCallback
   human_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
-    "/drone/detected_humans", 10, std::bind(&VisualisationMarker::humanCallback, this, _1));
+    "/X4/detected_humans", 10, std::bind(&VisualisationMarker::humanCallback, this, _1));
 
   // MAKE A SUB TOPIC /drone/detected_doors TO TELL MARKER WHERE TO FIND DOORS
   door_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
-    "/drone/detected_doors", 10, std::bind(&VisualisationMarker::doorCallback, this, _1));
+    "/X4/detected_doors", 10, std::bind(&VisualisationMarker::doorCallback, this, _1));
   
   PubVisual_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("/visualization_marker",3);  
 

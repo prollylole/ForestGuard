@@ -22,9 +22,11 @@ using namespace std;
  * @brief Constructor initializes laser processing with first scan
  * @param laserScan Initial laser scan data to process
  */
-LaserProcessing::LaserProcessing(sensor_msgs::msg::LaserScan laserScan):
-    laserScan_(laserScan)
-{}
+LaserProcessing::LaserProcessing()
+{
+    // initialize with empty scan
+    laserScan_ = sensor_msgs::msg::LaserScan();
+}
 
 // to make detect human will go together with detect cupboard, coming woth the similar concept, 
 // but this time we will check if segment >= 6 the drone is inside room

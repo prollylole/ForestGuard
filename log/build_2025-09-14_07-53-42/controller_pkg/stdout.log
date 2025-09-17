@@ -1,4 +1,0 @@
-[ 28%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/controller.cpp.o[0m
-[ 28%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/main_quadcopter.cpp.o[0m
-[ 42%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o[0m
-[ 85%] Built target vismarker

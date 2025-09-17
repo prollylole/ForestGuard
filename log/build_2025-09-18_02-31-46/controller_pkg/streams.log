@@ -1,0 +1,11 @@
+[0.036s] Invoking command in '/home/claudia/ForestGuard/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
+[0.133s] [ 33%] Built target vismarker
+[0.151s] [ 55%] Built target laserprocessing
+[0.246s] [ 66%] [32m[1mLinking CXX executable quadcopter[0m
+[2.044s] /usr/bin/ld: CMakeFiles/quadcopter.dir/src/controller.cpp.o: in function `Controller::laserCallback(sensor_msgs::msg::LaserScan_<std::allocator<void> > const&)':
+[2.045s] controller.cpp:(.text+0x1293): undefined reference to `LaserProcessing::newScan(sensor_msgs::msg::LaserScan_<std::allocator<void> >)'
+[2.288s] collect2: error: ld returned 1 exit status
+[2.291s] gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:263: quadcopter] Error 1
+[2.292s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/quadcopter.dir/all] Error 2
+[2.293s] gmake: *** [Makefile:146: all] Error 2
+[2.297s] Invoked command in '/home/claudia/ForestGuard/build/controller_pkg' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/controller_pkg -- -j16 -l16
