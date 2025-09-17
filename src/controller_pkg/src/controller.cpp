@@ -118,7 +118,7 @@ bool Controller::goalReached() {
   return false;
 }
 
-/**
+/***
    * @brief Gets current odometry reading
    * @return Current pose of the platform
    */
