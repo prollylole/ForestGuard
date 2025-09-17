@@ -1,5 +1,5 @@
 /**
- * @file controller.cpp
+ * @file controller.cpp-
  * @brief Implementation of the Controller base class for robot control
  * 
  * This class serves as the foundation for robot controllers, providing:
