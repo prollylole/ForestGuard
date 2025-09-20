@@ -1,0 +1,10 @@
+# ROS build files
+/build/
+/install/
+/log/
+
+# Object files
+*.o
+*.so
+*.a
+*.pyc

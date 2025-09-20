@@ -33,7 +33,8 @@
             </ode>
         </physics>
     <model name="X4">
-        <plugin name="ros_gz_pose_publisher" filename="gz-sim-ros-pose-publisher-system">
+        <plugin filename="libignition-gazebo6-pose-publisher-system.so"
+        name="ignition::gazebo::systems::PosePublisher">
             <ros>
                 <namespace>X4</namespace>
             </ros>
@@ -435,8 +436,11 @@
             <sensor name="scan_omni" type="gpu_lidar">
                 <pose>-0.1855 0 0.5318 0 0 0
                 </pose>
+                <topic>X4/scan</topic>
                 <update_rate>10
                 </update_rate>
+                <always_on>true</always_on>
+                <visualize>true</visualize>
                 <lidar>
                     <scan>
                         <horizontal>
@@ -479,10 +483,6 @@
                         </stddev>
                     </noise>
                 </lidar>
-                <always_on>true
-                </always_on>
-                <visualize>true
-                </visualize>
             </sensor>
             <visual name="camera_mount_base_visual">
                 <pose>0.05 0 -0.030 0 0.0 0
@@ -531,6 +531,7 @@
             <sensor name="camera_front" type="rgbd_camera">
                 <pose>0.2 0 0 0 +.785 0 
                 </pose>
+                <topic>X4/rgbd</topic>
                 <always_on>1
                 </always_on>
                 <update_rate>20
@@ -1168,7 +1169,7 @@
         </joint>
         
         <!-- now some plugins -->
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system" name="ignition::gazebo::systems::MulticopterMotorModel">
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so" name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
             <jointName>rotor_0_joint
@@ -1204,7 +1205,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"  name="ignition::gazebo::systems::MulticopterMotorModel">
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"  name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
             <jointName>rotor_1_joint
@@ -1240,7 +1241,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1277,7 +1278,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1314,7 +1315,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1351,7 +1352,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1389,7 +1390,7 @@
             </motorType>
         </plugin>
         
-        <plugin   filename="ignition-gazebo-multicopter-control-system"   name="ignition::gazebo::systems::MulticopterVelocityControl">
+        <plugin   filename="libignition-gazebo6-multicopter-control-system.so"   name="ignition::gazebo::systems::MulticopterVelocityControl">
             <robotNamespace>X4
             </robotNamespace>
             <commandSubTopic>cmd_vel
@@ -1487,7 +1488,7 @@
                 </rotor>
             </rotorConfiguration>
         </plugin>
-        <plugin  filename="ignition-gazebo-odometry-publisher-system"  name="ignition::gazebo::systems::OdometryPublisher">
+        <plugin  filename="libignition-gazebo6-odometry-publisher-system.so"  name="ignition::gazebo::systems::OdometryPublisher">
             <dimensions>3
             </dimensions>
             <odom_frame>X4/odom
@@ -1495,10 +1496,11 @@
             <robot_base_frame>X4/base_footprint
             </robot_base_frame>
         </plugin>
-        <plugin filename="ignition-gazebo-navsat-system"  name="ignition::gazebo::systems::NavSat">
+        <plugin filename="libignition-gazebo6-navsat-system.so"  name="ignition::gazebo::systems::NavSat">
         </plugin>
         
-          <plugin name="ignition::gazebo::systems::PosePublisher" filename="ignition-gazebo-pose-publisher-system">
+          <plugin filename="libignition-gazebo6-pose-publisher-system.so"
+        name="ignition::gazebo::systems::PosePublisher">
             <publish_link_pose>true
             </publish_link_pose>
             <publish_collision_pose>false
@@ -1510,6 +1512,12 @@
             <update_frequency>20
             </update_frequency>
         </plugin>
+
+  <!-- Lidar and cameras use the general Sensors plugin -->
+        <!-- <plugin
+            filename="libignition-gazebo-sensors-system.so"
+            name="ignition::gazebo::systems::Sensors">
+        </plugin> -->
         
         
     </model>

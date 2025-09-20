@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O2 -g -DNDEBUG  -Wall -Wextra -Wno-long-long -Wno-unused-value -Wfloat-equal -Wshadow -Winit-self -Wswitch-default -Wmissing-include-dirs -pedantic -UNDEBUG -shared -Wl,-soname,libignition-utils1.so.1 -o ../lib/libignition-utils1.so.1.5.1 "CMakeFiles/ignition-utils1.dir/Environment.cc.o" 

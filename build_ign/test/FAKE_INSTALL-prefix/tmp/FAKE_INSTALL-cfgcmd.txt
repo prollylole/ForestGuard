@@ -1,0 +1,1 @@
+cmd='/usr/bin/cmake;-DBUILD_TESTING=OFF;-DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/build_ign/fake/install;-GUnix Makefiles;<SOURCE_DIR><SOURCE_SUBDIR>'

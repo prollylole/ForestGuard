@@ -1,6 +1,0 @@
-/usr/bin/ld: CMakeFiles/quadcopter.dir/src/controller.cpp.o: in function `Controller::laserCallback(sensor_msgs::msg::LaserScan_<std::allocator<void> > const&)':
-controller.cpp:(.text+0x1293): undefined reference to `LaserProcessing::newScan(sensor_msgs::msg::LaserScan_<std::allocator<void> >)'
-collect2: error: ld returned 1 exit status
-gmake[2]: *** [CMakeFiles/quadcopter.dir/build.make:263: quadcopter] Error 1
-gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/quadcopter.dir/all] Error 2
-gmake: *** [Makefile:146: all] Error 2
