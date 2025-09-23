@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/home/john/ForestGuard/john"
+    "cmake.sourceDirectory": "/home/john/ForestGuard/john",
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true
 }
