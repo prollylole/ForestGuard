@@ -48,8 +48,8 @@ Quadcopter::Quadcopter() :
 
     // Initialise publishers
     pubCmdVel_  = this->create_publisher<geometry_msgs::msg::Twist>("/X4/cmd_vel",3);  
-    // pubTakeOff_ = this->create_publisher<std_msgs::msg::Empty>("X4/takeoff",3);  
-    // pubLanding_ = this->create_publisher<std_msgs::msg::Empty>("X4/land",3);  
+    pubTakeOff_ = this->create_publisher<std_msgs::msg::Empty>("X4/takeoff",3);  
+    pubLanding_ = this->create_publisher<std_msgs::msg::Empty>("X4/land",3);  
     PubDoor_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/X4/detected_doors",3);  
     PubHuman_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/X4/detected_humans",3);  
 
@@ -285,6 +285,13 @@ void Quadcopter::sendLanding(void) {
   @return goal reached (true - goal reached, false - goal abandoned : not reached)
     @details this function takes in a vector of goals and reach all goals in the vector within tolerance and time
   */
+ /**
+ * ** IDLE - stays on the ground, waiting for a goal to be set
+ * ** TAKEOFF - sends takeoff command, then switches to RUNNING if a goal is set, otherwise IDLE
+ * ** HOVER - stays in the air, waiting for a goal to be set
+ * ** RUNNING - moves towards current goal, if goal reached, move to next goal or LANDING if no goals left
+ * ** LANDING - sends landing command, then switches to IDLE
+ */
  bool Quadcopter::reachGoal(void) {
 
     switch(status_){
@@ -292,9 +299,10 @@ void Quadcopter::sendLanding(void) {
         case IDLE:
             // if goal is set, set status run
             if(goalSet_){
-                status_= RUNNING;
+                status_= TAKEOFF;
             }
-            return false;
+            return true;
+
         // if takeoff
         case TAKEOFF:
             // publish takeoff, publish takeoff
@@ -305,15 +313,33 @@ void Quadcopter::sendLanding(void) {
             }
             else{
                 // if goal is not set, status idle
-                status_= IDLE;
+                status_= HOVER;
             }
             return true;
-            // if land, send publish land
+
+        // if hover, stay in air
+        case HOVER: {
+            // keep drone steady in air
+            geometry_msgs::msg::Twist hoverMsg;
+            hoverMsg.linear.x = 0.0;
+            hoverMsg.linear.y = 0.0;
+            hoverMsg.linear.z = 0.0;  // or maintain altitude if needed
+            hoverMsg.angular.z = 0.0;
+            pubCmdVel_->publish(hoverMsg);
+
+            // when goal is set, start mission
+            if(goalSet_){
+                status_ = RUNNING;
+            }
+            return true;
+        }
+        // if land, send publish land
         case LANDING:
             sendLanding();
             // then turn idle
             status_= IDLE;
             return true;
+
         case RUNNING:
             break;
     }
@@ -373,13 +399,13 @@ void Quadcopter::sendLanding(void) {
             // Send the quadcopter to land
             sendCmd(0, 0, -1.0, 0);
             std::cout << "ALL GOALS REACHED!!!" << std::endl;
-            sendCmd(0, 0, 0, 0); 
-            // Clip dz to range [-1.0, 1.0]
-            if (dz > 1.0) {
-                dz = 1.0;
-            } else if (dz < -1.0) {
-                dz = -1.0;
-            }
+            // sendCmd(0, 0, 0, 0); 
+            // // Clip dz to range [-1.0, 1.0]
+            // if (dz > 1.0) {
+            //     dz = 1.0;
+            // } else if (dz < -1.0) {
+            //     dz = -1.0;
+            // }
             return true;
         }
     }

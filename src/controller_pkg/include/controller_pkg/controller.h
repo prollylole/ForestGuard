@@ -35,7 +35,8 @@ enum PlatformStatus {
     IDLE,      // Platform waiting for commands
     RUNNING,   // Platform actively executing goals
     TAKEOFF,   // Platform initiating flight
-    LANDING    // Platform performing landing sequence
+    LANDING,    // Platform performing landing sequence
+    HOVER     // Platform hovering in place
 };
 
 /**

@@ -1,0 +1,138 @@
+[0.017s] Invoking command in '/home/claudia/ForestGuard/src/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/controller_pkg -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/controller_pkg
+[0.143s] -- The C compiler identification is GNU 11.4.0
+[0.255s] -- The CXX compiler identification is GNU 11.4.0
+[0.272s] -- Detecting C compiler ABI info
+[0.369s] -- Detecting C compiler ABI info - done
+[0.377s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.378s] -- Detecting C compile features
+[0.378s] -- Detecting C compile features - done
+[0.383s] -- Detecting CXX compiler ABI info
+[0.482s] -- Detecting CXX compiler ABI info - done
+[0.491s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.491s] -- Detecting CXX compile features
+[0.492s] -- Detecting CXX compile features - done
+[0.508s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.673s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.883s] -- Found rclcpp: 16.0.14 (/opt/ros/humble/share/rclcpp/cmake)
+[1.014s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.033s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.076s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.104s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.143s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.253s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.263s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.424s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.474s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.549s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.577s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.671s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.672s] -- Found Threads: TRUE  
+[1.768s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[1.816s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[1.846s] -- Found tf2: 0.25.16 (/opt/ros/humble/share/tf2/cmake)
+[1.872s] -- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)
+[2.037s] -- Found tf2_geometry_msgs: 0.25.16 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[2.078s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[2.080s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[2.080s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[2.087s] -- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)
+[2.106s] -- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)
+[2.137s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[2.167s] -- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)
+[2.358s] -- Configuring done
+[2.386s] -- Generating done
+[2.397s] -- Build files have been written to: /home/claudia/ForestGuard/src/build/controller_pkg
+[2.411s] Invoked command in '/home/claudia/ForestGuard/src/build/controller_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/controller_pkg -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/controller_pkg
+[2.414s] Invoking command in '/home/claudia/ForestGuard/src/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/controller_pkg -- -j16 -l16
+[2.454s] [ 33%] [32mBuilding CXX object CMakeFiles/vismarker.dir/src/main_vismarker.cpp.o[0m
+[2.454s] [ 33%] [32mBuilding CXX object CMakeFiles/vismarker.dir/src/vis_marker.cpp.o[0m
+[2.454s] [ 33%] [32mBuilding CXX object CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o[0m
+[5.322s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:[m[K In member function ‘[01m[Kbool LaserProcessing::checkObstruction(double&, double&)[m[K’:
+[5.322s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/laserprocessing.cpp:213:23:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<float, std::allocator<float> >::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[5.322s]   213 |     for (int i = 0; [01;35m[Ki < laserScan_.ranges.size()[m[K; i++) {
+[5.322s]       |                     [01;35m[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[6.079s] [ 44%] [32m[1mLinking CXX shared library liblaserprocessing.so[0m
+[6.289s] [ 44%] Built target laserprocessing
+[6.307s] [ 77%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/quadcopter.cpp.o[0m
+[6.307s] [ 77%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/main_quadcopter.cpp.o[0m
+[6.307s] [ 77%] [32mBuilding CXX object CMakeFiles/quadcopter.dir/src/controller.cpp.o[0m
+[9.152s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[9.152s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:[m[K In constructor ‘[01m[KController::Controller()[m[K’:
+[9.152s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:116:8:[m[K [01;35m[Kwarning: [m[K‘[01m[KController::goalSet_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.153s]   116 |   bool [01;35m[KgoalSet_[m[K; //!< Flag indicating if a goal has been set
+[9.153s]       |        [01;35m[K^~~~~~~~[m[K
+[9.153s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:112:10:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Ksize_t Controller::current_goal_idx_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.153s]   112 |   size_t [01;35m[Kcurrent_goal_idx_[m[K; //!< Track current goal index
+[9.153s]       |          [01;35m[K^~~~~~~~~~~~~~~~~[m[K
+[9.153s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:23:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.153s]    23 | [01;35m[KController[m[K::Controller()  :
+[9.153s]       | [01;35m[K^~~~~~~~~~[m[K
+[9.153s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:12[m[K:
+[9.153s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:129:21:[m[K [01;35m[Kwarning: [m[K‘[01m[KController::laserDataReceived_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.153s]   129 |   std::atomic<bool> [01;35m[KlaserDataReceived_[m[K ; // Flag to indicate laser data received
+[9.153s]       |                     [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+[9.153s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/controller.h:122:18:[m[K [01;35m[Kwarning: [m[K  ‘[01m[KPlatformStatus Controller::status_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.154s]   122 |   PlatformStatus [01;35m[Kstatus_[m[K; //!< The current platform stats
+[9.154s]       |                  [01;35m[K^~~~~~~[m[K
+[9.154s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/controller.cpp:23:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.154s]    23 | [01;35m[KController[m[K::Controller()  :
+[9.154s]       | [01;35m[K^~~~~~~~~~[m[K
+[9.192s] In file included from [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:16[m[K:
+[9.193s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:[m[K In constructor ‘[01m[KQuadcopter::Quadcopter()[m[K’:
+[9.193s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:73:8:[m[K [01;35m[Kwarning: [m[K‘[01m[KQuadcopter::liftoff_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.193s]    73 |   bool [01;35m[Kliftoff_[m[K; //<-- indicate if the quadcopter is in the air
+[9.193s]       |        [01;35m[K^~~~~~~~[m[K
+[9.193s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/include/controller_pkg/quadcopter.h:68:16:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kconst double Quadcopter::TARGET_SPEED[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.193s]    68 |   const double [01;35m[KTARGET_SPEED[m[K; //<-- Maximum movement speed
+[9.193s]       |                [01;35m[K^~~~~~~~~~~~[m[K
+[9.193s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:40:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[9.193s]    40 | [01;35m[KQuadcopter[m[K::Quadcopter() :
+[9.193s]       | [01;35m[K^~~~~~~~~~[m[K
+[9.205s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:[m[K In member function ‘[01m[Kvirtual GoalStats Quadcopter::calcNewGoal()[m[K’:
+[9.205s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[9.205s]   202 |         return GoalStats{[01;35m[K}[m[K;
+[9.205s]       |                          [01;35m[K^[m[K
+[9.205s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[9.205s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[9.205s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:202:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[9.206s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[9.206s]   241 |     return GoalStats{[01;35m[K}[m[K;
+[9.206s]       |                      [01;35m[K^[m[K
+[9.206s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[9.206s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[9.206s] [01m[K/home/claudia/ForestGuard/src/controller_pkg/src/quadcopter.cpp:241:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[10.930s] [ 88%] [32m[1mLinking CXX executable vismarker[0m
+[11.264s] [ 88%] Built target vismarker
+[18.267s] [100%] [32m[1mLinking CXX executable quadcopter[0m
+[18.999s] [100%] Built target quadcopter
+[19.006s] Invoked command in '/home/claudia/ForestGuard/src/build/controller_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/controller_pkg -- -j16 -l16
+[19.011s] Invoking command in '/home/claudia/ForestGuard/src/build/controller_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/controller_pkg
+[19.014s] -- Install configuration: ""
+[19.014s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/lib/controller_pkg/quadcopter
+[19.022s] -- Set runtime path of "/home/claudia/ForestGuard/src/install/controller_pkg/lib/controller_pkg/quadcopter" to ""
+[19.022s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so
+[19.023s] -- Set runtime path of "/home/claudia/ForestGuard/src/install/controller_pkg/lib/controller_pkg/liblaserprocessing.so" to ""
+[19.023s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/lib/controller_pkg/vismarker
+[19.026s] -- Set runtime path of "/home/claudia/ForestGuard/src/install/controller_pkg/lib/controller_pkg/vismarker" to ""
+[19.026s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/include
+[19.026s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/include/controller_pkg
+[19.026s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/include/controller_pkg/vis_marker.h
+[19.027s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/include/controller_pkg/laserprocessing.h
+[19.027s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/include/controller_pkg/quadcopter.h
+[19.027s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/include/controller_pkg/controller.h
+[19.027s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/ament_index/resource_index/package_run_dependencies/controller_pkg
+[19.027s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/ament_index/resource_index/parent_prefix_path/controller_pkg
+[19.027s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/environment/ament_prefix_path.sh
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/environment/ament_prefix_path.dsv
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/environment/path.sh
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/environment/path.dsv
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/local_setup.bash
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/local_setup.sh
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/local_setup.zsh
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/local_setup.dsv
+[19.028s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/package.dsv
+[19.029s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/ament_index/resource_index/packages/controller_pkg
+[19.029s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig.cmake
+[19.029s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/cmake/controller_pkgConfig-version.cmake
+[19.029s] -- Installing: /home/claudia/ForestGuard/src/install/controller_pkg/share/controller_pkg/package.xml
+[19.031s] Invoked command in '/home/claudia/ForestGuard/src/build/controller_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/controller_pkg

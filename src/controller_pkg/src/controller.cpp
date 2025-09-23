@@ -305,63 +305,41 @@ void Controller::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> 
        return;
     }
 
+    // perform detect human
+    auto humans = laserProcessingPtr_->detectHumans();
+    // flag if there is human
+    bool person_visible = !humans.empty();
+
+    // calculate status
+    double percentageCompletion = status();
+
+    std::string message;
+
     // if received request data from service
     if (req->data) {
         // if goal is set
         if (goalSet_) {
             // set status takeoff
             status_ = TAKEOFF;
-             
-            // calculate status
-            double percentageCompletion = status();
-            
-            // perform detect human
-            auto humans = laserProcessingPtr_->detectHumans();
+            message = person_visible ? "Person spotted! Takeoff OK. " 
+                                     : "No person detected at current location. ";
+        }
+        else {
+            status_ = HOVER;
+            message = "No goal set. Teleoperation mode.";
+        }
 
-            // flag if there is human
-            bool person_visible = !humans.empty();
-            
-            // send flag to response
-            res->success = person_visible;
-            
-            // build response message
-            std::string message;
-            if (person_visible) {
-                message = "Person spotted! Takeoff OK. ";
-            } else {
-                message = "No person detected at current location. ";
-            }
             message += "Mission completion: " + std::to_string(percentageCompletion) + "%";
-            
             res->message = message;
-        } else {
-            res->success = false;
-            res->message = "No goal set. Cannot TAKEOFF.";
-        }
-    } else {
+    } 
+    else {
         status_ = LANDING;
-        
-        // call for status
-        double percentageCompletion = status();
-        
-        // check for humans before landing
-        auto humans = laserProcessingPtr_->detectHumans();
-
-        // set flag human detected or not
-        bool person_visible = !humans.empty();
-        
-        // send data to res
-        res->success = person_visible;
-
-        // build response message
-        std::string message;
-        if (person_visible) {
-            message = "Landing initiated, but person still in view! ";
-        } else {
-            message = "Landing initiated. No person detected. ";
-        }
-        message += "Mission completion: " + std::to_string(percentageCompletion) + "%";
-        
-        res->message = message;
-    }
+        message = person_visible ? "Landing initiated, but person still in view! "
+                                 : "Landing initiated. No person detected. ";
+    }    
+    
+    message += "Mission completion: " + std::to_string(percentageCompletion) + "%";
+    
+    res->success = person_visible;
+    res->message = message;
 }

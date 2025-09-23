@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-edd37d60fecd52a16b81.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "controller_pkg",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "controller_pkg_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-controller_pkg_uninstall-9de1a7a227d3000f55c4.json",
+					"name" : "controller_pkg_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "laserprocessing::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-laserprocessing-166dde5dc87e89eb4afb.json",
+					"name" : "laserprocessing",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "quadcopter::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-quadcopter-c5804e5f4f8d7f40da77.json",
+					"name" : "quadcopter",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-5c9db78c9adc44caf96d.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vismarker::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vismarker-da041fbcf6f5fb17625f.json",
+					"name" : "vismarker",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/claudia/ForestGuard/src/build/controller_pkg",
+		"source" : "/home/claudia/ForestGuard/src/controller_pkg"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
