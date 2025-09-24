@@ -228,8 +228,14 @@ std::string Controller::getInfoString()
         // Platform initiating flight
         case TAKEOFF : ss << "TAKEOFF ";  break;
 
+        // Platform initiating flight
+        case HOVER : ss << "HOVER ";  break;
+
         // Platform performing landing sequence
         case LANDING : ss << "LANDING ";  break;
+
+        // Platform performing landing sequence
+        case TELEOP : ss << "TELEOP ";  break;
     }
     return ss.str(); // This command convertes trsingstream to string
 }

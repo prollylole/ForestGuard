@@ -274,6 +274,14 @@
   </joint>
 
   <!-- Gazebo extensions for ROS plugins -->
+  <!-- Lidar and cameras use the general Sensors plugin -->
+  <gazebo>
+    <plugin
+        filename="libignition-gazebo-sensors-system.so"
+        name="ignition::gazebo::systems::Sensors">
+    </plugin>
+  </gazebo>
+
   <gazebo>
     <plugin filename="libgazebo_ros_multirotor_base_plugin.so" name="multirotor_base_plugin">
       <robotNamespace>/X4</robotNamespace>
@@ -281,7 +289,9 @@
       <rotorVelocitySlowdownSim>2</rotorVelocitySlowdownSim>
     </plugin>
 
-    <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+    <plugin
+        filename="ignition-gazebo-imu-system"
+        name="ignition::gazebo::systems::Imu">
       <robotNamespace>/X4</robotNamespace>
       <topicName>imu</topicName>
       <bodyName>base_link</bodyName>

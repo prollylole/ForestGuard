@@ -53,6 +53,10 @@ Quadcopter::Quadcopter() :
     PubDoor_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/X4/detected_doors",3);  
     PubHuman_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/X4/detected_humans",3);  
 
+    // Initialise subscriber
+    cmdVel_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
+        "/X4/cmd_vel", 10, std::bind(&Quadcopter::sendTeleopCmd, this, std::placeholders::_1));
+
     // Initialize control loop timer
     timer_ = this->create_wall_timer(100ms, std::bind(&Quadcopter::reachGoal, this));
 }
@@ -261,18 +265,26 @@ void Quadcopter::sendCmd(double turn_l_r, double move_l_r, double move_u_d, doub
     pubCmdVel_->publish(msg);
 }
 
-/**
- * @brief Initiates takeoff sequence
- */
+void Quadcopter::sendTeleopCmd(const geometry_msgs::msg::Twist::SharedPtr msg) {
+    currentTeleopCommand_ = *msg;
+    teleopActive_ = true;
+
+    // set timer for teleop timeout
+    lastTeleopTime_ = this->get_clock()->now();
+}
+
+// /**
+//  * @brief Initiates takeoff sequence
+//  */
 void Quadcopter::sendTakeOff(void) {
     std_msgs::msg::Empty msg;
     // publish movement to cmdVel
     pubTakeOff_->publish(msg);
 }
 
-/**
- * @brief Initiates landing sequence
- */
+// /**
+//  * @brief Initiates landing sequence
+//  */
 void Quadcopter::sendLanding(void) {
     std_msgs::msg::Empty msg;
     // publish movement to cmdVel
@@ -318,26 +330,43 @@ void Quadcopter::sendLanding(void) {
             return true;
 
         // if hover, stay in air
-        case HOVER: {
-            // keep drone steady in air
-            geometry_msgs::msg::Twist hoverMsg;
-            hoverMsg.linear.x = 0.0;
-            hoverMsg.linear.y = 0.0;
-            hoverMsg.linear.z = 0.0;  // or maintain altitude if needed
-            hoverMsg.angular.z = 0.0;
-            pubCmdVel_->publish(hoverMsg);
+        case HOVER: 
+            if(teleopActive_) {
+                // Use teleop command if available
+                status_ = TELEOP;
+            }
+            else {
+                // Otherwise, keep hovering
+                geometry_msgs::msg::Twist hoverMsg;
+                hoverMsg.linear.x = 0.0;
+                hoverMsg.linear.y = 0.0;
+                hoverMsg.linear.z = 0.0;  // or maintain altitude if needed
+                hoverMsg.angular.z = 0.0;
+                pubCmdVel_->publish(hoverMsg);
+            }
 
             // when goal is set, start mission
             if(goalSet_){
                 status_ = RUNNING;
             }
             return true;
-        }
+        
         // if land, send publish land
         case LANDING:
             sendLanding();
             // then turn idle
             status_= IDLE;
+            return true;
+
+        case TELEOP: 
+            // Publish teleop command if available
+            pubCmdVel_->publish(currentTeleopCommand_);
+            
+            // If teleop stops, go back to hover for 2 seconds then resume normal operation
+            if((this->get_clock()->now() - lastTeleopTime_).seconds() > 2.0) {
+                teleopActive_ = false;
+                status_ = HOVER;
+            }
             return true;
 
         case RUNNING:

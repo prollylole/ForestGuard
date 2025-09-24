@@ -6,6 +6,7 @@ from std_srvs.srv import SetBool
 import sys
 import termios
 import tty
+import threading
 
 
 MSG = """
@@ -38,8 +39,9 @@ class TeleopNode(Node):
 
         # Publishers
         self.cmd_vel_publisher = self.create_publisher(Twist, '/X4/cmd_vel', 10)
-        # self.takeoff_publisher = self.create_publisher(Empty, 'takeoff', 10)
-        # self.land_publisher = self.create_publisher(Empty, 'land', 10)
+
+        # Optionally, publish a zero-velocity command to initialize
+        self.publish_cmd_vel()
 
         # Velocity parameters
         self.linear_velocity = 0.0
@@ -49,8 +51,12 @@ class TeleopNode(Node):
         self.max_linear_velocity = 1.0
         self.max_angular_velocity = 1.0
 
-        # Start a timer to listen to keyboard inputs
-        self.create_timer((1/30), self.read_keyboard_input)
+        # Lock for thread-safe operations
+        self.lock = threading.Lock()
+
+        # Run keyboard reading in separate thread so ROS2 loop stays alive
+        self.keyboard_thread = threading.Thread(target=self.keyboard_loop, daemon=True)
+        self.keyboard_thread.start()
 
     def call_mission_service(self, value: bool) -> None:
         """Call /X4/mission SetBool service (non-blocking)."""
@@ -74,91 +80,88 @@ class TeleopNode(Node):
                 self.get_logger().error(f'Failed calling /X4/mission: {e}')
         future.add_done_callback(_cb)
 
+    def publish_cmd_vel(self, linear_vec=Vector3(), angular_vec=Vector3()):
+        twist = Twist()
+        twist.linear = linear_vec
+        twist.angular = angular_vec
+        self.cmd_vel_publisher.publish(twist)
+
     def get_velocity_msg(self) -> str:
         return "Linear Velocity: " + str(self.linear_velocity) + "\nAngular Velocity: " \
             + str(self.angular_velocity) + "\n"
 
-    def read_keyboard_input(self) -> None:
-        """
-        Read keyboard inputs and publish corresponding commands
-        """
-        try:
-            # while rclpy.ok():
-                # Print the instructions
-                print(MSG+self.get_velocity_msg())
+    def keyboard_loop(self):
+        """Separate loop for keyboard input."""
+        while rclpy.ok():
+            try:
+                print(MSG + self.get_velocity_msg())
+
                 # Implement a non-blocking keyboard read
                 key = self.get_key()
+                self.handle_key(key)
+
+            except Exception as e:
+                self.get_logger().error(f'Error in keyboard handler: {e}')
+                break
+
+    def handle_key(self, key: str):
+        
+        # Handle velocity changes
+        key = key.lower()  # Always lowercase
+
+        # Default zero vectors
+        linear_vec = Vector3()
+        angular_vec = Vector3()
+
+        if key == 'q':
+            with self.lock:
+                self.linear_velocity = min(self.linear_velocity + self.linear_increment,
+                                        self.max_linear_velocity)
+                self.angular_velocity = min(self.angular_velocity + self.angular_increment,
+                                        self.max_angular_velocity)
                 
-                # Handle velocity changes
-                if key.lower() == 'q':
-                    self.linear_velocity = min(self.linear_velocity + self.linear_increment,
-                                            self.max_linear_velocity)
-                    self.angular_velocity = min(self.angular_velocity + self.angular_increment,
-                                                self.max_angular_velocity)
-                elif key.lower() == 'e':
-                    self.linear_velocity = max(self.linear_velocity - self.linear_increment,
-                                            -self.max_linear_velocity)
-                    self.angular_velocity = max(self.angular_velocity - self.angular_increment,
-                                                -self.max_angular_velocity)
-                elif key.lower() == 'w':
-                    # Move forward
-                    linear_vec = Vector3()
-                    linear_vec.x = self.linear_velocity
-                    self.publish_cmd_vel(linear_vec)
-                elif key.lower() == 's':
-                    # Hover
-                    self.publish_cmd_vel()
-                elif key.lower() == 'x':
-                    # Move backward
-                    linear_vec = Vector3()
-                    linear_vec.x = -self.linear_velocity
-                    self.publish_cmd_vel(linear_vec)
-                elif key == 'a':
-                    # Move Left
-                    linear_vec = Vector3()
-                    linear_vec.y = self.linear_velocity
-                    self.publish_cmd_vel(linear_vec)
-                elif key == 'd':
-                    # Move right
-                    linear_vec = Vector3()
-                    linear_vec.y = -self.linear_velocity
-                    self.publish_cmd_vel(linear_vec)
-                elif key == 'A':
-                    # Rotate Left
-                    angular_vec = Vector3()
-                    angular_vec.z = self.angular_velocity
-                    self.publish_cmd_vel(angular_vec=angular_vec)
-                elif key == 'D':
-                    # Rotate right
-                    angular_vec = Vector3()
-                    angular_vec.z = -self.angular_velocity
-                    self.publish_cmd_vel(angular_vec=angular_vec)
-                elif key.lower() == 'r':
-                    # Rise
-                    linear_vec = Vector3()
-                    linear_vec.z = self.linear_velocity
-                    self.publish_cmd_vel(linear_vec)
-                elif key.lower() == 'f':
-                    # Fall
-                    linear_vec = Vector3()
-                    linear_vec.z = -self.angular_velocity
-                    self.publish_cmd_vel(linear_vec)
-                # Handle other keys for different movements
-                elif key.lower() == 't':
-                    # Takeoff
-                    self.call_mission_service(True)
-                elif key.lower() == 'l':
-                    # Land
-                    self.publish_cmd_vel()
-                    self.call_mission_service(False)
+        elif key == 'e':
+            with self.lock:
+                self.linear_velocity = max(self.linear_velocity - self.linear_increment,
+                                        -self.max_linear_velocity)
+                self.angular_velocity = max(self.angular_velocity - self.angular_increment,
+                                        -self.max_angular_velocity)
+                
+        elif key == 'w':  # forward
+            linear_vec.x = self.linear_velocity
 
-        except Exception as e:
-            self.get_logger().error(f'Error in keyboard handler: {e}')
+        elif key == 'x':  # backward
+            linear_vec.x = -self.linear_velocity
 
-        finally:
+        elif key == 'a':  # left
+            linear_vec.y = self.linear_velocity
+
+        elif key == 'd':  # right
+            linear_vec.y = -self.linear_velocity
+
+        elif key == 'r':  # rise
+            linear_vec.z = self.linear_velocity
+
+        elif key == 'f':  # fall
+            linear_vec.z = -self.linear_velocity  # fix: was angular_velocity
+        
+        elif key == 'k':  # rotate left
+            angular_vec.z = self.angular_velocity
+
+        elif key == 'l':  # rotate right
+            angular_vec.z = -self.angular_velocity
+
+        elif key == 's':  # hover
+            pass  # no movement → keep zero vectors
+
+        elif key == 'c':
             # Stop the drone and shutdown ROS2 cleanly
             self.publish_cmd_vel()
             rclpy.shutdown()
+            return
+        
+        # Send velocities
+        self.publish_cmd_vel(linear_vec, angular_vec)
 
     def get_key(self) -> str:
         """
@@ -169,6 +172,11 @@ class TeleopNode(Node):
         try:
             tty.setraw(sys.stdin.fileno())
             ch = sys.stdin.read(1)
+            print(f"Key pressed: {ch}")  # DEBUG: Print key to see if it's read
+
+        # ctrl-c = c
+        except KeyboardInterrupt:
+            ch = 'c'
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
@@ -185,10 +193,18 @@ class TeleopNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     teleop_node = TeleopNode()
-    rclpy.spin(teleop_node)
-    teleop_node.destroy_node()
-    rclpy.shutdown()
 
+    try:
+        # This will keep the main thread alive for ROS2 callbacks
+        while rclpy.ok():
+            rclpy.spin_once(teleop_node, timeout_sec=0.1)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Clean shutdown
+        teleop_node.publish_cmd_vel()  # Stop the drone
+        teleop_node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

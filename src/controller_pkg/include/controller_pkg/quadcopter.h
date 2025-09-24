@@ -80,6 +80,12 @@ private:
   rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr PubHuman_;//!< Publisher for detected human visualization
   rclcpp::TimerBase::SharedPtr timer_;//!< Timer for control loop execution
 
+  // Teleop control
+  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmdVel_sub_;
+  geometry_msgs::msg::Twist currentTeleopCommand_; //!< Stores the latest teleop
+  bool teleopActive_; //!< Flag indicating if teleop command is active
+  rclcpp::Time lastTeleopTime_; //!< Timestamp of the last received teleop
+
   /**
    * @brief Timer callback that implements goal-reaching behavior
    * @return true if goal was reached successfully
@@ -94,6 +100,11 @@ private:
    * @param move_f_b Linear velocity along X axis
    */
   void sendCmd(double turn_l_r, double move_l_r, double move_u_d, double move_f_b);
+
+  /**
+   * @brief Switches to Teleop mode and sends teleop command
+   */
+  void sendTeleopCmd(const geometry_msgs::msg::Twist::SharedPtr msg);
 
   /**
    * @brief Initiates takeoff sequence

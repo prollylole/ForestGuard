@@ -36,7 +36,8 @@ enum PlatformStatus {
     RUNNING,   // Platform actively executing goals
     TAKEOFF,   // Platform initiating flight
     LANDING,    // Platform performing landing sequence
-    HOVER     // Platform hovering in place
+    HOVER,     // Platform hovering in place
+    TELEOP   // Platform under manual control
 };
 
 /**
