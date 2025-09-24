@@ -1,0 +1,63 @@
+[0.571s] Invoking command in '/home/claudia/ForestGuard/src/forest_guard_sim': PYTHONPATH=/home/claudia/ForestGuard/src/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/forest_guard_sim build --build-base /home/claudia/ForestGuard/src/build/forest_guard_sim/build install --record /home/claudia/ForestGuard/src/build/forest_guard_sim/install.log --single-version-externally-managed install_data
+[0.784s] running egg_info
+[0.784s] creating ../build/forest_guard_sim/forest_guard_sim.egg-info
+[0.784s] writing ../build/forest_guard_sim/forest_guard_sim.egg-info/PKG-INFO
+[0.784s] writing dependency_links to ../build/forest_guard_sim/forest_guard_sim.egg-info/dependency_links.txt
+[0.784s] writing entry points to ../build/forest_guard_sim/forest_guard_sim.egg-info/entry_points.txt
+[0.785s] writing requirements to ../build/forest_guard_sim/forest_guard_sim.egg-info/requires.txt
+[0.785s] writing top-level names to ../build/forest_guard_sim/forest_guard_sim.egg-info/top_level.txt
+[0.785s] writing manifest file '../build/forest_guard_sim/forest_guard_sim.egg-info/SOURCES.txt'
+[0.786s] reading manifest file '../build/forest_guard_sim/forest_guard_sim.egg-info/SOURCES.txt'
+[0.786s] writing manifest file '../build/forest_guard_sim/forest_guard_sim.egg-info/SOURCES.txt'
+[0.787s] running build
+[0.787s] running build_py
+[0.787s] creating /home/claudia/ForestGuard/src/build/forest_guard_sim/build
+[0.787s] creating /home/claudia/ForestGuard/src/build/forest_guard_sim/build/lib
+[0.787s] creating /home/claudia/ForestGuard/src/build/forest_guard_sim/build/lib/forest_guard_sim
+[0.787s] copying forest_guard_sim/__init__.py -> /home/claudia/ForestGuard/src/build/forest_guard_sim/build/lib/forest_guard_sim
+[0.787s] running install
+[0.787s] running install_lib
+[0.788s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages/forest_guard_sim
+[0.788s] copying /home/claudia/ForestGuard/src/build/forest_guard_sim/build/lib/forest_guard_sim/__init__.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages/forest_guard_sim
+[0.788s] byte-compiling /home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages/forest_guard_sim/__init__.py to __init__.cpython-310.pyc
+[0.788s] running install_data
+[0.788s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index
+[0.788s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index/resource_index
+[0.788s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index/resource_index/packages
+[0.789s] copying resource/forest_guard_sim -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index/resource_index/packages
+[0.789s] copying package.xml -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim
+[0.789s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.789s] copying launch/forest_world.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.789s] copying launch/forest_random.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.789s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/worlds
+[0.789s] copying worlds/forest.world.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/worlds
+[0.789s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models
+[0.789s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+[0.789s] copying models/forest_env/model.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+[0.789s] copying models/forest_env/model.config -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+[0.789s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/meshes
+[0.789s] copying models/forest_env/meshes/Environment1.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/meshes
+[0.792s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials
+[0.792s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials/textures
+[0.792s] copying models/forest_env/materials/textures/empty_grass.png -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials/textures
+[0.795s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+[0.795s] copying models/tree1/model.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+[0.795s] copying models/tree1/model.config -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+[0.795s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/meshes
+[0.795s] copying models/tree1/meshes/tree_a.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/meshes
+[0.796s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials
+[0.796s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials/textures
+[0.796s] copying models/tree1/materials/textures/bark01.jpg -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials/textures
+[0.796s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+[0.796s] copying models/tree2/model.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+[0.796s] copying models/tree2/model.config -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+[0.796s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/meshes
+[0.796s] copying models/tree2/meshes/tree_b.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/meshes
+[0.800s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials
+[0.800s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials/textures
+[0.800s] copying models/tree2/materials/textures/bark.jpeg -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials/textures
+[0.800s] running install_egg_info
+[0.802s] Copying ../build/forest_guard_sim/forest_guard_sim.egg-info to /home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages/forest_guard_sim-0.0.1-py3.10.egg-info
+[0.803s] running install_scripts
+[0.820s] writing list of installed files to '/home/claudia/ForestGuard/src/build/forest_guard_sim/install.log'
+[0.845s] Invoked command in '/home/claudia/ForestGuard/src/forest_guard_sim' returned '0': PYTHONPATH=/home/claudia/ForestGuard/src/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/forest_guard_sim build --build-base /home/claudia/ForestGuard/src/build/forest_guard_sim/build install --record /home/claudia/ForestGuard/src/build/forest_guard_sim/install.log --single-version-externally-managed install_data

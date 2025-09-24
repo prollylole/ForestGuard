@@ -15,10 +15,9 @@ Moving around:
     a   s    d
         x
 
-t/l: takeoff/land (upper/lower case)
-q/e : increase/decrease linear and angular velocity (upper/lower case)
-A/D: rotate left/right
-r/f : rise/fall (upper/lower case)
+q/e : increase/decrease linear and angular velocity (lower case)
+k/l: rotate left/right
+r/f : rise/fall (lower case)
 
 ---------------------------
 CTRL-C to quit
