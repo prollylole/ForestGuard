@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="tree1">
+    <static>true</static>
+    <link name="tree_link">
+      <visual name="tree_visual">
+        <geometry>
+          <mesh>
+            <uri>model://tree1/meshes/tree_a.dae</uri>
+            <scale>0.1 0.1 0.1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <!-- Simple collision for now (same mesh). You can swap to a low-poly later. -->
+      <collision name="tree_collision">
+        <geometry>
+          <mesh>
+            <uri>model://tree1/meshes/tree_a.dae</uri>
+            <scale>0.1 0.1 0.1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
