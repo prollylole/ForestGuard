@@ -1,0 +1,2 @@
+Invoking command in '/home/yut/git/ForestGuard/build/41068_ignition_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/yut/git/ForestGuard/41068_ignition_bringup -DCMAKE_INSTALL_PREFIX=/home/yut/git/ForestGuard/install/41068_ignition_bringup
+Invoked command in '/home/yut/git/ForestGuard/build/41068_ignition_bringup' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/yut/git/ForestGuard/41068_ignition_bringup -DCMAKE_INSTALL_PREFIX=/home/yut/git/ForestGuard/install/41068_ignition_bringup
