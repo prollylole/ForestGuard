@@ -10,7 +10,7 @@
 # ** Can run autonomous control or teleop because the bridge exposes control topics.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
@@ -26,9 +26,19 @@ def generate_launch_description():
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_share = get_package_share_directory('my_drone_pkg')
 
+    print(pkg_ros_gz_sim)
+
+    # Paths to models and worlds for model:// URIs
+    models = PathJoinSubstitution([pkg_share, 'models'])
+    worlds = PathJoinSubstitution([pkg_share, 'worlds'])
+
+    # Set IGNITION paths so model:// URIs are found
+    ign_gazebo_env = SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', [models, ':', worlds])
+    gz_sim_env     = SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', [models, ':', worlds])
+
     #  Path to urdf and sdf files inside package
     xacro_file = os.path.join(pkg_share, 'urdf', 'X4.urdf.xacro')
-    world_file = os.path.join(pkg_share, 'models', 'X4_GPS_LIDAR_RGBD', 'model.sdf')
+    # world_file = os.path.join(pkg_share, 'models', 'X4_GPS_LIDAR_RGBD', 'model.sdf')
 
     # Process the Xacro file
     robot_description_config = xacro.process_file(xacro_file)
@@ -83,6 +93,23 @@ def generate_launch_description():
         executable='rviz2',
         arguments=['-d', os.path.join(pkg_share, 'config', 'drone.rviz')]
     )
+
+    spawn_node = Node(
+                    package='ros_gz_sim',
+                    executable='create',
+                    name='spawn_entity',
+                    output='screen',
+                    arguments=[
+                        '-world', 'forest_world',
+                        '-name',  'test_drone',
+                        '-x', '0.0',
+                        '-y', '0.0',
+                        '-z', '0.0',
+                        '-Y', '0.0',
+                        '-file', os.path.join(pkg_share, 'urdf', 'X4.urdf.xacro'),
+                        '-allow_renaming', 'true'
+                    ]
+                )
 
     # -- if uses robot_state_publisher add it to the return list like this
     return LaunchDescription([

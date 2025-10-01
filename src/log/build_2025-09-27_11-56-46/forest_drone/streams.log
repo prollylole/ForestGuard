@@ -1,0 +1,20 @@
+[2.407s] Invoking command in '/home/claudia/ForestGuard/src/forest_drone': PYTHONPATH=/home/claudia/ForestGuard/src/build/forest_drone/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/forest_drone build --build-base /home/claudia/ForestGuard/src/build/forest_drone/build install --record /home/claudia/ForestGuard/src/build/forest_drone/install.log --single-version-externally-managed install_data
+[3.037s] running egg_info
+[3.039s] writing ../build/forest_drone/forest_drone.egg-info/PKG-INFO
+[3.039s] writing dependency_links to ../build/forest_drone/forest_drone.egg-info/dependency_links.txt
+[3.040s] writing entry points to ../build/forest_drone/forest_drone.egg-info/entry_points.txt
+[3.040s] writing requirements to ../build/forest_drone/forest_drone.egg-info/requires.txt
+[3.040s] writing top-level names to ../build/forest_drone/forest_drone.egg-info/top_level.txt
+[3.044s] reading manifest file '../build/forest_drone/forest_drone.egg-info/SOURCES.txt'
+[3.046s] writing manifest file '../build/forest_drone/forest_drone.egg-info/SOURCES.txt'
+[3.046s] running build
+[3.047s] running build_py
+[3.047s] running install
+[3.049s] running install_lib
+[3.051s] running install_data
+[3.051s] running install_egg_info
+[3.055s] removing '/home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages/forest_drone-0.0.0-py3.10.egg-info' (and everything under it)
+[3.056s] Copying ../build/forest_drone/forest_drone.egg-info to /home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages/forest_drone-0.0.0-py3.10.egg-info
+[3.058s] running install_scripts
+[3.106s] writing list of installed files to '/home/claudia/ForestGuard/src/build/forest_drone/install.log'
+[3.160s] Invoked command in '/home/claudia/ForestGuard/src/forest_drone' returned '0': PYTHONPATH=/home/claudia/ForestGuard/src/build/forest_drone/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/forest_drone build --build-base /home/claudia/ForestGuard/src/build/forest_drone/build install --record /home/claudia/ForestGuard/src/build/forest_drone/install.log --single-version-externally-managed install_data

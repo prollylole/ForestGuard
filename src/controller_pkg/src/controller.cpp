@@ -303,13 +303,13 @@ double Controller::status()
 void Controller::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,
                         std::shared_ptr<std_srvs::srv::SetBool::Response> res) {
 
-    // Check if laser processing is available
-    if (!laserDataReceived_) {
-       res->success = false;
-       res->message = "Waiting for first laser scan...";
-       RCLCPP_WARN(this->get_logger(), "Mission requested before laser scan arrived");
-       return;
-    }
+    // // Check if laser processing is available
+    // if (!laserDataReceived_) {
+    //    res->success = false;
+    //    res->message = "Waiting for first laser scan...";
+    //    RCLCPP_WARN(this->get_logger(), "Mission requested before laser scan arrived");
+    //    return;
+    // }
 
     // perform detect human
     auto humans = laserProcessingPtr_->detectHumans();

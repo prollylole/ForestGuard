@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="X4">
+
+  <!-- Material definitions -->
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="red">
+    <color rgba="0.8 0 0 1"/>
+  </material>
+  <material name="grey">
+    <color rgba="0.7 0.7 0.7 1"/>
+  </material>
+
+  <!-- Base Link -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="3.42"/>
+      <inertia ixx="0.075" ixy="0" ixz="0" iyy="0.075" iyz="0" izz="0.148916"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.3 0.25"/>
+      </geometry>
+    </collision>
+
+    <!-- Additional visual elements -->
+    <visual name="marker_visual_1">
+      <origin xyz="-0.1 0 0.077" rpy="0 -0.1 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+    <visual name="marker_visual_2">
+      <origin xyz="-0.09 0.059 0.059" rpy="-0.785397 0 0.2"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+    <visual name="marker_visual_3">
+      <origin xyz="-0.09 -0.059 0.059" rpy="0.785397 0 -0.2"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Camera mount visuals -->
+    <visual name="camera_mount_base_visual">
+      <origin xyz="0.05 0 -0.030" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.06 0.06 0.006"/>
+      </geometry>
+    </visual>
+
+    <visual name="camera_mount_arm_visual">
+      <origin xyz="0.08 0 -0.040" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.005" length="0.08"/>
+      </geometry>
+    </visual>
+
+    <visual name="camera_mount_arm2_visual">
+      <origin xyz="0.08 0 -0.08" rpy="0 1.57 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.025"/>
+      </geometry>
+    </visual>
+
+    <visual name="camera_visual">
+      <origin xyz="0.1 0 -0.08" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.02 0.025 0.025"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Rotor 0 -->
+  <link name="rotor_0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.005"/>
+      <inertia ixx="9.75e-07" ixy="0" ixz="0" iyy="8.13545e-05" iyz="0" izz="8.22545e-05"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1397" length="0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotor_0_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor_0"/>
+    <origin xyz="0.247 0.1506 0.028" rpy="0.087267 0 0.523599"/>
+    <axis xyz="0.043578 -0.075479 0.996195"/>
+  </joint>
+
+  <!-- Rotor 1 -->
+  <link name="rotor_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.005"/>
+      <inertia ixx="9.75e-07" ixy="0" ixz="0" iyy="8.13545e-05" iyz="0" izz="8.22545e-05"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1397" length="0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotor_1_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor_1"/>
+    <origin xyz="-0.00067 0.28929 0.028" rpy="0 -0.087267 0"/>
+    <axis xyz="-0.087156 0 0.996195"/>
+  </joint>
+
+  <!-- Rotor 2 -->
+  <link name="rotor_2">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.005"/>
+      <inertia ixx="9.75e-07" ixy="0" ixz="0" iyy="8.13545e-05" iyz="0" izz="8.22545e-05"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1397" length="0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotor_2_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor_2"/>
+    <origin xyz="-0.2501 0.1454 0.028" rpy="0.087267 0 2.61799"/>
+    <axis xyz="0.043578 0.075479 0.996195"/>
+  </joint>
+
+  <!-- Rotor 3 -->
+  <link name="rotor_3">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.005"/>
+      <inertia ixx="9.75e-07" ixy="0" ixz="0" iyy="8.13545e-05" iyz="0" izz="8.22545e-05"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1397" length="0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotor_3_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor_3"/>
+    <origin xyz="-0.2501 -0.1454 0.028" rpy="-0.087267 0 -2.61799"/>
+    <axis xyz="0.043578 -0.075479 0.996195"/>
+  </joint>
+
+  <!-- Rotor 4 -->
+  <link name="rotor_4">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.005"/>
+      <inertia ixx="9.75e-07" ixy="0" ixz="0" iyy="8.13545e-05" iyz="0" izz="8.22545e-05"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1397" length="0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotor_4_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor_4"/>
+    <origin xyz="-0.00067 -0.28929 0.028" rpy="0 0.087267 -3.14159"/>
+    <axis xyz="-0.087156 0 0.996195"/>
+  </joint>
+
+  <!-- Rotor 5 -->
+  <link name="rotor_5">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.005"/>
+      <inertia ixx="9.75e-07" ixy="0" ixz="0" iyy="8.13545e-05" iyz="0" izz="8.22545e-05"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1397" length="0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotor_5_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor_5"/>
+    <origin xyz="0.247 -0.1506 0.028" rpy="-0.087267 0 -0.523599"/>
+    <axis xyz="0.043578 0.075479 0.996195"/>
+  </joint>
+
+  <!-- Gazebo extensions for ROS plugins -->
+  <!-- Lidar and cameras use the general Sensors plugin -->
+  <gazebo>
+    <plugin
+        filename="libignition-gazebo-sensors-system.so"
+        name="ignition::gazebo::systems::Sensors">
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros_multirotor_base_plugin.so" name="multirotor_base_plugin">
+      <robotNamespace>/X4</robotNamespace>
+      <linkName>base_link</linkName>
+      <rotorVelocitySlowdownSim>2</rotorVelocitySlowdownSim>
+    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-imu-system"
+        name="ignition::gazebo::systems::Imu">
+      <robotNamespace>/X4</robotNamespace>
+      <topicName>imu</topicName>
+      <bodyName>base_link</bodyName>
+      <updateRate>250</updateRate>
+      <imuTopicName>imu</imuTopicName>
+    </plugin>
+
+    <plugin filename="libgazebo_ros_camera.so" name="camera_plugin">
+      <robotNamespace>/X4</robotNamespace>
+      <cameraName>camera_front</cameraName>
+      <imageTopicName>camera/image_raw</imageTopicName>
+      <cameraInfoTopicName>camera/camera_info</cameraInfoTopicName>
+      <frameName>camera_front</frameName>
+      <hackBaseline>0.07</hackBaseline>
+      <updateRate>20</updateRate>
+    </plugin>
+  </gazebo>
+
+  <!-- Sensor definitions for Gazebo -->
+  <gazebo reference="base_link">
+    <sensor type="imu" name="imu_sensor">
+      <always_on>true</always_on>
+      <update_rate>250</update_rate>
+      <imu>
+        <noise>
+          <type>gaussian</type>
+          <rate>
+            <mean>0.0</mean>
+            <stddev>0.009</stddev>
+            <bias_mean>0.00075</bias_mean>
+            <bias_stddev>0.005</bias_stddev>
+          </rate>
+          <accel>
+            <mean>0.0</mean>
+            <stddev>0.021</stddev>
+            <bias_mean>0.05</bias_mean>
+            <bias_stddev>0.0075</bias_stddev>
+          </accel>
+        </noise>
+      </imu>
+    </sensor>
+
+    <sensor type="camera" name="camera_front">
+      <pose>0.2 0 0 0 0.785 0</pose>
+      <camera>
+        <horizontal_fov>1.0472</horizontal_fov>
+        <image>
+          <width>320</width>
+          <height>240</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <always_on>true</always_on>
+      <update_rate>20</update_rate>
+    </sensor>
+  </gazebo>
+
+  <!-- ROS Control -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="ros_control">
+      <robotNamespace>/X4</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <!-- Transmission for rotors -->
+  <transmission name="rotor_0_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotor_0_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotor_0_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Repeat for other rotors 1-5 -->
+  <transmission name="rotor_1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotor_1_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotor_1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="rotor_2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotor_2_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotor_2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="rotor_3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotor_3_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotor_3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="rotor_4_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotor_4_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotor_4_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="rotor_5_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotor_5_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotor_5_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+</robot>

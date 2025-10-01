@@ -1,0 +1,153 @@
+[1.451s] Invoking command in '/home/claudia/ForestGuard/src/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/src/install/forest_guard_sim:/home/claudia/ForestGuard/src/install/forest_drone:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ForestGuard/install/drone_control:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/my_drone_pkg -- -j16 -l16
+[1.496s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.785s] -- Found rclcpp: 16.0.14 (/opt/ros/humble/share/rclcpp/cmake)
+[2.028s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.063s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.129s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.188s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.268s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.507s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.529s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.849s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[2.948s] -- Found FastRTPS: /opt/ros/humble/include  
+[3.102s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.165s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[3.372s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[3.375s] -- Found Threads: TRUE  
+[3.563s] -- Found gazebo_ros_pkgs: 3.9.0 (/opt/ros/humble/share/gazebo_ros_pkgs/cmake)
+[3.578s] -- Found gazebo_plugins: 3.9.0 (/opt/ros/humble/share/gazebo_plugins/cmake)
+[3.631s] -- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") 
+[3.634s] -- Checking for module 'bullet>=2.82'
+[3.668s] --   Found bullet, version 3.05
+[4.002s] -- Found fcl: /usr/include (found suitable version "0.7.0", minimum required is "0.5.0") 
+[4.136s] -- Found assimp: /usr/include (found version "5.2.0") 
+[4.249s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[4.392s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.40.0") found components: thread system filesystem program_options regex iostreams date_time 
+[4.442s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[4.479s] -- Looking for ignition-math6 -- found version 6.15.1
+[4.508s] -- Searching for dependencies of ignition-math6
+[4.512s] -- Looking for OGRE...
+[4.513s] -- OGRE_PREFIX_WATCH changed.
+[4.525s] -- Checking for module 'OGRE'
+[4.561s] --   Found OGRE, version 1.9.0
+[4.655s] -- Found Ogre Ghadamon (1.9.0)
+[4.690s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[4.714s] -- Looking for OGRE_Paging...
+[4.742s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[4.742s] -- Looking for OGRE_Terrain...
+[4.768s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[4.769s] -- Looking for OGRE_Property...
+[4.795s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[4.795s] -- Looking for OGRE_RTShaderSystem...
+[4.820s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[4.820s] -- Looking for OGRE_Volume...
+[4.846s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[4.846s] -- Looking for OGRE_Overlay...
+[4.872s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[5.485s] -- Looking for ignition-math6 -- found version 6.15.1
+[5.509s] -- Looking for ignition-transport8 -- found version 8.2.1
+[5.511s] -- Searching for dependencies of ignition-transport8
+[5.576s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") 
+[5.626s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[5.637s] -- Checking for module 'libzmq >= 4'
+[5.677s] --   Found libzmq , version 4.3.4
+[5.769s] -- Found ZeroMQ: TRUE (Required is at least version "4") 
+[5.784s] -- Checking for module 'uuid'
+[5.820s] --   Found uuid, version 2.37.2
+[5.902s] -- Found UUID: TRUE  
+[5.925s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[5.926s] -- Searching for dependencies of ignition-msgs5
+[5.995s] -- Looking for ignition-math6 -- found version 6.15.1
+[6.007s] -- Checking for module 'tinyxml2'
+[6.044s] --   Found tinyxml2, version 9.0.0
+[6.136s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[6.154s] -- Looking for ignition-common3 -- found version 3.14.0
+[6.155s] -- Searching for dependencies of ignition-common3
+[6.157s] -- Looking for dlfcn.h - found
+[6.161s] -- Looking for libdl - found
+[6.164s] -- Found DL: TRUE  
+[6.205s] -- Found tinyobjloader: /usr/lib/x86_64-linux-gnu/cmake/tinyobjloader/tinyobjloader-config.cmake (found version "2.0.0") 
+[6.207s] -- Searching for <ignition-common3> component [graphics]
+[6.224s] -- Looking for ignition-common3-graphics -- found version 3.14.0
+[6.225s] -- Searching for dependencies of ignition-common3-graphics
+[6.226s] -- Looking for ignition-math6 -- found version 6.15.1
+[6.245s] -- Looking for ignition-fuel_tools4 -- found version 4.4.0
+[6.246s] -- Searching for dependencies of ignition-fuel_tools4
+[6.479s] -- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.81.0")  
+[6.513s] -- Checking for module 'jsoncpp'
+[6.549s] --   Found jsoncpp, version 1.9.5
+[6.632s] -- Found JSONCPP: TRUE  
+[6.651s] -- Checking for module 'libzip'
+[6.687s] --   Found libzip, version 1.7.3
+[6.771s] -- Found ZIP: TRUE  
+[6.773s] -- Looking for ignition-common3 -- found version 3.14.0
+[6.774s] -- Looking for ignition-math6 -- found version 6.15.1
+[6.775s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[6.802s] -- Gazebo version: 11.14
+[6.802s] -- Checking for module 'tbb'
+[6.840s] --   Found tbb, version 2021.5.0
+[7.114s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[7.311s] -- Added test 'flake8' to check Python code syntax and style conventions
+[7.313s] -- Added test 'lint_cmake' to check CMake code style
+[7.316s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[7.323s] -- Added test 'xmllint' to check XML markup files
+[7.326s] -- Configuring done
+[7.342s] -- Generating done
+[7.351s] -- Build files have been written to: /home/claudia/ForestGuard/src/build/my_drone_pkg
+[7.396s] Invoked command in '/home/claudia/ForestGuard/src/build/my_drone_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/src/install/forest_guard_sim:/home/claudia/ForestGuard/src/install/forest_drone:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ForestGuard/install/drone_control:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/my_drone_pkg -- -j16 -l16
+[7.410s] Invoking command in '/home/claudia/ForestGuard/src/build/my_drone_pkg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/src/install/forest_guard_sim:/home/claudia/ForestGuard/src/install/forest_drone:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ForestGuard/install/drone_control:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/my_drone_pkg
+[7.416s] -- Install configuration: ""
+[7.417s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/lib/my_drone_pkg/setup_gazebo.sh
+[7.417s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/launch
+[7.418s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/launch/drone_launch.py
+[7.418s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/worlds
+[7.418s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/worlds/world_demo.sdf
+[7.419s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models
+[7.419s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD
+[7.419s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/model.sdf
+[7.419s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials
+[7.420s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures
+[7.420s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures/led.jpg
+[7.420s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/materials/textures/spotlight.jpg
+[7.422s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/model.config
+[7.422s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes
+[7.423s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
+[7.428s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.dae
+[7.431s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae
+[7.431s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.jpg
+[7.433s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/propeller_cw.dae
+[7.433s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/propeller_ccw.dae
+[7.434s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
+[7.439s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led_lamp.dae
+[7.440s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_sensor.jpg
+[7.441s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_sensor.dae
+[7.524s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_camera.jpg
+[7.525s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/pelican.dae
+[7.531s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/vi_camera.dae
+[7.532s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
+[7.533s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails
+[7.533s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/2.jpg
+[7.533s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/5.jpg
+[7.534s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/1.jpg
+[7.535s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/3.jpg
+[7.535s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/models/X4_GPS_LIDAR_RGBD/thumbnails/4.jpg
+[7.536s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/urdf
+[7.536s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/urdf/X4.urdf.xacro
+[7.537s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/config
+[7.537s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/config/ros_gz_bridge_config.yaml
+[7.537s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/ament_index/resource_index/package_run_dependencies/my_drone_pkg
+[7.538s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/ament_index/resource_index/parent_prefix_path/my_drone_pkg
+[7.538s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.sh
+[7.539s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/environment/ament_prefix_path.dsv
+[7.539s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/environment/path.sh
+[7.540s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/environment/path.dsv
+[7.541s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/local_setup.bash
+[7.541s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/local_setup.sh
+[7.541s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/local_setup.zsh
+[7.542s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/local_setup.dsv
+[7.542s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/package.dsv
+[7.542s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/ament_index/resource_index/packages/my_drone_pkg
+[7.542s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig.cmake
+[7.543s] -- Up-to-date: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/cmake/my_drone_pkgConfig-version.cmake
+[7.543s] -- Installing: /home/claudia/ForestGuard/src/install/my_drone_pkg/share/my_drone_pkg/package.xml
+[7.547s] Invoked command in '/home/claudia/ForestGuard/src/build/my_drone_pkg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/src/install/forest_guard_sim:/home/claudia/ForestGuard/src/install/forest_drone:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ForestGuard/install/drone_control:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/my_drone_pkg

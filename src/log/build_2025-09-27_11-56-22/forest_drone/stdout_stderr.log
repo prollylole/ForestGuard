@@ -1,0 +1,31 @@
+running egg_info
+creating ../build/forest_drone/forest_drone.egg-info
+writing ../build/forest_drone/forest_drone.egg-info/PKG-INFO
+writing dependency_links to ../build/forest_drone/forest_drone.egg-info/dependency_links.txt
+writing entry points to ../build/forest_drone/forest_drone.egg-info/entry_points.txt
+writing requirements to ../build/forest_drone/forest_drone.egg-info/requires.txt
+writing top-level names to ../build/forest_drone/forest_drone.egg-info/top_level.txt
+writing manifest file '../build/forest_drone/forest_drone.egg-info/SOURCES.txt'
+reading manifest file '../build/forest_drone/forest_drone.egg-info/SOURCES.txt'
+writing manifest file '../build/forest_drone/forest_drone.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/claudia/ForestGuard/src/build/forest_drone/build
+creating /home/claudia/ForestGuard/src/build/forest_drone/build/lib
+creating /home/claudia/ForestGuard/src/build/forest_drone/build/lib/forest_drone
+copying forest_drone/__init__.py -> /home/claudia/ForestGuard/src/build/forest_drone/build/lib/forest_drone
+running install
+running install_lib
+creating /home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages/forest_drone
+copying /home/claudia/ForestGuard/src/build/forest_drone/build/lib/forest_drone/__init__.py -> /home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages/forest_drone
+byte-compiling /home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages/forest_drone/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/claudia/ForestGuard/src/install/forest_drone/share/ament_index
+creating /home/claudia/ForestGuard/src/install/forest_drone/share/ament_index/resource_index
+creating /home/claudia/ForestGuard/src/install/forest_drone/share/ament_index/resource_index/packages
+copying resource/forest_drone -> /home/claudia/ForestGuard/src/install/forest_drone/share/ament_index/resource_index/packages
+copying package.xml -> /home/claudia/ForestGuard/src/install/forest_drone/share/forest_drone
+running install_egg_info
+Copying ../build/forest_drone/forest_drone.egg-info to /home/claudia/ForestGuard/src/install/forest_drone/lib/python3.10/site-packages/forest_drone-0.0.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/claudia/ForestGuard/src/build/forest_drone/install.log'

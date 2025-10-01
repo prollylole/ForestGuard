@@ -33,6 +33,18 @@
             </ode>
         </physics>
     <model name="X4">
+        <plugin filename="libignition-gazebo6-pose-publisher-system.so"
+        name="ignition::gazebo::systems::PosePublisher">
+            <ros>
+                <namespace>X4</namespace>
+            </ros>
+            <publish_tf>true</publish_tf>
+            <publish_tf_static>true</publish_tf_static>
+            <publish_pose>true</publish_pose>
+            <publish_link_pose>true</publish_link_pose>
+            <publish_nested_model_pose>true</publish_nested_model_pose>
+        </plugin>
+
         <pose>0 0 0.121078 0 0 0
         </pose>
         <link name="base_link">
@@ -75,7 +87,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/x4.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/x4.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -87,7 +99,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/led.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/led.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -99,7 +111,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/led.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/led.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -111,7 +123,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/led.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/led.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -123,7 +135,7 @@
                     <mesh>
                         <scale>0.01 0.01 0.01
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -135,7 +147,7 @@
                     <mesh>
                         <scale>0.01 0.01 0.01
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -147,7 +159,7 @@
                     <mesh>
                         <scale>0.01 0.01 0.01
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/spotlight.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -424,8 +436,11 @@
             <sensor name="scan_omni" type="gpu_lidar">
                 <pose>-0.1855 0 0.5318 0 0 0
                 </pose>
+                <topic>X4/scan</topic>
                 <update_rate>10
                 </update_rate>
+                <always_on>true</always_on>
+                <visualize>true</visualize>
                 <lidar>
                     <scan>
                         <horizontal>
@@ -468,10 +483,6 @@
                         </stddev>
                     </noise>
                 </lidar>
-                <always_on>false
-                </always_on>
-                <visualize>false
-                </visualize>
             </sensor>
             <visual name="camera_mount_base_visual">
                 <pose>0.05 0 -0.030 0 0.0 0
@@ -520,6 +531,7 @@
             <sensor name="camera_front" type="rgbd_camera">
                 <pose>0.2 0 0 0 +.785 0 
                 </pose>
+                <topic>X4/rgbd</topic>
                 <always_on>1
                 </always_on>
                 <update_rate>20
@@ -641,7 +653,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -736,7 +748,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -831,7 +843,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -926,7 +938,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -1021,7 +1033,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -1110,7 +1122,7 @@
                     <mesh>
                         <scale>1 1 1
                         </scale>
-                        <uri>model:://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
+                        <uri>model://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae
                         </uri>
                     </mesh>
                 </geometry>
@@ -1157,7 +1169,7 @@
         </joint>
         
         <!-- now some plugins -->
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system" name="ignition::gazebo::systems::MulticopterMotorModel">
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so" name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
             <jointName>rotor_0_joint
@@ -1193,7 +1205,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"  name="ignition::gazebo::systems::MulticopterMotorModel">
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"  name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
             <jointName>rotor_1_joint
@@ -1229,7 +1241,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1266,7 +1278,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1303,7 +1315,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1340,7 +1352,7 @@
             <motorType>velocity
             </motorType>
         </plugin>
-        <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        <plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
   name="ignition::gazebo::systems::MulticopterMotorModel">
             <robotNamespace>X4
             </robotNamespace>
@@ -1378,7 +1390,7 @@
             </motorType>
         </plugin>
         
-        <plugin   filename="ignition-gazebo-multicopter-control-system"   name="ignition::gazebo::systems::MulticopterVelocityControl">
+        <plugin   filename="libignition-gazebo6-multicopter-control-system.so"   name="ignition::gazebo::systems::MulticopterVelocityControl">
             <robotNamespace>X4
             </robotNamespace>
             <commandSubTopic>cmd_vel
@@ -1476,7 +1488,7 @@
                 </rotor>
             </rotorConfiguration>
         </plugin>
-        <plugin  filename="ignition-gazebo-odometry-publisher-system"  name="ignition::gazebo::systems::OdometryPublisher">
+        <plugin  filename="libignition-gazebo6-odometry-publisher-system.so"  name="ignition::gazebo::systems::OdometryPublisher">
             <dimensions>3
             </dimensions>
             <odom_frame>X4/odom
@@ -1484,20 +1496,27 @@
             <robot_base_frame>X4/base_footprint
             </robot_base_frame>
         </plugin>
-        <plugin filename="ignition-gazebo-navsat-system"  name="ignition::gazebo::systems::NavSat">
+        <plugin filename="libignition-gazebo6-navsat-system.so"  name="ignition::gazebo::systems::NavSat">
         </plugin>
         
-          <plugin name="ignition::gazebo::systems::PosePublisher" filename="ignition-gazebo-pose-publisher-system">
+          <plugin filename="libignition-gazebo6-pose-publisher-system.so"
+        name="ignition::gazebo::systems::PosePublisher">
             <publish_link_pose>true
             </publish_link_pose>
             <publish_collision_pose>false
             </publish_collision_pose>
-            <publish_visual_pose>false
+            <publish_visual_pose>true
             </publish_visual_pose>
             <publish_nested_model_pose>true
             </publish_nested_model_pose>
             <update_frequency>20
             </update_frequency>
+        </plugin>
+
+  <!-- Lidar and cameras use the general Sensors plugin -->
+        <plugin
+            filename="libignition-gazebo-sensors-system.so"
+            name="ignition::gazebo::systems::Sensors">
         </plugin>
         
         
