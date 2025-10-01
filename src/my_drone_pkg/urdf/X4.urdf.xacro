@@ -23,7 +23,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/x4.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/x4.dae" scale="1 1 1"/>
       </geometry>
       <material name="grey"/>
     </visual>
@@ -39,21 +39,21 @@
     <visual name="marker_visual_1">
       <origin xyz="-0.1 0 0.077" rpy="0 -0.1 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
       </geometry>
     </visual>
 
     <visual name="marker_visual_2">
       <origin xyz="-0.09 0.059 0.059" rpy="-0.785397 0 0.2"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
       </geometry>
     </visual>
 
     <visual name="marker_visual_3">
       <origin xyz="-0.09 -0.059 0.059" rpy="0.785397 0 -0.2"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/led.dae" scale="1 1 1"/>
       </geometry>
     </visual>
 
@@ -98,7 +98,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
       </geometry>
       <material name="red"/>
     </visual>
@@ -129,7 +129,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -160,7 +160,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -191,7 +191,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -222,7 +222,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_ccw.dae" scale="1 1 1"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -253,7 +253,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
+        <mesh filename="package://my_drone_pkg/models/X4_GPS_LIDAR_RGBD/meshes/neo11_propeller_cw.dae" scale="1 1 1"/>
       </geometry>
       <material name="red"/>
     </visual>
@@ -273,42 +273,94 @@
     <axis xyz="0.043578 0.075479 0.996195"/>
   </joint>
 
-  <!-- Gazebo extensions for ROS plugins -->
-  <!-- Lidar and cameras use the general Sensors plugin -->
-  <gazebo>
-    <plugin
-        filename="libignition-gazebo-sensors-system.so"
-        name="ignition::gazebo::systems::Sensors">
-    </plugin>
-  </gazebo>
+  <!-- Motor model (already in model.sdf) -->
+<plugin filename="libignition-gazebo6-multicopter-motor-model-system.so"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+  <robotNamespace>X4</robotNamespace>
+  <maxRotVelocity>1000.0
+  </maxRotVelocity>
+  <motorConstant>1.269e-05
+  </motorConstant>
+  <momentConstant>0.016754
+  </momentConstant>
+  <commandSubTopic>command/motor_speed
+  </commandSubTopic>
+  <!-- <motorNumber>0
+  </motorNumber> -->
+  <rotorDragCoefficient>2.0673e-04
+  </rotorDragCoefficient>
+  <rotorDragCoefficient>0
+  </rotorDragCoefficient>
+  <rollingMomentCoefficient>0
+  </rollingMomentCoefficient>
+  <!-- <motorSpeedPubTopic>motor_speed/0
+  </motorSpeedPubTopic> -->
+  <rotorVelocitySlowdownSim>2</rotorVelocitySlowdownSim>
+</plugin>
 
-  <gazebo>
-    <plugin filename="libgazebo_ros_multirotor_base_plugin.so" name="multirotor_base_plugin">
-      <robotNamespace>/X4</robotNamespace>
-      <linkName>base_link</linkName>
-      <rotorVelocitySlowdownSim>2</rotorVelocitySlowdownSim>
-    </plugin>
+<!-- Controller (velocity-based command topic) -->
+<plugin filename="libignition-gazebo6-multicopter-control-system.so"
+        name="ignition::gazebo::systems::MulticopterVelocityControl">
+  <robotNamespace>X4</robotNamespace>
+  <!-- topic that the plugin listens on for control commands -->
+  <commandSubTopic>cmd_vel</commandSubTopic>
+  <enableSubTopic>enable
+  </enableSubTopic>
+  <comLinkName>base_link
+  </comLinkName>
+  <velocityGain>6 6 10
+  </velocityGain>
+  <attitudeGain>4 4 2
+  </attitudeGain>
+  <angularRateGain>0.7 0.7 0.7
+  </angularRateGain>
+  <maximumLinearAcceleration>1 1 2
+  </maximumLinearAcceleration>
+  <maximumLinearVelocity>5 5 5
+  </maximumLinearVelocity>
+  <maximumAngularVelocity>3 3 3
+  </maximumAngularVelocity>
+  <linearVelocityNoiseMean>0 0 0
+  </linearVelocityNoiseMean>
+  <linearVelocityNoiseStdDev>0.1105 0.1261 0.0947
+  </linearVelocityNoiseStdDev>
+  <angularVelocityNoiseMean>0 0 0
+  </angularVelocityNoiseMean>
+  <!-- angularVelocityNoiseStdDev values based on ADIS16448's Rate Noise Density with a sample  -->
+  <!-- time of 0.004 ms. -->
+  <angularVelocityNoiseStdDev>0.004 0.004 0.004
+  </angularVelocityNoiseStdDev>
+  <!-- optionally configure link names / topics here -->
+</plugin>
 
-    <plugin
-        filename="ignition-gazebo-imu-system"
-        name="ignition::gazebo::systems::Imu">
-      <robotNamespace>/X4</robotNamespace>
-      <topicName>imu</topicName>
-      <bodyName>base_link</bodyName>
-      <updateRate>250</updateRate>
-      <imuTopicName>imu</imuTopicName>
-    </plugin>
+<!-- Odometry publisher -->
+<plugin filename="libignition-gazebo6-odometry-publisher-system.so"
+        name="ignition::gazebo::systems::OdometryPublisher">
+  <robotNamespace>X4</robotNamespace>
+  <odom_topic>/X4/odom</odom_topic>
+  <robot_base_frame>base_link</robot_base_frame>
+</plugin>
 
-    <plugin filename="libgazebo_ros_camera.so" name="camera_plugin">
-      <robotNamespace>/X4</robotNamespace>
-      <cameraName>camera_front</cameraName>
-      <imageTopicName>camera/image_raw</imageTopicName>
-      <cameraInfoTopicName>camera/camera_info</cameraInfoTopicName>
-      <frameName>camera_front</frameName>
-      <hackBaseline>0.07</hackBaseline>
-      <updateRate>20</updateRate>
-    </plugin>
-  </gazebo>
+
+  <plugin
+      filename="ignition-gazebo-imu-system"
+      name="ignition::gazebo::systems::Imu">
+    <robotNamespace>/X4</robotNamespace>
+    <topicName>imu</topicName>
+    <bodyName>base_link</bodyName>
+    <updateRate>250</updateRate>
+    <imuTopicName>imu</imuTopicName>
+  </plugin>
+
+  <plugin filename="libgazebo_ros_camera.so" name="camera_plugin">
+    <robotNamespace>/X4</robotNamespace>
+    <cameraName>camera_front</cameraName>
+    <imageTopicName>camera/image_raw</imageTopicName>
+    <cameraInfoTopicName>camera/camera_info</cameraInfoTopicName>
+    <frameName>camera_front</frameName>
+    <hackBaseline>0.07</hackBaseline>
+    <updateRate>20</updateRate>
+  </plugin>
 
   <!-- Sensor definitions for Gazebo -->
   <gazebo reference="base_link">
@@ -355,15 +407,22 @@
       </camera>
       <always_on>true</always_on>
       <update_rate>20</update_rate>
+
+      <!-- Gazebo extensions for ROS plugins -->
+      <!-- Lidar and cameras use the general Sensors plugin -->
+      <plugin
+          filename="libignition-gazebo-sensors-system.so"
+          name="ignition::gazebo::systems::Sensors">
+      </plugin>
     </sensor>
   </gazebo>
 
   <!-- ROS Control -->
-  <gazebo>
+  <!-- <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="ros_control">
       <robotNamespace>/X4</robotNamespace>
     </plugin>
-  </gazebo>
+  </gazebo> -->
 
   <!-- Transmission for rotors -->
   <transmission name="rotor_0_trans">
