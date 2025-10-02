@@ -1,0 +1,3 @@
+[console_scripts]
+tree_detector = forestguard_colour.tree_detector_node:main
+
