@@ -6,7 +6,7 @@
       <visual name="ground_visual">
         <geometry>
           <mesh>
-            <uri>model://forest_env/meshes/Environment.dae</uri>
+            <uri>model://forest_env/meshes/Environment1.dae</uri>
             <scale>15 15 15</scale>
           </mesh>
         </geometry>
