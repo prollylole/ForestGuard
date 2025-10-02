@@ -1,1 +1,0 @@
-/home/claudia/ForestGuard/build/my_drone_pkg/ament_cmake_core/my_drone_pkgConfig.cmake

@@ -1,1 +1,0 @@
-/home/claudia/ForestGuard/src/forest_drone/launch/forest_drone.launch.py
