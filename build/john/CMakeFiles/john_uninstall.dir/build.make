@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/john/git/RS1/John_branch/src/john
+CMAKE_SOURCE_DIR = /home/john/git/RS1/John_branch/src/forest_guard_sim
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/john/git/RS1/John_branch/build/john
@@ -82,6 +82,6 @@ CMakeFiles/john_uninstall.dir/clean:
 .PHONY : CMakeFiles/john_uninstall.dir/clean
 
 CMakeFiles/john_uninstall.dir/depend:
-	cd /home/john/git/RS1/John_branch/build/john && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/john/git/RS1/John_branch/src/john /home/john/git/RS1/John_branch/src/john /home/john/git/RS1/John_branch/build/john /home/john/git/RS1/John_branch/build/john /home/john/git/RS1/John_branch/build/john/CMakeFiles/john_uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/john/git/RS1/John_branch/build/john && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/john/git/RS1/John_branch/src/forest_guard_sim /home/john/git/RS1/John_branch/src/forest_guard_sim /home/john/git/RS1/John_branch/build/john /home/john/git/RS1/John_branch/build/john /home/john/git/RS1/John_branch/build/john/CMakeFiles/john_uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/john_uninstall.dir/depend
 

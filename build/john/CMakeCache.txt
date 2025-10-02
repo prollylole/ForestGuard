@@ -353,7 +353,7 @@ john_BINARY_DIR:STATIC=/home/john/git/RS1/John_branch/build/john
 john_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-john_SOURCE_DIR:STATIC=/home/john/git/RS1/John_branch/src/john
+john_SOURCE_DIR:STATIC=/home/john/git/RS1/John_branch/src/forest_guard_sim
 
 //The directory containing a CMake configuration file for rcl_interfaces.
 rcl_interfaces_DIR:PATH=/opt/ros/humble/share/rcl_interfaces/cmake
@@ -506,7 +506,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/john/git/RS1/John_branch/src/john
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/john/git/RS1/John_branch/src/forest_guard_sim
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER

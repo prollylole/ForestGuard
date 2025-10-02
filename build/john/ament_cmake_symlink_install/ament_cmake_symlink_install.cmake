@@ -311,46 +311,46 @@ message(STATUS "Execute custom install script")
 # begin of custom install code
 
 # install(DIRECTORY "config" "launch" "models" "urdf" "worlds" "DESTINATION" "share/john")
-ament_cmake_symlink_install_directory("/home/john/git/RS1/John_branch/src/john" DIRECTORY "config" "launch" "models" "urdf" "worlds" "DESTINATION" "share/john")
+ament_cmake_symlink_install_directory("/home/john/git/RS1/John_branch/src/forest_guard_sim" DIRECTORY "config" "launch" "models" "urdf" "worlds" "DESTINATION" "share/john")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/john" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/john" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/john" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/john" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/john" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/john" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
 
 # install(FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/john/environment")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/john/environment")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/john/environment")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/john/environment")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/john/environment")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/john/environment")
 
 # install(FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/john/environment")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/john/environment")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/opt/ros/humble/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/john/environment")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/john/environment")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/john/environment")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/john/environment")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/john")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/john")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/john")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/john")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/john")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/john")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/john")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/john")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/john")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/john")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/john")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/john")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/john")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/john")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/john")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/packages/john" "DESTINATION" "share/ament_index/resource_index/packages")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/packages/john" "DESTINATION" "share/ament_index/resource_index/packages")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_index/share/ament_index/resource_index/packages/john" "DESTINATION" "share/ament_index/resource_index/packages")
 
 # install(FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_core/johnConfig.cmake" "/home/john/git/RS1/John_branch/build/john/ament_cmake_core/johnConfig-version.cmake" "DESTINATION" "share/john/cmake")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_core/johnConfig.cmake" "/home/john/git/RS1/John_branch/build/john/ament_cmake_core/johnConfig-version.cmake" "DESTINATION" "share/john/cmake")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/build/john/ament_cmake_core/johnConfig.cmake" "/home/john/git/RS1/John_branch/build/john/ament_cmake_core/johnConfig-version.cmake" "DESTINATION" "share/john/cmake")
 
-# install(FILES "/home/john/git/RS1/John_branch/src/john/package.xml" "DESTINATION" "share/john")
-ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/john" FILES "/home/john/git/RS1/John_branch/src/john/package.xml" "DESTINATION" "share/john")
+# install(FILES "/home/john/git/RS1/John_branch/src/forest_guard_sim/package.xml" "DESTINATION" "share/john")
+ament_cmake_symlink_install_files("/home/john/git/RS1/John_branch/src/forest_guard_sim" FILES "/home/john/git/RS1/John_branch/src/forest_guard_sim/package.xml" "DESTINATION" "share/john")

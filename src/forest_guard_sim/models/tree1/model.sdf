@@ -11,8 +11,6 @@
           </mesh>
         </geometry>
       </visual>
-
-      <!-- Simple collision for now (same mesh). You can swap to a low-poly later. -->
       <collision name="tree_collision">
         <geometry>
           <mesh>

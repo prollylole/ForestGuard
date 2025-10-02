@@ -1,4 +1,4 @@
-# Install script for directory: /home/john/git/RS1/John_branch/src/john
+# Install script for directory: /home/john/git/RS1/John_branch/src/forest_guard_sim
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
