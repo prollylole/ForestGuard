@@ -1,10 +1,10 @@
 Metadata-Version: 2.1
 Name: forestguard-colour
 Version: 0.0.1
-Summary: Camera subscriber: converts ROS Image to OpenCV (step 2).
+Summary: ForestGuard colour detector node (step 3)
 Home-page: UNKNOWN
-Maintainer: You
-Maintainer-email: you@example.com
+Maintainer: john
+Maintainer-email: cohnjhen@gmail.com
 License: MIT
 Platform: UNKNOWN
 

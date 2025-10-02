@@ -1,0 +1,18 @@
+[0.389s] Invoking command in '/home/john/git/RS1/John_branch/build/forestguard_colour': PYTHONPATH=/home/john/git/RS1/John_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/John_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/John_branch/build/forestguard_colour/build --no-deps symlink_data
+[0.545s] running develop
+[0.635s] running egg_info
+[0.635s] writing forestguard_colour.egg-info/PKG-INFO
+[0.635s] writing dependency_links to forestguard_colour.egg-info/dependency_links.txt
+[0.635s] writing entry points to forestguard_colour.egg-info/entry_points.txt
+[0.635s] writing requirements to forestguard_colour.egg-info/requires.txt
+[0.635s] writing top-level names to forestguard_colour.egg-info/top_level.txt
+[0.636s] reading manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+[0.637s] writing manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+[0.637s] running build_ext
+[0.638s] Creating /home/john/git/RS1/John_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard-colour.egg-link (link to .)
+[0.638s] Installing hsv_calibrator script to /home/john/git/RS1/John_branch/install/forestguard_colour/lib/forestguard_colour
+[0.638s] Installing tree_detector script to /home/john/git/RS1/John_branch/install/forestguard_colour/lib/forestguard_colour
+[0.638s] 
+[0.638s] Installed /home/john/git/RS1/John_branch/build/forestguard_colour
+[0.638s] running symlink_data
+[0.656s] Invoked command in '/home/john/git/RS1/John_branch/build/forestguard_colour' returned '0': PYTHONPATH=/home/john/git/RS1/John_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/John_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/John_branch/build/forestguard_colour/build --no-deps symlink_data

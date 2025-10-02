@@ -1,3 +1,4 @@
 [console_scripts]
+hsv_calibrator = forestguard_colour.hsv_calibrator:main
 tree_detector = forestguard_colour.tree_detector_node:main
 
