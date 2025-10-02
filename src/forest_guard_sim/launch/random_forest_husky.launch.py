@@ -1,16 +1,26 @@
 # launch/random_forest_husky.launch.py
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, OpaqueFunction, ExecuteProcess
+from launch.actions import (
+    DeclareLaunchArgument,
+    IncludeLaunchDescription,
+    SetEnvironmentVariable,
+    OpaqueFunction,
+    ExecuteProcess,
+)
 from launch.conditions import IfCondition
 from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
-from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
+
 import os, math, random, time
 
+# ------------------------
+# Forest world generation
+# ------------------------
 def generate_forest_world(context):
-    # Read CLI args for forest generation
+    # Read CLI args
     num_a = int(LaunchConfiguration('num_a').perform(context))
     num_b = int(LaunchConfiguration('num_b').perform(context))
     xmin = float(LaunchConfiguration('xmin').perform(context))
@@ -23,11 +33,11 @@ def generate_forest_world(context):
     z = float(LaunchConfiguration('z').perform(context))
     seed = int(LaunchConfiguration('seed').perform(context))
 
-    # Robot spawn (read from launch args)
-    spawn_x = float(LaunchConfiguration('spawn_x').perform(context))
-    spawn_y = float(LaunchConfiguration('spawn_y').perform(context))
+    # Spawn position (already resolved in launch_setup)
+    spawn_x = float(context.launch_configurations['resolved_spawn_x'])
+    spawn_y = float(context.launch_configurations['resolved_spawn_y'])
 
-    # Use system time for true randomization if seed = -1
+    # Seed handling
     if seed == -1:
         seed = int(time.time() * 1000)
         print(f"[forest_random] Using random seed: {seed}")
@@ -39,46 +49,49 @@ def generate_forest_world(context):
         max_sep = min_sep + 1e-6
 
     # Effective bounds
-    xmin_eff, xmax_eff = xmin + margin, xmax - margin
-    ymin_eff, ymax_eff = ymin + margin, ymax - margin
+    xmin_eff = xmin + margin
+    xmax_eff = xmax - margin
+    ymin_eff = ymin + margin
+    ymax_eff = ymax - margin
 
-    # Tree sampler with exclusion zone
+    # Sampler with min/max separation and a spawn exclusion around the robot
     def sample_points(n, xmin_, xmax_, ymin_, ymax_, min_s, max_s, seed_pts=1, max_tries=40000):
         pts, tries = [], 0
-        min_r2, max_r2 = min_s**2, max_s**2
-        spawn_exclusion_radius = 1.5  # meters
-        spawn_r2 = spawn_exclusion_radius**2
+        min_r2 = min_s * min_s
+        max_r2 = max_s * max_s
+        spawn_exclusion_radius = 1.5
+        spawn_r2 = spawn_exclusion_radius * spawn_exclusion_radius
 
         while len(pts) < n and tries < max_tries:
-            x, y = random.uniform(xmin_, xmax_), random.uniform(ymin_, ymax_)
+            x = random.uniform(xmin_, xmax_)
+            y = random.uniform(ymin_, ymax_)
 
-            # Exclude near Husky spawn
+            # Keep away from robot spawn
             if (x - spawn_x)**2 + (y - spawn_y)**2 <= spawn_r2:
                 tries += 1
                 continue
 
-            # Enforce min separation
+            # Enforce min distance between trees
             if not all((x - xi)**2 + (y - yi)**2 >= min_r2 for xi, yi in pts):
                 tries += 1
                 continue
 
-            # Allow cluster seeding
+            # Seed first cluster
             if len(pts) < seed_pts:
                 pts.append((x, y))
                 continue
 
-            # Enforce max separation
+            # Subsequent points must be within max_sep of something to create clumps
             if any((x - xi)**2 + (y - yi)**2 <= max_r2 for xi, yi in pts):
                 pts.append((x, y))
-
             tries += 1
         return pts
 
-    pts = sample_points(num_a + num_b, xmin_eff, xmax_eff, ymin_eff, ymax_eff, min_sep, max_sep, seed_pts=1)
-    if len(pts) < num_a + num_b:
-        print(f"[forest_random] placed {len(pts)}/{num_a+num_b} trees; relax min_sep/increase max_sep or enlarge bounds.")
+    total = num_a + num_b
+    pts = sample_points(total, xmin_eff, xmax_eff, ymin_eff, ymax_eff, min_sep, max_sep)
+    if len(pts) < total:
+        print(f"[forest_random] placed {len(pts)}/{total} trees; relax min_sep/increase max_sep or enlarge bounds.")
 
-    # Helper to generate <include>
     def inc(uri, name, x, y, z_, yaw):
         return f"""
     <include>
@@ -87,12 +100,12 @@ def generate_forest_world(context):
       <pose>{x:.3f} {y:.3f} {z_:.3f} 0 0 {yaw:.6f}</pose>
     </include>"""
 
-    # Build world SDF
-    blocks = [inc("model://forest_env", "forest_env", 0, 0, 0, 0.0)]
+    blocks = []
+    blocks.append(inc("model://forest_env", "forest_env", 0, 0, 0, 0.0))
     for i, (x, y) in enumerate(pts[:num_a]):
-        blocks.append(inc("model://tree1", f"tree1_{i}", x, y, z, random.uniform(0, 2*math.pi)))
-    for j, (x, y) in enumerate(pts[num_a:]):
-        blocks.append(inc("model://tree2", f"tree2_{j}", x, y, z, random.uniform(0, 2*math.pi)))
+        blocks.append(inc("model://tree1", f"tree1_{i}", x, y, z, random.uniform(0.0, 2*math.pi)))
+    for j, (x, y) in enumerate(pts[num_a:num_a+num_b]):
+        blocks.append(inc("model://tree2", f"tree2_{j}", x, y, z, random.uniform(0.0, 2*math.pi)))
 
     world_sdf = f"""<?xml version="1.0" ?>
 <sdf version="1.9">
@@ -114,102 +127,157 @@ def generate_forest_world(context):
     out_path = os.path.join(out_dir, 'husky_forest_random.world.sdf')
     with open(out_path, 'w') as f:
         f.write(world_sdf)
-    print(f"[husky_forest_random] wrote {out_path} with seed {seed} (spawn at {spawn_x:.2f}, {spawn_y:.2f})")
+    print(f"[husky_forest_random] wrote {out_path} with seed {seed}")
     return out_path
 
-def launch_setup(context, *args, **kwargs):
-    world_path = generate_forest_world(context)
-    return [ExecuteProcess(cmd=['ign', 'gazebo', '-r', world_path, '-v', '4'], output='screen')]
+# ------------------------
+# Helpers
+# ------------------------
+def resolve_spawn_arg(context, name, lo, hi):
+    val = LaunchConfiguration(name).perform(context)
+    return str(random.uniform(lo, hi)) if val == 'RANDOM' else val
 
+# ------------------------
+# Setup phase: resolve spawn, write world, start sim & spawn robot
+# ------------------------
+def launch_setup(context, *args, **kwargs):
+    # Resolve robot spawn (RANDOM or numeric strings)
+    spawn_x_val = resolve_spawn_arg(context, 'spawn_x', -2.0, 2.0)
+    spawn_y_val = resolve_spawn_arg(context, 'spawn_y', -2.0, 2.0)
+    spawn_yaw_val = resolve_spawn_arg(context, 'spawn_yaw', 0.0, 2*math.pi)
+
+    # Make spawn available for world generation (tree exclusion)
+    context.launch_configurations['resolved_spawn_x'] = spawn_x_val
+    context.launch_configurations['resolved_spawn_y'] = spawn_y_val
+
+    # Generate world file with trees
+    world_path = generate_forest_world(context)
+
+    # Start Gazebo with that world
+    gazebo_process = ExecuteProcess(
+        cmd=['ign', 'gazebo', '-r', world_path, '-v', '4'],
+        output='screen'
+    )
+
+    # Spawn robot here (we have concrete strings now)
+    robot_spawner = Node(
+        package='ros_gz_sim',
+        executable='create',
+        output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+        arguments=[
+            '-topic', '/robot_description',
+            '-x', spawn_x_val,
+            '-y', spawn_y_val,
+            '-z', '0.4',
+            '-Y', spawn_yaw_val,
+            '-wait', '5'
+        ]
+    )
+
+    return [gazebo_process, robot_spawner]
+
+# ------------------------
+# Main launch description
+# ------------------------
 def generate_launch_description():
     pkg_path = get_package_share_directory('john')
     resource_path = os.pathsep.join([
         os.path.join(pkg_path, 'models'),
         os.path.join(pkg_path, 'worlds')
     ])
+
     ld = LaunchDescription()
 
-    # Resource paths
+    # Gazebo resource paths
     ld.add_action(SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', resource_path))
     ld.add_action(SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', resource_path))
 
-    # Core args
+    # Common args
     ld.add_action(DeclareLaunchArgument('use_sim_time', default_value='True'))
     ld.add_action(DeclareLaunchArgument('rviz', default_value='False'))
     ld.add_action(DeclareLaunchArgument('nav2', default_value='True'))
 
     # Forest args
     for arg in [
-        ('num_a','18'), ('num_b','2'),
-        ('xmin','-5.0'), ('xmax','5.0'),
-        ('ymin','-5.0'), ('ymax','5.0'),
-        ('margin','0.5'), ('min_sep','0.8'), ('max_sep','3'),
-        ('z','0.0'), ('seed','-1')
+        DeclareLaunchArgument('num_a', default_value='18'),
+        DeclareLaunchArgument('num_b', default_value='2'),
+        DeclareLaunchArgument('xmin', default_value='-5.0'),
+        DeclareLaunchArgument('xmax', default_value='5.0'),
+        DeclareLaunchArgument('ymin', default_value='-5.0'),
+        DeclareLaunchArgument('ymax', default_value='5.0'),
+        DeclareLaunchArgument('margin', default_value='0.5'),
+        DeclareLaunchArgument('min_sep', default_value='0.8'),
+        DeclareLaunchArgument('max_sep', default_value='3'),
+        DeclareLaunchArgument('z', default_value='0.0'),
+        DeclareLaunchArgument('seed', default_value='-1'),  # -1 => time-based seed
     ]:
-        ld.add_action(DeclareLaunchArgument(arg[0], default_value=arg[1]))
+        ld.add_action(arg)
 
-    use_sim_time = LaunchConfiguration('use_sim_time')
-
-    # Randomize Husky spawn and declare as args
-    spawn_x = str(random.uniform(-2.0, 2.0))
-    spawn_y = str(random.uniform(-2.0, 2.0))
-    spawn_yaw = str(random.uniform(0, 2*math.pi))
-    ld.add_action(DeclareLaunchArgument('spawn_x', default_value=spawn_x))
-    ld.add_action(DeclareLaunchArgument('spawn_y', default_value=spawn_y))
-    ld.add_action(DeclareLaunchArgument('spawn_yaw', default_value=spawn_yaw))
+    # Husky spawn args (RANDOM or numeric strings)
+    ld.add_action(DeclareLaunchArgument('spawn_x', default_value='RANDOM'))
+    ld.add_action(DeclareLaunchArgument('spawn_y', default_value='RANDOM'))
+    ld.add_action(DeclareLaunchArgument('spawn_yaw', default_value='RANDOM'))
 
     # Robot description
-    robot_description = ParameterValue(
+    robot_description_content = ParameterValue(
         Command(['xacro ', PathJoinSubstitution([pkg_path, 'urdf', 'husky.urdf.xacro'])]),
-        value_type=str)
-
-    # Nodes
-    ld.add_action(Node(
+        value_type=str
+    )
+    robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[{'robot_description': robot_description, 'use_sim_time': use_sim_time}]
-    ))
-    ld.add_action(Node(
+        parameters=[{
+            'robot_description': robot_description_content,
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+        }]
+    )
+    ld.add_action(robot_state_publisher_node)
+
+    # Localization
+    robot_localization_node = Node(
         package='robot_localization',
         executable='ekf_node',
         name='robot_localization',
         output='screen',
         parameters=[PathJoinSubstitution([pkg_path, 'config', 'robot_localization.yaml']),
-                    {'use_sim_time': use_sim_time}]
-    ))
-    ld.add_action(Node(
-        package='ros_gz_sim',
-        executable='create',
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}],
-        arguments=['-topic','/robot_description',
-                   '-x', LaunchConfiguration('spawn_x'),
-                   '-y', LaunchConfiguration('spawn_y'),
-                   '-z','0.4',
-                   '-Y', LaunchConfiguration('spawn_yaw'),
-                   '-wait','5']
-    ))
-    ld.add_action(Node(
+                    {'use_sim_time': LaunchConfiguration('use_sim_time')}]
+    )
+    ld.add_action(robot_localization_node)
+
+    # Bridge
+    gazebo_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        parameters=[{'config_file': PathJoinSubstitution([pkg_path,'config','gazebo_bridge.yaml']),
-                     'use_sim_time': use_sim_time}],
+        parameters=[{
+            'config_file': PathJoinSubstitution([pkg_path, 'config', 'gazebo_bridge.yaml']),
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+        }],
         output='screen'
-    ))
-    ld.add_action(Node(
+    )
+    ld.add_action(gazebo_bridge)
+
+    # RViz (optional)
+    rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         output='screen',
-        parameters=[{'use_sim_time': use_sim_time}],
-        arguments=['-d', PathJoinSubstitution([pkg_path,'config','john.rviz'])],
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+        arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'john.rviz'])],
         condition=IfCondition(LaunchConfiguration('rviz'))
-    ))
-    ld.add_action(IncludeLaunchDescription(
-        PathJoinSubstitution([pkg_path,'launch','johnNavigation.launch.py']),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
-        condition=IfCondition(LaunchConfiguration('nav2'))
-    ))
+    )
+    ld.add_action(rviz_node)
 
-    # Generate + start world
+    # Nav2 (optional)
+    nav2 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [PathJoinSubstitution([pkg_path, 'launch', 'johnNavigation.launch.py'])]
+        ),
+        launch_arguments={'use_sim_time': LaunchConfiguration('use_sim_time')}.items(),
+        condition=IfCondition(LaunchConfiguration('nav2'))
+    )
+    ld.add_action(nav2)
+
+    # Generate world + start Gazebo + spawn robot
     ld.add_action(OpaqueFunction(function=launch_setup))
     return ld
