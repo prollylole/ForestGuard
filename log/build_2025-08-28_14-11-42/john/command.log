@@ -1,4 +1,0 @@
-Invoking command in '/home/john/ForestGuard/build/john': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/john/ForestGuard/build/john -- -j20 -l20
-Invoked command in '/home/john/ForestGuard/build/john' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/john/ForestGuard/build/john -- -j20 -l20
-Invoking command in '/home/john/ForestGuard/build/john': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/john/ForestGuard/build/john
-Invoked command in '/home/john/ForestGuard/build/john' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/john/ForestGuard/build/john

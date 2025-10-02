@@ -1,8 +1,8 @@
-# Install script for directory: /home/john/ForestGuard/john
+# Install script for directory: /home/john/git/RS1/John_branch/src/john
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/john/ForestGuard/install/john")
+  set(CMAKE_INSTALL_PREFIX "/home/john/git/RS1/John_branch/install/john")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,7 +43,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/john/ForestGuard/build/john/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
+  include("/home/john/git/RS1/John_branch/build/john/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -54,5 +54,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/john/ForestGuard/build/john/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/john/git/RS1/John_branch/build/john/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

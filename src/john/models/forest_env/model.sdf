@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="forest_env">
+    <static>true</static>
+    <link name="ground_link">
+      <visual name="ground_visual">
+        <geometry>
+          <mesh>
+            <uri>model://forest_env/meshes/Environment.dae</uri>
+            <scale>15 15 15</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="ground_collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>200 200</size>  
+          </plane>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
