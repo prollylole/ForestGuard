@@ -1,0 +1,12 @@
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/uninstall.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/controller_pkg_uninstall.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/laserprocessing.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/quadcopter.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/vismarker.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/test.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/edit_cache.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/rebuild_cache.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/list_install_components.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/install.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/install/local.dir
+/home/claudia/ForestGuard/build/controller_pkg/CMakeFiles/install/strip.dir

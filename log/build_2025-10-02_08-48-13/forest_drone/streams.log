@@ -1,0 +1,25 @@
+[0.875s] Invoking command in '/home/claudia/ForestGuard/build/forest_drone': PYTHONPATH=/home/claudia/ForestGuard/build/forest_drone/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_drone/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_drone/build --no-deps symlink_data
+[1.126s] running develop
+[1.295s] running egg_info
+[1.295s] creating forest_drone.egg-info
+[1.295s] writing forest_drone.egg-info/PKG-INFO
+[1.295s] writing dependency_links to forest_drone.egg-info/dependency_links.txt
+[1.295s] writing entry points to forest_drone.egg-info/entry_points.txt
+[1.296s] writing requirements to forest_drone.egg-info/requires.txt
+[1.296s] writing top-level names to forest_drone.egg-info/top_level.txt
+[1.296s] writing manifest file 'forest_drone.egg-info/SOURCES.txt'
+[1.297s] reading manifest file 'forest_drone.egg-info/SOURCES.txt'
+[1.297s] writing manifest file 'forest_drone.egg-info/SOURCES.txt'
+[1.299s] running build_ext
+[1.299s] Creating /home/claudia/ForestGuard/install/forest_drone/lib/python3.10/site-packages/forest-drone.egg-link (link to .)
+[1.299s] 
+[1.300s] Installed /home/claudia/ForestGuard/build/forest_drone
+[1.300s] running symlink_data
+[1.300s] creating /home/claudia/ForestGuard/install/forest_drone/share/ament_index
+[1.300s] creating /home/claudia/ForestGuard/install/forest_drone/share/ament_index/resource_index
+[1.300s] creating /home/claudia/ForestGuard/install/forest_drone/share/ament_index/resource_index/packages
+[1.300s] symbolically linking /home/claudia/ForestGuard/build/forest_drone/resource/forest_drone -> /home/claudia/ForestGuard/install/forest_drone/share/ament_index/resource_index/packages
+[1.300s] symbolically linking /home/claudia/ForestGuard/build/forest_drone/package.xml -> /home/claudia/ForestGuard/install/forest_drone/share/forest_drone
+[1.300s] creating /home/claudia/ForestGuard/install/forest_drone/share/forest_drone/launch
+[1.300s] symbolically linking /home/claudia/ForestGuard/build/forest_drone/launch/forest_drone.launch.py -> /home/claudia/ForestGuard/install/forest_drone/share/forest_drone/launch
+[1.325s] Invoked command in '/home/claudia/ForestGuard/build/forest_drone' returned '0': PYTHONPATH=/home/claudia/ForestGuard/build/forest_drone/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_drone/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_drone/build --no-deps symlink_data

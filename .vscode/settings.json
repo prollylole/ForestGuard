@@ -1,0 +1,22 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/claudia/ForestGuard/build/forest_guard_sim",
+        "/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages",
+        "/home/claudia/ForestGuard/build/forest_drone",
+        "/home/claudia/ForestGuard/install/forest_drone/lib/python3.10/site-packages",
+        "/home/claudia/ForestGuard/install/drone_control/lib/python3.10/site-packages",
+        "/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/claudia/ForestGuard/build/forest_guard_sim",
+        "/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages",
+        "/home/claudia/ForestGuard/build/forest_drone",
+        "/home/claudia/ForestGuard/install/forest_drone/lib/python3.10/site-packages",
+        "/home/claudia/ForestGuard/install/drone_control/lib/python3.10/site-packages",
+        "/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
