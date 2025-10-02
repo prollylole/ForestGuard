@@ -1,0 +1,1 @@
+/home/claudia/ForestGuard/build/forest_husky/ament_cmake_core/forest_huskyConfig-version.cmake

@@ -1,0 +1,23 @@
+[0.372s] Invoking command in '/home/claudia/ForestGuard/build/forest_husky': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/forest_husky -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/forest_husky
+[0.382s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.488s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.517s] [31mCMake Error at CMakeLists.txt:11 (find_package):
+[0.517s]   By not providing "Findros_ign_interfaces.cmake" in CMAKE_MODULE_PATH this
+[0.517s]   project has asked CMake to find a package configuration file provided by
+[0.517s]   "ros_ign_interfaces", but CMake did not find one.
+[0.517s] 
+[0.518s]   Could not find a package configuration file provided by
+[0.518s]   "ros_ign_interfaces" with any of the following names:
+[0.518s] 
+[0.518s]     ros_ign_interfacesConfig.cmake
+[0.518s]     ros_ign_interfaces-config.cmake
+[0.518s] 
+[0.518s]   Add the installation prefix of "ros_ign_interfaces" to CMAKE_PREFIX_PATH or
+[0.518s]   set "ros_ign_interfaces_DIR" to a directory containing one of the above
+[0.518s]   files.  If "ros_ign_interfaces" provides a separate development package or
+[0.519s]   SDK, be sure it has been installed.
+[0.519s] 
+[0.519s] [0m
+[0.519s] -- Configuring incomplete, errors occurred!
+[0.519s] See also "/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/CMakeOutput.log".
+[0.521s] Invoked command in '/home/claudia/ForestGuard/build/forest_husky' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/forest_husky -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/install/forest_husky

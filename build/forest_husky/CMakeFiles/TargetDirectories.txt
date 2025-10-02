@@ -1,0 +1,9 @@
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/uninstall.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/forest_husky_uninstall.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/test.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/edit_cache.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/rebuild_cache.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/list_install_components.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/install.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/install/local.dir
+/home/claudia/ForestGuard/build/forest_husky/CMakeFiles/install/strip.dir

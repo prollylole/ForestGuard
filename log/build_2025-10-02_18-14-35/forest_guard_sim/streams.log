@@ -1,0 +1,17 @@
+[0.530s] Invoking command in '/home/claudia/ForestGuard/build/forest_guard_sim': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data
+[0.739s] running develop
+[0.897s] running egg_info
+[0.897s] writing forest_guard_sim.egg-info/PKG-INFO
+[0.897s] writing dependency_links to forest_guard_sim.egg-info/dependency_links.txt
+[0.898s] writing entry points to forest_guard_sim.egg-info/entry_points.txt
+[0.898s] writing requirements to forest_guard_sim.egg-info/requires.txt
+[0.898s] writing top-level names to forest_guard_sim.egg-info/top_level.txt
+[0.899s] reading manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[0.899s] writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[0.900s] running build_ext
+[0.901s] Creating /home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages/forest-guard-sim.egg-link (link to .)
+[0.901s] 
+[0.901s] Installed /home/claudia/ForestGuard/build/forest_guard_sim
+[0.901s] running symlink_data
+[0.902s] error: can't copy '/home/claudia/ForestGuard/build/forest_guard_sim/models/forest_env/model.sdf': doesn't exist or not a regular file
+[0.923s] Invoked command in '/home/claudia/ForestGuard/build/forest_guard_sim' returned '1': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data
