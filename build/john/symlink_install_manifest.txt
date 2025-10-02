@@ -5,10 +5,11 @@
 /home/john/git/RS1/John_branch/install/john/share/john/config/slam_params.yaml
 /home/john/git/RS1/John_branch/install/john/share/john/launch/john.launch.py
 /home/john/git/RS1/John_branch/install/john/share/john/launch/johnNavigation.launch.py
+/home/john/git/RS1/John_branch/install/john/share/john/launch/random_forest_husky.launch.py
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/materials/textures/empty_grass.png
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/meshes/Environment.dae
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/meshes/Environment1.dae
-/home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/meshes/empty_grass.png.001.png
+/home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/meshes/empty_grass.png
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/model.config
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/model.sdf
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_plane/materials/textures/empty_grass.png
