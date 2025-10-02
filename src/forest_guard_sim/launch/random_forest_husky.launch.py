@@ -1,4 +1,3 @@
-# launch/random_forest_husky.launch.py
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
