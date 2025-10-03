@@ -1,0 +1,17 @@
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/package_run_dependencies/husky_controller
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/parent_prefix_path/husky_controller
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.sh
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.dsv
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.sh
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.dsv
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.bash
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.sh
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.zsh
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.dsv
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.dsv
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/packages/husky_controller
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig.cmake
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig-version.cmake
+-- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.xml

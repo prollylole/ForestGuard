@@ -8,6 +8,7 @@
       "includePath": [
         "/home/claudia/rs1_ws/install/turtlesim/include/**",
         "/opt/ros/humble/include/**",
+        "/home/claudia/ForestGuard/src/husky_controller/include/**",
         "include/**",
         "/usr/include/**"
       ],

@@ -1,0 +1,15 @@
+/home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/package_run_dependencies/husky_controller
+/home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/parent_prefix_path/husky_controller
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.sh
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.dsv
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.sh
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.dsv
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.bash
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.sh
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.zsh
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.dsv
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.dsv
+/home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/packages/husky_controller
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig.cmake
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig-version.cmake
+/home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.xml
