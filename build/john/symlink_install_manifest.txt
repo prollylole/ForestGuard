@@ -4,7 +4,9 @@
 /home/john/git/RS1/John_branch/install/john/share/john/config/robot_localization.yaml
 /home/john/git/RS1/John_branch/install/john/share/john/config/slam_params.yaml
 /home/john/git/RS1/John_branch/install/john/share/john/launch/john.launch.py
+/home/john/git/RS1/John_branch/install/john/share/john/launch/johnGreenTreeTraining.launch.py
 /home/john/git/RS1/John_branch/install/john/share/john/launch/johnNavigation.launch.py
+/home/john/git/RS1/John_branch/install/john/share/john/launch/johnRedTreeTraining.launch.py
 /home/john/git/RS1/John_branch/install/john/share/john/launch/random_forest_husky.launch.py
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/materials/textures/empty_grass.png
 /home/john/git/RS1/John_branch/install/john/share/john/models/forest_env/meshes/Environment.dae
@@ -44,6 +46,8 @@
 /home/john/git/RS1/John_branch/install/john/share/john/urdf/meshes/wheel.dae
 /home/john/git/RS1/John_branch/install/john/share/john/urdf/wheel.urdf.xacro
 /home/john/git/RS1/John_branch/install/john/share/john/worlds/forest_world.sdf
+/home/john/git/RS1/John_branch/install/john/share/john/worlds/forest_world_green.sdf
+/home/john/git/RS1/John_branch/install/john/share/john/worlds/forest_world_red.sdf
 /home/john/git/RS1/John_branch/install/john/share/john/worlds/large_demo.sdf
 /home/john/git/RS1/John_branch/install/john/share/john/worlds/simple_trees.sdf
 /home/john/git/RS1/John_branch/install/john/share/ament_index/resource_index/package_run_dependencies/john
