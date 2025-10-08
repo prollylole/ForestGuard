@@ -197,6 +197,189 @@ husky_controller_uninstall/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky_controller_uninstall.dir/build.make CMakeFiles/husky_controller_uninstall.dir/build
 .PHONY : husky_controller_uninstall/fast
 
+#=============================================================================
+# Target rules for targets named laserprocessing
+
+# Build rule for target.
+laserprocessing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 laserprocessing
+.PHONY : laserprocessing
+
+# fast build rule for target.
+laserprocessing/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/build
+.PHONY : laserprocessing/fast
+
+#=============================================================================
+# Target rules for targets named husky
+
+# Build rule for target.
+husky: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 husky
+.PHONY : husky
+
+# fast build rule for target.
+husky/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/build
+.PHONY : husky/fast
+
+#=============================================================================
+# Target rules for targets named vismarker
+
+# Build rule for target.
+vismarker: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vismarker
+.PHONY : vismarker
+
+# fast build rule for target.
+vismarker/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vismarker.dir/build.make CMakeFiles/vismarker.dir/build
+.PHONY : vismarker/fast
+
+src/controller_husky.o: src/controller_husky.cpp.o
+.PHONY : src/controller_husky.o
+
+# target to build an object file
+src/controller_husky.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/controller_husky.cpp.o
+.PHONY : src/controller_husky.cpp.o
+
+src/controller_husky.i: src/controller_husky.cpp.i
+.PHONY : src/controller_husky.i
+
+# target to preprocess a source file
+src/controller_husky.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/controller_husky.cpp.i
+.PHONY : src/controller_husky.cpp.i
+
+src/controller_husky.s: src/controller_husky.cpp.s
+.PHONY : src/controller_husky.s
+
+# target to generate assembly for a file
+src/controller_husky.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/controller_husky.cpp.s
+.PHONY : src/controller_husky.cpp.s
+
+src/husky.o: src/husky.cpp.o
+.PHONY : src/husky.o
+
+# target to build an object file
+src/husky.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/husky.cpp.o
+.PHONY : src/husky.cpp.o
+
+src/husky.i: src/husky.cpp.i
+.PHONY : src/husky.i
+
+# target to preprocess a source file
+src/husky.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/husky.cpp.i
+.PHONY : src/husky.cpp.i
+
+src/husky.s: src/husky.cpp.s
+.PHONY : src/husky.s
+
+# target to generate assembly for a file
+src/husky.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/husky.cpp.s
+.PHONY : src/husky.cpp.s
+
+src/laserprocessing.o: src/laserprocessing.cpp.o
+.PHONY : src/laserprocessing.o
+
+# target to build an object file
+src/laserprocessing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o
+.PHONY : src/laserprocessing.cpp.o
+
+src/laserprocessing.i: src/laserprocessing.cpp.i
+.PHONY : src/laserprocessing.i
+
+# target to preprocess a source file
+src/laserprocessing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.i
+.PHONY : src/laserprocessing.cpp.i
+
+src/laserprocessing.s: src/laserprocessing.cpp.s
+.PHONY : src/laserprocessing.s
+
+# target to generate assembly for a file
+src/laserprocessing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laserprocessing.dir/build.make CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.s
+.PHONY : src/laserprocessing.cpp.s
+
+src/main_husky.o: src/main_husky.cpp.o
+.PHONY : src/main_husky.o
+
+# target to build an object file
+src/main_husky.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/main_husky.cpp.o
+.PHONY : src/main_husky.cpp.o
+
+src/main_husky.i: src/main_husky.cpp.i
+.PHONY : src/main_husky.i
+
+# target to preprocess a source file
+src/main_husky.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/main_husky.cpp.i
+.PHONY : src/main_husky.cpp.i
+
+src/main_husky.s: src/main_husky.cpp.s
+.PHONY : src/main_husky.s
+
+# target to generate assembly for a file
+src/main_husky.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/husky.dir/build.make CMakeFiles/husky.dir/src/main_husky.cpp.s
+.PHONY : src/main_husky.cpp.s
+
+src/main_vismarker.o: src/main_vismarker.cpp.o
+.PHONY : src/main_vismarker.o
+
+# target to build an object file
+src/main_vismarker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vismarker.dir/build.make CMakeFiles/vismarker.dir/src/main_vismarker.cpp.o
+.PHONY : src/main_vismarker.cpp.o
+
+src/main_vismarker.i: src/main_vismarker.cpp.i
+.PHONY : src/main_vismarker.i
+
+# target to preprocess a source file
+src/main_vismarker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vismarker.dir/build.make CMakeFiles/vismarker.dir/src/main_vismarker.cpp.i
+.PHONY : src/main_vismarker.cpp.i
+
+src/main_vismarker.s: src/main_vismarker.cpp.s
+.PHONY : src/main_vismarker.s
+
+# target to generate assembly for a file
+src/main_vismarker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vismarker.dir/build.make CMakeFiles/vismarker.dir/src/main_vismarker.cpp.s
+.PHONY : src/main_vismarker.cpp.s
+
+src/vis_marker.o: src/vis_marker.cpp.o
+.PHONY : src/vis_marker.o
+
+# target to build an object file
+src/vis_marker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vismarker.dir/build.make CMakeFiles/vismarker.dir/src/vis_marker.cpp.o
+.PHONY : src/vis_marker.cpp.o
+
+src/vis_marker.i: src/vis_marker.cpp.i
+.PHONY : src/vis_marker.i
+
+# target to preprocess a source file
+src/vis_marker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vismarker.dir/build.make CMakeFiles/vismarker.dir/src/vis_marker.cpp.i
+.PHONY : src/vis_marker.cpp.i
+
+src/vis_marker.s: src/vis_marker.cpp.s
+.PHONY : src/vis_marker.s
+
+# target to generate assembly for a file
+src/vis_marker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vismarker.dir/build.make CMakeFiles/vismarker.dir/src/vis_marker.cpp.s
+.PHONY : src/vis_marker.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +395,27 @@ help:
 	@echo "... test"
 	@echo "... husky_controller_uninstall"
 	@echo "... uninstall"
+	@echo "... husky"
+	@echo "... laserprocessing"
+	@echo "... vismarker"
+	@echo "... src/controller_husky.o"
+	@echo "... src/controller_husky.i"
+	@echo "... src/controller_husky.s"
+	@echo "... src/husky.o"
+	@echo "... src/husky.i"
+	@echo "... src/husky.s"
+	@echo "... src/laserprocessing.o"
+	@echo "... src/laserprocessing.i"
+	@echo "... src/laserprocessing.s"
+	@echo "... src/main_husky.o"
+	@echo "... src/main_husky.i"
+	@echo "... src/main_husky.s"
+	@echo "... src/main_vismarker.o"
+	@echo "... src/main_vismarker.i"
+	@echo "... src/main_vismarker.s"
+	@echo "... src/vis_marker.o"
+	@echo "... src/vis_marker.i"
+	@echo "... src/vis_marker.s"
 .PHONY : help
 
 

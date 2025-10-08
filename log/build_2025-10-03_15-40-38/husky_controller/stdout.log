@@ -1,0 +1,5 @@
+[ 33%] Built target vismarker
+[ 55%] Built target laserprocessing
+[ 77%] [32mBuilding CXX object CMakeFiles/husky.dir/src/main_husky.cpp.o[0m
+[ 77%] [32mBuilding CXX object CMakeFiles/husky.dir/src/controller_husky.cpp.o[0m
+[ 88%] [32mBuilding CXX object CMakeFiles/husky.dir/src/husky.cpp.o[0m

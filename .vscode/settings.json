@@ -8,5 +8,9 @@
         "/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages",
         "/opt/ros/humble/lib/python3.10/site-packages",
         "/opt/ros/humble/local/lib/python3.10/dist-packages"
-    ]
+    ],
+    "files.associations": {
+        "functional": "cpp"
+    },
+    "cmake.sourceDirectory": "/home/claudia/ForestGuard/src/forest_husky"
 }

@@ -1,48 +1,42 @@
-#ifndef QUADCOPTER_H
-#define QUADCOPTER_H
+#ifndef HUSKY_H
+#define HUSKY_H
 
 /**
- * @file new_quadcopter.cpp
- * @brief Implementation of the Quadcopter derived class for aerial robot control
+ * @file husky.h
+ * @brief Header for the Husky derived class for ground robot control
  * 
- * This class implements specific quadcopter functionality including:
+ * This class implements specific Husky functionality including:
  * - Autonomous navigation between goals
- * - Takeoff and landing operations
+ * - Obstacle avoidance using laser data
  * - Human detection using laser data
  * - Real-time visualization of detections
  * 
- * The quadcopter navigates through rooms, detecting humans while
- * maintaining safe flight operations and goal tracking.
+ * The Husky navigates through environments, detecting humans while
+ * maintaining safe ground operations and goal tracking.
  */
 
 #include "controller_husky.h"
-
 #include "std_msgs/msg/empty.hpp"
 #include "geometry_msgs/msg/twist.hpp"
-#include "visualization_msgs/msg/marker_array.hpp"
-
-// #include <pfms_types.h>
-
+#include "geometry_msgs/msg/pose_array.hpp"
 
 class Husky: public Controller
 {
 public:
   /**
-   * @brief Constructor initializes quadcopter parameters and ROS publishers
-   * @details Sets up publishers for velocity commands, takeoff/landing signals,
-   * and detection visualization
+   * @brief Constructor initializes Husky parameters and ROS publishers
+   * @details Sets up publishers for velocity commands and detection visualization
    */
-  //Default constructor - should set all sensor attributes to a default value
   Husky();
 
   /**
-   * @brief Destructor ensures safe shutdown of quadcopter
+   * @brief Destructor ensures safe shutdown of Husky
    */
   ~Husky(); 
 
   /**
    * @brief Checks if path to destination is feasible
-   * @param origin Current pose of the quadcopter
+   * @param origin Current pose of the Husky
    * @param goalPosition Target position to reach
    * @param[out] distance Calculated distance to goal
    * @param[out] time Estimated time to reach goal
@@ -56,7 +50,7 @@ public:
 
 protected:
   /**
-   * Instructs the underlying platform to recalcuate a goal, and set any internal variables as needed
+   * Instructs the underlying platform to recalculate a goal, and set any internal variables as needed
    *
    * Called when goal or tolerance changes
    * @return Whether goal is reachable by the platform
@@ -66,25 +60,21 @@ protected:
 private:
   // Constants
   const double TARGET_SPEED; //<-- Maximum movement speed
-  const double TARGET_HEIGHT_TOLERANCE; //<-- Acceptable height error margin
 
   // State variables
-  double target_angle_ = 0; //<-- Angle required for quadcopter to have a straight shot at the goal
-  bool liftoff_; //<-- indicate if the quadcopter is in the air
+  double target_angle_; //<-- Angle required for Husky to have a straight shot at the goal
+  double distance_toGoal_;  //!< Current Euclidean distance to the navigation goal in meters
 
-  // ROS Pubishers
+  // ROS Publishers
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr pubCmdVel_;//!< Publisher for velocity commands
-  rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr pubTakeOff_;//!< Publisher for takeoff signal
-  rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr pubLanding_;//!< Publisher for landing signal
-  rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr PubDoor_;//!< Publisher for detected door visualization
   rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr PubHuman_;//!< Publisher for detected human visualization
   rclcpp::TimerBase::SharedPtr timer_;//!< Timer for control loop execution
 
   // Teleop control
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmdVel_sub_;
-  geometry_msgs::msg::Twist currentTeleopCommand_; //!< Stores the latest teleop
+  geometry_msgs::msg::Twist currentTeleopCommand_; //!< Stores the latest teleop command
   bool teleopActive_; //!< Flag indicating if teleop command is active
-  rclcpp::Time lastTeleopTime_; //!< Timestamp of the last received teleop
+  rclcpp::Time lastTeleopTime_; //!< Timestamp of the last received teleop command
 
   /**
    * @brief Timer callback that implements goal-reaching behavior
@@ -93,28 +83,16 @@ private:
   bool reachGoal(void);
 
   /**
-   * @brief Sends movement commands to quadcopter
-   * @param turn_l_r Angular velocity around Z axis
-   * @param move_l_r Linear velocity along Y axis
-   * @param move_u_d Linear velocity along Z axis
-   * @param move_f_b Linear velocity along X axis
+   * @brief Sends movement commands to Husky
+   * @param linear_x Linear velocity along X axis
+   * @param angular_z Angular velocity around Z axis
    */
-  void sendCmd(double turn_l_r, double move_l_r, double move_u_d, double move_f_b);
+  void sendCmd(double linear_x, double angular_z);
 
   /**
    * @brief Switches to Teleop mode and sends teleop command
    */
   void sendTeleopCmd(const geometry_msgs::msg::Twist::SharedPtr msg);
-
-  /**
-   * @brief Initiates takeoff sequence
-   */
-  void sendTakeOff(void);
-
-  /**
-   * @brief Initiates landing sequence
-     */
-  void sendLanding(void);
+  
+#endif // HUSKY_H
 };
-
-#endif

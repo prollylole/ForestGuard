@@ -9,8 +9,13 @@
  * - Status monitoring and reporting
  */
 
-#include "controller_husky.h"
+#include "husky_controller/controller_husky.h"
+#include "husky_controller/laserprocessing.h"
+
+#include "rclcpp/rclcpp.hpp"
+#include "std_srvs/srv/set_bool.hpp"
 #include <cmath>
+#include <iostream>
 
 using std::placeholders::_1;
 
@@ -26,19 +31,22 @@ Controller::Controller()  :
   current_goal_idx_(0),
   tolerance_(0.5),
   laserDataReceived_(false),
-  status_(pfms::PlatformStatus::IDLE) 
+  status_(IDLE) 
 {
-   // Laser subscriber: Processes environmental data for obstacle detection
+  // Initialize laserProcessingPtr_ 
+   laserProcessingPtr_ = std::make_unique<LaserProcessing>();
+
+  // Laser subscriber: Processes environmental data for obstacle detection
    laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-      "husky/scan", 10, std::bind(&Controller::laserCallback,this,std::placeholders::_1));    
+      "/scan", 10, std::bind(&Controller::laserCallback,this,std::placeholders::_1));    
    
    // Goal subscriber: Receives navigation waypoints
    goal_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
-      "/husky/goals", 10, std::bind(&Controller::setGoal,this,std::placeholders::_1)); 
+      "/goal_pose", 10, std::bind(&Controller::setGoal,this,std::placeholders::_1)); 
          
    // Odometry subscriber: Tracks robot position and movement
    odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(
-       "/husky/odometry", 10, std::bind(&Controller::odoCallback,this,std::placeholders::_1));
+       "/odometry/filtered", 10, std::bind(&Controller::odoCallback,this,std::placeholders::_1));
    
    // Mission service: Handles external control commands
    service_ = this->create_service<std_srvs::srv::SetBool>(
@@ -79,6 +87,7 @@ bool Controller::setTolerance(double tolerance) {
  * @return GoalStats structure containing goal position and orientation
  */ 
 GoalStats Controller::getGoalStats(void) {
+  std::lock_guard<std::mutex> lock(goalMtx_);
   return goals_.at(current_goal_idx_);
 }
 
@@ -89,6 +98,8 @@ GoalStats Controller::getGoalStats(void) {
  * @return true if the goal is reached
  */
 bool Controller::goalReached() {
+  std::lock_guard<std::mutex> lock(goalMtx_);
+
   // if there is no goal or goal is not set, goal not reached
   if (!goalSet_ || goals_.empty()) return false;
 
@@ -116,6 +127,7 @@ bool Controller::goalReached() {
  * @return Current pose of the platform
  */
 geometry_msgs::msg::Pose Controller::getOdometry(void){
+  std::lock_guard<std::mutex> lock(poseMtx_);
   return pose_;
 }
 
@@ -125,19 +137,20 @@ geometry_msgs::msg::Pose Controller::getOdometry(void){
  */
 void Controller::laserCallback(const sensor_msgs::msg::LaserScan& msg)
 {
+  std::lock_guard<std::mutex> lock(laserMtx_);
   // Store latest scan
   laserData_ = msg; 
   // set laser received flag
   laserDataReceived_ = true;
 
   //If we have not created the laserProcessingPtr object, create it
-  if (laserProcessingPtr_ == nullptr) {
-      laserProcessingPtr_ = std::make_unique<LaserProcessing>(laserData_);
+  if (!laserProcessingPtr_) {
+     RCLCPP_WARN(this->get_logger(), "LaserProcessingPtr should never be null now!");
+     laserProcessingPtr_ = std::make_unique<LaserProcessing>();
   }
-  // otherwise, update laserscan data
-  else {
-      laserProcessingPtr_->newScan(laserData_);
-  }
+  // update laserscan data
+  std::cout << "DEBUG: Updating laser scan" << std::endl;
+  laserProcessingPtr_->newScan(laserData_);
 }
 
 /**
@@ -145,6 +158,8 @@ void Controller::laserCallback(const sensor_msgs::msg::LaserScan& msg)
  * @param msg Array of poses representing goals
  */
 void Controller::setGoal(const geometry_msgs::msg::PoseArray& msg){    
+  std::lock_guard<std::mutex> lock(goalMtx_);
+
   // clear the previous goals before adding new ones
   goals_.clear();
   segment_distances_.clear();
@@ -194,6 +209,7 @@ void Controller::setGoal(const geometry_msgs::msg::PoseArray& msg){
  * @param msg Odometry message from ROS topic
  */
 void Controller::odoCallback(const nav_msgs::msg::Odometry& msg){
+  std::lock_guard<std::mutex> lock(poseMtx_);
   pose_ = msg.pose.pose;
 }
 
@@ -207,16 +223,13 @@ std::string Controller::getInfoString()
     switch(status_)
     {
         // Platform waiting for commands
-        case pfms::PlatformStatus::IDLE   : ss << "IDLE ";    break;
+        case IDLE   : ss << "IDLE ";    break;
 
         // Platform actively executing goals
-        case pfms::PlatformStatus::RUNNING : ss << "RUNNING ";  break;
+        case RUNNING : ss << "RUNNING ";  break;
 
-        // Platform ready for mission
-        case pfms::PlatformStatus::READY : ss << "READY ";  break;
-
-        // Platform stopped
-        case pfms::PlatformStatus::STOPPED : ss << "STOPPED ";  break;
+        // Platform under teleoperation control
+        case TELEOP : ss << "TELEOP ";  break;
     }
     return ss.str(); // This command converts stringstream to string
 }
@@ -257,6 +270,7 @@ double Controller::status()
 
   // avoid division by 0
   if (segment_length > 0.001) { //NEAR ZERO VALUE
+
     // distance travelled decimal progress to current goal = 
     //      1- (distance to current goal/ estimated initial distance from pre goal to current goal)
     segment_progress = 1.0 - (distToCurrGoal / segment_length);
@@ -273,3 +287,58 @@ double Controller::status()
   
   return std::min(100.0, std::max(0.0, percentCompletion));
 }
+
+/**
+ * @brief Service callback for controlling Husky mission
+ * @param req Service request containing control command
+ * @param res Service response indicating success/failure
+ */
+void Controller::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,
+                        std::shared_ptr<std_srvs::srv::SetBool::Response> res) {
+
+    // Check if laser processing is available
+    // if (!laserDataReceived_) {
+    //    res->success = false;
+    //    res->message = "Waiting for first laser scan...";
+    //    RCLCPP_WARN(this->get_logger(), "Mission requested before laser scan arrived");
+    //    return;
+    // }
+
+    // perform detect human
+    // auto humans = laserProcessingPtr_->detectHumans();
+    // // flag if there is human
+    // bool person_visible = !humans.empty();
+
+    // calculate status
+    double percentageCompletion = status();
+
+    std::string message;
+
+    // if received request data from service
+    if (req->data) {
+        // if goal is set
+        if (goalSet_) {
+            // set status running
+            status_ = RUNNING;
+            // message = person_visible ? "Person spotted! Mission started. " 
+                                    //  : "No person detected at current location. ";
+        }
+        else {
+            status_ = IDLE;
+            message = "No goal set. Cannot start mission.";
+        }
+
+        message += "Mission completion: " + std::to_string(percentageCompletion) + "%";
+        res->message = message;
+    } 
+    else {
+        status_ = IDLE;
+        // message = person_visible ? "Mission stopped, but person still in view! "
+        //                          : "Mission stopped. No person detected. ";
+        
+        message += "Mission completion: " + std::to_string(percentageCompletion) + "%";
+    }    
+    
+    // res->success = person_visible;
+    res->message = message;
+  }

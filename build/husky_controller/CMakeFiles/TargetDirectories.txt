@@ -1,5 +1,8 @@
 /home/claudia/ForestGuard/build/husky_controller/CMakeFiles/uninstall.dir
 /home/claudia/ForestGuard/build/husky_controller/CMakeFiles/husky_controller_uninstall.dir
+/home/claudia/ForestGuard/build/husky_controller/CMakeFiles/laserprocessing.dir
+/home/claudia/ForestGuard/build/husky_controller/CMakeFiles/husky.dir
+/home/claudia/ForestGuard/build/husky_controller/CMakeFiles/vismarker.dir
 /home/claudia/ForestGuard/build/husky_controller/CMakeFiles/test.dir
 /home/claudia/ForestGuard/build/husky_controller/CMakeFiles/edit_cache.dir
 /home/claudia/ForestGuard/build/husky_controller/CMakeFiles/rebuild_cache.dir

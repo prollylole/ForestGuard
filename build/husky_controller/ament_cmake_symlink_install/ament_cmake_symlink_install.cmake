@@ -310,6 +310,12 @@ message(STATUS "Execute custom install script")
 
 # begin of custom install code
 
+# install("TARGETS" "husky" "laserprocessing" "vismarker" "DESTINATION" "lib/husky_controller")
+include("/home/claudia/ForestGuard/build/husky_controller/ament_cmake_symlink_install_targets_0_${CMAKE_INSTALL_CONFIG_NAME}.cmake")
+
+# install(DIRECTORY "include/" "DESTINATION" "include")
+ament_cmake_symlink_install_directory("/home/claudia/ForestGuard/src/husky_controller" DIRECTORY "include/" "DESTINATION" "include")
+
 # install(FILES "/home/claudia/ForestGuard/build/husky_controller/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/husky_controller" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/claudia/ForestGuard/src/husky_controller" FILES "/home/claudia/ForestGuard/build/husky_controller/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/husky_controller" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 

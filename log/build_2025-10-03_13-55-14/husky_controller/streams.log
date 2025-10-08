@@ -1,0 +1,59 @@
+[0.012s] Invoking command in '/home/claudia/ForestGuard/build/husky_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/husky_controller -- -j16 -l16
+[0.047s] [ 44%] Built target laserprocessing
+[0.047s] [ 55%] Built target vismarker
+[0.081s] [ 77%] [32mBuilding CXX object CMakeFiles/husky.dir/src/main_husky.cpp.o[0m
+[0.081s] [ 77%] [32mBuilding CXX object CMakeFiles/husky.dir/src/husky.cpp.o[0m
+[0.342s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+[0.342s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+[0.342s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[0.343s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[0.343s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[0.343s]       |  [01;35m[K^~~~~~~[m[K
+[0.348s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+[0.348s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+[0.348s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/main_husky.cpp:6[m[K:
+[0.348s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[0.348s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[0.348s]       |  [01;35m[K^~~~~~~[m[K
+[2.518s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K In member function ‘[01m[Kvirtual GoalStats Husky::calcNewGoal()[m[K’:
+[2.518s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.518s]   174 |         return GoalStats{[01;35m[K}[m[K;
+[2.518s]       |                          [01;35m[K^[m[K
+[2.518s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[2.518s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.518s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[2.519s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.519s]   213 |     return GoalStats{[01;35m[K}[m[K;
+[2.519s]       |                      [01;35m[K^[m[K
+[2.519s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[2.519s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.519s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[7.340s] [ 88%] [32m[1mLinking CXX executable husky[0m
+[8.262s] [100%] Built target husky
+[8.269s] Invoked command in '/home/claudia/ForestGuard/build/husky_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/husky_controller -- -j16 -l16
+[8.270s] Invoking command in '/home/claudia/ForestGuard/build/husky_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/husky_controller
+[8.274s] -- Install configuration: ""
+[8.275s] -- Execute custom install script
+[8.276s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/husky
+[8.279s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/liblaserprocessing.so
+[8.282s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/vismarker
+[8.285s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/controller_husky.h
+[8.289s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/husky.h
+[8.292s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/laserprocessing.h
+[8.295s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/vis_marker.h
+[8.298s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/package_run_dependencies/husky_controller
+[8.298s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/parent_prefix_path/husky_controller
+[8.298s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.sh
+[8.298s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.dsv
+[8.299s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.sh
+[8.299s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.dsv
+[8.299s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.bash
+[8.299s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.sh
+[8.299s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.zsh
+[8.299s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.dsv
+[8.299s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.dsv
+[8.303s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/packages/husky_controller
+[8.303s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig.cmake
+[8.303s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig-version.cmake
+[8.303s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.xml
+[8.306s] Invoked command in '/home/claudia/ForestGuard/build/husky_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/husky_controller

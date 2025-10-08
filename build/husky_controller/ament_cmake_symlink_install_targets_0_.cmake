@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/claudia/ForestGuard/build/husky_controller/husky" "/home/claudia/ForestGuard/build/husky_controller/liblaserprocessing.so" "/home/claudia/ForestGuard/build/husky_controller/vismarker" "TARGETS" "husky" "laserprocessing" "vismarker" "DESTINATION" "lib/husky_controller")

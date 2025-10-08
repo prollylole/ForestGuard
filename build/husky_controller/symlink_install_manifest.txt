@@ -1,3 +1,10 @@
+/home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/husky
+/home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/liblaserprocessing.so
+/home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/vismarker
+/home/claudia/ForestGuard/install/husky_controller/include/husky_controller/controller_husky.h
+/home/claudia/ForestGuard/install/husky_controller/include/husky_controller/husky.h
+/home/claudia/ForestGuard/install/husky_controller/include/husky_controller/laserprocessing.h
+/home/claudia/ForestGuard/install/husky_controller/include/husky_controller/vis_marker.h
 /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/package_run_dependencies/husky_controller
 /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/parent_prefix_path/husky_controller
 /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.sh

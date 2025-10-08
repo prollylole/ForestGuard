@@ -1,0 +1,49 @@
+[0.031s] Invoking command in '/home/claudia/ForestGuard/build/husky_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/husky_controller -- -j16 -l16
+[0.104s] [ 22%] Built target laserprocessing
+[0.105s] [ 55%] Built target vismarker
+[0.151s] [ 66%] [32mBuilding CXX object CMakeFiles/husky.dir/src/controller_husky.cpp.o[0m
+[0.707s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+[0.707s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:12[m[K:
+[0.707s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[0.708s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[0.708s]       |  [01;35m[K^~~~~~~[m[K
+[2.963s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:12[m[K:
+[2.963s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:[m[K In constructor ‘[01m[KController::Controller()[m[K’:
+[2.963s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:101:12:[m[K [01;35m[Kwarning: [m[K‘[01m[KController::tolerance_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.963s]   101 |     double [01;35m[Ktolerance_[m[K;
+[2.963s]       |            [01;35m[K^~~~~~~~~~[m[K
+[2.963s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:99:10:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kbool Controller::laserDataReceived_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.963s]    99 |     bool [01;35m[KlaserDataReceived_[m[K;
+[2.963s]       |          [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+[2.963s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:28:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.963s]    28 | [01;35m[KController[m[K::Controller()  :
+[2.963s]       | [01;35m[K^~~~~~~~~~[m[K
+[11.757s] [ 77%] [32m[1mLinking CXX executable husky[0m
+[12.658s] [100%] Built target husky
+[12.664s] Invoked command in '/home/claudia/ForestGuard/build/husky_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/husky_controller -- -j16 -l16
+[12.665s] Invoking command in '/home/claudia/ForestGuard/build/husky_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/husky_controller
+[12.668s] -- Install configuration: ""
+[12.668s] -- Execute custom install script
+[12.668s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/husky
+[12.669s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/liblaserprocessing.so
+[12.669s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/lib/husky_controller/vismarker
+[12.669s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/controller_husky.h
+[12.669s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/husky.h
+[12.669s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/laserprocessing.h
+[12.669s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/include/husky_controller/vis_marker.h
+[12.669s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/package_run_dependencies/husky_controller
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/parent_prefix_path/husky_controller
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.sh
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/ament_prefix_path.dsv
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.sh
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/environment/path.dsv
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.bash
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.sh
+[12.670s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.zsh
+[12.671s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/local_setup.dsv
+[12.671s] -- Symlinking: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.dsv
+[12.675s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/ament_index/resource_index/packages/husky_controller
+[12.675s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig.cmake
+[12.675s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig-version.cmake
+[12.675s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/husky_controller/share/husky_controller/package.xml
+[12.677s] Invoked command in '/home/claudia/ForestGuard/build/husky_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/husky_controller

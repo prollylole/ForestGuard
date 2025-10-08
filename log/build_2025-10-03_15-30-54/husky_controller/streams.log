@@ -1,0 +1,168 @@
+[0.011s] Invoking command in '/home/claudia/ForestGuard/build/husky_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/husky_controller -- -j16 -l16
+[0.041s] [ 44%] Built target laserprocessing
+[0.041s] [ 55%] Built target vismarker
+[0.073s] [ 77%] [32mBuilding CXX object CMakeFiles/husky.dir/src/main_husky.cpp.o[0m
+[0.073s] [ 77%] [32mBuilding CXX object CMakeFiles/husky.dir/src/controller_husky.cpp.o[0m
+[0.073s] [ 88%] [32mBuilding CXX object CMakeFiles/husky.dir/src/husky.cpp.o[0m
+[0.343s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+[0.343s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+[0.343s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/main_husky.cpp:6[m[K:
+[0.343s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[0.343s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[0.343s]       |  [01;35m[K^~~~~~~[m[K
+[0.343s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+[0.344s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+[0.344s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[0.344s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[0.344s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[0.344s]       |  [01;35m[K^~~~~~~[m[K
+[0.345s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+[0.345s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:12[m[K:
+[0.345s] [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+[0.345s]    35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+[0.345s]       |  [01;35m[K^~~~~~~[m[K
+[2.560s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:12[m[K:
+[2.561s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:[m[K In constructor ‘[01m[KController::Controller()[m[K’:
+[2.561s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:98:12:[m[K [01;35m[Kwarning: [m[K‘[01m[KController::tolerance_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.561s]    98 |     double [01;35m[Ktolerance_[m[K;
+[2.561s]       |            [01;35m[K^~~~~~~~~~[m[K
+[2.561s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:96:10:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kbool Controller::laserDataReceived_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.561s]    96 |     bool [01;35m[KlaserDataReceived_[m[K;
+[2.561s]       |          [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+[2.561s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:27:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.561s]    27 | [01;35m[KController[m[K::Controller()  :
+[2.561s]       | [01;35m[K^~~~~~~~~~[m[K
+[2.572s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:28:12:[m[K [01;31m[Kerror: [m[Kusing-declaration for non-member at class scope
+[2.572s]    28 | using std::[01;31m[Kcout[m[K;
+[2.572s]       |            [01;31m[K^~~~[m[K
+[2.573s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:29:12:[m[K [01;31m[Kerror: [m[Kusing-declaration for non-member at class scope
+[2.573s]    29 | using std::[01;31m[Kendl[m[K;
+[2.573s]       |            [01;31m[K^~~~[m[K
+[2.573s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:30:7:[m[K [01;31m[Kerror: [m[Kexpected nested-name-specifier before ‘[01m[Knamespace[m[K’
+[2.573s]    30 | using [01;31m[Knamespace[m[K std::chrono_literals;
+[2.573s]       |       [01;31m[K^~~~~~~~~[m[K
+[2.573s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:36:1:[m[K [01;31m[Kerror: [m[Kextra qualification ‘[01m[KHusky::[m[K’ on member ‘[01m[KHusky[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.573s]    36 | [01;31m[KHusky[m[K::Husky() :
+[2.573s]       | [01;31m[K^~~~~[m[K
+[2.573s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:36:1:[m[K [01;31m[Kerror: [m[K‘[01m[KHusky::Husky()[m[K’ cannot be overloaded with ‘[01m[KHusky::Husky()[m[K’
+[2.573s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.573s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:30:3:[m[K [01;36m[Knote: [m[Kprevious declaration ‘[01m[KHusky::Husky()[m[K’
+[2.573s]    30 |   [01;36m[KHusky[m[K();
+[2.573s]       |   [01;36m[K^~~~~[m[K
+[2.573s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:60:1:[m[K [01;31m[Kerror: [m[Kextra qualification ‘[01m[KHusky::[m[K’ on member ‘[01m[KHusky[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.573s]    60 | [01;31m[KHusky[m[K::~Husky() {
+[2.573s]       | [01;31m[K^~~~~[m[K
+[2.573s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:60:1:[m[K [01;31m[Kerror: [m[K‘[01m[KHusky::~Husky()[m[K’ cannot be overloaded with ‘[01m[KHusky::~Husky()[m[K’
+[2.574s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:35:3:[m[K [01;36m[Knote: [m[Kprevious declaration ‘[01m[KHusky::~Husky()[m[K’
+[2.574s]    35 |   [01;36m[K~[m[KHusky();
+[2.574s]       |   [01;36m[K^[m[K
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:81:6:[m[K [01;31m[Kerror: [m[Kextra qualification ‘[01m[KHusky::[m[K’ on member ‘[01m[KcheckOriginToDestination[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.574s]    81 | bool [01;31m[KHusky[m[K::checkOriginToDestination(geometry_msgs::msg::Pose origin,
+[2.574s]       |      [01;31m[K^~~~~[m[K
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:81:6:[m[K [01;31m[Kerror: [m[K‘[01m[Kbool Husky::checkOriginToDestination(geometry_msgs::msg::Pose, geometry_msgs::msg::Point, double&, double&, geometry_msgs::msg::Pose&)[m[K’ cannot be overloaded with ‘[01m[Kbool Husky::checkOriginToDestination(geometry_msgs::msg::Pose, geometry_msgs::msg::Point, double&, double&, geometry_msgs::msg::Pose&)[m[K’
+[2.574s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:46:8:[m[K [01;36m[Knote: [m[Kprevious declaration ‘[01m[Kbool Husky::checkOriginToDestination(geometry_msgs::msg::Pose, geometry_msgs::msg::Point, double&, double&, geometry_msgs::msg::Pose&)[m[K’
+[2.574s]    46 |   bool [01;36m[KcheckOriginToDestination[m[K(geometry_msgs::msg::Pose origin,
+[2.574s]       |        [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:170:11:[m[K [01;31m[Kerror: [m[Kextra qualification ‘[01m[KHusky::[m[K’ on member ‘[01m[KcalcNewGoal[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.574s]   170 | GoalStats [01;31m[KHusky[m[K::calcNewGoal(void) {
+[2.574s]       |           [01;31m[K^~~~~[m[K
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:170:11:[m[K [01;31m[Kerror: [m[K‘[01m[KGoalStats Husky::calcNewGoal()[m[K’ cannot be overloaded with ‘[01m[KGoalStats Husky::calcNewGoal()[m[K’
+[2.574s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:58:13:[m[K [01;36m[Knote: [m[Kprevious declaration ‘[01m[KGoalStats Husky::calcNewGoal()[m[K’
+[2.574s]    58 |   GoalStats [01;36m[KcalcNewGoal[m[K(void);
+[2.574s]       |             [01;36m[K^~~~~~~~~~~[m[K
+[2.574s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:221:6:[m[K [01;31m[Kerror: [m[Kextra qualification ‘[01m[KHusky::[m[K’ on member ‘[01m[KsendCmd[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.575s]   221 | void [01;31m[KHusky[m[K::sendCmd(double linear_x, double angular_z) {
+[2.575s]       |      [01;31m[K^~~~~[m[K
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:221:6:[m[K [01;31m[Kerror: [m[K‘[01m[Kvoid Husky::sendCmd(double, double)[m[K’ cannot be overloaded with ‘[01m[Kvoid Husky::sendCmd(double, double)[m[K’
+[2.575s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:90:8:[m[K [01;36m[Knote: [m[Kprevious declaration ‘[01m[Kvoid Husky::sendCmd(double, double)[m[K’
+[2.575s]    90 |   void [01;36m[KsendCmd[m[K(double linear_x, double angular_z);
+[2.575s]       |        [01;36m[K^~~~~~~[m[K
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:232:6:[m[K [01;31m[Kerror: [m[Kextra qualification ‘[01m[KHusky::[m[K’ on member ‘[01m[KsendTeleopCmd[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.575s]   232 | void [01;31m[KHusky[m[K::sendTeleopCmd(const geometry_msgs::msg::Twist::SharedPtr msg) {
+[2.575s]       |      [01;31m[K^~~~~[m[K
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:232:6:[m[K [01;31m[Kerror: [m[K‘[01m[Kvoid Husky::sendTeleopCmd(geometry_msgs::msg::Twist_<std::allocator<void> >::SharedPtr)[m[K’ cannot be overloaded with ‘[01m[Kvoid Husky::sendTeleopCmd(geometry_msgs::msg::Twist_<std::allocator<void> >::SharedPtr)[m[K’
+[2.575s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:95:8:[m[K [01;36m[Knote: [m[Kprevious declaration ‘[01m[Kvoid Husky::sendTeleopCmd(geometry_msgs::msg::Twist_<std::allocator<void> >::SharedPtr)[m[K’
+[2.575s]    95 |   void [01;36m[KsendTeleopCmd[m[K(const geometry_msgs::msg::Twist::SharedPtr msg);
+[2.575s]       |        [01;36m[K^~~~~~~~~~~~~[m[K
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:247:6:[m[K [01;31m[Kerror: [m[Kextra qualification ‘[01m[KHusky::[m[K’ on member ‘[01m[KreachGoal[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.575s]   247 | bool [01;31m[KHusky[m[K::reachGoal(void) {
+[2.575s]       |      [01;31m[K^~~~~[m[K
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:247:6:[m[K [01;31m[Kerror: [m[K‘[01m[Kbool Husky::reachGoal()[m[K’ cannot be overloaded with ‘[01m[Kbool Husky::reachGoal()[m[K’
+[2.575s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.575s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:83:8:[m[K [01;36m[Knote: [m[Kprevious declaration ‘[01m[Kbool Husky::reachGoal()[m[K’
+[2.575s]    83 |   bool [01;36m[KreachGoal[m[K(void);
+[2.576s]       |        [01;36m[K^~~~~~~~~[m[K
+[2.576s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:344:2:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K}[m[K’ at end of input
+[2.576s]   344 | }
+[2.576s]       |  [01;31m[K^[m[K
+[2.576s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.576s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:24:1:[m[K [01;36m[Knote: [m[Kto match this ‘[01m[K{[m[K’
+[2.576s]    24 | [01;36m[K{[m[K
+[2.576s]       | [01;36m[K^[m[K
+[2.580s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K In constructor ‘[01m[KHusky::Husky()[m[K’:
+[2.580s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:54:38:[m[K [01;31m[Kerror: [m[Kunable to find numeric literal operator ‘[01m[Koperator""ms[m[K’
+[2.581s]    54 |     timer_ = this->create_wall_timer([01;31m[K100ms[m[K, std::bind(&Husky::reachGoal, this));
+[2.581s]       |                                      [01;31m[K^~~~~[m[K
+[2.584s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K In member function ‘[01m[Kbool Husky::checkOriginToDestination(geometry_msgs::msg::Pose, geometry_msgs::msg::Point, double&, double&, geometry_msgs::msg::Pose&)[m[K’:
+[2.584s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:123:49:[m[K [01;31m[Kerror: [m[Kinvalid use of incomplete type ‘[01m[Kclass LaserProcessing[m[K’
+[2.584s]   123 |         bool obstacleExist = laserProcessingPtr_[01;31m[K->[m[KcheckObstruction(distance, angleLocal);
+[2.584s]       |                                                 [01;31m[K^~[m[K
+[2.584s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+[2.584s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.584s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:24:7:[m[K [01;36m[Knote: [m[Kforward declaration of ‘[01m[Kclass LaserProcessing[m[K’
+[2.584s]    24 | class [01;36m[KLaserProcessing[m[K;
+[2.584s]       |       [01;36m[K^~~~~~~~~~~~~~~[m[K
+[2.584s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:126:50:[m[K [01;31m[Kerror: [m[Kinvalid use of incomplete type ‘[01m[Kclass LaserProcessing[m[K’
+[2.584s]   126 |         auto detectedHumans = laserProcessingPtr_[01;31m[K->[m[KdetectHumans();
+[2.585s]       |                                                  [01;31m[K^~[m[K
+[2.585s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+[2.585s]                  from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:24:7:[m[K [01;36m[Knote: [m[Kforward declaration of ‘[01m[Kclass LaserProcessing[m[K’
+[2.585s]    24 | class [01;36m[KLaserProcessing[m[K;
+[2.585s]       |       [01;36m[K^~~~~~~~~~~~~~~[m[K
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K In member function ‘[01m[KGoalStats Husky::calcNewGoal()[m[K’:
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.585s]   174 |         return GoalStats{[01;35m[K}[m[K;
+[2.585s]       |                          [01;35m[K^[m[K
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:[m[K At global scope:
+[2.585s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:350:6:[m[K [01;31m[Kerror: [m[Kredefinition of ‘[01m[Kvoid Controller::control(std::shared_ptr<std_srvs::srv::SetBool_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::SetBool_Response_<std::allocator<void> > >)[m[K’
+[2.585s]   350 | void [01;31m[KController[m[K::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,
+[2.585s]       |      [01;31m[K^~~~~~~~~~[m[K
+[2.586s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:295:6:[m[K [01;36m[Knote: [m[K‘[01m[Kvirtual void Controller::control(std::shared_ptr<std_srvs::srv::SetBool_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::SetBool_Response_<std::allocator<void> > >)[m[K’ previously defined here
+[2.586s]   295 | void [01;36m[KController[m[K::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,
+[2.586s]       |      [01;36m[K^~~~~~~~~~[m[K
+[2.586s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.586s]   213 |     return GoalStats{[01;35m[K}[m[K;
+[2.586s]       |                      [01;35m[K^[m[K
+[2.586s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[2.586s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[2.586s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[2.589s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K At global scope:
+[2.589s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:344:2:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id at end of input
+[2.589s]   344 | }
+[2.589s]       |  [01;31m[K^[m[K
+[2.637s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/main_husky.cpp:22:2:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K}[m[K’ at end of input
+[2.637s]    22 | }
+[2.637s]       |  [01;31m[K^[m[K
+[2.637s] In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/main_husky.cpp:6[m[K:
+[2.637s] [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:24:1:[m[K [01;36m[Knote: [m[Kto match this ‘[01m[K{[m[K’
+[2.637s]    24 | [01;36m[K{[m[K
+[2.637s]       | [01;36m[K^[m[K
+[2.640s] [01m[K/home/claudia/ForestGuard/src/husky_controller/src/main_husky.cpp:22:2:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id at end of input
+[2.640s]    22 | }
+[2.640s]       |  [01;31m[K^[m[K
+[3.053s] gmake[2]: *** [CMakeFiles/husky.dir/build.make:76: CMakeFiles/husky.dir/src/main_husky.cpp.o] Error 1
+[3.053s] gmake[2]: *** Waiting for unfinished jobs....
+[4.650s] gmake[2]: *** [CMakeFiles/husky.dir/build.make:104: CMakeFiles/husky.dir/src/husky.cpp.o] Error 1
+[6.673s] gmake[2]: *** [CMakeFiles/husky.dir/build.make:90: CMakeFiles/husky.dir/src/controller_husky.cpp.o] Error 1
+[6.674s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/husky.dir/all] Error 2
+[6.674s] gmake: *** [Makefile:146: all] Error 2
+[6.676s] Invoked command in '/home/claudia/ForestGuard/build/husky_controller' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/husky_controller -- -j16 -l16

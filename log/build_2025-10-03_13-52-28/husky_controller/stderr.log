@@ -1,0 +1,37 @@
+In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+                 from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+                 from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16[m[K:
+[01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+   35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+      |  [01;35m[K^~~~~~~[m[K
+In file included from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17[m[K,
+                 from [01m[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18[m[K,
+                 from [01m[K/home/claudia/ForestGuard/src/husky_controller/src/main_husky.cpp:6[m[K:
+[01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:[m[K [01;35m[Kwarning: [m[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp]8;;[m[K]
+   35 | #[01;35m[Kwarning[m[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+      |  [01;35m[K^~~~~~~[m[K
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K In member function ‘[01m[Kvirtual bool Husky::checkOriginToDestination(geometry_msgs::msg::Pose, geometry_msgs::msg::Point, double&, double&, geometry_msgs::msg::Pose&)[m[K’:
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:97:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kdistance_toGoal_[m[K’ was not declared in this scope; did you mean ‘[01m[Kdistance_toGoal[m[K’?
+   97 |     [01;31m[Kdistance_toGoal_[m[K = distance;
+      |     [01;31m[K^~~~~~~~~~~~~~~~[m[K
+      |     [32m[Kdistance_toGoal[m[K
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K In member function ‘[01m[Kvirtual GoalStats Husky::calcNewGoal()[m[K’:
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+  174 |         return GoalStats{[01;35m[K}[m[K;
+      |                          [01;35m[K^[m[K
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Point[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Point_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+  213 |     return GoalStats{[01;35m[K}[m[K;
+      |                      [01;35m[K^[m[K
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kgeometry_msgs::msg::Quaternion[m[K’ {aka ‘[01m[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>][m[K’
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:[m[K In member function ‘[01m[Kvirtual bool Husky::reachGoal()[m[K’:
+[01m[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:284:31:[m[K [01;31m[Kerror: [m[K‘[01m[KgetYaw[m[K’ is not a member of ‘[01m[Ktf2[m[K’
+  284 |     double current_yaw = tf2::[01;31m[KgetYaw[m[K(pose.orientation);
+      |                               [01;31m[K^~~~~~[m[K
+gmake[2]: *** [CMakeFiles/husky.dir/build.make:104: CMakeFiles/husky.dir/src/husky.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/husky.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

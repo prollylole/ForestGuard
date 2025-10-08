@@ -12,11 +12,9 @@
  * maintaining safe ground operations and goal tracking.
  */
 
-#include "controller_husky.h"
-#include "husky.h"
-#include "laserprocessing.h"
-#include <pfms_types.h>
-
+#include "rclcpp/rclcpp.hpp"
+#include "husky_controller/husky.h"
+#include "husky_controller/laserprocessing.h"
 #include <iostream>
 #include <cmath>
 #include <thread>
@@ -38,14 +36,19 @@ using namespace std::chrono_literals;
 Husky::Husky() :  
     Controller(), // initialize base class first
     TARGET_SPEED(0.4),
-    target_angle_(0.0)
+    target_angle_(0.0),
+    teleopActive_(false)
 {
     // We set tolerance to be default of 0.5
     tolerance_=0.5;
 
     // Initialize publishers
-    pubCmdVel_  = this->create_publisher<geometry_msgs::msg::Twist>("husky/cmd_vel", 3);  
+    pubCmdVel_  = this->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 3);  
     PubHuman_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/husky/detected_humans", 3);  
+
+    // Initialize subscriber for teleop
+    cmdVel_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
+        "/cmd_vel_teleop", 10, std::bind(&Husky::sendTeleopCmd, this, std::placeholders::_1));
 
     // Initialize control loop timer
     timer_ = this->create_wall_timer(100ms, std::bind(&Husky::reachGoal, this));
@@ -98,7 +101,13 @@ bool Husky::checkOriginToDestination(geometry_msgs::msg::Pose origin,
     estimatedGoalPose.position.y = goalPosition.y;
  
     // local view angle
-    double robotYaw = tf2::getYaw(origin.orientation);
+    // Helper function to extract yaw from quaternion
+    auto getYawFromQuaternion = [](const geometry_msgs::msg::Quaternion& q) -> double {
+        // Yaw (z-axis rotation) from quaternion
+        return std::atan2(2.0 * (q.w * q.z + q.x * q.y),
+                          1.0 - 2.0 * (q.y * q.y + q.z * q.z));
+    };
+    double robotYaw = getYawFromQuaternion(origin.orientation);
     double angleLocal = angle - robotYaw;
 
     // wrap into [–π, +π):
@@ -220,6 +229,15 @@ void Husky::sendCmd(double linear_x, double angular_z) {
     pubCmdVel_->publish(msg);
 }
 
+void Husky::sendTeleopCmd(const geometry_msgs::msg::Twist::SharedPtr msg) {
+    currentTeleopCommand_ = *msg;
+    teleopActive_ = true;
+    status_ = TELEOP;
+
+    // set timer for teleop timeout
+    lastTeleopTime_ = this->get_clock()->now();
+}
+
 /**
  * @brief Timer callback that implements goal-reaching behavior
  * Reach goal - execute control to reach goal, blocking call until goal reached or abandoned
@@ -230,16 +248,26 @@ bool Husky::reachGoal(void) {
 
     switch(status_){
         // if idle
-        case pfms::PlatformStatus::IDLE:
-            // if goal is set, set status run
+        case IDLE:
+            // if goal is set, set status running
             if(goalSet_){
-                status_=pfms::PlatformStatus::RUNNING;
+                status_= RUNNING;
             }
             return false;
-        case pfms::PlatformStatus::RUNNING:
-            break;
-        default:
+
+        case TELEOP: 
+            // Publish teleop command if available
+            pubCmdVel_->publish(currentTeleopCommand_);
+            
+            // If teleop stops, go back to idle for 2 seconds then resume normal operation
+            if((this->get_clock()->now() - lastTeleopTime_).seconds() > 2.0) {
+                teleopActive_ = false;
+                status_ = IDLE;
+            }
             return false;
+
+        case RUNNING:
+            break;
     }
 
     if(!goalSet_){return false;};
@@ -252,8 +280,14 @@ bool Husky::reachGoal(void) {
     // update odometry
     geometry_msgs::msg::Pose pose = getOdometry();
 
+    // Helper function to extract yaw from quaternion
+    auto getYawFromQuaternion = [](const geometry_msgs::msg::Quaternion& q) -> double {
+        return std::atan2(2.0 * (q.w * q.z + q.x * q.y),
+                          1.0 - 2.0 * (q.y * q.y + q.z * q.z));
+    };
+
     // Get relative target angle
-    double current_yaw = tf2::getYaw(pose.orientation);
+    double current_yaw = getYawFromQuaternion(pose.orientation);
     double angle_error = target_angle_ - current_yaw;
 
     // Normalize angle error to [-pi, pi]
@@ -307,75 +341,4 @@ bool Husky::reachGoal(void) {
     }
 
     return reached;
-}
-
-/**
- * @brief Service callback for controlling Husky mission
- * @param req Service request containing control command
- * @param res Service response indicating success/failure
- */
-void Husky::control(const std::shared_ptr<std_srvs::srv::SetBool::Request> req,
-                   std::shared_ptr<std_srvs::srv::SetBool::Response> res){
-
-    // if received request data from service
-    if (req->data)
-    {
-        // if goal is set
-        if (goalSet_) 
-        {
-            // set status running
-            status_ = pfms::PlatformStatus::RUNNING;
-            // calculate status
-            double percentageCompletion = status();
-            // perform detect human
-            auto humans = laserProcessingPtr_->detectHumans();
-
-            // flag if there is human
-            bool person_visible = !humans.empty();
-            // send flag to response
-            res->success = person_visible; 
-            // if there is human send string detected
-            if (person_visible) {
-                res->message = "Person spotted! Mission started.";
-            } 
-            // otherwise no spotted  
-            else {
-                res->message = "No person detected at current location.";
-            }
-
-            // send status response
-            res->message += " Mission completion: " + std::to_string(percentageCompletion) + "%";
-        }
-        else
-        {
-            res->success = false;
-            res->message = "No goal set. Cannot start mission.";
-        }
-    }
-    else
-    {
-        status_ = pfms::PlatformStatus::IDLE;
-        // call for status
-        double percentageCompletion = status();
-        // check for humans before stopping
-        auto humans = laserProcessingPtr_->detectHumans();
-
-        // set flag human detected or not
-        bool person_visible = !humans.empty();
-        // send data to res
-        res->success = person_visible;
-
-        if (person_visible) {
-            res->message = "Mission stopped, but person still in view!";
-        } 
-        else {
-            res->message = "Mission stopped. No person detected.";
-        }
-
-        // send status response
-        res->message += " Mission completion: " + std::to_string(percentageCompletion) + "%";
-        
-        // Stop the robot
-        sendCmd(0, 0);
-    }
 }
