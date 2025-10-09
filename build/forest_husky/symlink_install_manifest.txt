@@ -7,6 +7,7 @@
 /home/claudia/ForestGuard/install/forest_husky/share/forest_husky/launch/41068_ignition_drone.launch.py
 /home/claudia/ForestGuard/install/forest_husky/share/forest_husky/launch/41068_navigation.launch.py
 /home/claudia/ForestGuard/install/forest_husky/share/forest_husky/launch/forest_husky.launch.py
+/home/claudia/ForestGuard/install/forest_husky/share/forest_husky/launch/large_forest_husky.launch.py
 /home/claudia/ForestGuard/install/forest_husky/share/forest_husky/launch/random_forest_husky.launch.py
 /home/claudia/ForestGuard/install/forest_husky/share/forest_husky/models/forest_env/materials/textures/empty_grass.png
 /home/claudia/ForestGuard/install/forest_husky/share/forest_husky/models/forest_env/meshes/Environment1.dae
