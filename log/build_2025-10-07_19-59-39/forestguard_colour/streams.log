@@ -1,0 +1,18 @@
+[0.376s] Invoking command in '/home/john/git/RS1/John_branch/build/forestguard_colour': PS1=(yolo_env) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/john/git/RS1/John_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/John_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(yolo_env) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/John_branch/build/forestguard_colour/build --no-deps symlink_data
+[0.538s] running develop
+[0.626s] running egg_info
+[0.626s] writing forestguard_colour.egg-info/PKG-INFO
+[0.626s] writing dependency_links to forestguard_colour.egg-info/dependency_links.txt
+[0.626s] writing entry points to forestguard_colour.egg-info/entry_points.txt
+[0.626s] writing requirements to forestguard_colour.egg-info/requires.txt
+[0.626s] writing top-level names to forestguard_colour.egg-info/top_level.txt
+[0.627s] reading manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+[0.628s] writing manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+[0.629s] running build_ext
+[0.629s] Creating /home/john/git/RS1/John_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard-colour.egg-link (link to .)
+[0.629s] Installing hsv_calibrator script to /home/john/git/RS1/John_branch/install/forestguard_colour/lib/forestguard_colour
+[0.629s] Installing tree_detector script to /home/john/git/RS1/John_branch/install/forestguard_colour/lib/forestguard_colour
+[0.629s] 
+[0.629s] Installed /home/john/git/RS1/John_branch/build/forestguard_colour
+[0.629s] running symlink_data
+[0.646s] Invoked command in '/home/john/git/RS1/John_branch/build/forestguard_colour' returned '0': PS1=(yolo_env) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/john/git/RS1/John_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/John_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} VIRTUAL_ENV_PROMPT=(yolo_env) /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/John_branch/build/forestguard_colour/build --no-deps symlink_data
