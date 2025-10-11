@@ -1,0 +1,27 @@
+[ 55%] Built target laserprocessing
+[ 55%] Built target vismarker
+[100%] Built target husky
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/lib/husky_controller/husky
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/lib/husky_controller/liblaserprocessing.so
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/lib/husky_controller/vismarker
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/controller_husky.h
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/husky.h
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/laserprocessing.h
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/vis_marker.h
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/ament_index/resource_index/package_run_dependencies/husky_controller
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/ament_index/resource_index/parent_prefix_path/husky_controller
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/path.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/path.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.bash
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.zsh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/package.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/ament_index/resource_index/packages/husky_controller
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig.cmake
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig-version.cmake
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/package.xml

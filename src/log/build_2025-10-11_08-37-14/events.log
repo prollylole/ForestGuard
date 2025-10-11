@@ -1,0 +1,503 @@
+[0.000000] (-) TimerEvent: {}
+[0.001903] (-) JobUnselected: {'identifier': 'forest_guard_sim'}
+[0.002083] (forest_husky) JobQueued: {'identifier': 'forest_husky', 'dependencies': OrderedDict()}
+[0.002185] (husky_controller) JobQueued: {'identifier': 'husky_controller', 'dependencies': OrderedDict()}
+[0.002228] (forest_husky) JobStarted: {'identifier': 'forest_husky'}
+[0.023473] (husky_controller) JobStarted: {'identifier': 'husky_controller'}
+[0.039741] (forest_husky) JobProgress: {'identifier': 'forest_husky', 'progress': 'cmake'}
+[0.041989] (forest_husky) Command: {'cmd': ['/usr/bin/cmake', '/home/claudia/ForestGuard/src/forest_husky', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/forest_husky'], 'cwd': '/home/claudia/ForestGuard/src/build/forest_husky', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('OLDPWD', '/home/claudia/ForestGuard'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '2496'), ('SYSTEMD_EXEC_PID', '2615'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3564'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:95849'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/2582,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/2582'), ('INVOCATION_ID', '6df3f14a57c145768f7bbbbf00cdab10'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.TOOYD3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:51a7bede-fe7f-4517-a4cb-278a53d6d188'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/src/build/forest_husky'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[0.051457] (husky_controller) JobProgress: {'identifier': 'husky_controller', 'progress': 'cmake'}
+[0.054079] (husky_controller) Command: {'cmd': ['/usr/bin/cmake', '/home/claudia/ForestGuard/src/husky_controller', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/husky_controller'], 'cwd': '/home/claudia/ForestGuard/src/build/husky_controller', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('OLDPWD', '/home/claudia/ForestGuard'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '2496'), ('SYSTEMD_EXEC_PID', '2615'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3564'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:95849'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/2582,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/2582'), ('INVOCATION_ID', '6df3f14a57c145768f7bbbbf00cdab10'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.TOOYD3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:51a7bede-fe7f-4517-a4cb-278a53d6d188'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/src/build/husky_controller'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[0.099250] (-) TimerEvent: {}
+[0.200087] (-) TimerEvent: {}
+[0.240413] (husky_controller) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.241281] (forest_husky) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.300247] (-) TimerEvent: {}
+[0.401285] (-) TimerEvent: {}
+[0.430889] (husky_controller) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.432466] (forest_husky) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.461808] (forest_husky) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.462737] (husky_controller) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.501471] (-) TimerEvent: {}
+[0.602228] (-) TimerEvent: {}
+[0.622346] (husky_controller) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.623009] (forest_husky) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.642753] (husky_controller) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.643941] (forest_husky) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.650197] (forest_husky) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.650634] (husky_controller) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.651202] (forest_husky) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.651577] (husky_controller) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.659405] (husky_controller) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.659947] (forest_husky) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.702429] (-) TimerEvent: {}
+[0.803191] (-) TimerEvent: {}
+[0.853794] (husky_controller) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.855321] (forest_husky) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.872150] (husky_controller) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.872918] (husky_controller) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.873987] (husky_controller) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.874900] (forest_husky) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.875657] (forest_husky) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.876747] (forest_husky) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.898656] (forest_husky) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.899258] (husky_controller) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.903282] (-) TimerEvent: {}
+[1.003742] (-) TimerEvent: {}
+[1.104326] (-) TimerEvent: {}
+[1.204846] (-) TimerEvent: {}
+[1.240532] (forest_husky) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.241021] (husky_controller) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.305026] (-) TimerEvent: {}
+[1.405545] (-) TimerEvent: {}
+[1.409347] (forest_husky) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.409753] (husky_controller) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.505730] (-) TimerEvent: {}
+[1.582413] (forest_husky) StdoutLine: {'line': b'-- Found ros_ign_interfaces: 0.244.20 (/opt/ros/humble/share/ros_ign_interfaces/cmake)\n'}
+[1.582888] (husky_controller) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.605889] (-) TimerEvent: {}
+[1.706332] (-) TimerEvent: {}
+[1.737563] (forest_husky) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.758161] (husky_controller) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.764377] (forest_husky) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.782235] (husky_controller) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.801377] (forest_husky) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.806447] (-) TimerEvent: {}
+[1.814544] (husky_controller) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.850250] (forest_husky) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.857844] (husky_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.906632] (-) TimerEvent: {}
+[1.915120] (forest_husky) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.918366] (husky_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.006781] (-) TimerEvent: {}
+[2.107337] (-) TimerEvent: {}
+[2.112122] (husky_controller) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[2.128542] (husky_controller) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[2.207483] (-) TimerEvent: {}
+[2.218970] (forest_husky) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[2.307647] (-) TimerEvent: {}
+[2.408186] (-) TimerEvent: {}
+[2.412930] (husky_controller) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[2.508350] (-) TimerEvent: {}
+[2.510795] (husky_controller) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[2.511725] (forest_husky) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[2.608509] (-) TimerEvent: {}
+[2.652384] (husky_controller) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[2.686873] (forest_husky) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[2.693615] (husky_controller) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[2.706001] (forest_husky) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[2.708640] (-) TimerEvent: {}
+[2.716983] (forest_husky) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[2.800690] (forest_husky) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[2.806685] (forest_husky) StdoutLine: {'line': b'-- Configuring done\n'}
+[2.808783] (-) TimerEvent: {}
+[2.818246] (forest_husky) StdoutLine: {'line': b'-- Generating done\n'}
+[2.823253] (forest_husky) StdoutLine: {'line': b'-- Build files have been written to: /home/claudia/ForestGuard/src/build/forest_husky\n'}
+[2.842218] (forest_husky) CommandEnded: {'returncode': 0}
+[2.843645] (forest_husky) JobProgress: {'identifier': 'forest_husky', 'progress': 'build'}
+[2.846065] (forest_husky) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/claudia/ForestGuard/src/build/forest_husky', '--', '-j16', '-l16'], 'cwd': '/home/claudia/ForestGuard/src/build/forest_husky', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('OLDPWD', '/home/claudia/ForestGuard'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '2496'), ('SYSTEMD_EXEC_PID', '2615'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3564'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:95849'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/2582,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/2582'), ('INVOCATION_ID', '6df3f14a57c145768f7bbbbf00cdab10'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.TOOYD3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:51a7bede-fe7f-4517-a4cb-278a53d6d188'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/src/build/forest_husky'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[2.863747] (husky_controller) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[2.866980] (husky_controller) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[2.900706] (forest_husky) CommandEnded: {'returncode': 0}
+[2.902275] (forest_husky) JobProgress: {'identifier': 'forest_husky', 'progress': 'install'}
+[2.908968] (-) TimerEvent: {}
+[2.913318] (forest_husky) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/claudia/ForestGuard/src/build/forest_husky'], 'cwd': '/home/claudia/ForestGuard/src/build/forest_husky', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('OLDPWD', '/home/claudia/ForestGuard'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '2496'), ('SYSTEMD_EXEC_PID', '2615'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3564'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:95849'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/2582,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/2582'), ('INVOCATION_ID', '6df3f14a57c145768f7bbbbf00cdab10'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.TOOYD3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:51a7bede-fe7f-4517-a4cb-278a53d6d188'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/src/build/forest_husky'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[2.922139] (forest_husky) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[2.923599] (forest_husky) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[2.925205] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/forest.rviz\n'}
+[2.935564] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/gazebo_bridge.yaml\n'}
+[2.944262] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/nav2_params.yaml\n'}
+[2.953595] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/robot_localization.yaml\n'}
+[2.962441] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/slam_params.yaml\n'}
+[2.972185] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/41068_ignition.launch.py\n'}
+[2.981695] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/41068_ignition_drone.launch.py\n'}
+[2.991006] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/41068_navigation.launch.py\n'}
+[3.001051] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/forest_husky.launch.py\n'}
+[3.009114] (-) TimerEvent: {}
+[3.009539] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/forest_mapping.launch.py\n'}
+[3.018935] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/large_forest_husky.launch.py\n'}
+[3.027135] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/random_forest_husky.launch.py\n'}
+[3.038514] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/materials/textures/empty_grass.png\n'}
+[3.046166] (husky_controller) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[3.049525] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/meshes/Environment1.dae\n'}
+[3.058616] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/model.config\n'}
+[3.068724] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/model.sdf\n'}
+[3.077635] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/materials/textures/empty_grass.png\n'}
+[3.086984] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/materials/textures/forest_overhead.png\n'}
+[3.096380] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/materials/textures/leaf_litter.png\n'}
+[3.105613] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/model.config\n'}
+[3.109248] (-) TimerEvent: {}
+[3.115321] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/model.sdf\n'}
+[3.126383] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/materials/textures/forest_wall.png\n'}
+[3.137379] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/materials/textures/forest_wall_transparent.png\n'}
+[3.143294] (husky_controller) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[3.149132] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/materials/textures/forest_wall_transparent_small.png\n'}
+[3.159134] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/model.config\n'}
+[3.169475] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/model.sdf\n'}
+[3.178913] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/grass_plane/materials/textures/empty_grass.png\n'}
+[3.188190] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/grass_plane/model.config\n'}
+[3.197611] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/grass_plane/model.sdf\n'}
+[3.203640] (husky_controller) StdoutLine: {'line': b'-- Found tf2: 0.25.16 (/opt/ros/humble/share/tf2/cmake)\n'}
+[3.206705] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/materials/textures/bark01.jpg\n'}
+[3.209371] (-) TimerEvent: {}
+[3.216491] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/meshes/tree_a.dae\n'}
+[3.225218] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/model.config\n'}
+[3.235979] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/model.sdf\n'}
+[3.246293] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/materials/textures/bark.jpeg\n'}
+[3.253444] (husky_controller) StdoutLine: {'line': b'-- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)\n'}
+[3.255223] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/meshes/tree_b.dae\n'}
+[3.265028] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/model.config\n'}
+[3.273637] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/model.sdf\n'}
+[3.284437] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/common_properties.urdf.xacro\n'}
+[3.292974] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/husky.gazebo.xacro\n'}
+[3.302321] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/husky.urdf.xacro\n'}
+[3.309558] (-) TimerEvent: {}
+[3.311107] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/base_link.dae\n'}
+[3.320146] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/bumper.dae\n'}
+[3.328447] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/jpl04_arch_nosensor.stl\n'}
+[3.337666] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/top_chassis.dae\n'}
+[3.346724] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/top_plate.dae\n'}
+[3.355577] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/wheel.dae\n'}
+[3.365006] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/wheel.urdf.xacro\n'}
+[3.374254] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/worlds/forest_world.sdf\n'}
+[3.383755] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/worlds/large_demo.sdf\n'}
+[3.392370] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/worlds/simple_trees.sdf\n'}
+[3.405025] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/common_properties.urdf.xacro\n'}
+[3.409691] (-) TimerEvent: {}
+[3.415755] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/hull.dae\n'}
+[3.424623] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_fl.dae\n'}
+[3.435440] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_fr.dae\n'}
+[3.444145] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_rl.dae\n'}
+[3.454071] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_rr.dae\n'}
+[3.463097] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/model.config\n'}
+[3.471941] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/model.sdf\n'}
+[3.481361] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/parrot.gazebo.xacro\n'}
+[3.490329] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/parrot.urdf.xacro\n'}
+[3.499937] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/1.png\n'}
+[3.508869] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/2.png\n'}
+[3.509818] (-) TimerEvent: {}
+[3.518352] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/3.png\n'}
+[3.526695] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/4.png\n'}
+[3.536218] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/5.png\n'}
+[3.545230] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/ament_index/resource_index/package_run_dependencies/forest_husky\n'}
+[3.554809] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/ament_index/resource_index/parent_prefix_path/forest_husky\n'}
+[3.563804] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/ament_prefix_path.sh\n'}
+[3.566726] (husky_controller) StdoutLine: {'line': b'-- Found tf2_geometry_msgs: 0.25.16 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)\n'}
+[3.572829] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/ament_prefix_path.dsv\n'}
+[3.581834] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/path.sh\n'}
+[3.590801] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/path.dsv\n'}
+[3.600810] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.bash\n'}
+[3.609221] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.sh\n'}
+[3.609921] (-) TimerEvent: {}
+[3.619339] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.zsh\n'}
+[3.629031] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.dsv\n'}
+[3.637383] (husky_controller) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[3.639742] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/package.dsv\n'}
+[3.641226] (husky_controller) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[3.641666] (husky_controller) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[3.650555] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/ament_index/resource_index/packages/forest_husky\n'}
+[3.655515] (husky_controller) StdoutLine: {'line': b'-- Found std_srvs: 4.9.0 (/opt/ros/humble/share/std_srvs/cmake)\n'}
+[3.659710] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/cmake/forest_huskyConfig.cmake\n'}
+[3.670418] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/cmake/forest_huskyConfig-version.cmake\n'}
+[3.679814] (forest_husky) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/package.xml\n'}
+[3.692899] (forest_husky) CommandEnded: {'returncode': 0}
+[3.696289] (husky_controller) StdoutLine: {'line': b'-- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[3.710363] (-) TimerEvent: {}
+[3.738328] (forest_husky) JobEnded: {'identifier': 'forest_husky', 'rc': 0}
+[3.759145] (husky_controller) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[3.809100] (husky_controller) StdoutLine: {'line': b'-- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)\n'}
+[3.810495] (-) TimerEvent: {}
+[3.911046] (-) TimerEvent: {}
+[4.011766] (-) TimerEvent: {}
+[4.112561] (-) TimerEvent: {}
+[4.145525] (husky_controller) StdoutLine: {'line': b'-- Configuring done\n'}
+[4.206179] (husky_controller) StdoutLine: {'line': b'-- Generating done\n'}
+[4.212695] (-) TimerEvent: {}
+[4.229505] (husky_controller) StdoutLine: {'line': b'-- Build files have been written to: /home/claudia/ForestGuard/src/build/husky_controller\n'}
+[4.258089] (husky_controller) CommandEnded: {'returncode': 0}
+[4.259623] (husky_controller) JobProgress: {'identifier': 'husky_controller', 'progress': 'build'}
+[4.261926] (husky_controller) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/claudia/ForestGuard/src/build/husky_controller', '--', '-j16', '-l16'], 'cwd': '/home/claudia/ForestGuard/src/build/husky_controller', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('OLDPWD', '/home/claudia/ForestGuard'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '2496'), ('SYSTEMD_EXEC_PID', '2615'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3564'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:95849'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/2582,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/2582'), ('INVOCATION_ID', '6df3f14a57c145768f7bbbbf00cdab10'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.TOOYD3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:51a7bede-fe7f-4517-a4cb-278a53d6d188'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/src/build/husky_controller'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[4.312973] (-) TimerEvent: {}
+[4.336427] (husky_controller) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/vismarker.dir/src/main_vismarker.cpp.o\x1b[0m\n'}
+[4.336869] (husky_controller) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/laserprocessing.dir/src/laserprocessing.cpp.o\x1b[0m\n'}
+[4.337050] (husky_controller) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/vismarker.dir/src/vis_marker.cpp.o\x1b[0m\n'}
+[4.413195] (-) TimerEvent: {}
+[4.514000] (-) TimerEvent: {}
+[4.614437] (-) TimerEvent: {}
+[4.715093] (-) TimerEvent: {}
+[4.817215] (-) TimerEvent: {}
+[4.917859] (-) TimerEvent: {}
+[5.018503] (-) TimerEvent: {}
+[5.119065] (-) TimerEvent: {}
+[5.219539] (-) TimerEvent: {}
+[5.320039] (-) TimerEvent: {}
+[5.420493] (-) TimerEvent: {}
+[5.520981] (-) TimerEvent: {}
+[5.621465] (-) TimerEvent: {}
+[5.721964] (-) TimerEvent: {}
+[5.822434] (-) TimerEvent: {}
+[5.922931] (-) TimerEvent: {}
+[6.023410] (-) TimerEvent: {}
+[6.123948] (-) TimerEvent: {}
+[6.224405] (-) TimerEvent: {}
+[6.324940] (-) TimerEvent: {}
+[6.425403] (-) TimerEvent: {}
+[6.525888] (-) TimerEvent: {}
+[6.626353] (-) TimerEvent: {}
+[6.726837] (-) TimerEvent: {}
+[6.827293] (-) TimerEvent: {}
+[6.927736] (-) TimerEvent: {}
+[7.028194] (-) TimerEvent: {}
+[7.128763] (-) TimerEvent: {}
+[7.229235] (-) TimerEvent: {}
+[7.329699] (-) TimerEvent: {}
+[7.430196] (-) TimerEvent: {}
+[7.530670] (-) TimerEvent: {}
+[7.631148] (-) TimerEvent: {}
+[7.731663] (-) TimerEvent: {}
+[7.832153] (-) TimerEvent: {}
+[7.932651] (-) TimerEvent: {}
+[8.033126] (-) TimerEvent: {}
+[8.133600] (-) TimerEvent: {}
+[8.234067] (-) TimerEvent: {}
+[8.334534] (-) TimerEvent: {}
+[8.434978] (-) TimerEvent: {}
+[8.535389] (-) TimerEvent: {}
+[8.635803] (-) TimerEvent: {}
+[8.736197] (-) TimerEvent: {}
+[8.836598] (-) TimerEvent: {}
+[8.937104] (-) TimerEvent: {}
+[9.037501] (-) TimerEvent: {}
+[9.137891] (-) TimerEvent: {}
+[9.238256] (-) TimerEvent: {}
+[9.338633] (-) TimerEvent: {}
+[9.389358] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/laserprocessing.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kbool LaserProcessing::checkObstruction(double&, double&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[9.389658] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/laserprocessing.cpp:213:23:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kcomparison of integer expressions of different signedness: \xe2\x80\x98\x1b[01m\x1b[Kint\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kstd::vector<float, std::allocator<float> >::size_type\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Klong unsigned int\x1b[m\x1b[K\xe2\x80\x99} [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare\x07-Wsign-compare\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[9.389773] (husky_controller) StderrLine: {'line': b'  213 |     for (int i = 0; \x1b[01;35m\x1b[Ki < laserScan_.ranges.size()\x1b[m\x1b[K; i++) {\n'}
+[9.389852] (husky_controller) StderrLine: {'line': b'      |                     \x1b[01;35m\x1b[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[9.438759] (-) TimerEvent: {}
+[9.539096] (-) TimerEvent: {}
+[9.639434] (-) TimerEvent: {}
+[9.739769] (-) TimerEvent: {}
+[9.840080] (-) TimerEvent: {}
+[9.940465] (-) TimerEvent: {}
+[10.035399] (husky_controller) StdoutLine: {'line': b'[ 44%] \x1b[32m\x1b[1mLinking CXX shared library liblaserprocessing.so\x1b[0m\n'}
+[10.040547] (-) TimerEvent: {}
+[10.140825] (-) TimerEvent: {}
+[10.210551] (husky_controller) StdoutLine: {'line': b'[ 44%] Built target laserprocessing\n'}
+[10.222867] (husky_controller) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding CXX object CMakeFiles/husky.dir/src/husky.cpp.o\x1b[0m\n'}
+[10.223067] (husky_controller) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding CXX object CMakeFiles/husky.dir/src/main_husky.cpp.o\x1b[0m\n'}
+[10.223149] (husky_controller) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding CXX object CMakeFiles/husky.dir/src/controller_husky.cpp.o\x1b[0m\n'}
+[10.240937] (-) TimerEvent: {}
+[10.341238] (-) TimerEvent: {}
+[10.441543] (-) TimerEvent: {}
+[10.500682] (husky_controller) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17\x1b[m\x1b[K,\n'}
+[10.500882] (husky_controller) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18\x1b[m\x1b[K,\n'}
+[10.500955] (husky_controller) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:16\x1b[m\x1b[K:\n'}
+[10.501019] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp\x07-Wcpp\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.501084] (husky_controller) StderrLine: {'line': b'   35 | #\x1b[01;35m\x1b[Kwarning\x1b[m\x1b[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead\n'}
+[10.501144] (husky_controller) StderrLine: {'line': b'      |  \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[10.501203] (husky_controller) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17\x1b[m\x1b[K,\n'}
+[10.501262] (husky_controller) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/husky.h:18\x1b[m\x1b[K,\n'}
+[10.501321] (husky_controller) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/main_husky.cpp:6\x1b[m\x1b[K:\n'}
+[10.501370] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp\x07-Wcpp\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.501422] (husky_controller) StderrLine: {'line': b'   35 | #\x1b[01;35m\x1b[Kwarning\x1b[m\x1b[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead\n'}
+[10.501470] (husky_controller) StderrLine: {'line': b'      |  \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[10.501516] (husky_controller) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:17\x1b[m\x1b[K,\n'}
+[10.501579] (husky_controller) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:12\x1b[m\x1b[K:\n'}
+[10.501649] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K#warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp\x07-Wcpp\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.501706] (husky_controller) StderrLine: {'line': b'   35 | #\x1b[01;35m\x1b[Kwarning\x1b[m\x1b[K This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead\n'}
+[10.501753] (husky_controller) StderrLine: {'line': b'      |  \x1b[01;35m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[10.541680] (-) TimerEvent: {}
+[10.642011] (-) TimerEvent: {}
+[10.742315] (-) TimerEvent: {}
+[10.842638] (-) TimerEvent: {}
+[10.942993] (-) TimerEvent: {}
+[11.043347] (-) TimerEvent: {}
+[11.143824] (-) TimerEvent: {}
+[11.244330] (-) TimerEvent: {}
+[11.345063] (-) TimerEvent: {}
+[11.445831] (-) TimerEvent: {}
+[11.546192] (-) TimerEvent: {}
+[11.646524] (-) TimerEvent: {}
+[11.746875] (-) TimerEvent: {}
+[11.847467] (-) TimerEvent: {}
+[11.947904] (-) TimerEvent: {}
+[12.048222] (-) TimerEvent: {}
+[12.148539] (-) TimerEvent: {}
+[12.248853] (-) TimerEvent: {}
+[12.349153] (-) TimerEvent: {}
+[12.449461] (-) TimerEvent: {}
+[12.549772] (-) TimerEvent: {}
+[12.650078] (-) TimerEvent: {}
+[12.750408] (-) TimerEvent: {}
+[12.771087] (husky_controller) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:12\x1b[m\x1b[K:\n'}
+[12.771297] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KController::Controller()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[12.771363] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:101:12:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KController::tolerance_\x1b[m\x1b[K\xe2\x80\x99 will be initialized after [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[12.771424] (husky_controller) StderrLine: {'line': b'  101 |     double \x1b[01;35m\x1b[Ktolerance_\x1b[m\x1b[K;\n'}
+[12.771479] (husky_controller) StderrLine: {'line': b'      |            \x1b[01;35m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[12.771530] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/include/husky_controller/controller_husky.h:99:10:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  \xe2\x80\x98\x1b[01m\x1b[Kbool Controller::laserDataReceived_\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[12.771609] (husky_controller) StderrLine: {'line': b'   99 |     bool \x1b[01;35m\x1b[KlaserDataReceived_\x1b[m\x1b[K;\n'}
+[12.771672] (husky_controller) StderrLine: {'line': b'      |          \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[12.771722] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/controller_husky.cpp:28:1:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K  when initialized here [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder\x07-Wreorder\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[12.771772] (husky_controller) StderrLine: {'line': b'   28 | \x1b[01;35m\x1b[KController\x1b[m\x1b[K::Controller()  :\n'}
+[12.771830] (husky_controller) StderrLine: {'line': b'      | \x1b[01;35m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[12.835465] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual GoalStats Husky::calcNewGoal()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[12.835675] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[12.835759] (husky_controller) StderrLine: {'line': b'  174 |         return GoalStats{\x1b[01;35m\x1b[K}\x1b[m\x1b[K;\n'}
+[12.835816] (husky_controller) StderrLine: {'line': b'      |                          \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[12.835869] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[12.835921] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[12.835973] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:174:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[12.836156] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Point_<ContainerAllocator>::Point_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[12.836262] (husky_controller) StderrLine: {'line': b'  213 |     return GoalStats{\x1b[01;35m\x1b[K}\x1b[m\x1b[K;\n'}
+[12.836326] (husky_controller) StderrLine: {'line': b'      |                      \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[12.836381] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[12.836445] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kconverting to \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<std::allocator<void> >\x1b[m\x1b[K\xe2\x80\x99} from initializer list would use explicit constructor \xe2\x80\x98\x1b[01m\x1b[Kgeometry_msgs::msg::Quaternion_<ContainerAllocator>::Quaternion_(rosidl_runtime_cpp::MessageInitialization) [with ContainerAllocator = std::allocator<void>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[12.836510] (husky_controller) StderrLine: {'line': b'\x1b[01m\x1b[K/home/claudia/ForestGuard/src/husky_controller/src/husky.cpp:213:22:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kin C++11 and above a default constructor can be explicit\n'}
+[12.850514] (-) TimerEvent: {}
+[12.950822] (-) TimerEvent: {}
+[13.051123] (-) TimerEvent: {}
+[13.151434] (-) TimerEvent: {}
+[13.251757] (-) TimerEvent: {}
+[13.352045] (-) TimerEvent: {}
+[13.452342] (-) TimerEvent: {}
+[13.552652] (-) TimerEvent: {}
+[13.652954] (-) TimerEvent: {}
+[13.753246] (-) TimerEvent: {}
+[13.853539] (-) TimerEvent: {}
+[13.953857] (-) TimerEvent: {}
+[14.054148] (-) TimerEvent: {}
+[14.154439] (-) TimerEvent: {}
+[14.254741] (-) TimerEvent: {}
+[14.355037] (-) TimerEvent: {}
+[14.455333] (-) TimerEvent: {}
+[14.555647] (-) TimerEvent: {}
+[14.655956] (-) TimerEvent: {}
+[14.756270] (-) TimerEvent: {}
+[14.856620] (-) TimerEvent: {}
+[14.891900] (husky_controller) StdoutLine: {'line': b'[ 88%] \x1b[32m\x1b[1mLinking CXX executable vismarker\x1b[0m\n'}
+[14.956743] (-) TimerEvent: {}
+[15.057058] (-) TimerEvent: {}
+[15.157405] (-) TimerEvent: {}
+[15.256613] (husky_controller) StdoutLine: {'line': b'[ 88%] Built target vismarker\n'}
+[15.257480] (-) TimerEvent: {}
+[15.357721] (-) TimerEvent: {}
+[15.458042] (-) TimerEvent: {}
+[15.558341] (-) TimerEvent: {}
+[15.658656] (-) TimerEvent: {}
+[15.758975] (-) TimerEvent: {}
+[15.859276] (-) TimerEvent: {}
+[15.959664] (-) TimerEvent: {}
+[16.060296] (-) TimerEvent: {}
+[16.160870] (-) TimerEvent: {}
+[16.261664] (-) TimerEvent: {}
+[16.362252] (-) TimerEvent: {}
+[16.462555] (-) TimerEvent: {}
+[16.562884] (-) TimerEvent: {}
+[16.663247] (-) TimerEvent: {}
+[16.763692] (-) TimerEvent: {}
+[16.863976] (-) TimerEvent: {}
+[16.964259] (-) TimerEvent: {}
+[17.064553] (-) TimerEvent: {}
+[17.164903] (-) TimerEvent: {}
+[17.265187] (-) TimerEvent: {}
+[17.365471] (-) TimerEvent: {}
+[17.465766] (-) TimerEvent: {}
+[17.566032] (-) TimerEvent: {}
+[17.666314] (-) TimerEvent: {}
+[17.766600] (-) TimerEvent: {}
+[17.866890] (-) TimerEvent: {}
+[17.967200] (-) TimerEvent: {}
+[18.067498] (-) TimerEvent: {}
+[18.167832] (-) TimerEvent: {}
+[18.268132] (-) TimerEvent: {}
+[18.368420] (-) TimerEvent: {}
+[18.468731] (-) TimerEvent: {}
+[18.569004] (-) TimerEvent: {}
+[18.669266] (-) TimerEvent: {}
+[18.769530] (-) TimerEvent: {}
+[18.869815] (-) TimerEvent: {}
+[18.970074] (-) TimerEvent: {}
+[19.070381] (-) TimerEvent: {}
+[19.170991] (-) TimerEvent: {}
+[19.271283] (-) TimerEvent: {}
+[19.371589] (-) TimerEvent: {}
+[19.471881] (-) TimerEvent: {}
+[19.572173] (-) TimerEvent: {}
+[19.672508] (-) TimerEvent: {}
+[19.772842] (-) TimerEvent: {}
+[19.873155] (-) TimerEvent: {}
+[19.973451] (-) TimerEvent: {}
+[20.073772] (-) TimerEvent: {}
+[20.174088] (-) TimerEvent: {}
+[20.274400] (-) TimerEvent: {}
+[20.374728] (-) TimerEvent: {}
+[20.475041] (-) TimerEvent: {}
+[20.575353] (-) TimerEvent: {}
+[20.675664] (-) TimerEvent: {}
+[20.775975] (-) TimerEvent: {}
+[20.876286] (-) TimerEvent: {}
+[20.976612] (-) TimerEvent: {}
+[21.077057] (-) TimerEvent: {}
+[21.177374] (-) TimerEvent: {}
+[21.277665] (-) TimerEvent: {}
+[21.377976] (-) TimerEvent: {}
+[21.478290] (-) TimerEvent: {}
+[21.578606] (-) TimerEvent: {}
+[21.678937] (-) TimerEvent: {}
+[21.779264] (-) TimerEvent: {}
+[21.879612] (-) TimerEvent: {}
+[21.979931] (-) TimerEvent: {}
+[22.080246] (-) TimerEvent: {}
+[22.180644] (-) TimerEvent: {}
+[22.280979] (-) TimerEvent: {}
+[22.381317] (-) TimerEvent: {}
+[22.481664] (-) TimerEvent: {}
+[22.581998] (-) TimerEvent: {}
+[22.682309] (-) TimerEvent: {}
+[22.782652] (-) TimerEvent: {}
+[22.883005] (-) TimerEvent: {}
+[22.897660] (husky_controller) StdoutLine: {'line': b'[ 77%] \x1b[32m\x1b[1mLinking CXX executable husky\x1b[0m\n'}
+[22.983121] (-) TimerEvent: {}
+[23.083451] (-) TimerEvent: {}
+[23.183812] (-) TimerEvent: {}
+[23.284163] (-) TimerEvent: {}
+[23.384491] (-) TimerEvent: {}
+[23.484833] (-) TimerEvent: {}
+[23.585161] (-) TimerEvent: {}
+[23.685497] (-) TimerEvent: {}
+[23.785851] (-) TimerEvent: {}
+[23.886151] (-) TimerEvent: {}
+[23.899314] (husky_controller) StdoutLine: {'line': b'[100%] Built target husky\n'}
+[23.905213] (husky_controller) CommandEnded: {'returncode': 0}
+[23.905958] (husky_controller) JobProgress: {'identifier': 'husky_controller', 'progress': 'install'}
+[23.906683] (husky_controller) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/claudia/ForestGuard/src/build/husky_controller'], 'cwd': '/home/claudia/ForestGuard/src/build/husky_controller', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/rs1_ws/install/turtlesim/lib:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('OLDPWD', '/home/claudia/ForestGuard'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '2496'), ('SYSTEMD_EXEC_PID', '2615'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3564'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/rs1_ws/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:95849'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/2582,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/2582'), ('INVOCATION_ID', '6df3f14a57c145768f7bbbbf00cdab10'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.TOOYD3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:51a7bede-fe7f-4517-a4cb-278a53d6d188'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/src/build/husky_controller'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/rs1_ws/install/turtlesim/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/husky_controller:/home/claudia/ForestGuard/install/forest_husky:/home/claudia/rs1_ws/install/turtlesim:/home/claudia/rs1_ws/install/41068_ignition_bringup:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[23.910098] (husky_controller) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[23.910494] (husky_controller) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[23.910965] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/lib/husky_controller/husky\n'}
+[23.915926] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/lib/husky_controller/liblaserprocessing.so\n'}
+[23.919372] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/lib/husky_controller/vismarker\n'}
+[23.922719] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/controller_husky.h\n'}
+[23.925952] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/husky.h\n'}
+[23.931132] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/laserprocessing.h\n'}
+[23.934544] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/include/husky_controller/vis_marker.h\n'}
+[23.937650] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/ament_index/resource_index/package_run_dependencies/husky_controller\n'}
+[23.940712] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/ament_index/resource_index/parent_prefix_path/husky_controller\n'}
+[23.944341] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/ament_prefix_path.sh\n'}
+[23.948916] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/ament_prefix_path.dsv\n'}
+[23.952893] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/path.sh\n'}
+[23.956542] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/environment/path.dsv\n'}
+[23.960301] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.bash\n'}
+[23.964842] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.sh\n'}
+[23.968340] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.zsh\n'}
+[23.971614] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/local_setup.dsv\n'}
+[23.974533] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/package.dsv\n'}
+[23.979533] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/ament_index/resource_index/packages/husky_controller\n'}
+[23.983449] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig.cmake\n'}
+[23.986229] (-) TimerEvent: {}
+[23.986891] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/cmake/husky_controllerConfig-version.cmake\n'}
+[23.990146] (husky_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/src/install/husky_controller/share/husky_controller/package.xml\n'}
+[23.995835] (husky_controller) CommandEnded: {'returncode': 0}
+[24.006364] (husky_controller) JobEnded: {'identifier': 'husky_controller', 'rc': 0}
+[24.007068] (-) EventReactorShutdown: {}

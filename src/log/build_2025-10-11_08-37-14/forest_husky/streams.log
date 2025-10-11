@@ -1,0 +1,118 @@
+[0.047s] Invoking command in '/home/claudia/ForestGuard/src/build/forest_husky': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/forest_husky -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/forest_husky
+[0.239s] -- The C compiler identification is GNU 11.4.0
+[0.430s] -- The CXX compiler identification is GNU 11.4.0
+[0.460s] -- Detecting C compiler ABI info
+[0.621s] -- Detecting C compiler ABI info - done
+[0.642s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.648s] -- Detecting C compile features
+[0.649s] -- Detecting C compile features - done
+[0.658s] -- Detecting CXX compiler ABI info
+[0.853s] -- Detecting CXX compiler ABI info - done
+[0.873s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.874s] -- Detecting CXX compile features
+[0.875s] -- Detecting CXX compile features - done
+[0.897s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.239s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.407s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.581s] -- Found ros_ign_interfaces: 0.244.20 (/opt/ros/humble/share/ros_ign_interfaces/cmake)
+[1.736s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.762s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.799s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.848s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.913s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.217s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[2.510s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.685s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.704s] -- Added test 'lint_cmake' to check CMake code style
+[2.715s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.799s] -- Added test 'xmllint' to check XML markup files
+[2.805s] -- Configuring done
+[2.816s] -- Generating done
+[2.821s] -- Build files have been written to: /home/claudia/ForestGuard/src/build/forest_husky
+[2.840s] Invoked command in '/home/claudia/ForestGuard/src/build/forest_husky' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake /home/claudia/ForestGuard/src/forest_husky -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/claudia/ForestGuard/src/install/forest_husky
+[2.846s] Invoking command in '/home/claudia/ForestGuard/src/build/forest_husky': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/forest_husky -- -j16 -l16
+[2.899s] Invoked command in '/home/claudia/ForestGuard/src/build/forest_husky' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/forest_husky -- -j16 -l16
+[2.913s] Invoking command in '/home/claudia/ForestGuard/src/build/forest_husky': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/forest_husky
+[2.920s] -- Install configuration: ""
+[2.922s] -- Execute custom install script
+[2.923s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/forest.rviz
+[2.934s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/gazebo_bridge.yaml
+[2.942s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/nav2_params.yaml
+[2.952s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/robot_localization.yaml
+[2.961s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/config/slam_params.yaml
+[2.970s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/41068_ignition.launch.py
+[2.980s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/41068_ignition_drone.launch.py
+[2.989s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/41068_navigation.launch.py
+[2.999s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/forest_husky.launch.py
+[3.008s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/forest_mapping.launch.py
+[3.017s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/large_forest_husky.launch.py
+[3.025s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/launch/random_forest_husky.launch.py
+[3.037s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/materials/textures/empty_grass.png
+[3.048s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/meshes/Environment1.dae
+[3.057s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/model.config
+[3.067s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_env/model.sdf
+[3.076s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/materials/textures/empty_grass.png
+[3.085s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/materials/textures/forest_overhead.png
+[3.095s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/materials/textures/leaf_litter.png
+[3.104s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/model.config
+[3.113s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_plane/model.sdf
+[3.124s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/materials/textures/forest_wall.png
+[3.135s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/materials/textures/forest_wall_transparent.png
+[3.147s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/materials/textures/forest_wall_transparent_small.png
+[3.157s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/model.config
+[3.168s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/forest_wall/model.sdf
+[3.177s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/grass_plane/materials/textures/empty_grass.png
+[3.186s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/grass_plane/model.config
+[3.196s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/grass_plane/model.sdf
+[3.205s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/materials/textures/bark01.jpg
+[3.215s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/meshes/tree_a.dae
+[3.223s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/model.config
+[3.234s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree1/model.sdf
+[3.245s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/materials/textures/bark.jpeg
+[3.253s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/meshes/tree_b.dae
+[3.263s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/model.config
+[3.272s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/models/tree2/model.sdf
+[3.282s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/common_properties.urdf.xacro
+[3.291s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/husky.gazebo.xacro
+[3.300s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/husky.urdf.xacro
+[3.309s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/base_link.dae
+[3.318s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/bumper.dae
+[3.327s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/jpl04_arch_nosensor.stl
+[3.336s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/top_chassis.dae
+[3.345s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/top_plate.dae
+[3.354s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/meshes/wheel.dae
+[3.363s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf/wheel.urdf.xacro
+[3.372s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/worlds/forest_world.sdf
+[3.382s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/worlds/large_demo.sdf
+[3.390s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/worlds/simple_trees.sdf
+[3.403s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/common_properties.urdf.xacro
+[3.414s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/hull.dae
+[3.423s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_fl.dae
+[3.433s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_fr.dae
+[3.442s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_rl.dae
+[3.452s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/meshes/propeller_rr.dae
+[3.461s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/model.config
+[3.470s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/model.sdf
+[3.479s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/parrot.gazebo.xacro
+[3.488s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/parrot.urdf.xacro
+[3.498s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/1.png
+[3.507s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/2.png
+[3.516s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/3.png
+[3.525s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/4.png
+[3.534s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/urdf_drone/thumbnails/5.png
+[3.543s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/ament_index/resource_index/package_run_dependencies/forest_husky
+[3.553s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/ament_index/resource_index/parent_prefix_path/forest_husky
+[3.562s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/ament_prefix_path.sh
+[3.571s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/ament_prefix_path.dsv
+[3.580s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/path.sh
+[3.589s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/environment/path.dsv
+[3.599s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.bash
+[3.607s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.sh
+[3.617s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.zsh
+[3.627s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/local_setup.dsv
+[3.638s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/package.dsv
+[3.649s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/ament_index/resource_index/packages/forest_husky
+[3.658s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/cmake/forest_huskyConfig.cmake
+[3.668s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/cmake/forest_huskyConfig-version.cmake
+[3.678s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_husky/share/forest_husky/package.xml
+[3.691s] Invoked command in '/home/claudia/ForestGuard/src/build/forest_husky' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/forest_husky

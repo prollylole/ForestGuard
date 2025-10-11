@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-3078e3cb5c31ceee299d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "husky_controller",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "husky::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-husky-08d81268186507722c2d.json",
+					"name" : "husky",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "husky_controller_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-husky_controller_uninstall-e24f9150ad68bd81d811.json",
+					"name" : "husky_controller_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "laserprocessing::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-laserprocessing-5c8242795241346e7598.json",
+					"name" : "laserprocessing",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-020e065c96bc32857f08.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vismarker::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vismarker-f1f09d71322777dcf490.json",
+					"name" : "vismarker",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/claudia/ForestGuard/src/build/husky_controller",
+		"source" : "/home/claudia/ForestGuard/src/husky_controller"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

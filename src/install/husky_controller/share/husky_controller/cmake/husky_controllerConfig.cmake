@@ -1,0 +1,1 @@
+/home/claudia/ForestGuard/src/build/husky_controller/ament_cmake_core/husky_controllerConfig.cmake

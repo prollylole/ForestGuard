@@ -1,0 +1,8 @@
+source;share/forest_husky/hook/cmake_prefix_path.ps1
+source;share/forest_husky/hook/cmake_prefix_path.dsv
+source;share/forest_husky/hook/cmake_prefix_path.sh
+source;share/forest_husky/local_setup.bash
+source;share/forest_husky/local_setup.dsv
+source;share/forest_husky/local_setup.ps1
+source;share/forest_husky/local_setup.sh
+source;share/forest_husky/local_setup.zsh
