@@ -4,6 +4,7 @@ setup.py
 forestguard_colour/__init__.py
 forestguard_colour/hsv_calibrator.py
 forestguard_colour/tree_detector_node.py
+forestguard_colour/tree_detector_v2.py
 forestguard_colour.egg-info/PKG-INFO
 forestguard_colour.egg-info/SOURCES.txt
 forestguard_colour.egg-info/dependency_links.txt

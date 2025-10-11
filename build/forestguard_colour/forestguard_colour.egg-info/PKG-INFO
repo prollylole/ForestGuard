@@ -1,11 +1,11 @@
 Metadata-Version: 2.1
 Name: forestguard-colour
 Version: 0.0.1
-Summary: ForestGuard colour detector node (step 3)
+Summary: Colour-based perception for ForestGuard
 Home-page: UNKNOWN
 Maintainer: john
-Maintainer-email: cohnjhen@gmail.com
-License: MIT
+Maintainer-email: john@example.com
+License: Apache-2.0
 Platform: UNKNOWN
 
 UNKNOWN
