@@ -105,7 +105,7 @@ def generate_launch_description():
     # ------------------------------
     world_launch_arg = DeclareLaunchArgument(
         'world',
-        default_value='simple_trees',
+        default_value='forest_world',
         description='Which world to load',
         choices=['simple_trees', 'large_demo', 'forest_world']
     )
