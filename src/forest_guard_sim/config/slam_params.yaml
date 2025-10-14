@@ -9,7 +9,7 @@ slam_toolbox:
     ceres_dogleg_type: TRADITIONAL_DOGLEG
     ceres_loss_function: None
 
-    # ROS Parameters
+    # ROS Parameters test
     use_odometry: true
     odom_topic: /odometry/filtered
     odom_frame: odom
