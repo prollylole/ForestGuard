@@ -1,0 +1,9 @@
+source;share/forest_guard_sim/hook/pythonpath.ps1
+source;share/forest_guard_sim/hook/pythonpath.dsv
+source;share/forest_guard_sim/hook/pythonpath.sh
+source;share/forest_guard_sim/hook/ament_prefix_path.ps1
+source;share/forest_guard_sim/hook/ament_prefix_path.dsv
+source;share/forest_guard_sim/hook/ament_prefix_path.sh
+source;../../build/forest_guard_sim/share/forest_guard_sim/hook/pythonpath_develop.ps1
+source;../../build/forest_guard_sim/share/forest_guard_sim/hook/pythonpath_develop.dsv
+source;../../build/forest_guard_sim/share/forest_guard_sim/hook/pythonpath_develop.sh
