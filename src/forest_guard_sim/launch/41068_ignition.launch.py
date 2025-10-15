@@ -13,7 +13,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # Get paths to directories
-    pkg_path = FindPackageShare('41068_ignition_bringup')
+    pkg_path = FindPackageShare('forest_guard_sim')
     config_path = PathJoinSubstitution([pkg_path,
                                        'config'])
 
@@ -84,7 +84,7 @@ def generate_launch_description():
     )
     ld.add_action(gazebo)
 
-    # Spawn robot in Gazebo
+    # Spawn robot in Gazebo41068_ignition_bringup
     robot_spawner = Node(
         package='ros_ign_gazebo',
         executable='create',

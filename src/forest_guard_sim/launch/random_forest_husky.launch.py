@@ -228,7 +228,7 @@ def generate_launch_description():
 
     # Common args
     ld.add_action(DeclareLaunchArgument('use_sim_time', default_value='True'))
-    ld.add_action(DeclareLaunchArgument('rviz', default_value='True'))
+    ld.add_action(DeclareLaunchArgument('rviz', default_value='False'))
     ld.add_action(DeclareLaunchArgument('nav2', default_value='True'))
 
     # Forest args
@@ -296,14 +296,15 @@ def generate_launch_description():
         executable='rviz2',
         output='screen',
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
-        arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'forest.rviz'])]
+        arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'forest.rviz'])],
+        condition=IfCondition(LaunchConfiguration('rviz'))
     )
     ld.add_action(rviz_node)
 
     # Nav2 (optional)
     nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [PathJoinSubstitution([pkg_path, 'launch', '41068_navigation.launch.py'])]
+            [PathJoinSubstitution([pkg_path, 'launch', 'navigation.launch.py'])]
         ),
         launch_arguments={'use_sim_time': LaunchConfiguration('use_sim_time')}.items(),
         condition=IfCondition(LaunchConfiguration('nav2'))

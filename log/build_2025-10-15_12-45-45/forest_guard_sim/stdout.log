@@ -20,11 +20,11 @@ creating /home/claudia/ForestGuard/install/forest_guard_sim/share/ament_index/re
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/resource/forest_guard_sim -> /home/claudia/ForestGuard/install/forest_guard_sim/share/ament_index/resource_index/packages
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/package.xml -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim
 creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/navigation.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/large_forest_husky.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/forest_world.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/41068_ignition.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/forest_random.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
-symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/41068_navigation.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/random_forest_husky.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
 symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/forest_mapping.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
 creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/config
