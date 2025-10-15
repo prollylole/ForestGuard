@@ -1,1 +1,1 @@
-/home/claudia/ForestGuard/src/setup.py
+/home/claudia/ForestGuard/src/forest_guard_sim/setup.py
