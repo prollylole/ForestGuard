@@ -49,12 +49,12 @@ def generate_launch_description():
             PathJoinSubstitution([
                 get_package_share_directory('forest_guard_sim'),
                 'launch',
-                'random_forest_husky.launch.py'
+                'large_forest_husky.launch.py'
             ])
         ),
         launch_arguments={
             'use_sim_time': use_sim_time,
-            'rviz': 'false',  # prevent double RViz
+            'rviz': 'true',  # prevent double RViz
             'nav2': 'false'   # disable Nav2 when mapping
         }.items()
     )
@@ -70,7 +70,10 @@ def generate_launch_description():
             slam_params_file,
             {
                 'use_sim_time': use_sim_time,
-                'use_lifecycle_manager': use_lifecycle_manager
+                'use_lifecycle_manager': use_lifecycle_manager,
+                # Add explicit frame parameters
+                'map_frame': 'map',
+                'odom_frame': 'odom'
             }
         ]
     )

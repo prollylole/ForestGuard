@@ -356,7 +356,7 @@ def generate_launch_description():
     # Nav2 (optional) - important for large forest mapping
     nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [PathJoinSubstitution([pkg_path, 'launch', '41068_navigation.launch.py'])]
+            [PathJoinSubstitution([pkg_path, 'launch', 'navigation.launch.py'])]
         ),
         launch_arguments={'use_sim_time': LaunchConfiguration('use_sim_time')}.items(),
         condition=IfCondition(LaunchConfiguration('nav2'))
