@@ -7,3 +7,8 @@ teleop_twist_joy_node:
     scale_angular.yaw: 2.0
     enable_button: 5          # RB
     enable_turbo_button: 7    # RT
+    
+    #teleop_twist_joy_node:
+  #ros__parameters:
+    #publish_topic: /cmd_vel_joy
+
