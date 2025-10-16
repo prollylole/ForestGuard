@@ -1,13 +1,6 @@
 package.xml
 setup.cfg
 setup.py
-../../build/forestguard_colour/forestguard_colour.egg-info/PKG-INFO
-../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt
-../../build/forestguard_colour/forestguard_colour.egg-info/dependency_links.txt
-../../build/forestguard_colour/forestguard_colour.egg-info/entry_points.txt
-../../build/forestguard_colour/forestguard_colour.egg-info/requires.txt
-../../build/forestguard_colour/forestguard_colour.egg-info/top_level.txt
-../../build/forestguard_colour/forestguard_colour.egg-info/zip-safe
 forestguard_colour/__init__.py
 forestguard_colour/hsv_calibrator.py
 forestguard_colour/tree_detector_node.py

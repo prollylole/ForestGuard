@@ -1,0 +1,3 @@
+[console_scripts]
+run_ui = turtlebot_ui.app:main
+

@@ -54,7 +54,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/john/git/RS1/john_branch/src/forest_guard_sim
+CMAKE_SOURCE_DIR = /home/john/git/RS1/john_branch/src/forestguard_sim
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/john/git/RS1/john_branch/build/john
