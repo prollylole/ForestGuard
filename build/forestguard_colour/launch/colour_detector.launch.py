@@ -1,1 +1,0 @@
-/home/john/git/RS1/John_branch/src/forestguard_colour/launch/colour_detector.launch.py
