@@ -127,7 +127,7 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('nav2'))
     )
     ld.add_action(nav2)
-
+    
     teleop_joy_node = Node(
         package='joy',
         executable='joy_node',
@@ -150,4 +150,3 @@ def generate_launch_description():
     ld.add_action(teleop_twist_node)
 
     return ld
-
