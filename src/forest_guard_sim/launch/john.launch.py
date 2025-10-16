@@ -127,5 +127,27 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('nav2'))
     )
     ld.add_action(nav2)
+    
+    teleop_joy_node = Node(
+        package='joy',
+        executable='joy_node',
+        name='joy_node',
+        output='screen',
+        parameters=[{'dev': '/dev/input/js0', 'deadzone': 0.05, 'autorepeat_rate': 20.0}],
+        condition=IfCondition(LaunchConfiguration('teleop'))
+    )
+
+    teleop_twist_node = Node(
+        package='teleop_twist_joy',
+        executable='teleop_node',
+        name='teleop_twist_joy_node',
+        parameters=[PathJoinSubstitution([config_path, 'xbox_teleop.yaml'])],
+        remappings=[('/cmd_vel', '/cmd_vel')],
+        condition=IfCondition(LaunchConfiguration('teleop'))
+    )
+
+    ld.add_action(teleop_joy_node)
+    ld.add_action(teleop_twist_node)
 
     return ld
+
