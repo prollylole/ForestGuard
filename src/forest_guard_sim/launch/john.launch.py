@@ -127,7 +127,7 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('nav2'))
     )
     ld.add_action(nav2)
-    
+
     teleop_joy_node = Node(
         package='joy',
         executable='joy_node',
@@ -148,6 +148,19 @@ def generate_launch_description():
 
     ld.add_action(teleop_joy_node)
     ld.add_action(teleop_twist_node)
+
+
+    twist_mux_node = Node(
+        package='twist_mux',
+        executable='twist_mux',
+        name='twist_mux',
+        output='screen',
+        parameters=[PathJoinSubstitution([config_path, 'twist_mux.yaml'])],
+        remappings=[
+            ('cmd_vel_out', '/cmd_vel')
+        ]
+    )
+    ld.add_action(twist_mux_node)
 
     return ld
 
