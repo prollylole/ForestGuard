@@ -1,0 +1,19 @@
+[0.812s] Invoking command in '/home/claudia/ForestGuard/build/forest_guard_sim': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data
+[1.141s] running develop
+[1.372s] running egg_info
+[1.372s] writing forest_guard_sim.egg-info/PKG-INFO
+[1.372s] writing dependency_links to forest_guard_sim.egg-info/dependency_links.txt
+[1.372s] writing entry points to forest_guard_sim.egg-info/entry_points.txt
+[1.372s] writing requirements to forest_guard_sim.egg-info/requires.txt
+[1.373s] writing top-level names to forest_guard_sim.egg-info/top_level.txt
+[1.376s] reading manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[1.377s] writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[1.379s] running build_ext
+[1.380s] Creating /home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages/forest-guard-sim.egg-link (link to .)
+[1.381s] 
+[1.381s] Installed /home/claudia/ForestGuard/build/forest_guard_sim
+[1.381s] running symlink_data
+[1.383s] creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/maps
+[1.383s] symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/maps/forest_map.yaml -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/maps
+[1.383s] symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/maps/forest_map.pgm -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/maps
+[1.450s] Invoked command in '/home/claudia/ForestGuard/build/forest_guard_sim' returned '0': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data

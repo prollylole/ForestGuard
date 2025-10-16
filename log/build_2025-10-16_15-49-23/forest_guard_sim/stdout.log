@@ -1,0 +1,81 @@
+running develop
+running egg_info
+creating forest_guard_sim.egg-info
+writing forest_guard_sim.egg-info/PKG-INFO
+writing dependency_links to forest_guard_sim.egg-info/dependency_links.txt
+writing entry points to forest_guard_sim.egg-info/entry_points.txt
+writing requirements to forest_guard_sim.egg-info/requires.txt
+writing top-level names to forest_guard_sim.egg-info/top_level.txt
+writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+reading manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages/forest-guard-sim.egg-link (link to .)
+
+Installed /home/claudia/ForestGuard/build/forest_guard_sim
+running symlink_data
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/ament_index
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/ament_index/resource_index
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/ament_index/resource_index/packages
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/resource/forest_guard_sim -> /home/claudia/ForestGuard/install/forest_guard_sim/share/ament_index/resource_index/packages
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/package.xml -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/sample -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/navigation.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/navigation_map.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/large_forest_husky.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/forest_world.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/41068_ignition.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/forest_random.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/random_forest_husky.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/forest_mapping.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/launch/autonomous_forest.launch.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/launch
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/config
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/config/forest.rviz -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/config
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/config/robot_localization.yaml -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/config
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/config/slam_params.yaml -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/config
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/config/nav2_params.yaml -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/config
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/config/gazebo_bridge.yaml -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/config
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/worlds
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/worlds/forest.world.sdf -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/worlds
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree1/model.sdf -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree1/model.config -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials/textures
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree1/materials/textures/bark01.jpg -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials/textures
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree1/meshes/tree_a.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree1/meshes
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/forest_env/model.sdf -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/forest_env/model.config -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials/textures
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/forest_env/materials/textures/empty_grass.png -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials/textures
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/forest_env/meshes/Environment1.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/meshes
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree2/model.sdf -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree2/model.config -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials/textures
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree2/materials/textures/bark.jpeg -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials/textures
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/models/tree2/meshes/tree_b.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/models/tree2/meshes
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/husky.urdf.xacro -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/wheel.urdf.xacro -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/common_properties.urdf.xacro -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/husky.gazebo.xacro -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/meshes/jpl04_arch_nosensor.stl -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/meshes/wheel.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/meshes/base_link.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/meshes/bumper.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/meshes/top_plate.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/urdf/meshes/top_chassis.dae -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+creating /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/test
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/test/test_pep257.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/test
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/test/test_copyright.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/test
+symbolically linking /home/claudia/ForestGuard/build/forest_guard_sim/test/test_flake8.py -> /home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/test

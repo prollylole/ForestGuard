@@ -32,7 +32,7 @@ data_files = [
 ]
 
 # gather standard directories if they exist
-for d in ('launch', 'config', 'worlds', 'models', 'urdf', 'test'):
+for d in ('launch', 'config', 'worlds', 'models', 'urdf', 'test', 'maps'):
     if os.path.isdir(d):
         data_files.extend(gather_package_data(d, os.path.join('share', package_name, d)))
 

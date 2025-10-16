@@ -15,12 +15,17 @@ forest_guard_sim.egg-info/requires.txt
 forest_guard_sim.egg-info/top_level.txt
 forest_guard_sim.egg-info/zip-safe
 launch/41068_ignition.launch.py
+launch/autonomous_forest.launch.py
 launch/forest_mapping.launch.py
 launch/forest_random.launch.py
 launch/forest_world.launch.py
 launch/large_forest_husky.launch.py
 launch/navigation.launch.py
+launch/navigation_map.launch.py
 launch/random_forest_husky.launch.py
+launch/sample
+maps/forest_map.pgm
+maps/forest_map.yaml
 models/forest_env/model.config
 models/forest_env/model.sdf
 models/forest_env/materials/textures/empty_grass.png

@@ -54,7 +54,7 @@ def generate_launch_description():
         ),
         launch_arguments={
             'use_sim_time': use_sim_time,
-            'rviz': 'true',  # prevent double RViz
+            'rviz': 'false',  # prevent double RViz
             'nav2': 'false'   # disable Nav2 when mapping
         }.items()
     )
