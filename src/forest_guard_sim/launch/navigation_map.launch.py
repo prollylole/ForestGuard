@@ -37,58 +37,58 @@ def generate_launch_description():
     )
 
     # Map server node from nav2_params.yaml
-    map_server_cmd = Node(
-        package='nav2_map_server',
-        executable='map_server',
-        name='map_server',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time,
-            'yaml_filename': map_yaml_file
-        }]
-    )
+    # map_server_cmd = Node(
+    #     package='nav2_map_server',
+    #     executable='map_server',
+    #     name='map_server',
+    #     output='screen',
+    #     parameters=[{
+    #         'use_sim_time': use_sim_time,
+    #         'yaml_filename': map_yaml_file
+    #     }]
+    # )
 
     # AMCL node for localization
-    amcl_cmd = Node(
-        package='nav2_amcl',
-        executable='amcl',
-        name='amcl',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time,
-            'yaml_filename': PathJoinSubstitution([forest_guard_sim_pkg, 'config', 'amcl_params.yaml'])
-        }]
-    )
+    # amcl_cmd = Node(
+    #     package='nav2_amcl',
+    #     executable='amcl',
+    #     name='amcl',
+    #     output='screen',
+    #     parameters=[{
+    #         'use_sim_time': use_sim_time,
+    #         'yaml_filename': PathJoinSubstitution([forest_guard_sim_pkg, 'config', 'amcl_params.yaml'])
+    #     }]
+    # )
 
     # Lifecycle manager - FIXED: Proper node names
-    lifecycle_manager_cmd = Node(
-        package='nav2_lifecycle_manager',
-        executable='lifecycle_manager',
-        name='lifecycle_manager_navigation',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time,
-            'autostart': True,
-            'node_names': [
-                'map_server',
-                'amcl',
-                'controller_server',
-                'local_costmap',
-                'global_costmap',
-                'planner_server',
-                'smoother_server',
-                'behavior_server',
-                'bt_navigator',
-                'waypoint_follower',
-                'velocity_smoother'
-            ]
-        }]
-    )
+    # lifecycle_manager_cmd = Node(
+    #     package='nav2_lifecycle_manager',
+    #     executable='lifecycle_manager',
+    #     name='lifecycle_manager_navigation',
+    #     output='screen',
+    #     parameters=[{
+    #         'use_sim_time': use_sim_time,
+    #         'autostart': True,
+    #         'node_names': [
+    #             'map_server',
+    #             'amcl',
+    #             'controller_server',
+    #             'local_costmap',
+    #             'global_costmap',
+    #             'planner_server',
+    #             'smoother_server',
+    #             'behavior_server',
+    #             'bt_navigator',
+    #             'waypoint_follower',
+    #             'velocity_smoother'
+    #         ]
+    #     }]
+    # )
 
     # Include Nav2 bringup for the rest of navigation stack
     nav2_bringup_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            PathJoinSubstitution([nav2_bringup_pkg, 'launch', 'navigation_launch.py'])
+            PathJoinSubstitution([nav2_bringup_pkg, 'launch', 'bringup_launch.py'])
         ),
         launch_arguments={
             'use_sim_time': use_sim_time,
@@ -103,9 +103,9 @@ def generate_launch_description():
     ld.add_action(declare_use_sim_time_cmd)
     ld.add_action(declare_map_yaml_cmd)
     ld.add_action(declare_params_file_cmd)
-    ld.add_action(map_server_cmd)
-    ld.add_action(amcl_cmd)
-    ld.add_action(lifecycle_manager_cmd)
+    # ld.add_action(map_server_cmd)
+    # ld.add_action(amcl_cmd)
+    # ld.add_action(lifecycle_manager_cmd)
     ld.add_action(nav2_bringup_cmd)
 
     return ld

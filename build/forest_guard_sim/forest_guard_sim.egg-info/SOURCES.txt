@@ -19,8 +19,8 @@ launch/autonomous_forest.launch.py
 launch/forest_mapping.launch.py
 launch/forest_random.launch.py
 launch/forest_world.launch.py
+launch/ign_navigation_launch.py
 launch/large_forest_husky.launch.py
-launch/navigation.launch.py
 launch/navigation_map.launch.py
 launch/random_forest_husky.launch.py
 launch/sample

@@ -1,1 +1,0 @@
-/home/claudia/ForestGuard/src/forest_guard_sim/launch/navigation.launch.py

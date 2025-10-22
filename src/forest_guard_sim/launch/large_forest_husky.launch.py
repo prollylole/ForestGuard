@@ -273,7 +273,7 @@ def generate_launch_description():
 
     # Common args
     ld.add_action(DeclareLaunchArgument('use_sim_time', default_value='True'))
-    ld.add_action(DeclareLaunchArgument('rviz', default_value='False'))
+    # ld.add_action(DeclareLaunchArgument('rviz', default_value='False'))
     ld.add_action(DeclareLaunchArgument('nav2', default_value='True'))
 
     # Large Forest args - 4x larger area and 4x more trees
@@ -343,15 +343,15 @@ def generate_launch_description():
     ld.add_action(gazebo_bridge)
 
     # RViz (optional)
-    rviz_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        output='screen',
-        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
-        arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'forest.rviz'])],
-        condition=IfCondition(LaunchConfiguration('rviz'))
-    )
-    ld.add_action(rviz_node)
+    # rviz_node = Node(
+    #     package='rviz2',
+    #     executable='rviz2',
+    #     output='screen',
+    #     parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
+    #     arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'forest.rviz'])],
+    #     condition=IfCondition(LaunchConfiguration('rviz'))
+    # )
+    # ld.add_action(rviz_node)
 
     # Nav2 (optional) - important for large forest mapping
     nav2 = IncludeLaunchDescription(

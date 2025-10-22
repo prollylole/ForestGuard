@@ -12,7 +12,7 @@ def generate_launch_description():
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    rviz = LaunchConfiguration('rviz', default='true')
+    rviz = LaunchConfiguration('rviz')
     use_map = LaunchConfiguration('use_map', default='true')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -23,7 +23,7 @@ def generate_launch_description():
 
     declare_rviz_cmd = DeclareLaunchArgument(
         'rviz',
-        default_value='true',
+        default_value='false',
         description='Launch RViz'
     )
 
@@ -58,6 +58,15 @@ def generate_launch_description():
     #     parameters=[{'use_sim_time': use_sim_time}]
     # )
 
+    # Add static transform from map to odom (FIXES MAP FRAME ISSUE)
+    static_transform_cmd = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='static_map_broadcaster',
+        arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom'],
+        parameters=[{'use_sim_time': use_sim_time}]
+    )
+
     # Navigation with prebuilt map
     navigation_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -74,14 +83,18 @@ def generate_launch_description():
     )
 
     # RViz for visualization
-    rviz_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution([
-                FindPackageShare('nav2_bringup'),
-                'launch',
-                'rviz_launch.py'
-            ])
-        ),
+    rviz_config_file = PathJoinSubstitution([
+                FindPackageShare('forest_guard_sim'),
+                'config',
+                'forest.rviz'
+    ])
+    
+    rviz_cmd = Node(
+        package='rviz2',
+        executable='rviz2',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}],
+        arguments=['-d', rviz_config_file],
         condition=IfCondition(rviz)
     )
 
@@ -90,6 +103,7 @@ def generate_launch_description():
     ld.add_action(declare_use_map_cmd)
     ld.add_action(forest_sim_cmd)
     # ld.add_action(husky_controller_cmd)  # Add your controller
+    ld.add_action(static_transform_cmd)
     ld.add_action(navigation_cmd)
     ld.add_action(rviz_cmd)
 

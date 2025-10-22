@@ -182,6 +182,23 @@ controller_server:
       RotateToGoal.slowing_factor: 5.0
       RotateToGoal.lookahead_time: -1.0
 
+lifecycle_manager_navigation:
+  ros__parameters:
+    use_sim_time: True
+    autostart: True
+    node_names:
+      - map_server
+      - amcl
+      - controller_server
+      - planner_server
+      - behavior_server
+      - bt_navigator
+      - local_costmap
+      - global_costmap
+      - velocity_smoother
+      - waypoint_follower
+      - smoother_server
+      
 local_costmap:
   local_costmap:
     ros__parameters:
