@@ -1,0 +1,25 @@
+[0.385s] Invoking command in '/home/john/git/RS1/john_branch/build/turtlebot_ui': PYTHONPATH=/home/john/git/RS1/john_branch/build/turtlebot_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/turtlebot_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/turtlebot_ui/build --no-deps symlink_data
+[0.554s] running develop
+[0.644s] running egg_info
+[0.644s] creating turtlebot_ui.egg-info
+[0.644s] writing turtlebot_ui.egg-info/PKG-INFO
+[0.644s] writing dependency_links to turtlebot_ui.egg-info/dependency_links.txt
+[0.645s] writing entry points to turtlebot_ui.egg-info/entry_points.txt
+[0.645s] writing requirements to turtlebot_ui.egg-info/requires.txt
+[0.645s] writing top-level names to turtlebot_ui.egg-info/top_level.txt
+[0.645s] writing manifest file 'turtlebot_ui.egg-info/SOURCES.txt'
+[0.646s] reading manifest file 'turtlebot_ui.egg-info/SOURCES.txt'
+[0.646s] writing manifest file 'turtlebot_ui.egg-info/SOURCES.txt'
+[0.647s] running build_ext
+[0.647s] Creating /home/john/git/RS1/john_branch/install/turtlebot_ui/lib/python3.10/site-packages/turtlebot-ui.egg-link (link to .)
+[0.647s] Installing controller_bridge script to /home/john/git/RS1/john_branch/install/turtlebot_ui/lib/turtlebot_ui
+[0.648s] Installing run_ui script to /home/john/git/RS1/john_branch/install/turtlebot_ui/lib/turtlebot_ui
+[0.648s] 
+[0.648s] Installed /home/john/git/RS1/john_branch/build/turtlebot_ui
+[0.648s] running symlink_data
+[0.648s] creating /home/john/git/RS1/john_branch/install/turtlebot_ui/share/ament_index
+[0.648s] creating /home/john/git/RS1/john_branch/install/turtlebot_ui/share/ament_index/resource_index
+[0.648s] creating /home/john/git/RS1/john_branch/install/turtlebot_ui/share/ament_index/resource_index/packages
+[0.648s] symbolically linking /home/john/git/RS1/john_branch/build/turtlebot_ui/resource/turtlebot_ui -> /home/john/git/RS1/john_branch/install/turtlebot_ui/share/ament_index/resource_index/packages
+[0.648s] symbolically linking /home/john/git/RS1/john_branch/build/turtlebot_ui/package.xml -> /home/john/git/RS1/john_branch/install/turtlebot_ui/share/turtlebot_ui
+[0.664s] Invoked command in '/home/john/git/RS1/john_branch/build/turtlebot_ui' returned '0': PYTHONPATH=/home/john/git/RS1/john_branch/build/turtlebot_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/turtlebot_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/turtlebot_ui/build --no-deps symlink_data

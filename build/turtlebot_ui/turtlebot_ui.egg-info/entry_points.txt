@@ -1,3 +1,4 @@
 [console_scripts]
+controller_bridge = turtlebot_ui.controller_bridge:main
 run_ui = turtlebot_ui.app:main
 

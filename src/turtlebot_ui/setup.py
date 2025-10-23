@@ -19,9 +19,10 @@ setup(
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-            'run_ui = turtlebot_ui.app:main',
-        ],
-    },
+        'console_scripts':      [
+            'run_ui = turtl     ebot_ui.app:main    ',
+            'controller_bri     dge = turtlebot_    ui.controller_bridge:main      ',
+        ],      
+    },      
 )
 

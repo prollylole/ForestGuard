@@ -1,0 +1,1 @@
+[0.333s] Invoking command in '/home/john/git/RS1/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/john -- -j20 -l20
