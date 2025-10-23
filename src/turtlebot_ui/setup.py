@@ -20,8 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts':      [
-            'run_ui = turtl     ebot_ui.app:main    ',
-            'controller_bri     dge = turtlebot_    ui.controller_bridge:main      ',
+            'run_ui = turtlebot_ui.app:main',
+            'controller_bridge = turtlebot_ui.controller_bridge:main',
         ],      
     },      
 )
