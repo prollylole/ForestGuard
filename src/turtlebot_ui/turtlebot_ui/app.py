@@ -155,7 +155,7 @@ class GuiRosNode(Node):
             reliability=ReliabilityPolicy.BEST_EFFORT,
             durability=DurabilityPolicy.VOLATILE,
             history=HistoryPolicy.KEEP_LAST,
-            depth=5
+            depth=1
         )
         self.reliable_qos = QoSProfile(
             reliability=ReliabilityPolicy.RELIABLE,
@@ -276,7 +276,7 @@ class RosWorker(QThread):
             self._executor.add_node(self._node)
             self._ready = True
             while not self._stop:
-                self._executor.spin_once(timeout_sec=0.1)
+                self._executor.spin_once(timeout_sec=0.01)
         except KeyboardInterrupt:
             # Treat Ctrl-C as a normal exit path for the worker thread
             pass
@@ -335,6 +335,7 @@ class ControlGUI(QWidget):
         self._build_ui()
         self._wire_behaviour()
         self._start_ros()
+        self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
 
     # ---- UI builders
     def rounded_pane(self, w: QWidget, pad=10):
@@ -480,8 +481,11 @@ class ControlGUI(QWidget):
         # Don’t send while tearing down or if estopped
         if not hasattr(self, "ros") or not self.ros.ready():
             return
+        # UI only publishes if explicitly enabled, but always allows E-STOP zeros
         if self._estopped:
             self.send_cmd(0.0, 0.0)
+            return
+        if not self._drive_enabled:
             return
         self.send_cmd(self._lin, self._ang)
 
@@ -513,7 +517,7 @@ class ControlGUI(QWidget):
         qimg = QImage(rgb_np.data, w, h, 3 * w, QImage.Format_RGB888)
         pix = QPixmap.fromImage(qimg)
         self.camera_lbl.setPixmap(pix.scaled(
-            self.camera_lbl.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
+            self.camera_lbl.size(), Qt.KeepAspectRatio, Qt.FastTransformation
         ))
 
     # ---- Clean shutdown
