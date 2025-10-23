@@ -1,35 +1,33 @@
+#!/usr/bin/env python3
 """
-PySide6 + ROS 2 GUI for TurtleBot / Husky control.
+PySide6 + ROS 2 GUI for TurtleBot / Husky control (compressed camera + frame-drop).
 
 - Publishes /cmd_vel (Twist) at 20 Hz while D-pad buttons are held.
-- Subscribes to /camera/image (Image) -> shows in camera panel.
+- Subscribes to /camera/image[/compressed] -> shows in camera panel.
 - Listens on /ui/camera_topic (String) to switch camera source at runtime.
 - Subscribes to /rosout (Log) -> streams to Log panel (filterable).
+- (Optional) Subscribes to /camera/depth/points and logs a decimated count.
 - Runs ROS in a QThread (MultiThreadedExecutor) so Qt stays responsive.
 - Includes red rounded E-STOP. Running LED reflects motion state.
-- Quieter shutdown: no noisy KeyboardInterrupt tracebacks.
-- Optional noise controls via env vars (see below).
+- Image pipeline stores only the LATEST frame and emits at a fixed rate to avoid backlog.
 
-Notes:
-- Avoids Pylance type-expression issues by not annotating CvBridge directly.
-- Works with or without cv_bridge / OpenCV (falls back to numpy-only).
-
-Noise controls (set as environment variables before launching):
-- UI_SUPPRESS_QT_DEBUG=1 (default): sets QT_LOGGING_RULES to silence Qt debug.
-- UI_LOG_LEVEL=warn|info|error|debug|fatal (default: info): sets *this node* logger level.
-- UI_ROSOUT_LEVEL=warn|info|error|debug|fatal (default: info): minimum /rosout level shown in the Log panel.
-- UI_DISABLE_ROSOUT=1: do not subscribe to /rosout at all (Log panel will only show app/local messages).
+Env knobs:
+  UI_SUPPRESS_QT_DEBUG=1 (default): silence noisy Qt debug logs.
+  UI_LOG_LEVEL=warn|info|error|debug|fatal (default: info): this node log level.
+  UI_ROSOUT_LEVEL=warn|info|error|debug|fatal (default: info): min /rosout level shown.
+  UI_DISABLE_ROSOUT=1: don't subscribe to /rosout.
+  UI_ENABLE_DRIVE=1: actually publish /cmd_vel (else UI shows but doesn't drive).
+  UI_CAMERA_COMPRESSED=1 (default): prefer /<topic>/compressed.
+  UI_CAMERA_EMIT_HZ=15 (default): UI redraw rate for camera frames.
 """
 
 from __future__ import annotations
 
-import sys
-import os
-import math
+import sys, os, math, signal
 from typing import Optional
+from threading import Lock
 
 from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF
-import signal
 from PySide6.QtGui import QColor, QPainter, QBrush, QImage, QPixmap
 from PySide6.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QTextEdit, QSlider, QFrame,
@@ -37,18 +35,18 @@ from PySide6.QtWidgets import (
 )
 
 # --------------------------- CONFIG ---------------------------------
-CAMERA_TOPIC_DEFAULT = "/camera/image"   # sensor_msgs/msg/Image (ros_gz_bridge default)
-ROSOUT_TOPIC         = "/rosout"         # rcl_interfaces/msg/Log
-CAMERA_TOPIC_CTRL    = "/ui/camera_topic"  # std_msgs/msg/String (controller can publish here)
+CAMERA_TOPIC_DEFAULT = "/camera/image"    # ros_gz_bridge default 'Image'
+ROSOUT_TOPIC         = "/rosout"
+CAMERA_TOPIC_CTRL    = "/ui/camera_topic" # std_msgs/String
 CMD_VEL_TOPIC        = "/cmd_vel"
 
-CMD_PUB_RATE_HZ = 20                 # publish rate for cmd_vel while moving
+CMD_PUB_RATE_HZ = 20
 
-MAX_LINEAR_MPS  = 0.40               # tune for your bot
-MAX_ANGULAR_RPS = 1.50               # rad/s
+MAX_LINEAR_MPS  = 0.40
+MAX_ANGULAR_RPS = 1.50
 # --------------------------------------------------------------------
 
-# ---- Optional deps for image conversion (works with or without cv_bridge)
+# Optional deps
 try:
     import numpy as np
 except Exception:
@@ -63,7 +61,7 @@ try:
     from cv_bridge import CvBridge
     _CV_BRIDGE_OK = True
 except Exception:
-    CvBridge = None        # runtime fallback symbol so code keeps working
+    CvBridge = None
     _CV_BRIDGE_OK = False
 
 # ---- ROS 2 imports
@@ -74,12 +72,14 @@ from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPo
 from rclpy.logging import LoggingSeverity
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image as RosImage
+from sensor_msgs.msg import CompressedImage as RosCompressedImage
+from sensor_msgs.msg import PointCloud2
+import sensor_msgs_py.point_cloud2 as pc2
 from rcl_interfaces.msg import Log as RosLog
 from std_msgs.msg import String as RosString
 
 
 # ========================= Qt widgets ===============================
-
 class LedIndicator(QLabel):
     def __init__(self, color=QColor("limegreen"), diameter=14, parent=None):
         super().__init__(parent)
@@ -88,8 +88,7 @@ class LedIndicator(QLabel):
         self.setFixedSize(diameter, diameter)
 
     def set_color(self, color: QColor | str):
-        self._color = QColor(color)
-        self.update()
+        self._color = QColor(color); self.update()
 
     def paintEvent(self, _):
         p = QPainter(self)
@@ -100,38 +99,28 @@ class LedIndicator(QLabel):
 
 
 # ========================= helpers ================================
-
 def _level_from_str(name: str) -> LoggingSeverity:
     name = (name or "").strip().lower()
     return {
         "debug": LoggingSeverity.DEBUG,
         "info": LoggingSeverity.INFO,
-        "warn": LoggingSeverity.WARN,
+        "warn":  LoggingSeverity.WARN,
         "warning": LoggingSeverity.WARN,
         "error": LoggingSeverity.ERROR,
         "fatal": LoggingSeverity.FATAL,
     }.get(name, LoggingSeverity.INFO)
 
-
 def _rosout_level_num(name: str) -> int:
     name = (name or "").strip().lower()
-    return {
-        "debug": 10,
-        "info": 20,
-        "warn": 30,
-        "warning": 30,
-        "error": 40,
-        "fatal": 50,
-    }.get(name, 20)
+    return {"debug":10, "info":20, "warn":30, "warning":30, "error":40, "fatal":50}.get(name, 20)
 
 
 # ========================= ROS <-> Qt bridge ========================
-
 class RosSignals(QObject):
     image = Signal(object)           # numpy RGB array (H,W,3) or None
     log = Signal(str)                # rosout text
     running = Signal(bool)           # running state (for LED)
-    ok = Signal(bool, str)           # status, message (init errors etc.)
+    ok = Signal(bool, str)           # status, message
 
 
 class GuiRosNode(Node):
@@ -140,19 +129,22 @@ class GuiRosNode(Node):
         super().__init__("turtlebot_gui")
         self.signals = signals
 
-        # Honor env log level for this node
+        # Log levels via env
         node_level = _level_from_str(os.environ.get("UI_LOG_LEVEL", "info"))
-        try:
-            self.get_logger().set_level(node_level)
-        except Exception:
-            pass
+        try: self.get_logger().set_level(node_level)
+        except Exception: pass
 
-        # Minimum /rosout level to forward to the Log panel
         self._rosout_min_level = _rosout_level_num(os.environ.get("UI_ROSOUT_LEVEL", "info"))
+        self._prefer_compressed = os.environ.get("UI_CAMERA_COMPRESSED", "1") == "1"
+        try:
+            self._emit_hz = float(os.environ.get("UI_CAMERA_EMIT_HZ", "15"))
+            self._emit_hz = max(1.0, min(60.0, self._emit_hz))
+        except Exception:
+            self._emit_hz = 15.0
 
-        # QoS for sensors (best-effort) and logs (reliable).
+        # QoS
         self.sensor_qos = QoSProfile(
-            reliability=ReliabilityPolicy.BEST_EFFORT,
+            reliability=ReliabilityPolicy.RELIABLE,
             durability=DurabilityPolicy.VOLATILE,
             history=HistoryPolicy.KEEP_LAST,
             depth=1
@@ -167,48 +159,56 @@ class GuiRosNode(Node):
         # Publishers
         self.cmd_pub = self.create_publisher(Twist, CMD_VEL_TOPIC, 10)
 
-        # Optional /rosout subscription (can be disabled or filtered)
+        # /rosout (optional)
         if os.environ.get("UI_DISABLE_ROSOUT", "0") != "1":
             self.create_subscription(RosLog, ROSOUT_TOPIC, self._on_rosout, self.reliable_qos)
 
+        # camera topic control
         self.create_subscription(RosString, CAMERA_TOPIC_CTRL, self._on_camera_topic_switch, 10)
 
-        # cv_bridge handle (typed as object to avoid Pylance issue)
+        # cv_bridge handle (optional)
         self.bridge: Optional[object] = CvBridge() if _CV_BRIDGE_OK else None
 
-        # Camera subscription (created below)
+        # Camera state
         self._camera_sub = None
-        self._camera_topic = CAMERA_TOPIC_DEFAULT
-        self._subscribe_camera(self._camera_topic)
+        self._camera_topic_raw = CAMERA_TOPIC_DEFAULT  # base without /compressed
+        self._latest_rgb = None
+        self._img_lock = Lock()
+        self._emit_timer = self.create_timer(1.0 / self._emit_hz, self._emit_image_tick)
+
+        # Subscribe initial camera
+        self._subscribe_camera(self._camera_topic_raw)
+
+        # Optional PointCloud2 subscription (lightweight logging)
+        try:
+            self.create_subscription(PointCloud2, "/camera/depth/points", self._on_pc, self.sensor_qos)
+            self._pc_latest_count = 0
+            self._pc_log_timer = self.create_timer(0.5, self._emit_pc_count_log)  # 2 Hz log
+        except Exception:
+            pass
 
         self.signals.ok.emit(True, "ROS node initialised")
 
-    # --- Call from Qt thread via queued connection
+    # ------------------- publishers -------------------
     @Slot(float, float)
     def publish_cmd(self, linear: float, angular: float):
         msg = Twist()
-        msg.linear.x = float(linear)
-        msg.angular.z = float(angular)
+        msg.linear.x = float(linear); msg.angular.z = float(angular)
         self.cmd_pub.publish(msg)
 
-    # --- Sub callbacks
+    # ------------------- subs/callbacks ----------------
     def _on_rosout(self, msg: RosLog):
         if int(getattr(msg, "level", 20)) < self._rosout_min_level:
             return
-        level_map = {10: "DEBUG", 20: "INFO", 30: "WARN", 40: "ERROR", 50: "FATAL"}
+        level_map = {10:"DEBUG", 20:"INFO", 30:"WARN", 40:"ERROR", 50:"FATAL"}
         level = level_map.get(msg.level, str(msg.level))
         self.signals.log.emit(f"[{level}] {msg.name}: {msg.msg}")
-
-    def _on_image(self, msg: RosImage):
-        rgb = self._image_to_rgb_numpy(msg)
-        if rgb is not None:
-            self.signals.image.emit(rgb)
 
     def _on_camera_topic_switch(self, msg: RosString):
         topic = (msg.data or "").strip()
         if not topic:
             return
-        if topic == self._camera_topic:
+        if topic == self._camera_topic_raw or topic.rstrip('/') == self._camera_topic_raw.rstrip('/'):
             return
         try:
             self._subscribe_camera(topic)
@@ -216,39 +216,100 @@ class GuiRosNode(Node):
         except Exception as e:
             self.signals.ok.emit(False, f"Failed to switch camera to '{topic}': {e}")
 
-    # Create/replace camera subscription
-    def _subscribe_camera(self, topic: str):
+    def _subscribe_camera(self, topic_base: str):
+        """Subscribe to compressed if preferred, else raw. topic_base should be the *raw* image base (no /compressed)."""
+        # tear down old
         if self._camera_sub is not None:
-            try:
-                self.destroy_subscription(self._camera_sub)
-            except Exception:
-                pass
+            try: self.destroy_subscription(self._camera_sub)
+            except Exception: pass
             self._camera_sub = None
-        self._camera_topic = topic
-        self._camera_sub = self.create_subscription(RosImage, topic, self._on_image, self.sensor_qos)
-        self.get_logger().info(f"Subscribed to camera: {topic}")
 
-    # Helper: convert sensor_msgs/Image to RGB numpy (H, W, 3)
+        self._camera_topic_raw = topic_base.rstrip('/')
+
+        # Try compressed
+        if self._prefer_compressed:
+            comp_topic = self._camera_topic_raw + "/compressed" if not self._camera_topic_raw.endswith("/compressed") else self._camera_topic_raw
+            try:
+                self._camera_sub = self.create_subscription(
+                    RosCompressedImage, comp_topic, self._on_image_compressed, self.sensor_qos
+                )
+                self.get_logger().info(f"Subscribed to camera (compressed): {comp_topic}")
+                return
+            except Exception as e:
+                self.get_logger().warn(f"Compressed subscribe failed ({e}); falling back to raw.")
+
+        # Fallback raw
+        self._camera_sub = self.create_subscription(RosImage, self._camera_topic_raw, self._on_image_raw, self.sensor_qos)
+        self.get_logger().info(f"Subscribed to camera (raw): {self._camera_topic_raw}")
+
+    # Store-latest image (no direct emit here)
+    def _on_image_raw(self, msg: RosImage):
+        rgb = self._image_to_rgb_numpy(msg)
+        if rgb is None:
+            return
+        with self._img_lock:
+            self._latest_rgb = rgb
+
+    def _on_image_compressed(self, msg: RosCompressedImage):
+        try:
+            if np is None or cv2 is None:
+                # No numpy/cv2 — ignore compressed images
+                return
+            arr = np.frombuffer(msg.data, dtype=np.uint8)
+            bgr = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+            if bgr is None:
+                return
+            rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+            with self._img_lock:
+                self._latest_rgb = rgb
+        except Exception as e:
+            self.get_logger().warn(f"Compressed decode failed: {e}")
+
+    # Emit most-recent at fixed rate and drop backlog
+    def _emit_image_tick(self):
+        rgb = None
+        with self._img_lock:
+            if self._latest_rgb is not None:
+                rgb = self._latest_rgb
+                self._latest_rgb = None
+        if rgb is not None:
+            self.signals.image.emit(rgb)
+
+    # Point cloud: light-weight count so we know it's alive
+    def _on_pc(self, msg: PointCloud2):
+        try:
+            cnt = 0
+            for i, _ in enumerate(pc2.read_points(msg, field_names=('x','y','z'), skip_nans=True)):
+                if i % 10 == 0:  # decimate by 10 cheaply
+                    cnt += 1
+                if cnt >= 20000:  # cap work
+                    break
+            self._pc_latest_count = cnt * 10
+        except Exception:
+            pass
+
+    def _emit_pc_count_log(self):
+        if getattr(self, "_pc_latest_count", 0):
+            self.signals.log.emit(f"[INFO] pointcloud: ~{self._pc_latest_count} points (approx, decimated)")
+            self._pc_latest_count = 0
+
+    # ------------------- helpers ----------------------
     def _image_to_rgb_numpy(self, msg: RosImage):
         try:
             if self.bridge is not None and _CV_BRIDGE_OK:
-                # type: ignore[attr-defined] - runtime-checked
+                # type: ignore[attr-defined]
                 cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")  # type: ignore
                 if cv2 is not None:
-                    rgb = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
+                    return cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
                 else:
-                    rgb = cv_image[:, :, ::-1].copy()
-                return rgb
+                    return cv_image[:, :, ::-1].copy()
             else:
                 if np is None:
                     return None
                 enc = (msg.encoding or "").lower()
                 if enc in ("rgb8", "bgr8"):
                     arr = np.frombuffer(msg.data, dtype=np.uint8).reshape((msg.height, msg.width, 3))
-                    if enc == "bgr8":
-                        return arr[:, :, ::-1].copy()
-                    return arr
-                # Fallback for mono8/mono16: promote to RGB
+                    return arr[:, :, ::-1].copy() if enc == "bgr8" else arr
                 if enc in ("mono8", "8uc1"):
                     arr = np.frombuffer(msg.data, dtype=np.uint8).reshape((msg.height, msg.width))
                     return np.stack([arr]*3, axis=-1)
@@ -278,7 +339,6 @@ class RosWorker(QThread):
             while not self._stop:
                 self._executor.spin_once(timeout_sec=0.01)
         except KeyboardInterrupt:
-            # Treat Ctrl-C as a normal exit path for the worker thread
             pass
         except Exception as e:
             self.signals.ok.emit(False, f"ROS error: {e}")
@@ -291,33 +351,25 @@ class RosWorker(QThread):
                     self._node.destroy_node()
             except Exception:
                 pass
-            try:
-                rclpy.shutdown()
-            except Exception:
-                pass
+            try: rclpy.shutdown()
+            except Exception: pass
 
-    def stop(self):
-        self._stop = True
+    def stop(self): self._stop = True
 
-    # public slot used by the GUI thread
     @Slot(float, float)
     def send_cmd(self, linear: float, angular: float):
         if self._node is not None and self._ready and not self._stop:
-            try:
-                self._node.publish_cmd(linear, angular)
-            except Exception:
-                # Ignore during teardown (publisher already destroyed)
-                pass
+            try: self._node.publish_cmd(linear, angular)
+            except Exception: pass
 
     def ready(self) -> bool:
-        # return self._ready and not self._stop
         try:
             return self._ready and not self._stop and rclpy.ok()
         except Exception:
             return False
 
-# ============================ GUI ===================================
 
+# ============================ GUI ===================================
 class ControlGUI(QWidget):
     def __init__(self):
         super().__init__()
@@ -329,9 +381,7 @@ class ControlGUI(QWidget):
         self._lin = 0.0
         self._ang = 0.0
 
-        # Make Ctrl-C (SIGINT) request a clean close; a second Ctrl-C aborts immediately.
         self._install_sigint_handler()
-
         self._build_ui()
         self._wire_behaviour()
         self._start_ros()
@@ -438,7 +488,7 @@ class ControlGUI(QWidget):
         self.speed.valueChanged.connect(self._update_command_from_speed)
         self.estop.clicked.connect(self._on_estop)
 
-        # Timer to send cmd_vel continuously (common for mobile bases)
+        # Timer to send cmd_vel continuously
         self.cmd_timer = QTimer(self)
         self.cmd_timer.timeout.connect(self._publish_cmd)
         self.cmd_timer.start(int(1000 / CMD_PUB_RATE_HZ))
@@ -446,12 +496,10 @@ class ControlGUI(QWidget):
     # ---- ROS worker thread
     def _start_ros(self):
         self.ros = RosWorker()
-        # Incoming signals
         self.ros.signals.image.connect(self._update_camera)
         self.ros.signals.log.connect(self._append_log)
         self.ros.signals.running.connect(self._set_running_led)
         self.ros.signals.ok.connect(lambda ok, msg: self._append_log(("OK " if ok else "ERR ") + msg))
-        # Outgoing commands to ROS thread
         self.send_cmd = self.ros.send_cmd
         self.ros.start()
 
@@ -478,14 +526,11 @@ class ControlGUI(QWidget):
         self._update_running_led()
 
     def _publish_cmd(self):
-        # Don’t send while tearing down or if estopped
         if not hasattr(self, "ros") or not self.ros.ready():
             return
-        # UI only publishes if explicitly enabled, but always allows E-STOP zeros
         if self._estopped:
-            self.send_cmd(0.0, 0.0)
-            return
-        if not self._drive_enabled:
+            self.send_cmd(0.0, 0.0); return
+        if os.environ.get("UI_ENABLE_DRIVE", "0") != "1":
             return
         self.send_cmd(self._lin, self._ang)
 
@@ -493,8 +538,7 @@ class ControlGUI(QWidget):
         self._lin = 0.0; self._ang = 0.0; self._estopped = True
         self._update_running_led()
         self._append_log(">>> EMERGENCY STOP PRESSED! <<<")
-        # If you want latched E-Stop, remove the next line
-        QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))
+        QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))  # remove for latched E-STOP
 
     # ---- UI updates
     def _update_running_led(self):
@@ -505,9 +549,8 @@ class ControlGUI(QWidget):
         self.led.set_color("limegreen" if running else "#bbbbbb")
 
     def _append_log(self, text: str):
-        if self._quitting:
-            return
-        self.log.append(text)
+        if not self._quitting:
+            self.log.append(text)
 
     @Slot(object)
     def _update_camera(self, rgb_np):
@@ -517,85 +560,61 @@ class ControlGUI(QWidget):
         qimg = QImage(rgb_np.data, w, h, 3 * w, QImage.Format_RGB888)
         pix = QPixmap.fromImage(qimg)
         self.camera_lbl.setPixmap(pix.scaled(
-            self.camera_lbl.size(), Qt.KeepAspectRatio, Qt.FastTransformation
+            self.camera_lbl.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
         ))
 
     # ---- Clean shutdown
     def closeEvent(self, event):
         try:
-            # Mark quitting first so slots early-out
             self._quitting = True
-
-            # 1) Stop the periodic publisher BEFORE stopping ROS
             if hasattr(self, "cmd_timer"):
                 self.cmd_timer.stop()
-                self.cmd_timer.timeout.disconnect(self._publish_cmd)
+                try: self.cmd_timer.timeout.disconnect(self._publish_cmd)
+                except Exception: pass
 
-            # 1.5) Disconnect inbound signals to avoid late queued calls
-            try:
-                self.ros.signals.image.disconnect(self._update_camera)
-            except Exception:
-                pass
-            try:
-                self.ros.signals.log.disconnect(self._append_log)
-            except Exception:
-                pass
-            try:
-                self.ros.signals.running.disconnect(self._set_running_led)
-            except Exception:
-                pass
-            try:
-                # Connected via lambda above; disconnect all ok->slots
-                self.ros.signals.ok.disconnect()
-            except Exception:
-                pass
+            try: self.ros.signals.image.disconnect(self._update_camera)
+            except Exception: pass
+            try: self.ros.signals.log.disconnect(self._append_log)
+            except Exception: pass
+            try: self.ros.signals.running.disconnect(self._set_running_led)
+            except Exception: pass
+            try: self.ros.signals.ok.disconnect()
+            except Exception: pass
 
-            # 2) Replace send_cmd with a no-op to avoid stray calls
-            self.send_cmd = lambda *_args, **_kw: None
-            # 3) Now stop the ROS thread cleanly
+            self.send_cmd = lambda *_a, **_k: None
             self.ros.stop()
             self.ros.wait(2000)
         except Exception:
             pass
         super().closeEvent(event)
 
-    # --- SIGINT: first Ctrl-C -> close nicely; second Ctrl-C -> default interrupt
+    # --- SIGINT niceness
     def _install_sigint_handler(self):
         def on_sigint(_signum, _frame):
             if not self._quitting:
-                # First Ctrl-C: close on the Qt event loop (safe for widgets/threads)
                 self._quitting = True
                 QTimer.singleShot(0, self.close)
             else:
-                # If user hits Ctrl-C again, restore default behavior (KeyboardInterrupt)
                 signal.signal(signal.SIGINT, signal.SIG_DFL)
-        try:
-            signal.signal(signal.SIGINT, on_sigint)
-        except Exception:
-            # Some environments disallow changing handlers; ignore.
-            pass
+        try: signal.signal(signal.SIGINT, on_sigint)
+        except Exception: pass
 
 
 # ============================== main ================================
-
 def _apply_qt_logging_rules_from_env():
-    # If user requested suppression (default), set rules iff not already defined.
-    want = os.environ.get("UI_SUPPRESS_QT_DEBUG", "1") == "1"
-    if want and "QT_LOGGING_RULES" not in os.environ:
-        # Silence most Qt debug noise; keep warnings+errors.
+    if os.environ.get("UI_SUPPRESS_QT_DEBUG", "1") == "1" and "QT_LOGGING_RULES" not in os.environ:
         os.environ["QT_LOGGING_RULES"] = "*.debug=false;qt.qpa.*=false"
 
 def main():
     _apply_qt_logging_rules_from_env()
 
     app = QApplication(sys.argv)
-    # Suppress ugly tracebacks on a clean Ctrl-C exit.
+
+    # quiet Ctrl-C tracebacks
     def _excepthook(exc_type, exc, tb):
         if exc_type is KeyboardInterrupt:
-            try:
-                QApplication.instance().quit()
-            except Exception:
-                pass
+            try: QApplication.instance().quit()
+            except Exception: pass
             return
         sys.__excepthook__(exc_type, exc, tb)
     sys.excepthook = _excepthook

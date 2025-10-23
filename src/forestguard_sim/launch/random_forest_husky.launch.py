@@ -326,13 +326,19 @@ def generate_launch_description():
         executable='teleop_node',
         name='teleop_twist_joy_node',
         parameters=[PathJoinSubstitution([pkg_path, 'config', 'xbox_teleop.yaml'])],
-        remappings=[('/cmd_vel', '/cmd_vel')],
+        remappings=[('/cmd_vel', '/cmd_vel_raw')],
         condition=IfCondition(LaunchConfiguration('teleop'))
     )
 
+    twist_scaler = Node(
+        package='turtlebot_ui',
+        executable='twist_scaler',
+        name='twist_scaler',
+        parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}],
+)
     ld.add_action(teleop_joy_node)
     ld.add_action(teleop_twist_node)
-
+    ld.add_action(twist_scaler)
 
     # RViz (optional)
     rviz_node = Node(

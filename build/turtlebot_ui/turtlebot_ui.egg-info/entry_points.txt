@@ -1,4 +1,5 @@
 [console_scripts]
 controller_bridge = turtlebot_ui.controller_bridge:main
 run_ui = turtlebot_ui.app:main
+twist_scaler = turtlebot_ui.twist_scaler:main
 
