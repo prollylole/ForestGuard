@@ -4,18 +4,27 @@ PySide6 + ROS 2 GUI for TurtleBot / Husky control.
 - Publishes /cmd_vel (Twist) at 20 Hz while D-pad buttons are held.
 - Subscribes to /camera/image (Image) -> shows in camera panel.
 - Listens on /ui/camera_topic (String) to switch camera source at runtime.
-- Subscribes to /rosout (Log) -> streams to Log panel.
+- Subscribes to /rosout (Log) -> streams to Log panel (filterable).
 - Runs ROS in a QThread (MultiThreadedExecutor) so Qt stays responsive.
 - Includes red rounded E-STOP. Running LED reflects motion state.
+- Quieter shutdown: no noisy KeyboardInterrupt tracebacks.
+- Optional noise controls via env vars (see below).
 
 Notes:
 - Avoids Pylance type-expression issues by not annotating CvBridge directly.
 - Works with or without cv_bridge / OpenCV (falls back to numpy-only).
+
+Noise controls (set as environment variables before launching):
+- UI_SUPPRESS_QT_DEBUG=1 (default): sets QT_LOGGING_RULES to silence Qt debug.
+- UI_LOG_LEVEL=warn|info|error|debug|fatal (default: info): sets *this node* logger level.
+- UI_ROSOUT_LEVEL=warn|info|error|debug|fatal (default: info): minimum /rosout level shown in the Log panel.
+- UI_DISABLE_ROSOUT=1: do not subscribe to /rosout at all (Log panel will only show app/local messages).
 """
 
 from __future__ import annotations
 
 import sys
+import os
 import math
 from typing import Optional
 
@@ -62,6 +71,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
+from rclpy.logging import LoggingSeverity
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image as RosImage
 from rcl_interfaces.msg import Log as RosLog
@@ -89,6 +99,32 @@ class LedIndicator(QLabel):
         p.drawEllipse(0, 0, self._diameter, self._diameter)
 
 
+# ========================= helpers ================================
+
+def _level_from_str(name: str) -> LoggingSeverity:
+    name = (name or "").strip().lower()
+    return {
+        "debug": LoggingSeverity.DEBUG,
+        "info": LoggingSeverity.INFO,
+        "warn": LoggingSeverity.WARN,
+        "warning": LoggingSeverity.WARN,
+        "error": LoggingSeverity.ERROR,
+        "fatal": LoggingSeverity.FATAL,
+    }.get(name, LoggingSeverity.INFO)
+
+
+def _rosout_level_num(name: str) -> int:
+    name = (name or "").strip().lower()
+    return {
+        "debug": 10,
+        "info": 20,
+        "warn": 30,
+        "warning": 30,
+        "error": 40,
+        "fatal": 50,
+    }.get(name, 20)
+
+
 # ========================= ROS <-> Qt bridge ========================
 
 class RosSignals(QObject):
@@ -103,6 +139,16 @@ class GuiRosNode(Node):
     def __init__(self, signals: RosSignals):
         super().__init__("turtlebot_gui")
         self.signals = signals
+
+        # Honor env log level for this node
+        node_level = _level_from_str(os.environ.get("UI_LOG_LEVEL", "info"))
+        try:
+            self.get_logger().set_level(node_level)
+        except Exception:
+            pass
+
+        # Minimum /rosout level to forward to the Log panel
+        self._rosout_min_level = _rosout_level_num(os.environ.get("UI_ROSOUT_LEVEL", "info"))
 
         # QoS for sensors (best-effort) and logs (reliable).
         self.sensor_qos = QoSProfile(
@@ -121,8 +167,10 @@ class GuiRosNode(Node):
         # Publishers
         self.cmd_pub = self.create_publisher(Twist, CMD_VEL_TOPIC, 10)
 
-        # Subscribers
-        self.create_subscription(RosLog, ROSOUT_TOPIC, self._on_rosout, self.reliable_qos)
+        # Optional /rosout subscription (can be disabled or filtered)
+        if os.environ.get("UI_DISABLE_ROSOUT", "0") != "1":
+            self.create_subscription(RosLog, ROSOUT_TOPIC, self._on_rosout, self.reliable_qos)
+
         self.create_subscription(RosString, CAMERA_TOPIC_CTRL, self._on_camera_topic_switch, 10)
 
         # cv_bridge handle (typed as object to avoid Pylance issue)
@@ -145,6 +193,8 @@ class GuiRosNode(Node):
 
     # --- Sub callbacks
     def _on_rosout(self, msg: RosLog):
+        if int(getattr(msg, "level", 20)) < self._rosout_min_level:
+            return
         level_map = {10: "DEBUG", 20: "INFO", 30: "WARN", 40: "ERROR", 50: "FATAL"}
         level = level_map.get(msg.level, str(msg.level))
         self.signals.log.emit(f"[{level}] {msg.name}: {msg.msg}")
@@ -230,7 +280,6 @@ class RosWorker(QThread):
         except KeyboardInterrupt:
             # Treat Ctrl-C as a normal exit path for the worker thread
             pass
-
         except Exception as e:
             self.signals.ok.emit(False, f"ROS error: {e}")
         finally:
@@ -460,8 +509,6 @@ class ControlGUI(QWidget):
     def _update_camera(self, rgb_np):
         if self._quitting or rgb_np is None:
             return
-        if rgb_np is None:
-            return
         h, w, _ = rgb_np.shape
         qimg = QImage(rgb_np.data, w, h, 3 * w, QImage.Format_RGB888)
         pix = QPixmap.fromImage(qimg)
@@ -527,7 +574,16 @@ class ControlGUI(QWidget):
 
 # ============================== main ================================
 
+def _apply_qt_logging_rules_from_env():
+    # If user requested suppression (default), set rules iff not already defined.
+    want = os.environ.get("UI_SUPPRESS_QT_DEBUG", "1") == "1"
+    if want and "QT_LOGGING_RULES" not in os.environ:
+        # Silence most Qt debug noise; keep warnings+errors.
+        os.environ["QT_LOGGING_RULES"] = "*.debug=false;qt.qpa.*=false"
+
 def main():
+    _apply_qt_logging_rules_from_env()
+
     app = QApplication(sys.argv)
     # Suppress ugly tracebacks on a clean Ctrl-C exit.
     def _excepthook(exc_type, exc, tb):
@@ -539,6 +595,7 @@ def main():
             return
         sys.__excepthook__(exc_type, exc, tb)
     sys.excepthook = _excepthook
+
     w = ControlGUI()
     w.show()
     sys.exit(app.exec())
