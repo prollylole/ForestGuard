@@ -1,0 +1,20 @@
+[100%] Built target forest_controller
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/lib/forest_controller/forest_controller
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/include/forest_controller/controller_husky.h
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/ament_index/resource_index/package_run_dependencies/forest_controller
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/ament_index/resource_index/parent_prefix_path/forest_controller
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/ament_prefix_path.sh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/ament_prefix_path.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/path.sh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/path.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.bash
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.sh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.zsh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/package.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/ament_index/resource_index/packages/forest_controller
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig.cmake
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig-version.cmake
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/package.xml

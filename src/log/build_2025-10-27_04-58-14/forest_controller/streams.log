@@ -1,0 +1,5 @@
+[0.018s] Invoking command in '/home/claudia/ForestGuard/src/build/forest_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/forest_controller -- -j16 -l16
+[0.241s] [ 66%] [32mBuilding CXX object CMakeFiles/forest_controller.dir/src/controller_husky.cpp.o[0m
+[0.241s] [ 66%] [32mBuilding CXX object CMakeFiles/forest_controller.dir/src/main_husky.cpp.o[0m
+[14.525s] [100%] [32m[1mLinking CXX executable forest_controller[0m
+[15.534s] [100%] Built target forest_controller

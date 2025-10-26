@@ -1,0 +1,20 @@
+[100%] Built target forest_controller
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/lib/forest_controller/forest_controller
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/include/forest_controller/controller_husky.h
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/ament_index/resource_index/package_run_dependencies/forest_controller
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/ament_index/resource_index/parent_prefix_path/forest_controller
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/path.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/environment/path.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.bash
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.zsh
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/local_setup.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/package.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/ament_index/resource_index/packages/forest_controller
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig.cmake
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig-version.cmake
+-- Up-to-date symlink: /home/claudia/ForestGuard/src/install/forest_controller/share/forest_controller/package.xml

@@ -1,0 +1,4 @@
+source;share/forest_controller/local_setup.bash
+source;share/forest_controller/local_setup.dsv
+source;share/forest_controller/local_setup.sh
+source;share/forest_controller/local_setup.zsh

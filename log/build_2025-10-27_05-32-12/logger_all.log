@@ -1,0 +1,269 @@
+[0.086s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.086s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x70e5b2a12560>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x70e5b2a12050>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x70e5b2a12050>>)
+[0.235s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.236s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.236s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.236s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.236s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.236s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.236s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/claudia/ForestGuard'
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.236s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.237s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.237s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.237s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.237s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.237s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.237s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.237s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.246s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extensions ['ignore', 'ignore_ament_install']
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extension 'ignore'
+[0.247s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) ignored
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extension 'ignore'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extension 'ignore_ament_install'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extensions ['colcon_pkg']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extension 'colcon_pkg'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extensions ['colcon_meta']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extension 'colcon_meta'
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extensions ['ros']
+[0.248s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_controller) by extension 'ros'
+[0.261s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forest_controller' with type 'ros.ament_cmake' and name 'forest_controller'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extensions ['ignore', 'ignore_ament_install']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extension 'ignore'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extension 'ignore_ament_install'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extensions ['colcon_pkg']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extension 'colcon_pkg'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extensions ['colcon_meta']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extension 'colcon_meta'
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extensions ['ros']
+[0.261s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_guard_sim) by extension 'ros'
+[0.262s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forest_guard_sim' with type 'ros.ament_python' and name 'forest_guard_sim'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extensions ['ignore', 'ignore_ament_install']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extension 'ignore'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extension 'ignore_ament_install'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extensions ['colcon_pkg']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extension 'colcon_pkg'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extensions ['colcon_meta']
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extension 'colcon_meta'
+[0.262s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extensions ['ros']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(src/forest_localization) by extension 'ros'
+[0.263s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forest_localization' with type 'ros.ament_cmake' and name 'forest_localization'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extensions ['ignore', 'ignore_ament_install']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extension 'ignore'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) ignored
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extensions ['ignore', 'ignore_ament_install']
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extension 'ignore'
+[0.263s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) ignored
+[0.263s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.263s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.264s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.264s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.264s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.294s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.295s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.296s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 3 installed packages in /home/claudia/ForestGuard/install
+[0.297s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 11 installed packages in /home/claudia/ros2_ws/install
+[0.305s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 479 installed packages in /opt/ros/humble
+[0.307s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'cmake_args' from command line to 'None'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'cmake_target' from command line to 'None'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'cmake_clean_first' from command line to 'False'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'cmake_force_configure' from command line to 'False'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'ament_cmake_args' from command line to 'None'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[0.357s] Level 5:colcon.colcon_core.verb:set package 'forest_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.357s] DEBUG:colcon.colcon_core.verb:Building package 'forest_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/claudia/ForestGuard/build/forest_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/claudia/ForestGuard/install/forest_controller', 'merge_install': False, 'path': '/home/claudia/ForestGuard/src/forest_controller', 'symlink_install': True, 'test_result_base': None}
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'cmake_args' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'cmake_target' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'cmake_clean_cache' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'cmake_clean_first' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'cmake_force_configure' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'ament_cmake_args' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'catkin_cmake_args' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_guard_sim' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.358s] DEBUG:colcon.colcon_core.verb:Building package 'forest_guard_sim' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/claudia/ForestGuard/build/forest_guard_sim', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/claudia/ForestGuard/install/forest_guard_sim', 'merge_install': False, 'path': '/home/claudia/ForestGuard/src/forest_guard_sim', 'symlink_install': True, 'test_result_base': None}
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'cmake_args' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'cmake_target' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'cmake_clean_cache' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'cmake_clean_first' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'cmake_force_configure' from command line to 'False'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'ament_cmake_args' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'catkin_cmake_args' from command line to 'None'
+[0.358s] Level 5:colcon.colcon_core.verb:set package 'forest_localization' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.358s] DEBUG:colcon.colcon_core.verb:Building package 'forest_localization' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/claudia/ForestGuard/build/forest_localization', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/claudia/ForestGuard/install/forest_localization', 'merge_install': False, 'path': '/home/claudia/ForestGuard/src/forest_localization', 'symlink_install': True, 'test_result_base': None}
+[0.358s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.359s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.359s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/claudia/ForestGuard/src/forest_controller' with build type 'ament_cmake'
+[0.359s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/claudia/ForestGuard/src/forest_controller'
+[0.361s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.361s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.361s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.366s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/claudia/ForestGuard/src/forest_guard_sim' with build type 'ament_python'
+[0.366s] Level 1:colcon.colcon_core.shell:create_environment_hook('forest_guard_sim', 'ament_prefix_path')
+[0.366s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/hook/ament_prefix_path.ps1'
+[0.367s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/hook/ament_prefix_path.dsv'
+[0.367s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/hook/ament_prefix_path.sh'
+[0.368s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.368s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.372s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/claudia/ForestGuard/src/forest_localization' with build type 'ament_cmake'
+[0.372s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/claudia/ForestGuard/src/forest_localization'
+[0.372s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.372s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.382s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/claudia/ForestGuard/build/forest_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_controller -- -j16 -l16
+[0.612s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/claudia/ForestGuard/src/forest_guard_sim'
+[0.612s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.612s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.622s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/claudia/ForestGuard/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_localization -- -j16 -l16
+[0.622s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/claudia/ForestGuard/build/forest_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_controller -- -j16 -l16
+[0.627s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/claudia/ForestGuard/build/forest_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/forest_controller
+[0.639s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forest_controller)
+[0.640s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/claudia/ForestGuard/build/forest_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/forest_controller
+[0.642s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller' for CMake module files
+[0.642s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller' for CMake config files
+[0.643s] Level 1:colcon.colcon_core.shell:create_environment_hook('forest_controller', 'cmake_prefix_path')
+[0.643s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/hook/cmake_prefix_path.ps1'
+[0.643s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/hook/cmake_prefix_path.dsv'
+[0.644s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/hook/cmake_prefix_path.sh'
+[0.644s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/lib'
+[0.644s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/bin'
+[0.644s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/lib/pkgconfig/forest_controller.pc'
+[0.644s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/lib/python3.10/site-packages'
+[0.645s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/bin'
+[0.645s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.ps1'
+[0.645s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.dsv'
+[0.646s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.sh'
+[0.646s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.bash'
+[0.647s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.zsh'
+[0.647s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/claudia/ForestGuard/install/forest_controller/share/colcon-core/packages/forest_controller)
+[0.648s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forest_controller)
+[0.648s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller' for CMake module files
+[0.648s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller' for CMake config files
+[0.648s] Level 1:colcon.colcon_core.shell:create_environment_hook('forest_controller', 'cmake_prefix_path')
+[0.649s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/hook/cmake_prefix_path.ps1'
+[0.649s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/hook/cmake_prefix_path.dsv'
+[0.649s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/hook/cmake_prefix_path.sh'
+[0.650s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/lib'
+[0.650s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/bin'
+[0.650s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/lib/pkgconfig/forest_controller.pc'
+[0.650s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/lib/python3.10/site-packages'
+[0.650s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_controller/bin'
+[0.650s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.ps1'
+[0.650s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.dsv'
+[0.651s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.sh'
+[0.651s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.bash'
+[0.651s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.zsh'
+[0.652s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/claudia/ForestGuard/install/forest_controller/share/colcon-core/packages/forest_controller)
+[0.958s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/claudia/ForestGuard/build/forest_guard_sim': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data
+[1.434s] Level 1:colcon.colcon_core.shell:create_environment_hook('forest_guard_sim', 'pythonpath_develop')
+[1.435s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/build/forest_guard_sim/share/forest_guard_sim/hook/pythonpath_develop.ps1'
+[1.435s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/claudia/ForestGuard/build/forest_guard_sim' returned '0': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data
+[1.436s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/claudia/ForestGuard/build/forest_guard_sim/share/forest_guard_sim/hook/pythonpath_develop.dsv'
+[1.437s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/build/forest_guard_sim/share/forest_guard_sim/hook/pythonpath_develop.sh'
+[1.438s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_guard_sim' for CMake module files
+[1.438s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_guard_sim' for CMake config files
+[1.439s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_guard_sim/lib'
+[1.439s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_guard_sim/bin'
+[1.439s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_guard_sim/lib/pkgconfig/forest_guard_sim.pc'
+[1.439s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages'
+[1.440s] Level 1:colcon.colcon_core.shell:create_environment_hook('forest_guard_sim', 'pythonpath')
+[1.440s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/hook/pythonpath.ps1'
+[1.440s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/hook/pythonpath.dsv'
+[1.440s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/hook/pythonpath.sh'
+[1.441s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_guard_sim/bin'
+[1.441s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forest_guard_sim)
+[1.441s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/package.ps1'
+[1.441s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/package.dsv'
+[1.442s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/package.sh'
+[1.442s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/package.bash'
+[1.442s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_guard_sim/share/forest_guard_sim/package.zsh'
+[1.443s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/claudia/ForestGuard/install/forest_guard_sim/share/colcon-core/packages/forest_guard_sim)
+[9.098s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/claudia/ForestGuard/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_localization -- -j16 -l16
+[9.100s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/claudia/ForestGuard/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/forest_localization
+[9.112s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forest_localization)
+[9.113s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization' for CMake module files
+[9.113s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/claudia/ForestGuard/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/forest_localization
+[9.113s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization' for CMake config files
+[9.114s] Level 1:colcon.colcon_core.shell:create_environment_hook('forest_localization', 'cmake_prefix_path')
+[9.114s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/hook/cmake_prefix_path.ps1'
+[9.114s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/hook/cmake_prefix_path.dsv'
+[9.115s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/hook/cmake_prefix_path.sh'
+[9.115s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/lib'
+[9.115s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/bin'
+[9.115s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/lib/pkgconfig/forest_localization.pc'
+[9.115s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/lib/python3.10/site-packages'
+[9.116s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/bin'
+[9.116s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.ps1'
+[9.116s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.dsv'
+[9.117s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.sh'
+[9.117s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.bash'
+[9.117s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.zsh'
+[9.117s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/claudia/ForestGuard/install/forest_localization/share/colcon-core/packages/forest_localization)
+[9.118s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forest_localization)
+[9.118s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization' for CMake module files
+[9.119s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization' for CMake config files
+[9.119s] Level 1:colcon.colcon_core.shell:create_environment_hook('forest_localization', 'cmake_prefix_path')
+[9.119s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/hook/cmake_prefix_path.ps1'
+[9.120s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/hook/cmake_prefix_path.dsv'
+[9.121s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/hook/cmake_prefix_path.sh'
+[9.121s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/lib'
+[9.121s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/bin'
+[9.121s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/lib/pkgconfig/forest_localization.pc'
+[9.121s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/lib/python3.10/site-packages'
+[9.122s] Level 1:colcon.colcon_core.environment:checking '/home/claudia/ForestGuard/install/forest_localization/bin'
+[9.122s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.ps1'
+[9.122s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.dsv'
+[9.123s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.sh'
+[9.123s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.bash'
+[9.124s] INFO:colcon.colcon_core.shell:Creating package script '/home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.zsh'
+[9.124s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/claudia/ForestGuard/install/forest_localization/share/colcon-core/packages/forest_localization)
+[9.124s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[9.124s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[9.124s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[9.125s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[9.130s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[9.130s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[9.130s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[9.141s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[9.142s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/claudia/ForestGuard/install/local_setup.ps1'
+[9.143s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/claudia/ForestGuard/install/_local_setup_util_ps1.py'
+[9.144s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/claudia/ForestGuard/install/setup.ps1'
+[9.145s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/claudia/ForestGuard/install/local_setup.sh'
+[9.146s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/claudia/ForestGuard/install/_local_setup_util_sh.py'
+[9.146s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/claudia/ForestGuard/install/setup.sh'
+[9.147s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/claudia/ForestGuard/install/local_setup.bash'
+[9.148s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/claudia/ForestGuard/install/setup.bash'
+[9.149s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/claudia/ForestGuard/install/local_setup.zsh'
+[9.149s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/claudia/ForestGuard/install/setup.zsh'

@@ -1,0 +1,1 @@
+/home/claudia/ForestGuard/src/forest_localization/include/forest_localization/amcl_localization.h

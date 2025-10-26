@@ -1,0 +1,85 @@
+[0.549s] Invoking command in '/home/claudia/ForestGuard/src/build/forest_guard_sim': PYTHONPATH=/home/claudia/ForestGuard/src/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/src/build/forest_guard_sim/build --no-deps symlink_data
+[0.769s] running develop
+[0.940s] running egg_info
+[0.940s] creating forest_guard_sim.egg-info
+[0.940s] writing forest_guard_sim.egg-info/PKG-INFO
+[0.941s] writing dependency_links to forest_guard_sim.egg-info/dependency_links.txt
+[0.941s] writing entry points to forest_guard_sim.egg-info/entry_points.txt
+[0.941s] writing requirements to forest_guard_sim.egg-info/requires.txt
+[0.941s] writing top-level names to forest_guard_sim.egg-info/top_level.txt
+[0.941s] writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[0.943s] reading manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[0.944s] writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[0.945s] running build_ext
+[0.945s] Creating /home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages/forest-guard-sim.egg-link (link to .)
+[0.946s] 
+[0.946s] Installed /home/claudia/ForestGuard/src/build/forest_guard_sim
+[0.946s] running symlink_data
+[0.946s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index
+[0.946s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index/resource_index
+[0.946s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index/resource_index/packages
+[0.946s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/resource/forest_guard_sim -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/ament_index/resource_index/packages
+[0.946s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/package.xml -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim
+[0.946s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.946s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/sample -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/navigation_map.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/large_forest_husky.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/forest_world.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/41068_ignition.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/forest_random.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/random_forest_husky.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/forest_mapping.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/launch/autonomous_forest.launch.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/launch
+[0.947s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/config
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/config/forest.rviz -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/config
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/config/robot_localization.yaml -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/config
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/config/slam_params.yaml -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/config
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/config/nav2_params.yaml -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/config
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/config/gazebo_bridge.yaml -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/config
+[0.947s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/worlds
+[0.947s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/worlds/forest.world.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/worlds
+[0.947s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models
+[0.947s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree1/model.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree1/model.config -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials/textures
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree1/materials/textures/bark01.jpg -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/materials/textures
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/meshes
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree1/meshes/tree_a.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree1/meshes
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/forest_env/model.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/forest_env/model.config -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials/textures
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/forest_env/materials/textures/empty_grass.png -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/materials/textures
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/meshes
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/forest_env/meshes/Environment1.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/forest_env/meshes
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree2/model.sdf -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+[0.948s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree2/model.config -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2
+[0.948s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials
+[0.949s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials/textures
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree2/materials/textures/bark.jpeg -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/materials/textures
+[0.949s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/meshes
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/models/tree2/meshes/tree_b.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/models/tree2/meshes
+[0.949s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/husky.urdf.xacro -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/wheel.urdf.xacro -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/common_properties.urdf.xacro -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/husky.gazebo.xacro -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf
+[0.949s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/meshes/jpl04_arch_nosensor.stl -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/meshes/wheel.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/meshes/base_link.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/meshes/bumper.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/meshes/top_plate.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+[0.949s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/urdf/meshes/top_chassis.dae -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/urdf/meshes
+[0.949s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/test
+[0.950s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/test/test_pep257.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/test
+[0.950s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/test/test_copyright.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/test
+[0.950s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/test/test_flake8.py -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/test
+[0.950s] creating /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/maps
+[0.950s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/maps/forest_map.yaml -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/maps
+[0.950s] symbolically linking /home/claudia/ForestGuard/src/build/forest_guard_sim/maps/forest_map.pgm -> /home/claudia/ForestGuard/src/install/forest_guard_sim/share/forest_guard_sim/maps
+[0.981s] Invoked command in '/home/claudia/ForestGuard/src/build/forest_guard_sim' returned '0': PYTHONPATH=/home/claudia/ForestGuard/src/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/src/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/src/build/forest_guard_sim/build --no-deps symlink_data

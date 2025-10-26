@@ -8,6 +8,7 @@
       "includePath": [
         "/opt/ros/humble/include/**",
         "/home/claudia/ForestGuard/src/forest_controller/include/**",
+        "/home/claudia/ForestGuard/src/forest_localization/include/**",
         "include/**",
         "/usr/include/**"
       ],

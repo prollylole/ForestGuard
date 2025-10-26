@@ -1,0 +1,1 @@
+/home/claudia/ForestGuard/build/forest_localization/ament_cmake_core/forest_localizationConfig.cmake

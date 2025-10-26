@@ -1,0 +1,54 @@
+[0.224s] Invoking command in '/home/claudia/ForestGuard/src/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/forest_localization -- -j16 -l16
+[0.238s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.304s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.309s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.334s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.336s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.340s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.349s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.358s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.383s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.384s] -- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.497s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.537s] -- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.546s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.558s] -- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.618s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.621s] -- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)
+[0.643s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.696s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.696s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/claudia/ForestGuard/src/forest_localization/include>
+[0.696s] -- Configured cppcheck exclude dirs and/or files: 
+[0.697s] -- Added test 'lint_cmake' to check CMake code style
+[0.698s] -- Added test 'uncrustify' to check C / C++ code style
+[0.698s] -- Configured uncrustify additional arguments: 
+[0.698s] -- Added test 'xmllint' to check XML markup files
+[0.699s] -- Configuring done
+[0.711s] -- Generating done
+[0.716s] -- Build files have been written to: /home/claudia/ForestGuard/src/build/forest_localization
+[0.739s] [ 33%] [32mBuilding CXX object CMakeFiles/forest_localization.dir/src/amcl_localization.cpp.o[0m
+[0.739s] [ 66%] [32mBuilding CXX object CMakeFiles/forest_localization.dir/src/main_amcl.cpp.o[0m
+[7.338s] [100%] [32m[1mLinking CXX executable forest_localization[0m
+[7.642s] [100%] Built target forest_localization
+[7.648s] Invoked command in '/home/claudia/ForestGuard/src/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/src/build/forest_localization -- -j16 -l16
+[7.649s] Invoking command in '/home/claudia/ForestGuard/src/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/forest_localization
+[7.652s] -- Install configuration: ""
+[7.652s] -- Execute custom install script
+[7.652s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/lib/forest_localization/forest_localization
+[7.655s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/include/forest_localization/amcl_localization.h
+[7.658s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/ament_index/resource_index/package_run_dependencies/forest_localization
+[7.661s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/ament_index/resource_index/parent_prefix_path/forest_localization
+[7.664s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/ament_prefix_path.sh
+[7.667s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/ament_prefix_path.dsv
+[7.669s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/path.sh
+[7.672s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/path.dsv
+[7.675s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.bash
+[7.677s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.sh
+[7.680s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.zsh
+[7.683s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.dsv
+[7.685s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/package.dsv
+[7.688s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/ament_index/resource_index/packages/forest_localization
+[7.691s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig.cmake
+[7.693s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig-version.cmake
+[7.696s] -- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/package.xml
+[7.700s] Invoked command in '/home/claudia/ForestGuard/src/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/src/build/forest_localization

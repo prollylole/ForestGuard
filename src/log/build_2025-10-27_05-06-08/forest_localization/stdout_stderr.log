@@ -1,0 +1,50 @@
+-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.8 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)
+-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+-- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)
+-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+-- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)
+-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/claudia/ForestGuard/src/forest_localization/include>
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/claudia/ForestGuard/src/build/forest_localization
+[ 33%] [32mBuilding CXX object CMakeFiles/forest_localization.dir/src/amcl_localization.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/forest_localization.dir/src/main_amcl.cpp.o[0m
+[100%] [32m[1mLinking CXX executable forest_localization[0m
+[100%] Built target forest_localization
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/lib/forest_localization/forest_localization
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/include/forest_localization/amcl_localization.h
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/ament_index/resource_index/package_run_dependencies/forest_localization
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/ament_index/resource_index/parent_prefix_path/forest_localization
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/ament_prefix_path.sh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/ament_prefix_path.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/path.sh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/environment/path.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.bash
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.sh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.zsh
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/local_setup.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/package.dsv
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/ament_index/resource_index/packages/forest_localization
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig.cmake
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig-version.cmake
+-- Symlinking: /home/claudia/ForestGuard/src/install/forest_localization/share/forest_localization/package.xml
