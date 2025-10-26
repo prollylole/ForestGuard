@@ -1,0 +1,225 @@
+[0.000000] (-) TimerEvent: {}
+[0.000440] (forest_controller) JobQueued: {'identifier': 'forest_controller', 'dependencies': OrderedDict()}
+[0.000637] (forest_guard_sim) JobQueued: {'identifier': 'forest_guard_sim', 'dependencies': OrderedDict()}
+[0.000662] (forest_controller) JobStarted: {'identifier': 'forest_controller'}
+[0.006620] (forest_guard_sim) JobStarted: {'identifier': 'forest_guard_sim'}
+[0.016006] (forest_controller) JobProgress: {'identifier': 'forest_controller', 'progress': 'cmake'}
+[0.016648] (forest_controller) JobProgress: {'identifier': 'forest_controller', 'progress': 'build'}
+[0.017432] (forest_controller) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/claudia/ForestGuard/build/forest_controller', '--', '-j16', '-l16'], 'cwd': '/home/claudia/ForestGuard/build/forest_controller', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1094'), ('SYSTEMD_EXEC_PID', '1216'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '1832'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:2394'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/1188,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/1188'), ('INVOCATION_ID', 'a0133888530646a2909a5348ac0567aa'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.F101E3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ForestGuard/install/forest_controller:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:e2ddb7f4-1791-4e4b-b079-e77a3c21b803'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/build/forest_controller'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/ForestGuard/build/forest_guard_sim:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/forest_controller:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[0.061783] (forest_controller) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/forest_controller.dir/src/controller_husky.cpp.o\x1b[0m\n'}
+[0.099790] (-) TimerEvent: {}
+[0.200074] (-) TimerEvent: {}
+[0.300392] (-) TimerEvent: {}
+[0.400682] (-) TimerEvent: {}
+[0.500985] (-) TimerEvent: {}
+[0.601273] (-) TimerEvent: {}
+[0.674155] (forest_guard_sim) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/claudia/ForestGuard/build/forest_guard_sim/build', '--no-deps', 'symlink_data'], 'cwd': '/home/claudia/ForestGuard/build/forest_guard_sim', 'env': {'GZ_SIM_SYSTEM_PLUGIN_PATH': '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins', 'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/home/claudia/ForestGuard/src/my_drone_pkg/models:', 'LANGUAGE': 'en_AU:en', 'USER': 'claudia', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/claudia', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/terminator.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'MANAGERPID': '1094', 'SYSTEMD_EXEC_PID': '1216', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'TERMINATOR_DBUS_NAME': 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '1832', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/claudia/ForestGuard/install:/home/claudia/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'claudia', 'JOURNAL_STREAM': '8:2394', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'claudia', 'STM32_PRG_PATH': '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/1188,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/1188', 'INVOCATION_ID': 'a0133888530646a2909a5348ac0567aa', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'TERMINATOR_DBUS_PATH': '/net/tenshu/Terminator2', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'IBUS_DISABLE_SNOOPER': '1', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.F101E3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ForestGuard/install/forest_controller:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble', 'SHELL': '/bin/bash', 'TERMINATOR_UUID': 'urn:uuid:e2ddb7f4-1791-4e4b-b079-e77a3c21b803', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'IGN_GAZEBO_RESOURCE_PATH': ':/home/claudia/ForestGuard/src/forest_guard_sim/models', 'GAZEBO_RESOURCE_PATH': '/usr/share/gazebo-11', 'GJS_DEBUG_OUTPUT': 'stderr', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/claudia/ForestGuard/build/forest_guard_sim', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:/home/claudia/ForestGuard/build/forest_guard_sim:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'VTE_VERSION': '6800', 'CMAKE_PREFIX_PATH': '/home/claudia/ForestGuard/install/forest_controller:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton'}, 'shell': False}
+[0.701374] (-) TimerEvent: {}
+[0.801668] (-) TimerEvent: {}
+[0.901992] (-) TimerEvent: {}
+[0.936483] (forest_guard_sim) StdoutLine: {'line': b'running develop\n'}
+[1.002100] (-) TimerEvent: {}
+[1.102414] (-) TimerEvent: {}
+[1.121363] (forest_guard_sim) StdoutLine: {'line': b'running egg_info\n'}
+[1.121578] (forest_guard_sim) StdoutLine: {'line': b'writing forest_guard_sim.egg-info/PKG-INFO\n'}
+[1.121833] (forest_guard_sim) StdoutLine: {'line': b'writing dependency_links to forest_guard_sim.egg-info/dependency_links.txt\n'}
+[1.121939] (forest_guard_sim) StdoutLine: {'line': b'writing entry points to forest_guard_sim.egg-info/entry_points.txt\n'}
+[1.122052] (forest_guard_sim) StdoutLine: {'line': b'writing requirements to forest_guard_sim.egg-info/requires.txt\n'}
+[1.122172] (forest_guard_sim) StdoutLine: {'line': b'writing top-level names to forest_guard_sim.egg-info/top_level.txt\n'}
+[1.124501] (forest_guard_sim) StdoutLine: {'line': b"reading manifest file 'forest_guard_sim.egg-info/SOURCES.txt'\n"}
+[1.125681] (forest_guard_sim) StdoutLine: {'line': b"writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'\n"}
+[1.127039] (forest_guard_sim) StdoutLine: {'line': b'running build_ext\n'}
+[1.127253] (forest_guard_sim) StdoutLine: {'line': b'Creating /home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages/forest-guard-sim.egg-link (link to .)\n'}
+[1.128148] (forest_guard_sim) StdoutLine: {'line': b'\n'}
+[1.128232] (forest_guard_sim) StdoutLine: {'line': b'Installed /home/claudia/ForestGuard/build/forest_guard_sim\n'}
+[1.128330] (forest_guard_sim) StdoutLine: {'line': b'running symlink_data\n'}
+[1.173642] (forest_guard_sim) CommandEnded: {'returncode': 0}
+[1.185878] (forest_guard_sim) JobEnded: {'identifier': 'forest_guard_sim', 'rc': 0}
+[1.202515] (-) TimerEvent: {}
+[1.302812] (-) TimerEvent: {}
+[1.403140] (-) TimerEvent: {}
+[1.503445] (-) TimerEvent: {}
+[1.603742] (-) TimerEvent: {}
+[1.704038] (-) TimerEvent: {}
+[1.804332] (-) TimerEvent: {}
+[1.904615] (-) TimerEvent: {}
+[2.004903] (-) TimerEvent: {}
+[2.105201] (-) TimerEvent: {}
+[2.205484] (-) TimerEvent: {}
+[2.305766] (-) TimerEvent: {}
+[2.406064] (-) TimerEvent: {}
+[2.506368] (-) TimerEvent: {}
+[2.606700] (-) TimerEvent: {}
+[2.707006] (-) TimerEvent: {}
+[2.807694] (-) TimerEvent: {}
+[2.907990] (-) TimerEvent: {}
+[3.008298] (-) TimerEvent: {}
+[3.108597] (-) TimerEvent: {}
+[3.208892] (-) TimerEvent: {}
+[3.309223] (-) TimerEvent: {}
+[3.409588] (-) TimerEvent: {}
+[3.509896] (-) TimerEvent: {}
+[3.610203] (-) TimerEvent: {}
+[3.710501] (-) TimerEvent: {}
+[3.810793] (-) TimerEvent: {}
+[3.911091] (-) TimerEvent: {}
+[4.011390] (-) TimerEvent: {}
+[4.111684] (-) TimerEvent: {}
+[4.211975] (-) TimerEvent: {}
+[4.312276] (-) TimerEvent: {}
+[4.412565] (-) TimerEvent: {}
+[4.512856] (-) TimerEvent: {}
+[4.613148] (-) TimerEvent: {}
+[4.713440] (-) TimerEvent: {}
+[4.813738] (-) TimerEvent: {}
+[4.914056] (-) TimerEvent: {}
+[5.014377] (-) TimerEvent: {}
+[5.114708] (-) TimerEvent: {}
+[5.215045] (-) TimerEvent: {}
+[5.315404] (-) TimerEvent: {}
+[5.415730] (-) TimerEvent: {}
+[5.516103] (-) TimerEvent: {}
+[5.616497] (-) TimerEvent: {}
+[5.716809] (-) TimerEvent: {}
+[5.817130] (-) TimerEvent: {}
+[5.917508] (-) TimerEvent: {}
+[6.017854] (-) TimerEvent: {}
+[6.118166] (-) TimerEvent: {}
+[6.218560] (-) TimerEvent: {}
+[6.318920] (-) TimerEvent: {}
+[6.419300] (-) TimerEvent: {}
+[6.519632] (-) TimerEvent: {}
+[6.619931] (-) TimerEvent: {}
+[6.720261] (-) TimerEvent: {}
+[6.820569] (-) TimerEvent: {}
+[6.920910] (-) TimerEvent: {}
+[7.021257] (-) TimerEvent: {}
+[7.121578] (-) TimerEvent: {}
+[7.221898] (-) TimerEvent: {}
+[7.322210] (-) TimerEvent: {}
+[7.422527] (-) TimerEvent: {}
+[7.522924] (-) TimerEvent: {}
+[7.623396] (-) TimerEvent: {}
+[7.723733] (-) TimerEvent: {}
+[7.824060] (-) TimerEvent: {}
+[7.924393] (-) TimerEvent: {}
+[8.024706] (-) TimerEvent: {}
+[8.125010] (-) TimerEvent: {}
+[8.225323] (-) TimerEvent: {}
+[8.325629] (-) TimerEvent: {}
+[8.425939] (-) TimerEvent: {}
+[8.526250] (-) TimerEvent: {}
+[8.626547] (-) TimerEvent: {}
+[8.726849] (-) TimerEvent: {}
+[8.827144] (-) TimerEvent: {}
+[8.927441] (-) TimerEvent: {}
+[9.027754] (-) TimerEvent: {}
+[9.128075] (-) TimerEvent: {}
+[9.228387] (-) TimerEvent: {}
+[9.328844] (-) TimerEvent: {}
+[9.429210] (-) TimerEvent: {}
+[9.529547] (-) TimerEvent: {}
+[9.629875] (-) TimerEvent: {}
+[9.730286] (-) TimerEvent: {}
+[9.830711] (-) TimerEvent: {}
+[9.931003] (-) TimerEvent: {}
+[10.031864] (-) TimerEvent: {}
+[10.132189] (-) TimerEvent: {}
+[10.232545] (-) TimerEvent: {}
+[10.332867] (-) TimerEvent: {}
+[10.433178] (-) TimerEvent: {}
+[10.533509] (-) TimerEvent: {}
+[10.633881] (-) TimerEvent: {}
+[10.734559] (-) TimerEvent: {}
+[10.834859] (-) TimerEvent: {}
+[10.935169] (-) TimerEvent: {}
+[11.035518] (-) TimerEvent: {}
+[11.135832] (-) TimerEvent: {}
+[11.236512] (-) TimerEvent: {}
+[11.336803] (-) TimerEvent: {}
+[11.437147] (-) TimerEvent: {}
+[11.537444] (-) TimerEvent: {}
+[11.637732] (-) TimerEvent: {}
+[11.738026] (-) TimerEvent: {}
+[11.838347] (-) TimerEvent: {}
+[11.938656] (-) TimerEvent: {}
+[12.039119] (-) TimerEvent: {}
+[12.139415] (-) TimerEvent: {}
+[12.239712] (-) TimerEvent: {}
+[12.340030] (-) TimerEvent: {}
+[12.440344] (-) TimerEvent: {}
+[12.540673] (-) TimerEvent: {}
+[12.640987] (-) TimerEvent: {}
+[12.741316] (-) TimerEvent: {}
+[12.841635] (-) TimerEvent: {}
+[12.941931] (-) TimerEvent: {}
+[13.042264] (-) TimerEvent: {}
+[13.142583] (-) TimerEvent: {}
+[13.242880] (-) TimerEvent: {}
+[13.343196] (-) TimerEvent: {}
+[13.443506] (-) TimerEvent: {}
+[13.544436] (-) TimerEvent: {}
+[13.644748] (-) TimerEvent: {}
+[13.745455] (-) TimerEvent: {}
+[13.845776] (-) TimerEvent: {}
+[13.946162] (-) TimerEvent: {}
+[14.046689] (-) TimerEvent: {}
+[14.147129] (-) TimerEvent: {}
+[14.247542] (-) TimerEvent: {}
+[14.347855] (-) TimerEvent: {}
+[14.448182] (-) TimerEvent: {}
+[14.548490] (-) TimerEvent: {}
+[14.648797] (-) TimerEvent: {}
+[14.749154] (-) TimerEvent: {}
+[14.849487] (-) TimerEvent: {}
+[14.950050] (-) TimerEvent: {}
+[15.050401] (-) TimerEvent: {}
+[15.150709] (-) TimerEvent: {}
+[15.251010] (-) TimerEvent: {}
+[15.351337] (-) TimerEvent: {}
+[15.451645] (-) TimerEvent: {}
+[15.551966] (-) TimerEvent: {}
+[15.652283] (-) TimerEvent: {}
+[15.752593] (-) TimerEvent: {}
+[15.852913] (-) TimerEvent: {}
+[15.953243] (-) TimerEvent: {}
+[16.053578] (-) TimerEvent: {}
+[16.153947] (-) TimerEvent: {}
+[16.254248] (-) TimerEvent: {}
+[16.265451] (forest_controller) StdoutLine: {'line': b'\x1b[32m\x1b[1mLinking CXX executable forest_controller\x1b[0m\n'}
+[16.354374] (-) TimerEvent: {}
+[16.454694] (-) TimerEvent: {}
+[16.555016] (-) TimerEvent: {}
+[16.655336] (-) TimerEvent: {}
+[16.755648] (-) TimerEvent: {}
+[16.855958] (-) TimerEvent: {}
+[16.956296] (-) TimerEvent: {}
+[17.056619] (-) TimerEvent: {}
+[17.157197] (-) TimerEvent: {}
+[17.257533] (-) TimerEvent: {}
+[17.271741] (forest_controller) StdoutLine: {'line': b'Built target forest_controller\n'}
+[17.276378] (forest_controller) CommandEnded: {'returncode': 0}
+[17.276905] (forest_controller) JobProgress: {'identifier': 'forest_controller', 'progress': 'install'}
+[17.280462] (forest_controller) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/claudia/ForestGuard/build/forest_controller'], 'cwd': '/home/claudia/ForestGuard/build/forest_controller', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'), ('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('GZ_SIM_RESOURCE_PATH', '/home/claudia/ForestGuard/src/my_drone_pkg/models:'), ('LANGUAGE', 'en_AU:en'), ('USER', 'claudia'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/claudia'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1094'), ('SYSTEMD_EXEC_PID', '1216'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '1832'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/claudia/ForestGuard/install:/home/claudia/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'claudia'), ('JOURNAL_STREAM', '8:2394'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'claudia'), ('STM32_PRG_PATH', '/home/claudia/STMicroelectronics/STM32Cube/STM32CubeProgrammer/binsource:/opt/ros/humble/setup.bash'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/claudia/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/claudia-Swift-SFX14-41G:@/tmp/.ICE-unix/1188,unix/claudia-Swift-SFX14-41G:/tmp/.ICE-unix/1188'), ('INVOCATION_ID', 'a0133888530646a2909a5348ac0567aa'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.F101E3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ForestGuard/install/forest_controller:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/home/claudia/ros2_ws/install/a3_skeleton:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:e2ddb7f4-1791-4e4b-b079-e77a3c21b803'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('IGN_GAZEBO_RESOURCE_PATH', ':/home/claudia/ForestGuard/src/forest_guard_sim/models'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/claudia/ForestGuard/build/forest_controller'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/claudia/ForestGuard/build/forest_guard_sim:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/claudia/ForestGuard/install/forest_controller:/home/claudia/ros2_ws/install/week11_quad_solution:/home/claudia/ros2_ws/install/week11_quad:/home/claudia/ros2_ws/install/week10_quad:/home/claudia/ros2_ws/install/week10_laser:/home/claudia/ros2_ws/install/srv_client_checks:/home/claudia/ros2_ws/install/quiz5:/home/claudia/ros2_ws/install/grid_example:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_subscriber:/home/claudia/ros2_ws/install/a3_skeleton:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble')]), 'shell': False}
+[17.282451] (forest_controller) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[17.282827] (forest_controller) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[17.283063] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/lib/forest_controller/forest_controller\n'}
+[17.283323] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/include/forest_controller/controller_husky.h\n'}
+[17.283473] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/ament_index/resource_index/package_run_dependencies/forest_controller\n'}
+[17.283601] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/ament_index/resource_index/parent_prefix_path/forest_controller\n'}
+[17.283725] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/ament_prefix_path.sh\n'}
+[17.283832] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/ament_prefix_path.dsv\n'}
+[17.283944] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/path.sh\n'}
+[17.284051] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/path.dsv\n'}
+[17.284172] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.bash\n'}
+[17.284278] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.sh\n'}
+[17.284380] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.zsh\n'}
+[17.284482] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.dsv\n'}
+[17.284555] (forest_controller) StdoutLine: {'line': b'-- Symlinking: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.dsv\n'}
+[17.287554] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/ament_index/resource_index/packages/forest_controller\n'}
+[17.287695] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig.cmake\n'}
+[17.287802] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig-version.cmake\n'}
+[17.287933] (forest_controller) StdoutLine: {'line': b'-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.xml\n'}
+[17.288860] (forest_controller) CommandEnded: {'returncode': 0}
+[17.297756] (forest_controller) JobEnded: {'identifier': 'forest_controller', 'rc': 0}
+[17.298371] (-) EventReactorShutdown: {}

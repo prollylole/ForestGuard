@@ -1,0 +1,10 @@
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/uninstall.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/forest_controller_uninstall.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/forest_controller.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/test.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/edit_cache.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/rebuild_cache.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/list_install_components.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/install.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/install/local.dir
+/home/claudia/ForestGuard/build/forest_controller/CMakeFiles/install/strip.dir

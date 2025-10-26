@@ -1,1 +1,0 @@
-/home/claudia/ForestGuard/build/forest_guard_sim/launch/ign_navigation_launch.py

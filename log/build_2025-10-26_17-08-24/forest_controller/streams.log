@@ -1,0 +1,26 @@
+[0.018s] Invoking command in '/home/claudia/ForestGuard/build/forest_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_controller -- -j16 -l16
+[0.066s] [ 33%] [32mBuilding CXX object CMakeFiles/forest_controller.dir/src/controller_husky.cpp.o[0m
+[14.867s] [ 66%] [32m[1mLinking CXX executable forest_controller[0m
+[16.095s] [100%] Built target forest_controller
+[16.102s] Invoked command in '/home/claudia/ForestGuard/build/forest_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_controller -- -j16 -l16
+[16.107s] Invoking command in '/home/claudia/ForestGuard/build/forest_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/forest_controller
+[16.109s] -- Install configuration: ""
+[16.109s] -- Execute custom install script
+[16.110s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/lib/forest_controller/forest_controller
+[16.110s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/include/forest_controller/controller_husky.h
+[16.110s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/ament_index/resource_index/package_run_dependencies/forest_controller
+[16.110s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/ament_index/resource_index/parent_prefix_path/forest_controller
+[16.110s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/ament_prefix_path.sh
+[16.110s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/ament_prefix_path.dsv
+[16.110s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/path.sh
+[16.111s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/environment/path.dsv
+[16.111s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.bash
+[16.111s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.sh
+[16.111s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.zsh
+[16.111s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/local_setup.dsv
+[16.111s] -- Symlinking: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.dsv
+[16.116s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/ament_index/resource_index/packages/forest_controller
+[16.116s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig.cmake
+[16.116s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/cmake/forest_controllerConfig-version.cmake
+[16.116s] -- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_controller/share/forest_controller/package.xml
+[16.118s] Invoked command in '/home/claudia/ForestGuard/build/forest_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --install /home/claudia/ForestGuard/build/forest_controller

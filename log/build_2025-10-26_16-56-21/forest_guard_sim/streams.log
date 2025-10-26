@@ -1,0 +1,16 @@
+[0.527s] Invoking command in '/home/claudia/ForestGuard/build/forest_guard_sim': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data
+[0.743s] running develop
+[0.908s] running egg_info
+[0.908s] writing forest_guard_sim.egg-info/PKG-INFO
+[0.908s] writing dependency_links to forest_guard_sim.egg-info/dependency_links.txt
+[0.908s] writing entry points to forest_guard_sim.egg-info/entry_points.txt
+[0.908s] writing requirements to forest_guard_sim.egg-info/requires.txt
+[0.908s] writing top-level names to forest_guard_sim.egg-info/top_level.txt
+[0.910s] reading manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[0.911s] writing manifest file 'forest_guard_sim.egg-info/SOURCES.txt'
+[0.912s] running build_ext
+[0.912s] Creating /home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages/forest-guard-sim.egg-link (link to .)
+[0.913s] 
+[0.913s] Installed /home/claudia/ForestGuard/build/forest_guard_sim
+[0.913s] running symlink_data
+[0.943s] Invoked command in '/home/claudia/ForestGuard/build/forest_guard_sim' returned '0': PYTHONPATH=/home/claudia/ForestGuard/build/forest_guard_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/claudia/ForestGuard/install/forest_guard_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/claudia/ForestGuard/build/forest_guard_sim/build --no-deps symlink_data

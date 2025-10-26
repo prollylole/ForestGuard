@@ -1,0 +1,10 @@
+[0.027s] Invoking command in '/home/claudia/ForestGuard/build/forest_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_controller -- -j16 -l16
+[0.077s] [ 50%] [32mBuilding CXX object CMakeFiles/forest_controller.dir/src/controller_husky.cpp.o[0m
+[0.092s] [01m[K/home/claudia/ForestGuard/src/forest_controller/src/controller_husky.cpp:13:10:[m[K [01;31m[Kfatal error: [m[Kforest_controller/controller_husky.h: No such file or directory
+[0.092s]    13 | #include [01;31m[K"forest_controller/controller_husky.h"[m[K
+[0.092s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.092s] compilation terminated.
+[0.093s] gmake[2]: *** [CMakeFiles/forest_controller.dir/build.make:76: CMakeFiles/forest_controller.dir/src/controller_husky.cpp.o] Error 1
+[0.093s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/forest_controller.dir/all] Error 2
+[0.094s] gmake: *** [Makefile:146: all] Error 2
+[0.452s] Invoked command in '/home/claudia/ForestGuard/build/forest_controller' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/claudia/ForestGuard/install/forest_guard_sim:/home/claudia/ros2_ws/install/examples_rclcpp_minimal_publisher:/home/claudia/ros2_ws/install/a3_support:/opt/ros/humble /usr/bin/cmake --build /home/claudia/ForestGuard/build/forest_controller -- -j16 -l16

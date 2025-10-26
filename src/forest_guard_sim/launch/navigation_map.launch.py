@@ -1,9 +1,10 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, GroupAction
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.actions import SetRemap
 
 
 def generate_launch_description():
@@ -86,18 +87,24 @@ def generate_launch_description():
     # )
 
     # Include Nav2 bringup for the rest of navigation stack
-    nav2_bringup_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution([nav2_bringup_pkg, 'launch', 'bringup_launch.py'])
-        ),
-        launch_arguments={
-            'use_sim_time': use_sim_time,
-            'params_file': params_file,
-            'map': map_yaml_file,  # Pass the map file here!
-            'autostart': 'true',
-            'map_subscribe_transient_local': 'true'
-        }.items()
+    nav2_bringup_include = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource(
+        PathJoinSubstitution([nav2_bringup_pkg, 'launch', 'bringup_launch.py'])
+    ),
+    launch_arguments={
+        'use_sim_time': use_sim_time,
+        'params_file': params_file,
+        'map': map_yaml_file,
+        'autostart': 'true',
+        'map_subscribe_transient_local': 'true'
+    }.items(),
     )
+
+    # Group with remapping for odometry
+    nav2_bringup_cmd = GroupAction([
+        SetRemap(src='/odom', dst='/odometry/filtered'),
+        nav2_bringup_include
+    ])
 
     # Add all commands to launch description
     ld.add_action(declare_use_sim_time_cmd)
