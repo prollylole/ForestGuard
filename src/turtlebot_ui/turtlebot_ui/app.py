@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 """
-PySide6 + ROS 2 GUI for TurtleBot / Husky control (compressed camera + frame-drop).
+PySide6 + ROS 2 GUI for TurtleBot / Husky control (raw/optional compressed camera).
 
-- Publishes /cmd_vel (Twist) at 20 Hz while D-pad buttons are held.
+- Publishes /cmd_vel (Twist) at 20 Hz while GUI D-pad buttons are held.
 - Subscribes to /camera/image[/compressed] -> shows in camera panel.
 - Listens on /ui/camera_topic (String) to switch camera source at runtime.
 - Subscribes to /rosout (Log) -> streams to Log panel (filterable).
 - (Optional) Subscribes to /camera/depth/points and logs a decimated count.
+- Subscribes to /joy (sensor_msgs/Joy) just to read *D-pad* clicks:
+    • D-pad Up -> bump GUI slider +1 step
+    • D-pad Down -> bump GUI slider -1 step
+  (Gamepad joysticks are *not* handled here; keep your existing joystick node.)
 - Runs ROS in a QThread (MultiThreadedExecutor) so Qt stays responsive.
 - Includes red rounded E-STOP. Running LED reflects motion state.
 - Image pipeline stores only the LATEST frame and emits at a fixed rate to avoid backlog.
+
+NO MIDDLEMAN: The speed slider only scales the GUI’s own /cmd_vel. Your joystick node still publishes to /cmd_vel as usual.
 
 Env knobs:
   UI_SUPPRESS_QT_DEBUG=1 (default): silence noisy Qt debug logs.
@@ -17,14 +23,21 @@ Env knobs:
   UI_ROSOUT_LEVEL=warn|info|error|debug|fatal (default: info): min /rosout level shown.
   UI_DISABLE_ROSOUT=1: don't subscribe to /rosout.
   UI_ENABLE_DRIVE=1: actually publish /cmd_vel (else UI shows but doesn't drive).
-  UI_CAMERA_COMPRESSED=1 (default): prefer /<topic>/compressed.
-  UI_CAMERA_EMIT_HZ=15 (default): UI redraw rate for camera frames.
+# UI_CAMERA_COMPRESSED=1: prefer /<topic>/compressed. (default: 0 -> use raw)
+  UI_CAMERA_EMIT_HZ=30 (default): UI redraw rate for camera frames.
+
+Gamepad D-pad mapping (typical for many controllers via joy_node):
+  UI_JOY_TOPIC=/joy                 (topic to read Joy messages)
+  UI_JOY_HAT_AXIS_V=7               (vertical hat axis; +1 up, -1 down). Set -1 to disable axis mode.
+  UI_JOY_BTN_UP=-1  UI_JOY_BTN_DOWN=-1
+      (button indices for D-pad Up/Down; set if your D-pad is reported as buttons.
+       Leave at -1 if unused. Edge-triggered; one slider step per *press*.)
 """
 
 from __future__ import annotations
 
 import sys, os, math, signal
-from typing import Optional
+from typing import Optional, Callable, Dict
 from threading import Lock
 
 from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF
@@ -74,10 +87,10 @@ from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image as RosImage
 from sensor_msgs.msg import CompressedImage as RosCompressedImage
 from sensor_msgs.msg import PointCloud2
+from sensor_msgs.msg import Joy
 import sensor_msgs_py.point_cloud2 as pc2
 from rcl_interfaces.msg import Log as RosLog
 from std_msgs.msg import String as RosString
-
 
 # ========================= Qt widgets ===============================
 class LedIndicator(QLabel):
@@ -97,7 +110,6 @@ class LedIndicator(QLabel):
         p.setPen(Qt.black)
         p.drawEllipse(0, 0, self._diameter, self._diameter)
 
-
 # ========================= helpers ================================
 def _level_from_str(name: str) -> LoggingSeverity:
     name = (name or "").strip().lower()
@@ -114,6 +126,13 @@ def _rosout_level_num(name: str) -> int:
     name = (name or "").strip().lower()
     return {"debug":10, "info":20, "warn":30, "warning":30, "error":40, "fatal":50}.get(name, 20)
 
+# Slider (0..20) <-> scale (0.10..1.50) mapping (GUI-local)
+def _slider_to_scale(v: int) -> float:
+    return 0.10 + (float(v) / 20.0) * (1.50 - 0.10)
+
+def _scale_to_slider(s: float) -> int:
+    s = max(0.10, min(1.50, float(s)))
+    return int(round((s - 0.10) / (1.50 - 0.10) * 20.0))
 
 # ========================= ROS <-> Qt bridge ========================
 class RosSignals(QObject):
@@ -121,7 +140,7 @@ class RosSignals(QObject):
     log = Signal(str)                # rosout text
     running = Signal(bool)           # running state (for LED)
     ok = Signal(bool, str)           # status, message
-
+    bump_speed = Signal(int)         # +1 / -1 (from gamepad D-pad)
 
 class GuiRosNode(Node):
     """ROS2 node performing pubs/subs and emitting Qt signals."""
@@ -135,12 +154,12 @@ class GuiRosNode(Node):
         except Exception: pass
 
         self._rosout_min_level = _rosout_level_num(os.environ.get("UI_ROSOUT_LEVEL", "info"))
-        self._prefer_compressed = os.environ.get("UI_CAMERA_COMPRESSED", "1") == "1"
+        self._prefer_compressed = os.environ.get("UI_CAMERA_COMPRESSED", "0") == "1"
         try:
-            self._emit_hz = float(os.environ.get("UI_CAMERA_EMIT_HZ", "15"))
+            self._emit_hz = float(os.environ.get("UI_CAMERA_EMIT_HZ", "30"))
             self._emit_hz = max(1.0, min(60.0, self._emit_hz))
         except Exception:
-            self._emit_hz = 15.0
+            self._emit_hz = 30.0
 
         # QoS
         self.sensor_qos = QoSProfile(
@@ -187,6 +206,21 @@ class GuiRosNode(Node):
         except Exception:
             pass
 
+        # ---- Gamepad D-pad -> bump slider (+1/-1) ----
+        joy_topic = os.environ.get("UI_JOY_TOPIC", "/joy")
+        self._hat_axis_v = int(os.environ.get("UI_JOY_HAT_AXIS_V", "7"))  # -1 to disable axis mode
+        self._btn_up = int(os.environ.get("UI_JOY_BTN_UP", "-1"))          # -1 if unused
+        self._btn_down = int(os.environ.get("UI_JOY_BTN_DOWN", "-1"))      # -1 if unused
+        self._prev_up = False
+        self._prev_down = False
+
+        try:
+            self.create_subscription(Joy, joy_topic, self._on_joy, 10)
+            self.get_logger().info(f"Listening for D-pad on {joy_topic} "
+                                   f"(axis_v={self._hat_axis_v}, btn_up={self._btn_up}, btn_down={self._btn_down})")
+        except Exception as e:
+            self.get_logger().warn(f"Failed to subscribe to {joy_topic}: {e}")
+
         self.signals.ok.emit(True, "ROS node initialised")
 
     # ------------------- publishers -------------------
@@ -217,16 +251,17 @@ class GuiRosNode(Node):
             self.signals.ok.emit(False, f"Failed to switch camera to '{topic}': {e}")
 
     def _subscribe_camera(self, topic_base: str):
-        """Subscribe to compressed if preferred, else raw. topic_base should be the *raw* image base (no /compressed)."""
-        # tear down old
+        # tear down old...
         if self._camera_sub is not None:
             try: self.destroy_subscription(self._camera_sub)
             except Exception: pass
             self._camera_sub = None
 
+        # Normalize base: if we do NOT prefer compressed and user gave ".../compressed", drop it.
+        if not self._prefer_compressed and topic_base.rstrip('/').endswith("/compressed"):
+            topic_base = topic_base.rstrip('/')[:-len("/compressed")]
         self._camera_topic_raw = topic_base.rstrip('/')
 
-        # Try compressed
         if self._prefer_compressed:
             comp_topic = self._camera_topic_raw + "/compressed" if not self._camera_topic_raw.endswith("/compressed") else self._camera_topic_raw
             try:
@@ -238,7 +273,7 @@ class GuiRosNode(Node):
             except Exception as e:
                 self.get_logger().warn(f"Compressed subscribe failed ({e}); falling back to raw.")
 
-        # Fallback raw
+        # Raw (default path now)
         self._camera_sub = self.create_subscription(RosImage, self._camera_topic_raw, self._on_image_raw, self.sensor_qos)
         self.get_logger().info(f"Subscribed to camera (raw): {self._camera_topic_raw}")
 
@@ -253,7 +288,6 @@ class GuiRosNode(Node):
     def _on_image_compressed(self, msg: RosCompressedImage):
         try:
             if np is None or cv2 is None:
-                # No numpy/cv2 — ignore compressed images
                 return
             arr = np.frombuffer(msg.data, dtype=np.uint8)
             bgr = cv2.imdecode(arr, cv2.IMREAD_COLOR)
@@ -280,9 +314,9 @@ class GuiRosNode(Node):
         try:
             cnt = 0
             for i, _ in enumerate(pc2.read_points(msg, field_names=('x','y','z'), skip_nans=True)):
-                if i % 10 == 0:  # decimate by 10 cheaply
+                if i % 10 == 0:
                     cnt += 1
-                if cnt >= 20000:  # cap work
+                if cnt >= 20000:
                     break
             self._pc_latest_count = cnt * 10
         except Exception:
@@ -293,11 +327,49 @@ class GuiRosNode(Node):
             self.signals.log.emit(f"[INFO] pointcloud: ~{self._pc_latest_count} points (approx, decimated)")
             self._pc_latest_count = 0
 
+    # ---- Joy (D-pad) -> bump slider ----
+    def _on_joy(self, msg: Joy):
+        up = False
+        down = False
+
+        # Prefer axis mode if provided
+        if self._hat_axis_v is not None and self._hat_axis_v >= 0:
+            try:
+                v = msg.axes[self._hat_axis_v]
+                up = (v > 0.5)
+                down = (v < -0.5)
+            except Exception:
+                pass
+
+        # Optional button mode (if your D-pad is provided as buttons)
+        if self._btn_up >= 0:
+            try:
+                up_btn = msg.buttons[self._btn_up] > 0
+                up = up or up_btn
+            except Exception:
+                pass
+        if self._btn_down >= 0:
+            try:
+                down_btn = msg.buttons[self._btn_down] > 0
+                down = down or down_btn
+            except Exception:
+                pass
+
+        # Edge detect to avoid repeats while held
+        if up and not self._prev_up:
+            self.signals.bump_speed.emit(+1)
+            self.get_logger().info("Gamepad D-pad: bump speed +1")
+        if down and not self._prev_down:
+            self.signals.bump_speed.emit(-1)
+            self.get_logger().info("Gamepad D-pad: bump speed -1")
+
+        self._prev_up = up
+        self._prev_down = down
+
     # ------------------- helpers ----------------------
     def _image_to_rgb_numpy(self, msg: RosImage):
         try:
             if self.bridge is not None and _CV_BRIDGE_OK:
-                # type: ignore[attr-defined]
                 cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")  # type: ignore
                 if cv2 is not None:
                     return cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
@@ -317,7 +389,6 @@ class GuiRosNode(Node):
         except Exception as e:
             self.get_logger().warn(f"Image conversion failed: {e}")
             return None
-
 
 class RosWorker(QThread):
     """Owns the ROS node and spins it in a background thread."""
@@ -368,7 +439,6 @@ class RosWorker(QThread):
         except Exception:
             return False
 
-
 # ============================ GUI ===================================
 class ControlGUI(QWidget):
     def __init__(self):
@@ -380,12 +450,15 @@ class ControlGUI(QWidget):
         self._estopped = False
         self._lin = 0.0
         self._ang = 0.0
+        self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
 
         self._install_sigint_handler()
         self._build_ui()
         self._wire_behaviour()
         self._start_ros()
-        self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
+
+        # Start slider at a reasonable default
+        self.speed.setValue(_scale_to_slider(0.60))
 
     # ---- UI builders
     def rounded_pane(self, w: QWidget, pad=10):
@@ -401,7 +474,7 @@ class ControlGUI(QWidget):
         self.camera_lbl.setMinimumHeight(150)
         cam = self.rounded_pane(self.camera_lbl, pad=14)
 
-        # D-Pad
+        # D-Pad (GUI) — drives robot while held
         dpad_w = QWidget(); g = QGridLayout(dpad_w)
         g.setSpacing(6); g.setContentsMargins(0, 0, 0, 0)
         def btn(t): b = QPushButton(t); b.setFixedSize(48, 36); return b
@@ -475,7 +548,7 @@ class ControlGUI(QWidget):
 
     # ---- Behaviour wiring
     def _wire_behaviour(self):
-        # D-pad press/release set desired command (held while pressed)
+        # GUI D-pad drives while pressed, scaled by slider
         self.btn_up.pressed.connect(lambda: self._set_motion(forward=True))
         self.btn_up.released.connect(lambda: self._set_motion(forward=False))
         self.btn_down.pressed.connect(lambda: self._set_motion(back=True))
@@ -485,7 +558,9 @@ class ControlGUI(QWidget):
         self.btn_right.pressed.connect(lambda: self._set_motion(right=True))
         self.btn_right.released.connect(lambda: self._set_motion(right=False))
 
-        self.speed.valueChanged.connect(self._update_command_from_speed)
+        # Slider just affects GUI scaling
+        self.speed.valueChanged.connect(self._on_slider_changed)
+
         self.estop.clicked.connect(self._on_estop)
 
         # Timer to send cmd_vel continuously
@@ -500,29 +575,41 @@ class ControlGUI(QWidget):
         self.ros.signals.log.connect(self._append_log)
         self.ros.signals.running.connect(self._set_running_led)
         self.ros.signals.ok.connect(lambda ok, msg: self._append_log(("OK " if ok else "ERR ") + msg))
+        # Gamepad D-pad bumps (from ROS Joy)
+        self.ros.signals.bump_speed.connect(self._bump_speed)
         self.send_cmd = self.ros.send_cmd
         self.ros.start()
 
     # ---- Motion logic
-    def _current_speed_fraction(self) -> float:
-        return float(self.speed.value()) / float(self.speed.maximum() or 1)
+    def _current_scale(self) -> float:
+        return _slider_to_scale(self.speed.value())
 
     def _set_motion(self, forward=None, back=None, left=None, right=None):
-        f = self._current_speed_fraction()
+        s = self._current_scale()
         if forward is not None:
-            self._lin = (MAX_LINEAR_MPS * f) if forward else 0.0 if not back else self._lin
+            self._lin = (MAX_LINEAR_MPS * s) if forward else 0.0 if not back else self._lin
         if back is not None:
-            self._lin = (-MAX_LINEAR_MPS * f) if back else 0.0 if not forward else self._lin
+            self._lin = (-MAX_LINEAR_MPS * s) if back else 0.0 if not forward else self._lin
         if left is not None:
-            self._ang = (MAX_ANGULAR_RPS * f) if left else 0.0 if not right else self._ang
+            self._ang = (MAX_ANGULAR_RPS * s) if left else 0.0 if not right else self._ang
         if right is not None:
-            self._ang = (-MAX_ANGULAR_RPS * f) if right else 0.0 if not left else self._ang
+            self._ang = (-MAX_ANGULAR_RPS * s) if right else 0.0 if not left else self._ang
         self._update_running_led()
 
-    def _update_command_from_speed(self, _v):
-        f = self._current_speed_fraction()
-        self._lin = math.copysign(min(abs(self._lin), MAX_LINEAR_MPS * f), self._lin)
-        self._ang = math.copysign(min(abs(self._ang), MAX_ANGULAR_RPS * f), self._ang)
+    def _bump_speed(self, delta_steps: int):
+        v = int(self.speed.value())
+        v = max(self.speed.minimum(), min(self.speed.maximum(), v + int(delta_steps)))
+        self.speed.setValue(v)
+        # If currently driving from GUI, re-apply scale so speed change takes effect immediately
+        s = self._current_scale()
+        sign_lin = (1.0 if self._lin > 0 else -1.0 if self._lin < 0 else 0.0)
+        sign_ang = (1.0 if self._ang > 0 else -1.0 if self._ang < 0 else 0.0)
+        if sign_lin != 0.0: self._lin = sign_lin * MAX_LINEAR_MPS * s
+        if sign_ang != 0.0: self._ang = sign_ang * MAX_ANGULAR_RPS * s
+        self._append_log(f"[INFO] GUI speed scale -> {s:.2f}")
+
+    def _on_slider_changed(self, _v: int):
+        # Nothing to publish; this slider is GUI-local. Just update LED if needed.
         self._update_running_led()
 
     def _publish_cmd(self):
@@ -530,7 +617,7 @@ class ControlGUI(QWidget):
             return
         if self._estopped:
             self.send_cmd(0.0, 0.0); return
-        if os.environ.get("UI_ENABLE_DRIVE", "0") != "1":
+        if not self._drive_enabled:
             return
         self.send_cmd(self._lin, self._ang)
 
@@ -538,7 +625,7 @@ class ControlGUI(QWidget):
         self._lin = 0.0; self._ang = 0.0; self._estopped = True
         self._update_running_led()
         self._append_log(">>> EMERGENCY STOP PRESSED! <<<")
-        QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))  # remove for latched E-STOP
+        QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))  # remove to latch E-STOP
 
     # ---- UI updates
     def _update_running_led(self):
@@ -580,6 +667,8 @@ class ControlGUI(QWidget):
             except Exception: pass
             try: self.ros.signals.ok.disconnect()
             except Exception: pass
+            try: self.ros.signals.bump_speed.disconnect(self._bump_speed)
+            except Exception: pass
 
             self.send_cmd = lambda *_a, **_k: None
             self.ros.stop()
@@ -598,7 +687,6 @@ class ControlGUI(QWidget):
                 signal.signal(signal.SIGINT, signal.SIG_DFL)
         try: signal.signal(signal.SIGINT, on_sigint)
         except Exception: pass
-
 
 # ============================== main ================================
 def _apply_qt_logging_rules_from_env():
