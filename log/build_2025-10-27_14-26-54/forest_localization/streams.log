@@ -1,0 +1,76 @@
+[0.017s] Invoking command in '/home/john/git/RS1/john_branch/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake /home/john/git/RS1/john_branch/src/forest_localization -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/john/git/RS1/john_branch/install/forest_localization
+[0.282s] -- The C compiler identification is GNU 11.4.0
+[0.282s] -- The CXX compiler identification is GNU 11.4.0
+[0.282s] -- Detecting C compiler ABI info
+[0.282s] -- Detecting C compiler ABI info - done
+[0.282s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.283s] -- Detecting C compile features
+[0.283s] -- Detecting C compile features - done
+[0.283s] -- Detecting CXX compiler ABI info
+[0.283s] -- Detecting CXX compiler ABI info - done
+[0.283s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.283s] -- Detecting CXX compile features
+[0.283s] -- Detecting CXX compile features - done
+[0.283s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.308s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.348s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.374s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.407s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.411s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.417s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.426s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.438s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.473s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.475s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.544s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.562s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.594s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.601s] -- Looking for pthread.h
+[0.654s] -- Looking for pthread.h - found
+[0.654s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.708s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.709s] -- Found Threads: TRUE  
+[0.744s] -- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.754s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.768s] -- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.843s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.851s] -- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)
+[0.878s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.929s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.929s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/john/git/RS1/john_branch/src/forest_localization/include>
+[0.929s] -- Configured cppcheck exclude dirs and/or files: 
+[0.930s] -- Added test 'lint_cmake' to check CMake code style
+[0.930s] -- Added test 'uncrustify' to check C / C++ code style
+[0.930s] -- Configured uncrustify additional arguments: 
+[0.931s] -- Added test 'xmllint' to check XML markup files
+[0.931s] -- Configuring done
+[0.937s] -- Generating done
+[0.939s] -- Build files have been written to: /home/john/git/RS1/john_branch/build/forest_localization
+[0.946s] Invoked command in '/home/john/git/RS1/john_branch/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake /home/john/git/RS1/john_branch/src/forest_localization -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/john/git/RS1/john_branch/install/forest_localization
+[0.946s] Invoking command in '/home/john/git/RS1/john_branch/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forest_localization -- -j20 -l20
+[0.977s] [ 33%] [32mBuilding CXX object CMakeFiles/forest_localization.dir/src/main_amcl.cpp.o[0m
+[0.977s] [ 66%] [32mBuilding CXX object CMakeFiles/forest_localization.dir/src/amcl_localization.cpp.o[0m
+[5.463s] [100%] [32m[1mLinking CXX executable forest_localization[0m
+[5.715s] [100%] Built target forest_localization
+[5.725s] Invoked command in '/home/john/git/RS1/john_branch/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forest_localization -- -j20 -l20
+[5.726s] Invoking command in '/home/john/git/RS1/john_branch/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forest_localization
+[5.731s] -- Install configuration: ""
+[5.731s] -- Execute custom install script
+[5.731s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/lib/forest_localization/forest_localization
+[5.738s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/include/forest_localization/amcl_localization.h
+[5.744s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/ament_index/resource_index/package_run_dependencies/forest_localization
+[5.750s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/ament_index/resource_index/parent_prefix_path/forest_localization
+[5.755s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/ament_prefix_path.sh
+[5.761s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/ament_prefix_path.dsv
+[5.766s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/path.sh
+[5.770s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/path.dsv
+[5.775s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.bash
+[5.780s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.sh
+[5.785s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.zsh
+[5.790s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.dsv
+[5.794s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/package.dsv
+[5.800s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/ament_index/resource_index/packages/forest_localization
+[5.805s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig.cmake
+[5.809s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig-version.cmake
+[5.814s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/package.xml
+[5.820s] Invoked command in '/home/john/git/RS1/john_branch/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forest_localization

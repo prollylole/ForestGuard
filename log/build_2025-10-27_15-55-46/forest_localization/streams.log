@@ -1,0 +1,24 @@
+[0.018s] Invoking command in '/home/john/git/RS1/john_branch/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forest_localization -- -j20 -l20
+[0.266s] [100%] Built target forest_localization
+[0.403s] Invoked command in '/home/john/git/RS1/john_branch/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forest_localization -- -j20 -l20
+[0.404s] Invoking command in '/home/john/git/RS1/john_branch/build/forest_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forest_localization
+[0.410s] -- Install configuration: ""
+[0.410s] -- Execute custom install script
+[0.411s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/lib/forest_localization/forest_localization
+[0.411s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/include/forest_localization/amcl_localization.h
+[0.411s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/ament_index/resource_index/package_run_dependencies/forest_localization
+[0.411s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/ament_index/resource_index/parent_prefix_path/forest_localization
+[0.412s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/ament_prefix_path.sh
+[0.412s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/ament_prefix_path.dsv
+[0.412s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/path.sh
+[0.412s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/environment/path.dsv
+[0.412s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.bash
+[0.414s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.sh
+[0.414s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.zsh
+[0.414s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/local_setup.dsv
+[0.415s] -- Symlinking: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/package.dsv
+[0.419s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/ament_index/resource_index/packages/forest_localization
+[0.419s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig.cmake
+[0.419s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig-version.cmake
+[0.419s] -- Up-to-date symlink: /home/john/git/RS1/john_branch/install/forest_localization/share/forest_localization/package.xml
+[0.439s] Invoked command in '/home/john/git/RS1/john_branch/build/forest_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/turtlebot_ui:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forest_localization
