@@ -1,2 +1,0 @@
-Invoking command in '/home/yut/ForestGuard/build/41068_ignition_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/yut/ForestGuard/YUTO igitionbringup -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/yut/ForestGuard/install/41068_ignition_bringup
-Invoked command in '/home/yut/ForestGuard/build/41068_ignition_bringup' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/yut/ForestGuard/YUTO igitionbringup -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/yut/ForestGuard/install/41068_ignition_bringup

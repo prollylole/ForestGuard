@@ -1,0 +1,135 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found ros_ign_interfaces: 0.244.20 (/opt/ros/humble/share/ros_ign_interfaces/cmake)
+-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/yuto
+-- Install configuration: ""
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config/xbox_teleop.yaml
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config/robot_localization.yaml
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config/gazebo_bridge.yaml
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config/slam_params.yaml
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config/john.rviz
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config/nav2_params.yaml
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/config/forest.rviz
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/forest_mapping.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/forest_random.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/random_forest_husky.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/autonomous_forest.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/john.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/johnNavigation.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/navigation_map.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/large_forest_husky.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/john_autonomous_forest.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/forest_world.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/41068_ignition.launch.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/sample
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/launch/johnXL.py
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/maps
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/maps/forest_map.pgm
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/maps/forest_map.yaml
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2/meshes
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2/meshes/tree_b.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2/materials
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2/materials/textures
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2/materials/textures/bark.jpeg
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2/model.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree2/model.config
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/grass_plane
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/grass_plane/materials
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/grass_plane/materials/textures
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/grass_plane/materials/textures/empty_grass.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/grass_plane/model.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/grass_plane/model.config
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane/materials
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane/materials/textures
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane/materials/textures/leaf_litter.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane/materials/textures/forest_overhead.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane/materials/textures/empty_grass.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane/model.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_plane/model.config
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/meshes
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/meshes/Environment1.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/meshes/Environment.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/meshes/empty_grass.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/materials
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/materials/textures
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/materials/textures/empty_grass.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/model.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_env/model.config
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall/materials
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall/materials/textures
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall/materials/textures/forest_wall_transparent_small.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall/materials/textures/forest_wall.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall/materials/textures/forest_wall_transparent.png
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall/model.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/forest_wall/model.config
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1/meshes
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1/meshes/tree_a.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1/materials
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1/materials/textures
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1/materials/textures/bark01.jpg
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1/model.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/models/tree1/model.config
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/meshes
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/meshes/top_chassis.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/meshes/bumper.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/meshes/top_plate.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/meshes/wheel.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/meshes/jpl04_arch_nosensor.stl
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/meshes/base_link.dae
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/husky.urdf.xacro
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/common_properties.urdf.xacro
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/wheel.urdf.xacro
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/urdf/husky.gazebo.xacro
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/worlds
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/worlds/simple_trees.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/worlds/forest_world.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/worlds/large_demo.sdf
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/ament_index/resource_index/package_run_dependencies/yuto
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/ament_index/resource_index/parent_prefix_path/yuto
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/environment/ament_prefix_path.sh
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/environment/ament_prefix_path.dsv
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/environment/path.sh
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/environment/path.dsv
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/local_setup.bash
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/local_setup.sh
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/local_setup.zsh
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/local_setup.dsv
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/package.dsv
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/ament_index/resource_index/packages/yuto
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/cmake/yutoConfig.cmake
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/cmake/yutoConfig-version.cmake
+-- Installing: /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/yuto/share/yuto/package.xml

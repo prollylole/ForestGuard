@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-5fe161ee5f164c8b80fc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "forestguard_localisation",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "forestguard_localisation::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-forestguard_localisation-4dd3272ced18ac30280e.json",
+					"name" : "forestguard_localisation",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "forestguard_localisation_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-forestguard_localisation_uninstall-2a4a13e77cb6ecbb0dcf.json",
+					"name" : "forestguard_localisation_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-4150cf302a7fc994b658.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_localisation",
+		"source" : "/home/yut/git/rs1-2025s-ytu77/yuto_branch/src/forestguard_localisation"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

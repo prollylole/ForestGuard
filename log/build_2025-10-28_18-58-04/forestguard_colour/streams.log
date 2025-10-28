@@ -1,0 +1,45 @@
+[1.043s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/yuto_branch/src/forestguard_colour': PYTHONPATH=/home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/forestguard_colour build --build-base /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build install --record /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/install.log --single-version-externally-managed install_data
+[1.199s] /home/yut/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+[1.199s]   warnings.warn(msg)
+[1.313s] running egg_info
+[1.333s] creating ../../build/forestguard_colour/forestguard_colour.egg-info
+[1.333s] writing ../../build/forestguard_colour/forestguard_colour.egg-info/PKG-INFO
+[1.334s] writing dependency_links to ../../build/forestguard_colour/forestguard_colour.egg-info/dependency_links.txt
+[1.335s] writing entry points to ../../build/forestguard_colour/forestguard_colour.egg-info/entry_points.txt
+[1.335s] writing requirements to ../../build/forestguard_colour/forestguard_colour.egg-info/requires.txt
+[1.335s] writing top-level names to ../../build/forestguard_colour/forestguard_colour.egg-info/top_level.txt
+[1.335s] writing manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+[1.373s] reading manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+[1.374s] writing manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+[1.374s] running build
+[1.374s] running build_py
+[1.375s] creating /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.375s] copying forestguard_colour/tree_detector_node.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.375s] copying forestguard_colour/tree_detector_v2.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.375s] copying forestguard_colour/hsv_calibrator.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.375s] copying forestguard_colour/__init__.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.376s] running install
+[1.380s] running install_lib
+[1.401s] creating /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.401s] copying /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour/tree_detector_node.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.401s] copying /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour/tree_detector_v2.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.401s] copying /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour/hsv_calibrator.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.401s] copying /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour/__init__.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.402s] byte-compiling /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/tree_detector_node.py to tree_detector_node.cpython-310.pyc
+[1.404s] byte-compiling /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/tree_detector_v2.py to tree_detector_v2.cpython-310.pyc
+[1.405s] byte-compiling /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/hsv_calibrator.py to hsv_calibrator.cpython-310.pyc
+[1.405s] byte-compiling /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/__init__.py to __init__.cpython-310.pyc
+[1.406s] running install_data
+[1.406s] creating /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/ament_index/resource_index/packages
+[1.406s] copying resource/forestguard_colour -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/ament_index/resource_index/packages
+[1.406s] copying package.xml -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/forestguard_colour
+[1.407s] creating /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/forestguard_colour/launch
+[1.407s] copying launch/colour_detector.launch.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/forestguard_colour/launch
+[1.407s] running install_egg_info
+[1.426s] Copying ../../build/forestguard_colour/forestguard_colour.egg-info to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour-0.0.1-py3.10.egg-info
+[1.427s] running install_scripts
+[1.463s] Installing hsv_calibrator script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/forestguard_colour
+[1.463s] Installing tree_detector script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/forestguard_colour
+[1.463s] Installing tree_detector_v2 script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/forestguard_colour
+[1.464s] writing list of installed files to '/home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/install.log'
+[1.503s] Invoked command in '/home/yut/git/rs1-2025s-ytu77/yuto_branch/src/forestguard_colour' returned '0': PYTHONPATH=/home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/forestguard_colour build --build-base /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build install --record /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/install.log --single-version-externally-managed install_data

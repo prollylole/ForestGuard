@@ -1,0 +1,28 @@
+running egg_info
+writing ../../build/forestguard_colour/forestguard_colour.egg-info/PKG-INFO
+writing dependency_links to ../../build/forestguard_colour/forestguard_colour.egg-info/dependency_links.txt
+writing entry points to ../../build/forestguard_colour/forestguard_colour.egg-info/entry_points.txt
+writing requirements to ../../build/forestguard_colour/forestguard_colour.egg-info/requires.txt
+writing top-level names to ../../build/forestguard_colour/forestguard_colour.egg-info/top_level.txt
+reading manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+writing manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+running build
+running build_py
+copying forestguard_colour/tree_detector_node.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+copying forestguard_colour/tree_detector_v2.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+copying forestguard_colour/hsv_calibrator.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+copying forestguard_colour/__init__.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/build/lib/forestguard_colour
+running install
+running install_lib
+running install_data
+copying resource/forestguard_colour -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/ament_index/resource_index/packages
+copying package.xml -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/forestguard_colour
+copying launch/colour_detector.launch.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/share/forestguard_colour/launch
+running install_egg_info
+removing '/home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour-0.0.1-py3.10.egg-info' (and everything under it)
+Copying ../../build/forestguard_colour/forestguard_colour.egg-info to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour-0.0.1-py3.10.egg-info
+running install_scripts
+Installing hsv_calibrator script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/forestguard_colour
+Installing tree_detector script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/forestguard_colour
+Installing tree_detector_v2 script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_colour/lib/forestguard_colour
+writing list of installed files to '/home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_colour/install.log'

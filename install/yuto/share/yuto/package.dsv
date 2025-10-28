@@ -1,0 +1,8 @@
+source;share/yuto/hook/cmake_prefix_path.ps1
+source;share/yuto/hook/cmake_prefix_path.dsv
+source;share/yuto/hook/cmake_prefix_path.sh
+source;share/yuto/local_setup.bash
+source;share/yuto/local_setup.dsv
+source;share/yuto/local_setup.ps1
+source;share/yuto/local_setup.sh
+source;share/yuto/local_setup.zsh

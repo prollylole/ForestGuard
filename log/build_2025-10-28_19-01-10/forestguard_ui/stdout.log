@@ -1,0 +1,27 @@
+running egg_info
+writing ../../build/forestguard_ui/forestguard_ui.egg-info/PKG-INFO
+writing dependency_links to ../../build/forestguard_ui/forestguard_ui.egg-info/dependency_links.txt
+writing entry points to ../../build/forestguard_ui/forestguard_ui.egg-info/entry_points.txt
+writing requirements to ../../build/forestguard_ui/forestguard_ui.egg-info/requires.txt
+writing top-level names to ../../build/forestguard_ui/forestguard_ui.egg-info/top_level.txt
+reading manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+writing manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+running build
+running build_py
+copying forestguard_ui/twist_scaler.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_ui/build/lib/forestguard_ui
+copying forestguard_ui/controller_bridge.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_ui/build/lib/forestguard_ui
+copying forestguard_ui/app.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_ui/build/lib/forestguard_ui
+copying forestguard_ui/__init__.py -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_ui/build/lib/forestguard_ui
+running install
+running install_lib
+running install_data
+copying resource/forestguard_ui -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_ui/share/ament_index/resource_index/packages
+copying package.xml -> /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_ui/share/forestguard_ui
+running install_egg_info
+removing '/home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/forestguard_ui/forestguard_ui.egg-info to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui-0.0.0-py3.10.egg-info
+running install_scripts
+Installing controller_bridge script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_ui/lib/forestguard_ui
+Installing run_ui script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_ui/lib/forestguard_ui
+Installing twist_scaler script to /home/yut/git/rs1-2025s-ytu77/yuto_branch/install/forestguard_ui/lib/forestguard_ui
+writing list of installed files to '/home/yut/git/rs1-2025s-ytu77/yuto_branch/build/forestguard_ui/install.log'

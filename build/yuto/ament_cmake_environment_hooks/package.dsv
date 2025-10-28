@@ -1,0 +1,4 @@
+source;share/yuto/local_setup.bash
+source;share/yuto/local_setup.dsv
+source;share/yuto/local_setup.sh
+source;share/yuto/local_setup.zsh
