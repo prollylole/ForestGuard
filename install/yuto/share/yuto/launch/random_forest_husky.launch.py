@@ -249,6 +249,7 @@ def generate_launch_description():
     ld.add_action(DeclareLaunchArgument('spawn_x', default_value='RANDOM'))
     ld.add_action(DeclareLaunchArgument('spawn_y', default_value='RANDOM'))
     ld.add_action(DeclareLaunchArgument('spawn_yaw', default_value='RANDOM'))
+    ld.add_action(DeclareLaunchArgument('teleop', default_value='True'))
 
     # Robot description
     robot_description_content = ParameterValue(
@@ -346,7 +347,7 @@ def generate_launch_description():
         executable='rviz2',
         output='screen',
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
-        arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'john.rviz'])],
+        arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'forest.rviz'])],
         condition=IfCondition(LaunchConfiguration('rviz')),
         on_exit=actions.Shutdown(),
     )
