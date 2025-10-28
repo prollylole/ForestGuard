@@ -195,11 +195,11 @@ def generate_launch_description():
         output='screen'
     ))
 
-    ld.add_action(Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom']
-    ))
+    # ld.add_action(Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom']
+    # ))
 
     # Nav2
     ld.add_action(IncludeLaunchDescription(

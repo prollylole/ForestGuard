@@ -1,0 +1,352 @@
+[0.000000] (-) TimerEvent: {}
+[0.000189] (forestguard_colour) JobQueued: {'identifier': 'forestguard_colour', 'dependencies': OrderedDict()}
+[0.000484] (forestguard_controller) JobQueued: {'identifier': 'forestguard_controller', 'dependencies': OrderedDict()}
+[0.000530] (forestguard_localisation) JobQueued: {'identifier': 'forestguard_localisation', 'dependencies': OrderedDict()}
+[0.000555] (forestguard_ui) JobQueued: {'identifier': 'forestguard_ui', 'dependencies': OrderedDict()}
+[0.000668] (john) JobQueued: {'identifier': 'john', 'dependencies': OrderedDict()}
+[0.000686] (forestguard_colour) JobStarted: {'identifier': 'forestguard_colour'}
+[0.004203] (forestguard_controller) JobStarted: {'identifier': 'forestguard_controller'}
+[0.006473] (forestguard_localisation) JobStarted: {'identifier': 'forestguard_localisation'}
+[0.008378] (forestguard_ui) JobStarted: {'identifier': 'forestguard_ui'}
+[0.011089] (john) JobStarted: {'identifier': 'john'}
+[0.099929] (-) TimerEvent: {}
+[0.134987] (forestguard_controller) JobProgress: {'identifier': 'forestguard_controller', 'progress': 'cmake'}
+[0.135165] (forestguard_controller) JobProgress: {'identifier': 'forestguard_controller', 'progress': 'build'}
+[0.135492] (forestguard_controller) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/john/git/RS1/john_branch/build/forestguard_controller', '--', '-j20', '-l20'], 'cwd': '/home/john/git/RS1/john_branch/build/forestguard_controller', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'john'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/john'), ('DESKTOP_SESSION', 'ubuntu-wayland'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '10937'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'john'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'john'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65'), ('GNOME_SETUP_DISPLAY', ':2'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_AU.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu-wayland'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.9XVBF3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.157'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu-wayland'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11/'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/john/git/RS1/john_branch/build/forestguard_controller'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.137877] (forestguard_localisation) JobProgress: {'identifier': 'forestguard_localisation', 'progress': 'cmake'}
+[0.137943] (forestguard_localisation) JobProgress: {'identifier': 'forestguard_localisation', 'progress': 'build'}
+[0.137953] (forestguard_localisation) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/john/git/RS1/john_branch/build/forestguard_localisation', '--', '-j20', '-l20'], 'cwd': '/home/john/git/RS1/john_branch/build/forestguard_localisation', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'john'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/john'), ('DESKTOP_SESSION', 'ubuntu-wayland'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '10937'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'john'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'john'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65'), ('GNOME_SETUP_DISPLAY', ':2'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_AU.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu-wayland'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.9XVBF3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.157'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu-wayland'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11/'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/john/git/RS1/john_branch/build/forestguard_localisation'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.200021] (-) TimerEvent: {}
+[0.266458] (forestguard_localisation) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/forestguard_localisation.dir/src/amcl_localisation.cpp.o\x1b[0m\n'}
+[0.266888] (forestguard_localisation) StdoutLine: {'line': b'[ 66%] \x1b[32mBuilding CXX object CMakeFiles/forestguard_localisation.dir/src/main_amcl.cpp.o\x1b[0m\n'}
+[0.266971] (forestguard_controller) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.267118] (forestguard_controller) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.267181] (forestguard_controller) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.267438] (forestguard_controller) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.267739] (forestguard_controller) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.267842] (forestguard_controller) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.267960] (forestguard_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.268163] (forestguard_controller) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.268259] (john) JobProgress: {'identifier': 'john', 'progress': 'cmake'}
+[0.268350] (john) JobProgress: {'identifier': 'john', 'progress': 'build'}
+[0.268553] (john) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/john/git/RS1/john_branch/build/john', '--', '-j20', '-l20'], 'cwd': '/home/john/git/RS1/john_branch/build/john', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'john'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/john'), ('DESKTOP_SESSION', 'ubuntu-wayland'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '10937'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'john'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'john'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65'), ('GNOME_SETUP_DISPLAY', ':2'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_AU.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu-wayland'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.9XVBF3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.157'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu-wayland'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11/'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/john/git/RS1/john_branch/build/john'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.273318] (forestguard_controller) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.274029] (forestguard_controller) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.299658] (john) CommandEnded: {'returncode': 0}
+[0.300021] (-) TimerEvent: {}
+[0.300775] (john) JobProgress: {'identifier': 'john', 'progress': 'install'}
+[0.307398] (john) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/john/git/RS1/john_branch/build/john'], 'cwd': '/home/john/git/RS1/john_branch/build/john', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'john'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/john'), ('DESKTOP_SESSION', 'ubuntu-wayland'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '10937'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'john'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'john'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65'), ('GNOME_SETUP_DISPLAY', ':2'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_AU.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu-wayland'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.9XVBF3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.157'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu-wayland'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11/'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/john/git/RS1/john_branch/build/john'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.313935] (john) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.314145] (john) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[0.314400] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/forest.rviz\n'}
+[0.321726] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/gazebo_bridge.yaml\n'}
+[0.327208] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/john.rviz\n'}
+[0.333284] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/nav2_params.yaml\n'}
+[0.338813] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/robot_localization.yaml\n'}
+[0.346063] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/slam_params.yaml\n'}
+[0.348318] (forestguard_controller) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.353117] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/xbox_teleop.yaml\n'}
+[0.359396] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/41068_ignition.launch.py\n'}
+[0.366491] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/autonomous_forest.launch.py\n'}
+[0.373468] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/forest_mapping.launch.py\n'}
+[0.378727] (forestguard_controller) StdoutLine: {'line': b'-- Found rclcpp_action: 16.0.15 (/opt/ros/humble/share/rclcpp_action/cmake)\n'}
+[0.379020] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/forest_random.launch.py\n'}
+[0.386070] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/forest_world.launch.py\n'}
+[0.393189] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/john.launch.py\n'}
+[0.395725] (forestguard_controller) StdoutLine: {'line': b'-- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)\n'}
+[0.398772] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/johnNavigation.launch.py\n'}
+[0.400086] (-) TimerEvent: {}
+[0.402641] (forestguard_controller) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.406084] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/johnXL.py\n'}
+[0.412191] (forestguard_controller) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[0.413092] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/john_autonomous_forest.launch.py\n'}
+[0.419203] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/large_forest_husky.launch.py\n'}
+[0.421740] (forestguard_controller) StdoutLine: {'line': b'-- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[0.425993] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/navigation_map.launch.py\n'}
+[0.432679] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/random_forest_husky.launch.py\n'}
+[0.432966] (forestguard_controller) StdoutLine: {'line': b'-- Found nav2_msgs: 1.1.19 (/opt/ros/humble/share/nav2_msgs/cmake)\n'}
+[0.438379] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/sample\n'}
+[0.444669] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/maps/forest_map.pgm\n'}
+[0.446944] (forestguard_controller) StdoutLine: {'line': b'-- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)\n'}
+[0.451999] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/maps/forest_map.yaml\n'}
+[0.459632] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/materials/textures/empty_grass.png\n'}
+[0.467976] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/Environment.dae\n'}
+[0.475589] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/Environment1.dae\n'}
+[0.478006] (forestguard_controller) StdoutLine: {'line': b'-- Found tf2_geometry_msgs: 0.25.16 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)\n'}
+[0.479879] (forestguard_controller) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[0.480768] (forestguard_controller) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[0.481652] (forestguard_controller) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[0.483929] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/empty_grass.png\n'}
+[0.485487] (forestguard_ui) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/john/git/RS1/john_branch/build/forestguard_ui/build', '--no-deps', 'symlink_data'], 'cwd': '/home/john/git/RS1/john_branch/build/forestguard_ui', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_AU:en', 'USER': 'john', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/john', 'DESKTOP_SESSION': 'ubuntu-wayland', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '10937', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'john', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'john', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65', 'GNOME_SETUP_DISPLAY': ':2', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'LANG': 'en_AU.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu-wayland', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.9XVBF3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.157', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu-wayland', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GAZEBO_RESOURCE_PATH': '/usr/share/gazebo-11/', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/john/git/RS1/john_branch/build/forestguard_ui', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/john/git/RS1/john_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_ui/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[0.489716] (forestguard_controller) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[0.491326] (forestguard_controller) StdoutLine: {'line': b'-- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)\n'}
+[0.492139] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/model.config\n'}
+[0.500173] (-) TimerEvent: {}
+[0.500604] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/model.sdf\n'}
+[0.507261] (forestguard_controller) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[0.507886] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/materials/textures/empty_grass.png\n'}
+[0.513136] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/materials/textures/forest_overhead.png\n'}
+[0.520841] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/materials/textures/leaf_litter.png\n'}
+[0.528081] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/model.config\n'}
+[0.535070] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/model.sdf\n'}
+[0.543489] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/materials/textures/forest_wall.png\n'}
+[0.548081] (forestguard_colour) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/john/git/RS1/john_branch/build/forestguard_colour/build', '--no-deps', 'symlink_data'], 'cwd': '/home/john/git/RS1/john_branch/build/forestguard_colour', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_AU:en', 'USER': 'john', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/john', 'DESKTOP_SESSION': 'ubuntu-wayland', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '10937', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'john', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'john', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65', 'GNOME_SETUP_DISPLAY': ':2', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'LANG': 'en_AU.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu-wayland', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.9XVBF3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.157', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu-wayland', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GAZEBO_RESOURCE_PATH': '/usr/share/gazebo-11/', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/john/git/RS1/john_branch/build/forestguard_colour', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/john/git/RS1/john_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[0.550334] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/materials/textures/forest_wall_transparent.png\n'}
+[0.557146] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/materials/textures/forest_wall_transparent_small.png\n'}
+[0.563819] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/model.config\n'}
+[0.565344] (forestguard_controller) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[0.565628] (forestguard_controller) StdoutLine: {'line': b'-- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/john/git/RS1/john_branch/src/forestguard_controller/include>\n'}
+[0.565711] (forestguard_controller) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[0.565927] (forestguard_controller) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[0.566094] (forestguard_controller) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[0.566167] (forestguard_controller) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[0.566271] (forestguard_controller) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[0.566879] (forestguard_controller) StdoutLine: {'line': b'-- Configuring done\n'}
+[0.570961] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/model.sdf\n'}
+[0.576296] (forestguard_controller) StdoutLine: {'line': b'-- Generating done\n'}
+[0.578044] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/grass_plane/materials/textures/empty_grass.png\n'}
+[0.579459] (forestguard_controller) StdoutLine: {'line': b'-- Build files have been written to: /home/john/git/RS1/john_branch/build/forestguard_controller\n'}
+[0.584423] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/grass_plane/model.config\n'}
+[0.589976] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/grass_plane/model.sdf\n'}
+[0.597300] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/materials/textures/bark01.jpg\n'}
+[0.600455] (-) TimerEvent: {}
+[0.603756] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/meshes/tree_a.dae\n'}
+[0.608971] (forestguard_controller) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/forestguard_controller.dir/src/main_husky.cpp.o\x1b[0m\n'}
+[0.609201] (forestguard_controller) StdoutLine: {'line': b'[ 66%] \x1b[32mBuilding CXX object CMakeFiles/forestguard_controller.dir/src/controller_husky.cpp.o\x1b[0m\n'}
+[0.609273] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/model.config\n'}
+[0.617088] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/model.sdf\n'}
+[0.624121] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/materials/textures/bark.jpeg\n'}
+[0.630150] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/meshes/tree_b.dae\n'}
+[0.635601] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/model.config\n'}
+[0.643074] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/model.sdf\n'}
+[0.650052] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/common_properties.urdf.xacro\n'}
+[0.658205] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/husky.gazebo.xacro\n'}
+[0.663752] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/husky.urdf.xacro\n'}
+[0.669405] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/base_link.dae\n'}
+[0.675195] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/bumper.dae\n'}
+[0.682878] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/jpl04_arch_nosensor.stl\n'}
+[0.688390] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/top_chassis.dae\n'}
+[0.695823] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/top_plate.dae\n'}
+[0.698735] (forestguard_colour) StdoutLine: {'line': b'running develop\n'}
+[0.700519] (-) TimerEvent: {}
+[0.703099] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/wheel.dae\n'}
+[0.710543] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/wheel.urdf.xacro\n'}
+[0.718485] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/worlds/forest_world.sdf\n'}
+[0.726150] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/worlds/large_demo.sdf\n'}
+[0.728826] (forestguard_ui) StdoutLine: {'line': b'running develop\n'}
+[0.733762] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/worlds/simple_trees.sdf\n'}
+[0.741988] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/ament_index/resource_index/package_run_dependencies/john\n'}
+[0.749743] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/ament_index/resource_index/parent_prefix_path/john\n'}
+[0.757215] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/ament_prefix_path.sh\n'}
+[0.762626] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/ament_prefix_path.dsv\n'}
+[0.770198] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/path.sh\n'}
+[0.778050] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/path.dsv\n'}
+[0.783025] (forestguard_colour) StdoutLine: {'line': b'running egg_info\n'}
+[0.783217] (forestguard_colour) StdoutLine: {'line': b'writing forestguard_colour.egg-info/PKG-INFO\n'}
+[0.783297] (forestguard_colour) StdoutLine: {'line': b'writing dependency_links to forestguard_colour.egg-info/dependency_links.txt\n'}
+[0.783550] (forestguard_colour) StdoutLine: {'line': b'writing entry points to forestguard_colour.egg-info/entry_points.txt\n'}
+[0.783625] (forestguard_colour) StdoutLine: {'line': b'writing requirements to forestguard_colour.egg-info/requires.txt\n'}
+[0.783691] (forestguard_colour) StdoutLine: {'line': b'writing top-level names to forestguard_colour.egg-info/top_level.txt\n'}
+[0.784418] (forestguard_colour) StdoutLine: {'line': b"reading manifest file 'forestguard_colour.egg-info/SOURCES.txt'\n"}
+[0.784882] (forestguard_colour) StdoutLine: {'line': b"writing manifest file 'forestguard_colour.egg-info/SOURCES.txt'\n"}
+[0.785493] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.bash\n'}
+[0.785846] (forestguard_colour) StdoutLine: {'line': b'running build_ext\n'}
+[0.785933] (forestguard_colour) StdoutLine: {'line': b'Creating /home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard-colour.egg-link (link to .)\n'}
+[0.786209] (forestguard_colour) StdoutLine: {'line': b'Installing hsv_calibrator script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour\n'}
+[0.786329] (forestguard_colour) StdoutLine: {'line': b'Installing tree_detector script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour\n'}
+[0.786597] (forestguard_colour) StdoutLine: {'line': b'Installing tree_detector_v2 script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour\n'}
+[0.786673] (forestguard_colour) StdoutLine: {'line': b'\n'}
+[0.786739] (forestguard_colour) StdoutLine: {'line': b'Installed /home/john/git/RS1/john_branch/build/forestguard_colour\n'}
+[0.786803] (forestguard_colour) StdoutLine: {'line': b'running symlink_data\n'}
+[0.792896] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.sh\n'}
+[0.800532] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.zsh\n'}
+[0.800703] (-) TimerEvent: {}
+[0.803991] (forestguard_colour) CommandEnded: {'returncode': 0}
+[0.807198] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.dsv\n'}
+[0.812667] (forestguard_colour) JobEnded: {'identifier': 'forestguard_colour', 'rc': 0}
+[0.813428] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/package.dsv\n'}
+[0.813986] (forestguard_ui) StdoutLine: {'line': b'running egg_info\n'}
+[0.814115] (forestguard_ui) StdoutLine: {'line': b'creating forestguard_ui.egg-info\n'}
+[0.814191] (forestguard_ui) StdoutLine: {'line': b'writing forestguard_ui.egg-info/PKG-INFO\n'}
+[0.814298] (forestguard_ui) StdoutLine: {'line': b'writing dependency_links to forestguard_ui.egg-info/dependency_links.txt\n'}
+[0.814568] (forestguard_ui) StdoutLine: {'line': b'writing entry points to forestguard_ui.egg-info/entry_points.txt\n'}
+[0.814657] (forestguard_ui) StdoutLine: {'line': b'writing requirements to forestguard_ui.egg-info/requires.txt\n'}
+[0.814729] (forestguard_ui) StdoutLine: {'line': b'writing top-level names to forestguard_ui.egg-info/top_level.txt\n'}
+[0.814794] (forestguard_ui) StdoutLine: {'line': b"writing manifest file 'forestguard_ui.egg-info/SOURCES.txt'\n"}
+[0.815325] (forestguard_ui) StdoutLine: {'line': b"reading manifest file 'forestguard_ui.egg-info/SOURCES.txt'\n"}
+[0.815707] (forestguard_ui) StdoutLine: {'line': b"writing manifest file 'forestguard_ui.egg-info/SOURCES.txt'\n"}
+[0.816497] (forestguard_ui) StdoutLine: {'line': b'running build_ext\n'}
+[0.816631] (forestguard_ui) StdoutLine: {'line': b'Creating /home/john/git/RS1/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard-ui.egg-link (link to .)\n'}
+[0.817084] (forestguard_ui) StdoutLine: {'line': b'Installing controller_bridge script to /home/john/git/RS1/john_branch/install/forestguard_ui/lib/forestguard_ui\n'}
+[0.817168] (forestguard_ui) StdoutLine: {'line': b'Installing run_ui script to /home/john/git/RS1/john_branch/install/forestguard_ui/lib/forestguard_ui\n'}
+[0.817253] (forestguard_ui) StdoutLine: {'line': b'Installing twist_scaler script to /home/john/git/RS1/john_branch/install/forestguard_ui/lib/forestguard_ui\n'}
+[0.817353] (forestguard_ui) StdoutLine: {'line': b'\n'}
+[0.817480] (forestguard_ui) StdoutLine: {'line': b'Installed /home/john/git/RS1/john_branch/build/forestguard_ui\n'}
+[0.817553] (forestguard_ui) StdoutLine: {'line': b'running symlink_data\n'}
+[0.817622] (forestguard_ui) StdoutLine: {'line': b'creating /home/john/git/RS1/john_branch/install/forestguard_ui/share/ament_index\n'}
+[0.817694] (forestguard_ui) StdoutLine: {'line': b'creating /home/john/git/RS1/john_branch/install/forestguard_ui/share/ament_index/resource_index\n'}
+[0.817762] (forestguard_ui) StdoutLine: {'line': b'creating /home/john/git/RS1/john_branch/install/forestguard_ui/share/ament_index/resource_index/packages\n'}
+[0.817827] (forestguard_ui) StdoutLine: {'line': b'symbolically linking /home/john/git/RS1/john_branch/build/forestguard_ui/resource/forestguard_ui -> /home/john/git/RS1/john_branch/install/forestguard_ui/share/ament_index/resource_index/packages\n'}
+[0.817903] (forestguard_ui) StdoutLine: {'line': b'symbolically linking /home/john/git/RS1/john_branch/build/forestguard_ui/package.xml -> /home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui\n'}
+[0.821508] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/ament_index/resource_index/packages/john\n'}
+[0.829474] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/cmake/johnConfig.cmake\n'}
+[0.836270] (forestguard_ui) CommandEnded: {'returncode': 0}
+[0.837017] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/cmake/johnConfig-version.cmake\n'}
+[0.843616] (john) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/package.xml\n'}
+[0.844621] (forestguard_ui) JobEnded: {'identifier': 'forestguard_ui', 'rc': 0}
+[0.851680] (john) CommandEnded: {'returncode': 0}
+[0.858553] (john) JobEnded: {'identifier': 'john', 'rc': 0}
+[0.900873] (-) TimerEvent: {}
+[1.001235] (-) TimerEvent: {}
+[1.101570] (-) TimerEvent: {}
+[1.201869] (-) TimerEvent: {}
+[1.302356] (-) TimerEvent: {}
+[1.402772] (-) TimerEvent: {}
+[1.503165] (-) TimerEvent: {}
+[1.603616] (-) TimerEvent: {}
+[1.703998] (-) TimerEvent: {}
+[1.804334] (-) TimerEvent: {}
+[1.904557] (-) TimerEvent: {}
+[2.004879] (-) TimerEvent: {}
+[2.105202] (-) TimerEvent: {}
+[2.205562] (-) TimerEvent: {}
+[2.305879] (-) TimerEvent: {}
+[2.406210] (-) TimerEvent: {}
+[2.506548] (-) TimerEvent: {}
+[2.606869] (-) TimerEvent: {}
+[2.707190] (-) TimerEvent: {}
+[2.807466] (-) TimerEvent: {}
+[2.907782] (-) TimerEvent: {}
+[3.008107] (-) TimerEvent: {}
+[3.108432] (-) TimerEvent: {}
+[3.208741] (-) TimerEvent: {}
+[3.309057] (-) TimerEvent: {}
+[3.409377] (-) TimerEvent: {}
+[3.509587] (-) TimerEvent: {}
+[3.609799] (-) TimerEvent: {}
+[3.710115] (-) TimerEvent: {}
+[3.810445] (-) TimerEvent: {}
+[3.910684] (-) TimerEvent: {}
+[4.010996] (-) TimerEvent: {}
+[4.111310] (-) TimerEvent: {}
+[4.211639] (-) TimerEvent: {}
+[4.311888] (-) TimerEvent: {}
+[4.412204] (-) TimerEvent: {}
+[4.512490] (-) TimerEvent: {}
+[4.612813] (-) TimerEvent: {}
+[4.713144] (-) TimerEvent: {}
+[4.734134] (forestguard_localisation) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable forestguard_localisation\x1b[0m\n'}
+[4.813346] (-) TimerEvent: {}
+[4.913562] (-) TimerEvent: {}
+[4.968811] (forestguard_localisation) StdoutLine: {'line': b'[100%] Built target forestguard_localisation\n'}
+[4.979245] (forestguard_localisation) CommandEnded: {'returncode': 0}
+[4.980463] (forestguard_localisation) JobProgress: {'identifier': 'forestguard_localisation', 'progress': 'install'}
+[4.980487] (forestguard_localisation) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/john/git/RS1/john_branch/build/forestguard_localisation'], 'cwd': '/home/john/git/RS1/john_branch/build/forestguard_localisation', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'john'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/john'), ('DESKTOP_SESSION', 'ubuntu-wayland'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '10937'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'john'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'john'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65'), ('GNOME_SETUP_DISPLAY', ':2'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_AU.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu-wayland'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.9XVBF3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.157'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu-wayland'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11/'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/john/git/RS1/john_branch/build/forestguard_localisation'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[4.984563] (forestguard_localisation) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[4.984793] (forestguard_localisation) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[4.985067] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/lib/forestguard_localisation/forestguard_localisation\n'}
+[4.991216] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/include/forestguard_localisation/amcl_localisation.h\n'}
+[4.997457] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/ament_index/resource_index/package_run_dependencies/forestguard_localisation\n'}
+[5.001839] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/ament_index/resource_index/parent_prefix_path/forestguard_localisation\n'}
+[5.006282] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/ament_prefix_path.sh\n'}
+[5.012439] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/ament_prefix_path.dsv\n'}
+[5.013644] (-) TimerEvent: {}
+[5.017744] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/path.sh\n'}
+[5.023891] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/path.dsv\n'}
+[5.028822] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.bash\n'}
+[5.034036] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.sh\n'}
+[5.038340] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.zsh\n'}
+[5.043131] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.dsv\n'}
+[5.049047] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.dsv\n'}
+[5.055614] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/ament_index/resource_index/packages/forestguard_localisation\n'}
+[5.060754] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/cmake/forestguard_localisationConfig.cmake\n'}
+[5.065675] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/cmake/forestguard_localisationConfig-version.cmake\n'}
+[5.071447] (forestguard_localisation) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.xml\n'}
+[5.078019] (forestguard_localisation) CommandEnded: {'returncode': 0}
+[5.084159] (forestguard_localisation) JobEnded: {'identifier': 'forestguard_localisation', 'rc': 0}
+[5.113877] (-) TimerEvent: {}
+[5.214244] (-) TimerEvent: {}
+[5.314490] (-) TimerEvent: {}
+[5.414868] (-) TimerEvent: {}
+[5.515166] (-) TimerEvent: {}
+[5.615502] (-) TimerEvent: {}
+[5.715888] (-) TimerEvent: {}
+[5.816265] (-) TimerEvent: {}
+[5.916658] (-) TimerEvent: {}
+[6.017044] (-) TimerEvent: {}
+[6.117413] (-) TimerEvent: {}
+[6.217675] (-) TimerEvent: {}
+[6.318038] (-) TimerEvent: {}
+[6.418419] (-) TimerEvent: {}
+[6.518658] (-) TimerEvent: {}
+[6.619019] (-) TimerEvent: {}
+[6.719385] (-) TimerEvent: {}
+[6.819742] (-) TimerEvent: {}
+[6.920100] (-) TimerEvent: {}
+[7.020466] (-) TimerEvent: {}
+[7.120823] (-) TimerEvent: {}
+[7.221194] (-) TimerEvent: {}
+[7.321599] (-) TimerEvent: {}
+[7.421999] (-) TimerEvent: {}
+[7.522312] (-) TimerEvent: {}
+[7.622629] (-) TimerEvent: {}
+[7.722927] (-) TimerEvent: {}
+[7.823237] (-) TimerEvent: {}
+[7.923475] (-) TimerEvent: {}
+[8.023674] (-) TimerEvent: {}
+[8.123985] (-) TimerEvent: {}
+[8.224296] (-) TimerEvent: {}
+[8.324606] (-) TimerEvent: {}
+[8.424942] (-) TimerEvent: {}
+[8.525248] (-) TimerEvent: {}
+[8.625574] (-) TimerEvent: {}
+[8.725895] (-) TimerEvent: {}
+[8.826201] (-) TimerEvent: {}
+[8.926515] (-) TimerEvent: {}
+[9.026814] (-) TimerEvent: {}
+[9.127124] (-) TimerEvent: {}
+[9.227426] (-) TimerEvent: {}
+[9.327719] (-) TimerEvent: {}
+[9.427962] (-) TimerEvent: {}
+[9.528270] (-) TimerEvent: {}
+[9.628589] (-) TimerEvent: {}
+[9.728919] (-) TimerEvent: {}
+[9.829244] (-) TimerEvent: {}
+[9.929573] (-) TimerEvent: {}
+[10.029818] (-) TimerEvent: {}
+[10.130156] (-) TimerEvent: {}
+[10.138900] (forestguard_controller) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable forestguard_controller\x1b[0m\n'}
+[10.230362] (-) TimerEvent: {}
+[10.330731] (-) TimerEvent: {}
+[10.431108] (-) TimerEvent: {}
+[10.531440] (-) TimerEvent: {}
+[10.631678] (-) TimerEvent: {}
+[10.731923] (-) TimerEvent: {}
+[10.827990] (forestguard_controller) StdoutLine: {'line': b'[100%] Built target forestguard_controller\n'}
+[10.832029] (-) TimerEvent: {}
+[10.838720] (forestguard_controller) CommandEnded: {'returncode': 0}
+[10.840161] (forestguard_controller) JobProgress: {'identifier': 'forestguard_controller', 'progress': 'install'}
+[10.840179] (forestguard_controller) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/john/git/RS1/john_branch/build/forestguard_controller'], 'cwd': '/home/john/git/RS1/john_branch/build/forestguard_controller', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_AU:en'), ('USER', 'john'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/john'), ('DESKTOP_SESSION', 'ubuntu-wayland'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '10937'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/john/git/RS1/john_branch/install:/home/john/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'john'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'john'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/john/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/xps:@/tmp/.ICE-unix/2891,unix/xps:/tmp/.ICE-unix/2891'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8f97fbea_8a29_4073_b9fe_26c409c1fa65'), ('GNOME_SETUP_DISPLAY', ':2'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_AU.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu-wayland'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.9XVBF3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.157'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu-wayland'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GAZEBO_RESOURCE_PATH', '/usr/share/gazebo-11/'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/john/git/RS1/john_branch/build/forestguard_controller'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu-wayland:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu-wayland:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[10.843535] (forestguard_controller) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[10.843754] (forestguard_controller) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[10.843909] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/lib/forestguard_controller/forestguard_controller\n'}
+[10.849626] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/include/forestguard_controller/controller_husky.h\n'}
+[10.855630] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/package_run_dependencies/forestguard_controller\n'}
+[10.862072] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/parent_prefix_path/forestguard_controller\n'}
+[10.867923] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.sh\n'}
+[10.872409] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.dsv\n'}
+[10.878944] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.sh\n'}
+[10.883914] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.dsv\n'}
+[10.888328] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.bash\n'}
+[10.892438] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.sh\n'}
+[10.898029] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.zsh\n'}
+[10.902272] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.dsv\n'}
+[10.906626] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.dsv\n'}
+[10.910864] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/packages/forestguard_controller\n'}
+[10.915332] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig.cmake\n'}
+[10.919481] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig-version.cmake\n'}
+[10.924412] (forestguard_controller) StdoutLine: {'line': b'-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.xml\n'}
+[10.931836] (forestguard_controller) CommandEnded: {'returncode': 0}
+[10.932090] (-) TimerEvent: {}
+[10.941004] (forestguard_controller) JobEnded: {'identifier': 'forestguard_controller', 'rc': 0}
+[10.941346] (-) EventReactorShutdown: {}

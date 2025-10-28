@@ -1,0 +1,27 @@
+[0.132s] Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_localisation': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_localisation -- -j20 -l20
+[0.260s] [ 33%] [32mBuilding CXX object CMakeFiles/forestguard_localisation.dir/src/amcl_localisation.cpp.o[0m
+[0.260s] [ 66%] [32mBuilding CXX object CMakeFiles/forestguard_localisation.dir/src/main_amcl.cpp.o[0m
+[4.728s] [100%] [32m[1mLinking CXX executable forestguard_localisation[0m
+[4.962s] [100%] Built target forestguard_localisation
+[4.973s] Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_localisation' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_localisation -- -j20 -l20
+[4.974s] Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_localisation': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_localisation
+[4.978s] -- Install configuration: ""
+[4.978s] -- Execute custom install script
+[4.979s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/lib/forestguard_localisation/forestguard_localisation
+[4.985s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/include/forestguard_localisation/amcl_localisation.h
+[4.991s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/ament_index/resource_index/package_run_dependencies/forestguard_localisation
+[4.995s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/ament_index/resource_index/parent_prefix_path/forestguard_localisation
+[5.000s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/ament_prefix_path.sh
+[5.006s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/ament_prefix_path.dsv
+[5.011s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/path.sh
+[5.018s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/path.dsv
+[5.022s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.bash
+[5.028s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.sh
+[5.032s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.zsh
+[5.037s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.dsv
+[5.043s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.dsv
+[5.049s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/ament_index/resource_index/packages/forestguard_localisation
+[5.054s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/cmake/forestguard_localisationConfig.cmake
+[5.059s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/cmake/forestguard_localisationConfig-version.cmake
+[5.065s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.xml
+[5.072s] Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_localisation' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_localisation

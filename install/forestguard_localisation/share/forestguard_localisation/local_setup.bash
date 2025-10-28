@@ -1,0 +1,1 @@
+/home/john/git/RS1/john_branch/build/forestguard_localisation/ament_cmake_environment_hooks/local_setup.bash

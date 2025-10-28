@@ -1,1 +1,0 @@
-/home/john/ForestGuard/src/john/launch/john.launch.py

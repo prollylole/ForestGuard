@@ -145,7 +145,7 @@ class RosSignals(QObject):
 class GuiRosNode(Node):
     """ROS2 node performing pubs/subs and emitting Qt signals."""
     def __init__(self, signals: RosSignals):
-        super().__init__("forestguard_gui")
+        super().__init__("forestguard_ui")
         self.signals = signals
 
         # Log levels via env

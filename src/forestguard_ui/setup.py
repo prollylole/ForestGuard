@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'forestguard_gui'
+package_name = 'forestguard_ui'
 
 setup(
     name=package_name,
@@ -20,9 +20,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
     'console_scripts': [
-        'run_ui = forestguard_gui.app:main',
-        'controller_bridge = forestguard_gui.controller_bridge:main',
-        'twist_scaler = forestguard_gui.twist_scaler:main',
+        'run_ui = forestguard_ui.app:main',
+        'controller_bridge = forestguard_ui.controller_bridge:main',
+        'twist_scaler = forestguard_ui.twist_scaler:main',
     ],
     }
 )
