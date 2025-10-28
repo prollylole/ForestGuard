@@ -1,3 +1,0 @@
-[console_scripts]
-run_ui = forestguard_ui.app:main
-

@@ -1,1 +1,0 @@
-/home/john/git/RS1/john_branch/src/forest_localization/include/forest_localization/amcl_localization.h

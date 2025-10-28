@@ -289,14 +289,14 @@ def generate_launch_description():
     ld.add_action(gazebo_bridge)
 
     ui_node = Node(
-        package='turtlebot_ui',
+        package='forestguard_ui',
         executable='run_ui',
         output='screen',
         condition=IfCondition(LaunchConfiguration('ui'))
     )
 
     controller_bridge = Node(
-        package='turtlebot_ui',
+        package='forestguard_ui',
         executable='controller_bridge',
         output='screen',
         condition=IfCondition(LaunchConfiguration('teleop'))
@@ -331,7 +331,7 @@ def generate_launch_description():
     )
 
     twist_scaler = Node(
-        package='turtlebot_ui',
+        package='forestguard_ui',
         executable='twist_scaler',
         name='twist_scaler',
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}],

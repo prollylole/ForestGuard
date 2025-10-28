@@ -1,1 +1,0 @@
-/home/john/git/RS1/john_branch/src/forest_controller/include/forest_controller/controller_husky.h

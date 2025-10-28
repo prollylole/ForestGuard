@@ -1,1 +1,0 @@
-/home/john/git/RS1/john_branch/src/forestguard_sim/launch/large_forest_husky.launch.py

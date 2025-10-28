@@ -14,7 +14,6 @@ from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
 import os, math, random, time
 
-
 # ------------------------
 # Forest world generator
 # ------------------------
@@ -58,10 +57,8 @@ def generate_forest_world(context):
         </include>"""
 
     blocks = ["<include><uri>model://forest_env</uri><name>forest_env</name><pose>0 0 0 0 0 0</pose></include>"]
-    # tree1s
     for i, (x, y) in enumerate(pts[:num_a]):
         blocks.append(inc("model://tree1", f"tree1_{i}", x, y, z, random.uniform(0.0, 2*math.pi)))
-    # tree2s
     for j, (x, y) in enumerate(pts[num_a:num_a+num_b]):
         blocks.append(inc("model://tree2", f"tree2_{j}", x, y, z, random.uniform(0.0, 2*math.pi)))
 
@@ -121,14 +118,13 @@ def launch_setup(context, *args, **kwargs):
 def generate_launch_description():
     pkg_path = get_package_share_directory('john')
 
-    # Add Ignition/Gazebo resource paths so model:// URIs resolve (forest_env, tree1, tree2)
+    # Tell Ignition/Gazebo where to find model:// URIs
     models_dir  = os.path.join(pkg_path, 'models')
     worlds_dir  = os.path.join(pkg_path, 'worlds')
     resource_path = os.pathsep.join([models_dir, worlds_dir])
 
     ld = LaunchDescription()
 
-    # Export env for both classic and new Ignition variables
     existing_ign = os.environ.get('IGN_GAZEBO_RESOURCE_PATH', '')
     existing_gz  = os.environ.get('GZ_SIM_RESOURCE_PATH', '')
     existing_gazebo_model = os.environ.get('GAZEBO_MODEL_PATH', '')
@@ -170,7 +166,6 @@ def generate_launch_description():
         ld.add_action(arg)
 
     # ------------------ Core Nodes ------------------
-    # Robot description
     robot_description = ParameterValue(
         Command(['xacro ', PathJoinSubstitution([pkg_path, 'urdf', 'husky.urdf.xacro'])]),
         value_type=str
@@ -184,7 +179,6 @@ def generate_launch_description():
         }]
     ))
 
-    # EKF localization (expects /odometry & /imu from bridge; publishes /odometry/filtered & TF)
     ld.add_action(Node(
         package='robot_localization',
         executable='ekf_node',
@@ -194,7 +188,6 @@ def generate_launch_description():
         output='screen'
     ))
 
-    # Bridge Gazebo ↔ ROS (topics configured in your gazebo_bridge.yaml)
     ld.add_action(Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -202,15 +195,13 @@ def generate_launch_description():
         output='screen'
     ))
 
-    # Static transform map→odom (AMCL will localize, but we keep map->odom static zero unless you want AMCL to publish)
     ld.add_action(Node(
         package='tf2_ros',
         executable='static_transform_publisher',
         arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom']
     ))
 
-    # ------------------ Nav2 stack ------------------
-    # include your navigation_map.launch.py (which now defaults to john/config paths)
+    # Nav2
     ld.add_action(IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [PathJoinSubstitution([pkg_path, 'launch', 'navigation_map.launch.py'])]
@@ -219,13 +210,13 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('use_map'))
     ))
 
-    # ------------------ UI + Teleop ------------------
+    # UI + Teleop
     ld.add_action(Node(
-        package='turtlebot_ui', executable='run_ui', output='screen',
+        package='forestguard_ui', executable='run_ui', output='screen',
         condition=IfCondition(LaunchConfiguration('ui'))
     ))
     ld.add_action(Node(
-        package='turtlebot_ui', executable='controller_bridge', output='screen',
+        package='forestguard_ui', executable='controller_bridge', output='screen',
         condition=IfCondition(LaunchConfiguration('teleop'))
     ))
     ld.add_action(Node(
@@ -240,17 +231,17 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('teleop'))
     ))
     ld.add_action(Node(
-        package='turtlebot_ui', executable='twist_scaler', name='twist_scaler',
+        package='forestguard_ui', executable='twist_scaler', name='twist_scaler',
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
 
-    # ------------------ RViz ------------------
+    # RViz
     ld.add_action(Node(
         package='rviz2', executable='rviz2', output='screen',
         arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'forest.rviz'])],
         condition=IfCondition(LaunchConfiguration('rviz'))
     ))
 
-    # ------------------ Gazebo + Spawn ------------------
+    # Gazebo + Spawn
     ld.add_action(OpaqueFunction(function=launch_setup))
     return ld

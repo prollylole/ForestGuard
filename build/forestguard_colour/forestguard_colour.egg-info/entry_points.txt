@@ -1,5 +1,0 @@
-[console_scripts]
-hsv_calibrator = forestguard_colour.hsv_calibrator:main
-tree_detector = forestguard_colour.tree_detector_node:main
-tree_detector_v2 = forestguard_colour.tree_detector_v2:main
-
