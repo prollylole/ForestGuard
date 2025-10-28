@@ -5,6 +5,7 @@ forestguard_colour/__init__.py
 forestguard_colour/hsv_calibrator.py
 forestguard_colour/tree_detector_node.py
 forestguard_colour/tree_detector_v2.py
+forestguard_colour/tree_mapper.py
 forestguard_colour.egg-info/PKG-INFO
 forestguard_colour.egg-info/SOURCES.txt
 forestguard_colour.egg-info/dependency_links.txt
@@ -13,4 +14,6 @@ forestguard_colour.egg-info/requires.txt
 forestguard_colour.egg-info/top_level.txt
 forestguard_colour.egg-info/zip-safe
 launch/colour_detector.launch.py
+launch/colour_detector_params.launch.py
+launch/tree_mapper.launch.py
 resource/forestguard_colour

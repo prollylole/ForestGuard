@@ -1,16 +1,22 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+from glob import glob
+import os
 
 package_name = 'forestguard_colour'
 
 setup(
     name=package_name,
     version='0.0.1',
-    packages=[package_name],
+    packages=find_packages(),  # picks up forestguard_colour because of __init__.py
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/colour_detector.launch.py']),
+        # Install ALL launch files, including tree_mapper.launch.py
+        (os.path.join('share', package_name, 'launch'),
+         glob('launch/*.launch.py')),
+        # (optional) if you add configs later:
+        # (os.path.join('share', package_name, 'config'), glob('config/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -18,12 +24,12 @@ setup(
     maintainer_email='john@example.com',
     description='Colour-based perception for ForestGuard',
     license='Apache-2.0',
-    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'tree_detector = forestguard_colour.tree_detector_node:main',
+            'tree_detector    = forestguard_colour.tree_detector_node:main',
             'tree_detector_v2 = forestguard_colour.tree_detector_v2:main',
-            'hsv_calibrator = forestguard_colour.hsv_calibrator:main',
+            'hsv_calibrator   = forestguard_colour.hsv_calibrator:main',
+            'tree_mapper      = forestguard_colour.tree_mapper:main',  
         ],
     },
 )

@@ -1,21 +1,25 @@
-from launch import LaunchDescription
+from launch import LaunchDescription, actions
 from launch.actions import (
     DeclareLaunchArgument,
     IncludeLaunchDescription,
+    SetEnvironmentVariable,
     OpaqueFunction,
     ExecuteProcess,
-    SetEnvironmentVariable,
+    RegisterEventHandler,
+    Shutdown,
 )
+from launch.event_handlers import OnProcessExit
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command
+from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
+
 import os, math, random, time
 
 # ------------------------
-# Forest world generator
+# Forest world generation
 # ------------------------
 def generate_forest_world(context):
     num_a = int(LaunchConfiguration('num_a').perform(context))
@@ -25,11 +29,12 @@ def generate_forest_world(context):
     ymin = float(LaunchConfiguration('ymin').perform(context))
     ymax = float(LaunchConfiguration('ymax').perform(context))
     min_sep = float(LaunchConfiguration('min_sep').perform(context))
+    max_sep = float(LaunchConfiguration('max_sep').perform(context))
     margin = float(LaunchConfiguration('margin').perform(context))
     z = float(LaunchConfiguration('z').perform(context))
     seed = int(LaunchConfiguration('seed').perform(context))
 
-    # resolved spawn from context (set in launch_setup)
+    # spawn (set in launch_setup)
     spawn_x = float(context.launch_configurations['resolved_spawn_x'])
     spawn_y = float(context.launch_configurations['resolved_spawn_y'])
 
@@ -38,117 +43,146 @@ def generate_forest_world(context):
         print(f"[forest_random] Using random seed: {seed}")
     random.seed(seed)
 
+    if max_sep <= min_sep:
+        max_sep = min_sep + 1e-6
+
     xmin_eff, xmax_eff = xmin + margin, xmax - margin
     ymin_eff, ymax_eff = ymin + margin, ymax - margin
 
-    pts = []
-    while len(pts) < num_a + num_b:
-        x = random.uniform(xmin_eff, xmax_eff)
-        y = random.uniform(ymin_eff, ymax_eff)
-        if all((x - xi)**2 + (y - yi)**2 >= min_sep**2 for xi, yi in pts):
-            pts.append((x, y))
+    def sample_points(n, xmin_, xmax_, ymin_, ymax_, min_s, max_s, max_tries=40000):
+        pts, tries = [], 0
+        min_r2, max_r2 = min_s * min_s, max_s * max_s
+        spawn_r2 = 1.5 * 1.5
+        while len(pts) < n and tries < max_tries:
+            x = random.uniform(xmin_, xmax_)
+            y = random.uniform(ymin_, ymax_)
+            if (x - spawn_x)**2 + (y - spawn_y)**2 <= spawn_r2:
+                tries += 1; continue
+            if not all((x - xi)**2 + (y - yi)**2 >= min_r2 for xi, yi in pts):
+                tries += 1; continue
+            if len(pts) == 0 or any((x - xi)**2 + (y - yi)**2 <= max_r2 for xi, yi in pts):
+                pts.append((x, y))
+            tries += 1
+        return pts
+
+    pts = sample_points(num_a + num_b, xmin_eff, xmax_eff, ymin_eff, ymax_eff, min_sep, max_sep)
 
     def inc(uri, name, x, y, z_, yaw):
         return f"""
-        <include>
-          <uri>{uri}</uri>
-          <name>{name}</name>
-          <pose>{x:.3f} {y:.3f} {z_:.3f} 0 0 {yaw:.6f}</pose>
-        </include>"""
+    <include>
+      <uri>{uri}</uri>
+      <name>{name}</name>
+      <pose>{x:.3f} {y:.3f} {z_:.3f} 0 0 {yaw:.6f}</pose>
+    </include>"""
 
-    blocks = ["<include><uri>model://forest_env</uri><name>forest_env</name><pose>0 0 0 0 0 0</pose></include>"]
+    blocks = [inc("model://forest_env", "forest_env", 0, 0, 0, 0.0)]
     for i, (x, y) in enumerate(pts[:num_a]):
         blocks.append(inc("model://tree1", f"tree1_{i}", x, y, z, random.uniform(0.0, 2*math.pi)))
     for j, (x, y) in enumerate(pts[num_a:num_a+num_b]):
         blocks.append(inc("model://tree2", f"tree2_{j}", x, y, z, random.uniform(0.0, 2*math.pi)))
 
     world_sdf = f"""<?xml version="1.0" ?>
-    <sdf version="1.9">
-      <world name="forest_world">
-        <light name="sun" type="directional">
-          <cast_shadows>true</cast_shadows>
-          <pose>0 0 10 0 0 0</pose>
-        </light>
-        <gravity>0 0 -9.81</gravity>
-        <scene><ambient>1 1 1 1</ambient><background>0.6 0.8 1.0 1</background></scene>
-        {"".join(blocks)}
-      </world>
-    </sdf>"""
+<sdf version="1.9">
+  <world name="forest_world">
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+    </light>
+    <gravity>0 0 -9.81</gravity>
+    <scene><ambient>1 1 1 1</ambient><background>0.6 0.8 1.0 1</background></scene>
+{"".join(blocks)}
+  </world>
+</sdf>"""
 
     out_dir = os.path.join(os.path.expanduser('~'), '.ros')
     os.makedirs(out_dir, exist_ok=True)
-    world_path = os.path.join(out_dir, 'husky_autonomous.world.sdf')
-    with open(world_path, 'w') as f:
+    out_path = os.path.join(out_dir, 'husky_forest_random.world.sdf')
+    with open(out_path, 'w') as f:
         f.write(world_sdf)
-    print(f"[forest_autonomous] wrote {world_path} with seed {seed}")
-    return world_path
+    print(f"[husky_forest_random] wrote {out_path} with seed {seed}")
+    return out_path
 
-
+# ------------------------
+# Helpers
+# ------------------------
 def resolve_spawn_arg(context, name, lo, hi):
     val = LaunchConfiguration(name).perform(context)
     return str(random.uniform(lo, hi)) if val == 'RANDOM' else val
 
-
+# ------------------------
+# Setup phase (returns gazebo + spawner + shutdown handler)
+# ------------------------
 def launch_setup(context, *args, **kwargs):
-    spawn_x = resolve_spawn_arg(context, 'spawn_x', -2.0, 2.0)
-    spawn_y = resolve_spawn_arg(context, 'spawn_y', -2.0, 2.0)
-    spawn_yaw = resolve_spawn_arg(context, 'spawn_yaw', 0.0, 2*math.pi)
-    context.launch_configurations['resolved_spawn_x'] = spawn_x
-    context.launch_configurations['resolved_spawn_y'] = spawn_y
+    # Resolve robot spawn
+    spawn_x_val = resolve_spawn_arg(context, 'spawn_x', -2.0, 2.0)
+    spawn_y_val = resolve_spawn_arg(context, 'spawn_y', -2.0, 2.0)
+    spawn_yaw_val = resolve_spawn_arg(context, 'spawn_yaw', 0.0, 2*math.pi)
 
+    # Expose to world generator
+    context.launch_configurations['resolved_spawn_x'] = spawn_x_val
+    context.launch_configurations['resolved_spawn_y'] = spawn_y_val
+
+    # Generate world
     world_path = generate_forest_world(context)
 
-    gazebo = ExecuteProcess(
-        cmd=['ign', 'gazebo', '-r', world_path],
-        output='screen'
+    # Start Ignition GUI
+    gazebo_process = ExecuteProcess(
+        cmd=['ign', 'gazebo', '-r', world_path, '-v', '4'],
+        output='screen',
     )
 
-    spawner = Node(
+    # Shut down everything when Ignition GUI exits
+    gazebo_shutdown_handler = RegisterEventHandler(
+        OnProcessExit(
+            target_action=gazebo_process,
+            on_exit=[Shutdown(reason='Ignition GUI closed')]
+        )
+    )
+
+    # Spawn the robot
+    robot_spawner = Node(
         package='ros_gz_sim',
         executable='create',
         output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
         arguments=[
             '-topic', '/robot_description',
-            '-x', spawn_x, '-y', spawn_y, '-z', '0.4', '-Y', spawn_yaw
+            '-x', spawn_x_val,
+            '-y', spawn_y_val,
+            '-z', '0.4',
+            '-Y', spawn_yaw_val,
+            '-wait', '5'
         ]
     )
-    return [gazebo, spawner]
 
+    # Return all actions created in setup
+    return [gazebo_process, gazebo_shutdown_handler, robot_spawner]
 
+# ------------------------
+# Main launch description
+# ------------------------
 def generate_launch_description():
     pkg_path = get_package_share_directory('john')
-
-    # Tell Ignition/Gazebo where to find model:// URIs
-    models_dir  = os.path.join(pkg_path, 'models')
-    worlds_dir  = os.path.join(pkg_path, 'worlds')
-    resource_path = os.pathsep.join([models_dir, worlds_dir])
+    resource_path = os.pathsep.join([
+        os.path.join(pkg_path, 'models'),
+        os.path.join(pkg_path, 'worlds')
+    ])
 
     ld = LaunchDescription()
 
-    existing_ign = os.environ.get('IGN_GAZEBO_RESOURCE_PATH', '')
-    existing_gz  = os.environ.get('GZ_SIM_RESOURCE_PATH', '')
-    existing_gazebo_model = os.environ.get('GAZEBO_MODEL_PATH', '')
+    # Gazebo resource paths
+    ld.add_action(SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', resource_path))
+    ld.add_action(SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', resource_path))
 
-    ld.add_action(SetEnvironmentVariable(
-        name='IGN_GAZEBO_RESOURCE_PATH',
-        value=(resource_path if not existing_ign else resource_path + os.pathsep + existing_ign)
-    ))
-    ld.add_action(SetEnvironmentVariable(
-        name='GZ_SIM_RESOURCE_PATH',
-        value=(resource_path if not existing_gz else resource_path + os.pathsep + existing_gz)
-    ))
-    ld.add_action(SetEnvironmentVariable(
-        name='GAZEBO_MODEL_PATH',
-        value=(resource_path if not existing_gazebo_model else resource_path + os.pathsep + existing_gazebo_model)
-    ))
+    # Common args
+    ld.add_action(DeclareLaunchArgument('use_sim_time', default_value='True'))
+    ld.add_action(DeclareLaunchArgument('rviz', default_value='True'))
+    ld.add_action(DeclareLaunchArgument('nav2', default_value='True'))
+    ld.add_action(DeclareLaunchArgument('ui', default_value='True'))
+    ld.add_action(DeclareLaunchArgument('teleop', default_value='True'))
 
-    # ------------------ Arguments ------------------
+    # Forest args
     for arg in [
-        DeclareLaunchArgument('use_sim_time', default_value='True'),
-        DeclareLaunchArgument('rviz', default_value='True'),
-        DeclareLaunchArgument('ui', default_value='True'),
-        DeclareLaunchArgument('teleop', default_value='True'),
-        DeclareLaunchArgument('use_map', default_value='True'),
         DeclareLaunchArgument('num_a', default_value='25'),
         DeclareLaunchArgument('num_b', default_value='2'),
         DeclareLaunchArgument('xmin', default_value='-7.0'),
@@ -157,6 +191,7 @@ def generate_launch_description():
         DeclareLaunchArgument('ymax', default_value='7.0'),
         DeclareLaunchArgument('margin', default_value='0.5'),
         DeclareLaunchArgument('min_sep', default_value='1.25'),
+        DeclareLaunchArgument('max_sep', default_value='4.0'),
         DeclareLaunchArgument('z', default_value='0.0'),
         DeclareLaunchArgument('seed', default_value='-1'),
         DeclareLaunchArgument('spawn_x', default_value='RANDOM'),
@@ -165,7 +200,7 @@ def generate_launch_description():
     ]:
         ld.add_action(arg)
 
-    # ------------------ Core Nodes ------------------
+    # Robot description
     robot_description = ParameterValue(
         Command(['xacro ', PathJoinSubstitution([pkg_path, 'urdf', 'husky.urdf.xacro'])]),
         value_type=str
@@ -179,35 +214,23 @@ def generate_launch_description():
         }]
     ))
 
+    # EKF
     ld.add_action(Node(
         package='robot_localization',
         executable='ekf_node',
         name='robot_localization',
+        output='screen',
         parameters=[PathJoinSubstitution([pkg_path, 'config', 'robot_localization.yaml']),
-                    {'use_sim_time': LaunchConfiguration('use_sim_time')}],
-        output='screen'
+                    {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     ))
 
+    # Bridge
     ld.add_action(Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        parameters=[{'config_file': PathJoinSubstitution([pkg_path, 'config', 'gazebo_bridge.yaml'])}],
+        parameters=[{'config_file': PathJoinSubstitution([pkg_path, 'config', 'gazebo_bridge.yaml']),
+                     'use_sim_time': LaunchConfiguration('use_sim_time')}],
         output='screen'
-    ))
-
-    # ld.add_action(Node(
-    #     package='tf2_ros',
-    #     executable='static_transform_publisher',
-    #     arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom']
-    # ))
-
-    # Nav2
-    ld.add_action(IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            [PathJoinSubstitution([pkg_path, 'launch', 'navigation_map.launch.py'])]
-        ),
-        launch_arguments={'use_sim_time': LaunchConfiguration('use_sim_time')}.items(),
-        condition=IfCondition(LaunchConfiguration('use_map'))
     ))
 
     # UI + Teleop
@@ -235,13 +258,35 @@ def generate_launch_description():
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
 
-    # RViz
-    ld.add_action(Node(
-        package='rviz2', executable='rviz2', output='screen',
+    # RViz (keep a handle so we can attach a shutdown handler)
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
         arguments=['-d', PathJoinSubstitution([pkg_path, 'config', 'forest.rviz'])],
-        condition=IfCondition(LaunchConfiguration('rviz'))
+        condition=IfCondition(LaunchConfiguration('rviz')),
+    )
+    ld.add_action(rviz_node)
+
+    # Shut everything down when RViz exits
+    ld.add_action(RegisterEventHandler(
+        OnProcessExit(
+            target_action=rviz_node,
+            on_exit=[Shutdown(reason='RViz closed')]
+        )
     ))
 
-    # Gazebo + Spawn
+    # Nav2 (optional)
+    ld.add_action(IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [PathJoinSubstitution([pkg_path, 'launch', 'johnNavigation.launch.py'])]
+        ),
+        launch_arguments={'use_sim_time': LaunchConfiguration('use_sim_time')}.items(),
+        condition=IfCondition(LaunchConfiguration('nav2'))
+    ))
+
+    # Generate world, start Gazebo, and add its shutdown handler + spawner
     ld.add_action(OpaqueFunction(function=launch_setup))
+
     return ld
