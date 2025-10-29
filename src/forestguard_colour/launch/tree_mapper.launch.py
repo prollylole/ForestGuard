@@ -21,8 +21,8 @@ def generate_launch_description():
 
         Node(
             package='forestguard_colour',
-            executable='tree_mapper',
-            name='tree_mapper',
+            executable='camera_tree_mapper',
+            name='camera_tree_mapper',
             output='screen',
             parameters=[{
                 'image_topic': image_topic,
@@ -33,4 +33,34 @@ def generate_launch_description():
                 'use_sim_time': use_sim_time,
             }]
         ),
+
+        Node(
+            package='forestguard_colour',
+            executable='lidar_tree_mapper',
+            name='lidar_tree_mapper',
+            output='screen',
+            parameters=[{
+                'scan_topic':  LaunchConfiguration('scan_topic'),   # default /scan
+                'base_frame':  LaunchConfiguration('base_frame'),   # default base_link
+                'map_frame':   LaunchConfiguration('map_frame'),    # default map
+                'deadzone_m':  0.8,    # tune with your spawn spacing
+                'cluster_break_m': 0.20,
+            }]
+        ),
+        
+        # Node(
+        #     package='forestguard_colour',
+        #     executable='tree_colour_confirmer',
+        #     name='tree_colour_confirmer',
+        #     output='screen',
+        #     parameters=[{
+        #         'image_topic': '/camera/image',
+        #         'map_frame':   'map',
+        #         'base_frame':  'base_link',
+        #         'camera_hfov_deg': 120,
+        #         'roi_ymin_frac': 0.35,
+        #         'stripe_half_px': 16,
+        #         'min_votes': 40,
+        #     }]
+        # )
     ])

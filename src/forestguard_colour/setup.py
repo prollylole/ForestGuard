@@ -26,10 +26,12 @@ setup(
     license='Apache-2.0',
     entry_points={
         'console_scripts': [
-            'tree_detector    = forestguard_colour.tree_detector_node:main',
-            'tree_detector_v2 = forestguard_colour.tree_detector_v2:main',
-            'hsv_calibrator   = forestguard_colour.hsv_calibrator:main',
-            'tree_mapper      = forestguard_colour.tree_mapper:main',  
+            'tree_detector      =   forestguard_colour.tree_detector_node:main',
+            'tree_detector_v2   =   forestguard_colour.tree_detector_v2:main',
+            'hsv_calibrator     =   forestguard_colour.hsv_calibrator:main',
+            'camera_tree_mapper =   forestguard_colour.camera_tree_mapper:main',  
+            'lidar_tree_mapper  =   forestguard_colour.lidar_tree_mapper:main',
+            'tree_colour_confirmer = forestguard_colour.tree_colour_confirmer:main',
         ],
     },
 )

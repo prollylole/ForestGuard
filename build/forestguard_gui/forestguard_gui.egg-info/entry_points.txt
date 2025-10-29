@@ -1,5 +1,0 @@
-[console_scripts]
-controller_bridge = forestguard_gui.controller_bridge:main
-run_ui = forestguard_gui.app:main
-twist_scaler = forestguard_gui.twist_scaler:main
-
