@@ -9,7 +9,7 @@
         <geometry>
           <mesh>
             <uri>model://forest_env/meshes/Environment1.dae</uri>
-            <scale>15 15 15</scale>
+            <scale>17.5 17.5 17.5</scale>
           </mesh>
         </geometry>
       </visual>
@@ -20,7 +20,7 @@
           <mesh>
             <!-- use a simplified collision mesh if you have one: Environment1_col.stl -->
             <uri>model://forest_env/meshes/Environment1.dae</uri>
-            <scale>15 15 15</scale>
+            <scale>17.5 17.5 17.5</scale>
           </mesh>
         </geometry>
         <surface>
