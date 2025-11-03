@@ -7,7 +7,7 @@ Key guarantees:
 - No two PRINTED positions are identical when rounded to --print-decimals.
 
 Usage:
-  python3 poisson_trees.py --n-good 25 --n-bad 5 --min-sep 3.0 \
+  python3 scripts/poisson_trees.py --n-good 25 --n-bad 3 --min-sep 3.0 \
     --xmin -9 --xmax 9 --ymin -9 --ymax 9 \
     --spawn-x 0 --spawn-y 0 --excl-radius 1.5 \
     --seed 424242 --print-decimals 3 --format sdf > /tmp/trees.sdf.inc
