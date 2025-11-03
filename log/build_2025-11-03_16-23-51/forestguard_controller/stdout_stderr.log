@@ -1,0 +1,23 @@
+[ 33%] [32mBuilding CXX object CMakeFiles/forestguard_controller.dir/src/controller_husky.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/forestguard_controller.dir/src/main_husky.cpp.o[0m
+[100%] [32m[1mLinking CXX executable forestguard_controller[0m
+[100%] Built target forestguard_controller
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/lib/forestguard_controller/forestguard_controller
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/include/forestguard_controller/controller_husky.h
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/package_run_dependencies/forestguard_controller
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/parent_prefix_path/forestguard_controller
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.sh
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.dsv
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.sh
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.dsv
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.bash
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.sh
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.zsh
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.dsv
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.dsv
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/packages/forestguard_controller
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig.cmake
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig-version.cmake
+-- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.xml

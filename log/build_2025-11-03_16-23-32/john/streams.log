@@ -1,0 +1,114 @@
+[0.260s] Invoking command in '/home/john/git/RS1/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake /home/john/git/RS1/john_branch/src/forestguard_sim -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/john/git/RS1/john_branch/install/john
+[0.298s] -- The C compiler identification is GNU 11.4.0
+[0.334s] -- The CXX compiler identification is GNU 11.4.0
+[0.338s] -- Detecting C compiler ABI info
+[0.384s] -- Detecting C compiler ABI info - done
+[0.392s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.392s] -- Detecting C compile features
+[0.392s] -- Detecting C compile features - done
+[0.395s] -- Detecting CXX compiler ABI info
+[0.449s] -- Detecting CXX compiler ABI info - done
+[0.456s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.456s] -- Detecting CXX compile features
+[0.457s] -- Detecting CXX compile features - done
+[0.459s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.553s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.591s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.607s] -- Found ros_ign_interfaces: 0.244.20 (/opt/ros/humble/share/ros_ign_interfaces/cmake)
+[0.627s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.630s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.635s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.642s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.651s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.704s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.749s] -- Added test 'copyright' to check source files copyright and LICENSE
+[0.752s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.753s] -- Added test 'lint_cmake' to check CMake code style
+[0.753s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.755s] -- Added test 'xmllint' to check XML markup files
+[0.756s] -- Configuring done
+[0.757s] -- Generating done
+[0.758s] -- Build files have been written to: /home/john/git/RS1/john_branch/build/john
+[0.762s] Invoked command in '/home/john/git/RS1/john_branch/build/john' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake /home/john/git/RS1/john_branch/src/forestguard_sim -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/john/git/RS1/john_branch/install/john
+[0.764s] Invoking command in '/home/john/git/RS1/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/john -- -j20 -l20
+[0.791s] Invoked command in '/home/john/git/RS1/john_branch/build/john' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/john -- -j20 -l20
+[0.797s] Invoking command in '/home/john/git/RS1/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/john
+[0.801s] -- Install configuration: ""
+[0.801s] -- Execute custom install script
+[0.801s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/forest.rviz
+[0.805s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/gazebo_bridge.yaml
+[0.810s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/john.rviz
+[0.816s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/nav2_params.yaml
+[0.821s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/robot_localization.yaml
+[0.826s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/slam_params.yaml
+[0.832s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/config/xbox_teleop.yaml
+[0.838s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/41068_ignition.launch.py
+[0.842s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/autonomous_forest.launch.py
+[0.848s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/forest_mapping.launch.py
+[0.853s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/forest_random.launch.py
+[0.859s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/forest_world.launch.py
+[0.863s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/john.launch.py
+[0.868s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/johnNavigation.launch.py
+[0.874s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/johnXL.py
+[0.879s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/john_autonomous_forest.launch.py
+[0.884s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/large_forest_husky.launch.py
+[0.888s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/navigation_map.launch.py
+[0.894s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/random_forest_husky.launch.py
+[0.899s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/launch/sample
+[0.904s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/maps/forest_map.pgm
+[0.910s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/maps/forest_map.yaml
+[0.915s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/materials/textures/empty_grass.png
+[0.921s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/Environment.dae
+[0.926s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/Environment1.dae
+[0.931s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/empty_grass.png
+[0.937s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/model.config
+[0.942s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/model.sdf
+[0.949s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/materials/textures/empty_grass.png
+[0.953s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/materials/textures/forest_overhead.png
+[0.959s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/materials/textures/leaf_litter.png
+[0.964s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/model.config
+[0.970s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/model.sdf
+[0.976s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/materials/textures/forest_wall.png
+[0.983s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/materials/textures/forest_wall_transparent.png
+[0.990s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/materials/textures/forest_wall_transparent_small.png
+[0.994s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/model.config
+[1.002s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/forest_wall/model.sdf
+[1.007s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/grass_plane/materials/textures/empty_grass.png
+[1.012s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/grass_plane/model.config
+[1.018s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/grass_plane/model.sdf
+[1.022s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/materials/textures/bark01.jpg
+[1.028s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/meshes/tree_a.dae
+[1.032s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/model.config
+[1.038s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree1/model.sdf
+[1.045s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/materials/textures/bark.jpeg
+[1.051s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/meshes/tree_b.dae
+[1.056s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/model.config
+[1.062s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/models/tree2/model.sdf
+[1.067s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/common_properties.urdf.xacro
+[1.072s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/husky.gazebo.xacro
+[1.078s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/husky.urdf.xacro
+[1.084s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/base_link.dae
+[1.090s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/bumper.dae
+[1.095s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/jpl04_arch_nosensor.stl
+[1.100s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/top_chassis.dae
+[1.105s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/top_plate.dae
+[1.111s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/meshes/wheel.dae
+[1.117s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/urdf/wheel.urdf.xacro
+[1.122s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/worlds/forest_world.sdf
+[1.129s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/worlds/large_demo.sdf
+[1.133s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/worlds/simple_trees.sdf
+[1.138s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/ament_index/resource_index/package_run_dependencies/john
+[1.143s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/ament_index/resource_index/parent_prefix_path/john
+[1.149s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/ament_prefix_path.sh
+[1.156s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/ament_prefix_path.dsv
+[1.163s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/path.sh
+[1.169s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/environment/path.dsv
+[1.175s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.bash
+[1.180s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.sh
+[1.187s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.zsh
+[1.191s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/local_setup.dsv
+[1.197s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/package.dsv
+[1.203s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/ament_index/resource_index/packages/john
+[1.208s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/cmake/johnConfig.cmake
+[1.212s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/cmake/johnConfig-version.cmake
+[1.219s] -- Symlinking: /home/john/git/RS1/john_branch/install/john/share/john/package.xml

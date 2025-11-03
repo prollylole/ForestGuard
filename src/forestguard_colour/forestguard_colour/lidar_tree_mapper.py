@@ -35,7 +35,8 @@ class LidarTreeMapper(Node):
         self.declare_parameter("map_frame", "map")
         self.declare_parameter("min_cluster_pts", 5)
         self.declare_parameter("cluster_break_m", 0.20)     # split cluster if adjacent points jump > this
-        self.declare_parameter("max_range_m", 12.0)         # ignore points beyond this
+        self.declare_parameter("max_range_m", 12.0
+        )         # ignore points beyond this
         self.declare_parameter("deadzone_m", 1.10)          # min sep between unique trees
         self.declare_parameter("min_arc_deg", 20.0)         # reject tiny specks
         self.declare_parameter("min_r_m", 0.06)             # rough trunk radius guard (weak check)

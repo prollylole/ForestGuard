@@ -1,0 +1,13 @@
+[01m[K/home/john/git/RS1/john_branch/src/forestguard_localisation/src/main_amcl.cpp:1:10:[m[K [01;31m[Kfatal error: [m[Kforestguard_localisation/amcl_localisation.h: No such file or directory
+    1 | #include [01;31m[K"forestguard_localisation/amcl_localisation.h"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/forestguard_localisation.dir/build.make:90: CMakeFiles/forestguard_localisation.dir/src/main_amcl.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+[01m[K/home/john/git/RS1/john_branch/src/forestguard_localisation/src/amcl_localisation.cpp:13:10:[m[K [01;31m[Kfatal error: [m[Kforestguard_localisation/amcl_localisation.h: No such file or directory
+   13 | #include [01;31m[K"forestguard_localisation/amcl_localisation.h"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/forestguard_localisation.dir/build.make:76: CMakeFiles/forestguard_localisation.dir/src/amcl_localisation.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/forestguard_localisation.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
