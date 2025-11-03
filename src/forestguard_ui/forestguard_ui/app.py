@@ -185,33 +185,11 @@ class GuiRosNode(Node):
         except Exception:
             pass
 
-        # tree counters (Int32/UInt32 supported)
-        def _mk_cb_total(msg):
-            v = int(getattr(msg, "data", 0))
-            self._tree_total = v
-            self.signals.tree_counts.emit(self._tree_total, getattr(self, "_tree_bad", 0))
-        def _mk_cb_bad(msg):
-            v = int(getattr(msg, "data", 0))
-            self._tree_bad = v
-            self.signals.tree_counts.emit(getattr(self, "_tree_total", 0), self._tree_bad)
+        # tree counters — subscribe ONCE with the correct type
         self._tree_total = 0
         self._tree_bad   = 0
-        try:
-            self.create_subscription(Int32,  TREE_TOTAL_TOPIC, _mk_cb_total, 10)
-        except Exception:
-            pass
-        try:
-            self.create_subscription(UInt32, TREE_TOTAL_TOPIC, _mk_cb_total, 10)
-        except Exception:
-            pass
-        try:
-            self.create_subscription(Int32,  TREE_BAD_TOPIC, _mk_cb_bad, 10)
-        except Exception:
-            pass
-        try:
-            self.create_subscription(UInt32, TREE_BAD_TOPIC, _mk_cb_bad, 10)
-        except Exception:
-            pass
+        self._sub_total = self._subscribe_int_counter(TREE_TOTAL_TOPIC, is_bad=False)
+        self._sub_bad   = self._subscribe_int_counter(TREE_BAD_TOPIC,   is_bad=True)
 
         # ---- Joy D-pad -> bump slider ----
         joy_topic = os.environ.get("UI_JOY_TOPIC", "/joy")
@@ -228,6 +206,41 @@ class GuiRosNode(Node):
             self.get_logger().warn(f"Joy subscribe failed: {e}")
 
         self.signals.ok.emit(True, "ROS node initialised")
+
+    # ---- subscribe helper (Int32/UInt32 autodetect, no duplicates)
+    def _subscribe_int_counter(self, topic_name: str, is_bad: bool):
+        """Subscribe to a counter topic published as Int32 or UInt32."""
+        # Try to detect from the graph
+        types_map = dict(self.get_topic_names_and_types())
+        preferred = None
+        if topic_name in types_map and types_map[topic_name]:
+            tname = types_map[topic_name][0]
+            if "std_msgs/msg/Int32" in tname:
+                preferred = Int32
+            elif "std_msgs/msg/UInt32" in tname:
+                preferred = UInt32
+
+        order = ([preferred] if preferred is not None else []) + [Int32, UInt32]
+        seen = set()
+        for candidate in order:
+            if candidate is None or candidate in seen:
+                continue
+            seen.add(candidate)
+            try:
+                def _cb(msg, bad=is_bad):
+                    v = int(getattr(msg, "data", 0))
+                    if bad:
+                        self._tree_bad = v
+                    else:
+                        self._tree_total = v
+                    self.signals.tree_counts.emit(self._tree_total, self._tree_bad)
+                sub = self.create_subscription(candidate, topic_name, _cb, 10)
+                self.get_logger().info(f"Subscribed {topic_name} as {candidate.__name__}")
+                return sub
+            except Exception as e:
+                self.get_logger().warn(f"{topic_name}: {candidate.__name__} failed ({e})")
+        self.get_logger().error(f"{topic_name}: unable to subscribe as Int32/UInt32")
+        return None
 
     # ------------------- publishers -------------------
     @Slot(float, float)
@@ -381,12 +394,15 @@ class ControlGUI(QWidget):
     def _apply_icon(self):
         icon_path = os.environ.get("UI_APP_ICON", "")
         if not icon_path:
-            # try a common project path
-            guess = os.path.expanduser("~/git/RS1/john_branch/src/forestguard_sim/assets/app_icon.png")
-            if os.path.exists(guess): icon_path = guess
-            else:
-                guess2 = os.path.expanduser("~/git/RS1/john_branch/john/assets/app_icon.png")
-                if os.path.exists(guess2): icon_path = guess2
+            # common project guesses
+            guesses = [
+                "~/git/RS1/john_branch/src/forestguard_ui/assets/app_icon.png",
+                "~/git/RS1/john_branch/john/assets/app_icon.png",
+            ]
+            for g in guesses:
+                p = os.path.expanduser(g)
+                if os.path.exists(p):
+                    icon_path = p; break
         if icon_path and os.path.exists(icon_path):
             try: self.setWindowIcon(QIcon(icon_path))
             except Exception: pass
@@ -435,8 +451,7 @@ class ControlGUI(QWidget):
         left_col.addWidget(cam, 3)
         left_col.addLayout(left_bottom, 2)
 
-        # Right column: top = Tree counter (pane), bottom = Speed slider (pane).
-        # They share height 50/50 regardless of window size.
+        # Right column: top = Map/Panel, bottom split 50/50 (tree counter + speed)
         # --- Tree counter
         self.tree_total = 0
         self.tree_bad = 0
@@ -468,8 +483,7 @@ class ControlGUI(QWidget):
         sp_l.addWidget(QLabel("Speed", alignment=Qt.AlignHCenter))
 
         right_col = QVBoxLayout()
-        right_col.addWidget(right_top_pane, 3)  # this is the top-right camera/map peer
-        # bottom area split 50:50 between tree counter and slider
+        right_col.addWidget(right_top_pane, 3)
         right_bottom = QVBoxLayout()
         right_bottom.addWidget(tree_pane, 1)
         right_bottom.addWidget(speed_pane, 1)
@@ -486,7 +500,7 @@ class ControlGUI(QWidget):
 
         bottom = QHBoxLayout(); bottom.addWidget(run_w, 1); bottom.addWidget(self.estop, 0, Qt.AlignRight)
 
-        # Root grid: two columns, top + bottom area naturally follow camera aspect
+        # Root
         root = QVBoxLayout(self)
         top = QHBoxLayout(); top.addLayout(left_col, 3); top.addLayout(right_col, 2)
         root.addLayout(top, 1); root.addLayout(bottom)
@@ -495,11 +509,9 @@ class ControlGUI(QWidget):
 
     # ---- Dark theme
     def _apply_dark_theme(self):
-        # Use Fusion for consistency
         try: QApplication.instance().setStyle(QStyleFactory.create("Fusion"))
         except Exception: pass
 
-        # Dark palette
         pal = QPalette()
         pal.setColor(QPalette.Window, QColor(0x12,0x12,0x12))
         pal.setColor(QPalette.WindowText, Qt.white)
@@ -515,7 +527,6 @@ class ControlGUI(QWidget):
         pal.setColor(QPalette.HighlightedText, Qt.white)
         QApplication.instance().setPalette(pal)
 
-        # Minimal CSS to style our panes and E-stop
         self.setStyleSheet("""
             QWidget { font-size: 14px; color: #eaeaea; }
             QFrame#pane {
@@ -731,13 +742,16 @@ def _apply_qt_logging_rules_from_env():
 def main():
     _apply_qt_logging_rules_from_env()
     app = QApplication(sys.argv)
-    app.setApplicationName("ForestGuardUI")        # becomes WM_CLASS (name part)
-    app.setOrganizationName("ForestGuard")         # optional
-    app.setDesktopFileName("forestguard-ui")       # ties to forestguard-ui.desktop
-    ICON_PATH = os.path.expanduser(
+    app.setApplicationName("ForestGuardUI")
+    app.setOrganizationName("ForestGuard")
+    app.setDesktopFileName("forestguard-ui")
+
+    # Icon (env overrides default)
+    icon_path = os.environ.get("UI_APP_ICON", os.path.expanduser(
         "~/git/RS1/john_branch/src/forestguard_ui/assets/app_icon.png"
-    )
-    app.setWindowIcon(QIcon(ICON_PATH))
+    ))
+    if os.path.exists(icon_path):
+        app.setWindowIcon(QIcon(icon_path))
 
     w = ControlGUI()
     w.show()
