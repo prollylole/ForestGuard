@@ -183,15 +183,15 @@ def generate_launch_description():
 
     # Forest args
     for arg in [
-        DeclareLaunchArgument('num_a', default_value='25'),
+        DeclareLaunchArgument('num_a', default_value='35'),
         DeclareLaunchArgument('num_b', default_value='2'),
         DeclareLaunchArgument('xmin', default_value='-7.0'),
         DeclareLaunchArgument('xmax', default_value='7.0'),
         DeclareLaunchArgument('ymin', default_value='-7.0'),
         DeclareLaunchArgument('ymax', default_value='7.0'),
         DeclareLaunchArgument('margin', default_value='0.5'),
-        DeclareLaunchArgument('min_sep', default_value='1.25'),
-        DeclareLaunchArgument('max_sep', default_value='4.0'),
+        DeclareLaunchArgument('min_sep', default_value='2.25'),
+        DeclareLaunchArgument('max_sep', default_value='3.0'),
         DeclareLaunchArgument('z', default_value='0.0'),
         DeclareLaunchArgument('seed', default_value='-1'),
         DeclareLaunchArgument('spawn_x', default_value='RANDOM'),

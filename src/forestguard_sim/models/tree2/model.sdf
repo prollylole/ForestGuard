@@ -7,7 +7,7 @@
         <geometry>
           <mesh>
             <uri>model://tree2/meshes/tree_b.dae</uri>
-            <scale>0.6 0.6 0.6</scale>
+            <scale>1.2 1.2 1.2</scale>
           </mesh>
         </geometry>
       </visual>
@@ -15,7 +15,7 @@
         <geometry>
           <mesh>
             <uri>model://tree2/meshes/tree_b.dae</uri>
-            <scale>0.6 0.6 0.6</scale>
+            <scale>1.2 1.2 1.2</scale>
           </mesh>
         </geometry>
       </collision>
