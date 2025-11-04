@@ -30,7 +30,7 @@ MAX_ANGULAR_RPS = 1.50
 # Launch control (Run Sim button)
 DEFAULT_LAUNCH_CMD = os.environ.get(
     "UI_LAUNCH_CMD",
-    "ros2 launch john JOHNAUTO.launch.py rviz:=true ui:=false teleop:=true amcl:=true slam:=false map:=true"
+    "ros2 launch john JOHNAUTO.launch.py rviz:=false ui:=false teleop:=true amcl:=true slam:=false map:=true"
 )
 
 # Build control (Rebuild Code button)  — Option B defaults
