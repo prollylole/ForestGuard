@@ -2,10 +2,10 @@
 <sdf version="1.9">
   <world name="forest_trees_flat">
     <!-- Core systems -->
-    <plugin name="ignition::gazebo::systems::Physics"         filename="ignition-gazebo-physics-system"/>
-    <plugin name="ignition::gazebo::systems::UserCommands"    filename="ignition-gazebo-user-commands-system"/>
-    <plugin name="ignition::gazebo::systems::SceneBroadcaster" filename="ignition-gazebo-scene-broadcaster-system"/>
-    <plugin name="ignition::gazebo::systems::Contact"         filename="ignition-gazebo-contact-system"/>
+    <plugin name="ignition::gazebo::systems::Physics"           filename="ignition-gazebo-physics-system"/>
+    <plugin name="ignition::gazebo::systems::UserCommands"      filename="ignition-gazebo-user-commands-system"/>
+    <plugin name="ignition::gazebo::systems::SceneBroadcaster"  filename="ignition-gazebo-scene-broadcaster-system"/>
+    <plugin name="ignition::gazebo::systems::Contact"           filename="ignition-gazebo-contact-system"/>
 
     <!-- Lighting -->
     <light name="sun" type="directional">
