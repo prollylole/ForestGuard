@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.9">
-  <world name="forest_world">
+  <world name="forest_trees">
     <!-- Core systems -->
     <plugin name="ignition::gazebo::systems::Physics"         filename="ignition-gazebo-physics-system"/>
     <plugin name="ignition::gazebo::systems::UserCommands"    filename="ignition-gazebo-user-commands-system"/>

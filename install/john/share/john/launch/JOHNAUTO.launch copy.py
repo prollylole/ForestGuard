@@ -1,1 +1,0 @@
-/home/john/git/RS1/john_branch/src/forestguard_sim/launch/JOHNAUTO.launch copy.py

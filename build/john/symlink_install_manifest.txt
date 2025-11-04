@@ -22,9 +22,16 @@
 /home/john/git/RS1/john_branch/install/john/share/john/maps/forest_map.pgm
 /home/john/git/RS1/john_branch/install/john/share/john/maps/forest_map.yaml
 /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/materials/textures/empty_grass.png
+/home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/materials/textures/grass-5efe540a8d596-1250.jpg
+/home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/materials/textures/pack_3530346_thumb.jpg
+/home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/materials/textures/seamless-rocky-forest-ground-texture-2.jpg
 /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/Environment.dae
 /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/Environment1.dae
+/home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/Environment2.dae
 /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/empty_grass.png
+/home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/grass-5efe540a8d596-1250.jpg
+/home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/pack_3530346_thumb.jpg
+/home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/meshes/seamless-rocky-forest-ground-texture-2.jpg
 /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/model.config
 /home/john/git/RS1/john_branch/install/john/share/john/models/forest_env/model.sdf
 /home/john/git/RS1/john_branch/install/john/share/john/models/forest_plane/materials/textures/empty_grass.png
