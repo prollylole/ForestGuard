@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# Robot UI (dark theme) — camera, D-pad (square), logs, tree counter, speed slider
+# Robot UI (dark theme) — camera, D-pad (square), logs, tree counter, speed slider + Run Sim + Rebuild Code
 from __future__ import annotations
 
-import sys, os, math, signal
+import sys, os, math, signal, shlex
 from typing import Optional
 from threading import Lock
 
-from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF, QRect
+from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF, QRect, QProcess
 from PySide6.QtGui import QColor, QPainter, QBrush, QImage, QPixmap, QIcon, QPalette
 from PySide6.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QTextEdit, QSlider, QFrame,
@@ -26,6 +26,29 @@ TREE_BAD_TOPIC   = os.environ.get("UI_TREE_BAD_TOPIC",   "/trees/bad")
 CMD_PUB_RATE_HZ = 20
 MAX_LINEAR_MPS  = 0.40
 MAX_ANGULAR_RPS = 1.50
+
+# Launch control (Run Sim button)
+DEFAULT_LAUNCH_CMD = os.environ.get(
+    "UI_LAUNCH_CMD",
+    "ros2 launch john JOHNAUTO.launch.py rviz:=true ui:=false teleop:=true amcl:=true slam:=false map:=true"
+)
+
+# Build control (Rebuild Code button)  — Option B defaults
+_DEFAULT_WS = os.path.expanduser("~/git/RS1/john_branch")
+DEFAULT_BUILD_CWD = os.environ.get(
+    "UI_BUILD_CWD",
+    _DEFAULT_WS if os.path.isdir(_DEFAULT_WS) else os.getcwd()
+)
+DEFAULT_BUILD_PRE = os.environ.get(
+    "UI_BUILD_PRE",
+    "source /opt/ros/humble/setup.bash"
+)
+DEFAULT_BUILD_CMD = os.environ.get(
+    "UI_BUILD_CMD",
+    "colcon build --symlink-install "
+    "--packages-select forestguard_colour forestguard_controller "
+    "forestguard_localisation forestguard_sim forestguard_ui john"
+)
 
 # ---------- optional deps ----------
 try:
@@ -209,8 +232,6 @@ class GuiRosNode(Node):
 
     # ---- subscribe helper (Int32/UInt32 autodetect, no duplicates)
     def _subscribe_int_counter(self, topic_name: str, is_bad: bool):
-        """Subscribe to a counter topic published as Int32 or UInt32."""
-        # Try to detect from the graph
         types_map = dict(self.get_topic_names_and_types())
         preferred = None
         if topic_name in types_map and types_map[topic_name]:
@@ -378,12 +399,23 @@ class ControlGUI(QWidget):
         self.setWindowTitle("Robot Control Panel")
         self._apply_icon()
 
-        self.setMinimumSize(820, 560)
+        self.setMinimumSize(900, 580)
         self._quitting = False
         self._estopped = False
         self._lin = 0.0
         self._ang = 0.0
         self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
+
+        # QProcess for launch/build (keeps IO on Qt thread; no crashes)
+        self._proc_launch = QProcess(self)
+        self._proc_launch.setProcessChannelMode(QProcess.MergedChannels)
+        self._proc_launch.readyReadStandardOutput.connect(self._on_launch_output)
+        self._proc_launch.finished.connect(self._on_launch_finished)
+
+        self._proc_build = QProcess(self)
+        self._proc_build.setProcessChannelMode(QProcess.MergedChannels)
+        self._proc_build.readyReadStandardOutput.connect(self._on_build_output)
+        self._proc_build.finished.connect(self._on_build_finished)
 
         self._install_sigint_handler()
         self._build_ui()
@@ -394,7 +426,6 @@ class ControlGUI(QWidget):
     def _apply_icon(self):
         icon_path = os.environ.get("UI_APP_ICON", "")
         if not icon_path:
-            # common project guesses
             guesses = [
                 "~/git/RS1/john_branch/src/forestguard_ui/assets/app_icon.png",
                 "~/git/RS1/john_branch/john/assets/app_icon.png",
@@ -440,9 +471,9 @@ class ControlGUI(QWidget):
 
         # Log Panel
         self.log = QTextEdit(); self.log.setReadOnly(True); self.log.setPlaceholderText("Log")
-        logpane = self.rounded_pane(self.log, pad=8); logpane.setMinimumSize(260, 140)
+        logpane = self.rounded_pane(self.log, pad=8); logpane.setMinimumSize(300, 160)
 
-        # Left bottom row: D-pad (square) + Log (they’ll match height)
+        # Left bottom row: D-pad (square) + Log
         left_bottom = QHBoxLayout()
         left_bottom.addWidget(dpad, 0)
         left_bottom.addWidget(logpane, 1)
@@ -489,16 +520,28 @@ class ControlGUI(QWidget):
         right_bottom.addWidget(speed_pane, 1)
         right_col.addLayout(right_bottom, 2)
 
-        # Bottom bar: running LED + E-stop
+        # Bottom bar: running LED + Run Sim + Rebuild Code + E-stop
         run = QHBoxLayout()
         run.addWidget(QLabel("Running")); self.led = LedIndicator(); run.addWidget(self.led); run.addStretch(1)
         run_w = QWidget(); run_w.setLayout(run)
+
+        self.launch_btn = QPushButton("Run Sim")
+        self.launch_btn.setCheckable(True)
+        self.launch_btn.clicked.connect(self._toggle_launch)
+
+        self.build_btn = QPushButton("Rebuild Code")
+        self.build_btn.setCheckable(False)
+        self.build_btn.clicked.connect(self._start_build)
 
         self.estop = QPushButton("E Stop"); self.estop.setObjectName("estop"); self.estop.setMinimumSize(140, 44)
         shadow = QGraphicsDropShadowEffect(blurRadius=16, offset=QPointF(0, 2))
         shadow.setColor(QColor(0, 0, 0, 160)); self.estop.setGraphicsEffect(shadow)
 
-        bottom = QHBoxLayout(); bottom.addWidget(run_w, 1); bottom.addWidget(self.estop, 0, Qt.AlignRight)
+        bottom = QHBoxLayout()
+        bottom.addWidget(run_w, 1)
+        bottom.addWidget(self.launch_btn, 0)
+        bottom.addWidget(self.build_btn, 0)
+        bottom.addWidget(self.estop, 0, Qt.AlignRight)
 
         # Root
         root = QVBoxLayout(self)
@@ -621,6 +664,85 @@ class ControlGUI(QWidget):
         self._append_log(">>> EMERGENCY STOP PRESSED! <<<")
         QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))  # remove to latch
 
+    # ---- Launch control (QProcess) ----
+    def _toggle_launch(self, checked: bool):
+        if checked:
+            self._start_launch(DEFAULT_LAUNCH_CMD)
+        else:
+            self._stop_launch()
+
+    def _start_launch(self, cmd: str):
+        if self._proc_launch.state() != QProcess.NotRunning:
+            self._append_log("[WARN] launch already running")
+            self.launch_btn.setChecked(True)
+            return
+        self._append_log(f"[INFO] Launching: {cmd}")
+        # Use bash -lc so sourced env/aliases work (UI should be started from a sourced shell anyway)
+        self._proc_launch.start("bash", ["-lc", cmd])
+        if not self._proc_launch.waitForStarted(3000):
+            self._append_log("[ERROR] failed to start launch process")
+            self.launch_btn.setChecked(False)
+
+    def _stop_launch(self):
+        if self._proc_launch.state() == QProcess.NotRunning:
+            return
+        self._append_log("[INFO] Stopping launch…")
+        self._proc_launch.terminate()
+        QTimer.singleShot(3000, lambda: self._proc_launch.kill()
+                          if self._proc_launch.state() != QProcess.NotRunning else None)
+
+    @Slot()
+    def _on_launch_output(self):
+        try:
+            text = self._proc_launch.readAllStandardOutput().data().decode(errors="ignore")
+            if text:
+                for line in text.splitlines():
+                    self._append_log(line)
+        except Exception:
+            pass
+
+    @Slot(int, QProcess.ExitStatus)
+    def _on_launch_finished(self, code: int, _status: QProcess.ExitStatus):
+        self._append_log(f"[INFO] launch exited (rc={code})")
+        self.launch_btn.setChecked(False)
+
+    # ---- Build control (QProcess) ----
+    def _start_build(self):
+        if self._proc_build.state() != QProcess.NotRunning:
+            self._append_log("[WARN] build already running")
+            return
+        self.build_btn.setEnabled(False)
+
+        pre = DEFAULT_BUILD_PRE.strip()
+        cmd = DEFAULT_BUILD_CMD
+        full_cmd = f"{pre}; {cmd}" if pre else cmd
+        cwd = DEFAULT_BUILD_CWD or os.getcwd()
+
+        self._append_log(f"[INFO] Rebuilding in {cwd} -> `{cmd}`")
+        self._proc_build.setWorkingDirectory(cwd)
+        # ensure same env as our process (already sourced when launching the UI)
+        env = os.environ.copy()
+        # Use bash -lc so `source` works inside the shell
+        self._proc_build.start("bash", ["-lc", full_cmd])
+        if not self._proc_build.waitForStarted(3000):
+            self._append_log("[ERROR] failed to start build")
+            self.build_btn.setEnabled(True)
+
+    @Slot()
+    def _on_build_output(self):
+        try:
+            text = self._proc_build.readAllStandardOutput().data().decode(errors="ignore")
+            if text:
+                for line in text.splitlines():
+                    self._append_log(line)
+        except Exception:
+            pass
+
+    @Slot(int, QProcess.ExitStatus)
+    def _on_build_finished(self, code: int, _status: QProcess.ExitStatus):
+        self._append_log(f"[INFO] build finished (rc={code})")
+        self.build_btn.setEnabled(True)
+
     # ---- UI updates
     def _update_running_led(self):
         running = (abs(self._lin) > 1e-3 or abs(self._ang) > 1e-3) and not self._estopped
@@ -654,6 +776,13 @@ class ControlGUI(QWidget):
             if hasattr(self, "cmd_timer"):
                 self.cmd_timer.stop()
                 try: self.cmd_timer.timeout.disconnect(self._publish_cmd)
+                except Exception: pass
+
+            try: self._stop_launch()
+            except Exception: pass
+
+            if self._proc_build.state() != QProcess.NotRunning:
+                try: self._proc_build.terminate()
                 except Exception: pass
 
             try: self.ros.signals.image.disconnect(self._update_camera)
@@ -746,7 +875,6 @@ def main():
     app.setOrganizationName("ForestGuard")
     app.setDesktopFileName("forestguard-ui")
 
-    # Icon (env overrides default)
     icon_path = os.environ.get("UI_APP_ICON", os.path.expanduser(
         "~/git/RS1/john_branch/src/forestguard_ui/assets/app_icon.png"
     ))
