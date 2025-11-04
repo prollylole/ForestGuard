@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-# Robot UI (dark theme) — camera, D-pad (square), logs, tree counter, speed slider + Run Sim + Rebuild Code + Map+Trees overlay
+# Robot UI (dark theme) — camera, D-pad (square), logs, tree counter, speed slider
+# + Run Sim + Rebuild Code + Map+Trees overlay + Depth Cloud counter + Teleop LED
 from __future__ import annotations
 
-import sys, os, math, signal, shlex, re
+import sys, os, math, signal
 from typing import Optional, Dict
 from threading import Lock
 
@@ -20,14 +21,26 @@ ROSOUT_TOPIC         = "/rosout"
 CAMERA_TOPIC_CTRL    = "/ui/camera_topic"
 CMD_VEL_TOPIC        = "/cmd_vel"
 
-TREE_TOTAL_TOPIC = os.environ.get("UI_TREE_TOTAL_TOPIC", "/trees/total")
+TREE_TOTAL_TOPIC = os.environ.get("UI_TREE_TOTAL_TOPIC", "/trees/count")
 TREE_BAD_TOPIC   = os.environ.get("UI_TREE_BAD_TOPIC",   "/trees/bad")
 
 # Map/markers topics (can override via env)
 MAP_TOPIC            = os.environ.get("UI_MAP_TOPIC", "/map")
 ROBOT_POSE_TOPIC     = os.environ.get("UI_ROBOT_POSE_TOPIC", "/amcl_pose")
-TREE_MARKERS_TOPIC_A = os.environ.get("UI_TREE_MARKERS", "/tree_markers")
+TREE_MARKERS_TOPIC_A = os.environ.get("UI_TREE_MARKERS", "/trees_markers")
 TREE_MARKERS_TOPIC_B = os.environ.get("UI_TREE_MARKER",  "/tree_marker")  # alt name
+
+# Point cloud source shown next to the Teleop LED
+PC_TOPIC = os.environ.get("UI_PC_TOPIC", "/camera/depth/points")
+
+# Joy: teleop enable button (Xbox RB=5)
+JOY_TELEOP_BTN = int(os.environ.get("UI_JOY_TELEOP_BTN", "5"))
+# Require teleop button to send /cmd_vel
+REQUIRE_TELEOP_BTN = os.environ.get("UI_REQUIRE_TELEOP_BTN", "1") == "1"
+
+# Sim heartbeat (uses /clock)
+SIM_HEARTBEAT_TOPIC = os.environ.get("UI_SIM_HEARTBEAT_TOPIC", "/clock")
+SIM_TIMEOUT_S = float(os.environ.get("UI_SIM_TIMEOUT_S", "1.0"))
 
 CMD_PUB_RATE_HZ = 20
 MAX_LINEAR_MPS  = 0.40
@@ -39,16 +52,10 @@ DEFAULT_LAUNCH_CMD = os.environ.get(
     "ros2 launch john JOHNAUTO.launch.py rviz:=false ui:=false teleop:=true amcl:=true slam:=false map:=true"
 )
 
-# Build control (Rebuild Code button)  — Option B defaults
+# Build control (Rebuild Code button)
 _DEFAULT_WS = os.path.expanduser("~/git/RS1/john_branch")
-DEFAULT_BUILD_CWD = os.environ.get(
-    "UI_BUILD_CWD",
-    _DEFAULT_WS if os.path.isdir(_DEFAULT_WS) else os.getcwd()
-)
-DEFAULT_BUILD_PRE = os.environ.get(
-    "UI_BUILD_PRE",
-    "source /opt/ros/humble/setup.bash"
-)
+DEFAULT_BUILD_CWD = os.environ.get("UI_BUILD_CWD", _DEFAULT_WS if os.path.isdir(_DEFAULT_WS) else os.getcwd())
+DEFAULT_BUILD_PRE = os.environ.get("UI_BUILD_PRE", "source /opt/ros/humble/setup.bash")
 DEFAULT_BUILD_CMD = os.environ.get(
     "UI_BUILD_CMD",
     "colcon build --symlink-install "
@@ -90,10 +97,11 @@ from std_msgs.msg import String as RosString
 from std_msgs.msg import Int32, UInt32
 from nav_msgs.msg import OccupancyGrid
 from visualization_msgs.msg import MarkerArray
+from rosgraph_msgs.msg import Clock
 
 # ========================= tiny widgets ===============================
 class LedIndicator(QLabel):
-    def __init__(self, color=QColor("#46d160"), diameter=14, parent=None):
+    def __init__(self, color=QColor("#666666"), diameter=14, parent=None):
         super().__init__(parent)
         self._color = QColor(color)
         self._diameter = diameter
@@ -110,7 +118,6 @@ class LedIndicator(QLabel):
         p.drawEllipse(0, 0, self._diameter, self._diameter)
 
 class SquareContainer(QWidget):
-    """Keeps its single child perfectly square (centered)."""
     def __init__(self, child: QWidget, parent=None):
         super().__init__(parent)
         self._child = child
@@ -155,10 +162,11 @@ class RosSignals(QObject):
     image = Signal(object)
     map_image = Signal(object)
     log = Signal(str)
-    running = Signal(bool)
+    teleop_led = Signal(bool, bool)   # (teleop_enabled, sim_alive)
     ok = Signal(bool, str)
     bump_speed = Signal(int)
-    tree_counts = Signal(int, int)   # (total, bad)
+    tree_counts = Signal(int, int)    # (total, bad)
+    pc_points = Signal(int)           # depth/scan cloud point count
 
 class GuiRosNode(Node):
     def __init__(self, signals: RosSignals):
@@ -212,11 +220,12 @@ class GuiRosNode(Node):
         self._emit_timer = self.create_timer(1.0 / self._emit_hz, self._emit_image_tick)
         self._subscribe_camera(self._camera_topic_raw)
 
-        # point cloud quick stats (optional)
+        # point cloud quick stats (shown next to Teleop LED)
         try:
-            self.create_subscription(PointCloud2, "/camera/depth/points", self._on_pc, self.sensor_qos)
+            self.create_subscription(PointCloud2, PC_TOPIC, self._on_pc, self.sensor_qos)
             self._pc_latest_count = 0
-            self._pc_log_timer = self.create_timer(0.5, self._emit_pc_count_log)
+            self._pc_timer = self.create_timer(0.5, self._emit_pc_count)
+            self.get_logger().info(f"Point cloud stats on {PC_TOPIC}")
         except Exception:
             pass
 
@@ -226,19 +235,30 @@ class GuiRosNode(Node):
         self._sub_total = self._subscribe_int_counter(TREE_TOTAL_TOPIC, is_bad=False)
         self._sub_bad   = self._subscribe_int_counter(TREE_BAD_TOPIC,   is_bad=True)
 
-        # joystick bump
+        # joystick bump + teleop enable (RB)
         joy_topic = os.environ.get("UI_JOY_TOPIC", "/joy")
         self._hat_axis_v = int(os.environ.get("UI_JOY_HAT_AXIS_V", "7"))
         self._btn_up = int(os.environ.get("UI_JOY_BTN_UP", "-1"))
         self._btn_down = int(os.environ.get("UI_JOY_BTN_DOWN", "-1"))
+        self._teleop_btn = JOY_TELEOP_BTN
         self._prev_up = False
         self._prev_down = False
+        self._teleop_enabled = False
         try:
             from sensor_msgs.msg import Joy
             self.create_subscription(Joy, joy_topic, self._on_joy, 10)
-            self.get_logger().info(f"D-pad on {joy_topic} (axis_v={self._hat_axis_v}, btn_up={self._btn_up}, btn_down={self._btn_down})")
+            self.get_logger().info(f"D-pad on {joy_topic} (axis_v={self._hat_axis_v}, btn_up={self._btn_up}, btn_down={self._btn_down}); teleop_btn={self._teleop_btn}")
         except Exception as e:
             self.get_logger().warn(f"Joy subscribe failed: {e}")
+
+        # ---- Sim heartbeat (/clock) ----
+        self._sim_alive = False
+        self._last_clock_ns = 0
+        try:
+            self.create_subscription(Clock, SIM_HEARTBEAT_TOPIC, self._on_clock, 10)
+            self._sim_timer = self.create_timer(0.2, self._check_sim_alive)
+        except Exception as e:
+            self.get_logger().warn(f"Clock subscribe failed: {e}")
 
         # ---- Map + trees overlay state ----
         self._map_msg: Optional[OccupancyGrid] = None
@@ -246,16 +266,13 @@ class GuiRosNode(Node):
         self._map_res = None
         self._map_origin = None  # (ox, oy)
         self._robot_pose = None  # (x, y, yaw)
-        # id -> {x,y,bgr}
         self._trees: Dict[str, Dict[str, float]] = {}
 
         self.create_subscription(OccupancyGrid, MAP_TOPIC, self._on_map, 1)
         self.create_subscription(PoseWithCovarianceStamped, ROBOT_POSE_TOPIC, self._on_pose, 10)
-        # accept both possible marker topic names
         self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_A, self._on_markers, 10)
         if TREE_MARKERS_TOPIC_B != TREE_MARKERS_TOPIC_A:
             self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_B, self._on_markers, 10)
-        # redraw timer (10 Hz)
         self._map_timer = self.create_timer(0.1, self._emit_map_image)
 
         self.signals.ok.emit(True, "ROS node initialised")
@@ -308,8 +325,7 @@ class GuiRosNode(Node):
 
     def _on_camera_topic_switch(self, msg: RosString):
         topic = (msg.data or "").strip()
-        if not topic:
-            return
+        if not topic: return
         if topic == self._camera_topic_raw or topic.rstrip('/') == self._camera_topic_raw.rstrip('/'):
             return
         try:
@@ -333,7 +349,7 @@ class GuiRosNode(Node):
                 self.get_logger().info(f"Subscribed camera (compressed): {comp_topic}")
                 return
             except Exception as e:
-                self.get_logger().warn(f"Compressed subscribe failed ({e}); falling back to raw.")
+                self.get_logger().warn(f"Compressed subscribe failed: {e}); falling back to raw.")
         self._camera_sub = self.create_subscription(RosImage, self._camera_topic_raw, self._on_image_raw, self.sensor_qos)
         self.get_logger().info(f"Subscribed camera (raw): {self._camera_topic_raw}")
 
@@ -372,9 +388,9 @@ class GuiRosNode(Node):
         except Exception:
             pass
 
-    def _emit_pc_count_log(self):
+    def _emit_pc_count(self):
         if getattr(self, "_pc_latest_count", 0):
-            self.signals.log.emit(f"[INFO] pointcloud: ~{self._pc_latest_count} points (approx, decimated)")
+            self.signals.pc_points.emit(int(self._pc_latest_count))
             self._pc_latest_count = 0
 
     def _on_joy(self, msg):
@@ -391,9 +407,29 @@ class GuiRosNode(Node):
         if self._btn_down >= 0:
             try: down = down or (msg.buttons[self._btn_down] > 0)
             except Exception: pass
+
+        # Teleop enable (RB)
+        try:
+            self._teleop_enabled = bool(msg.buttons[self._teleop_btn] > 0)
+        except Exception:
+            self._teleop_enabled = False
+
+        # Notify GUI for LED & speed bumps
+        self.signals.teleop_led.emit(self._teleop_enabled, self._sim_alive)
         if up and not self._prev_up:   self.signals.bump_speed.emit(+1)
         if down and not self._prev_down: self.signals.bump_speed.emit(-1)
         self._prev_up, self._prev_down = up, down
+
+    # ---- Sim heartbeat ----
+    def _on_clock(self, _msg: Clock):
+        self._last_clock_ns = self.get_clock().now().nanoseconds
+
+    def _check_sim_alive(self):
+        now_ns = self.get_clock().now().nanoseconds
+        alive = (now_ns - self._last_clock_ns) < int(SIM_TIMEOUT_S * 1e9)
+        if alive != self._sim_alive:
+            self._sim_alive = alive
+            self.signals.teleop_led.emit(self._teleop_enabled, self._sim_alive)
 
     # ---- Map + trees callbacks ----
     def _on_map(self, msg: OccupancyGrid):
@@ -407,7 +443,6 @@ class GuiRosNode(Node):
         self._robot_pose = (p.x, p.y, _yaw_from_q(msg.pose.pose.orientation))
 
     def _on_markers(self, msg: MarkerArray):
-        # id from ns:id if available, else id
         for m in msg.markers:
             mid = f"{m.ns}:{m.id}" if m.ns else str(m.id)
             x, y = m.pose.position.x, m.pose.position.y
@@ -419,8 +454,7 @@ class GuiRosNode(Node):
             self._trees[str(mid)] = {"x": float(x), "y": float(y), "bgr": bgr}
 
     def _grid_to_bgr(self, grid: OccupancyGrid):
-        if np is None:
-            return None
+        if np is None: return None
         w, h = grid.info.width, grid.info.height
         data = np.frombuffer(bytes(grid.data), dtype=np.int8).astype(np.int16).reshape(h, w)
         img = np.full((h, w), 128, dtype=np.uint8)
@@ -438,8 +472,7 @@ class GuiRosNode(Node):
         return col, row
 
     def _emit_map_image(self):
-        if np is None:
-            return
+        if np is None: return
         with self._map_lock:
             grid = self._map_msg
         if grid is None or self._map_res is None or self._map_origin is None:
@@ -449,7 +482,6 @@ class GuiRosNode(Node):
             return
         h, w = bgr.shape[:2]
 
-        # draw trees
         if cv2 is not None:
             for tid, t in self._trees.items():
                 try:
@@ -458,19 +490,15 @@ class GuiRosNode(Node):
                     cv2.putText(bgr, str(tid), (cx+6, cy-6), cv2.FONT_HERSHEY_SIMPLEX, 0.35, t["bgr"], 1, cv2.LINE_AA)
                 except Exception:
                     pass
-            # robot
             if self._robot_pose:
                 rx, ry, yaw = self._robot_pose
                 cx, cy = self._world_to_px(rx, ry, h)
                 cv2.circle(bgr, (cx, cy), 5, (0,0,255), -1)
                 tip = (int(cx + 15*math.cos(yaw)), int(cy - 15*math.sin(yaw)))
                 cv2.arrowedLine(bgr, (cx, cy), tip, (0,0,255), 2, tipLength=0.3)
-
             rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
         else:
-            # no cv2, just show gray map
             rgb = bgr[:, :, ::-1]
-
         self.signals.map_image.emit(rgb)
 
     # ------------------- helpers ----------------------
@@ -478,10 +506,8 @@ class GuiRosNode(Node):
         try:
             if self.bridge is not None and _CV_BRIDGE_OK:
                 cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")  # type: ignore
-                if cv2 is not None:
-                    return cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
-                else:
-                    return cv_image[:, :, ::-1].copy()
+                if cv2 is not None: return cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
+                else: return cv_image[:, :, ::-1].copy()
             else:
                 if np is None: return None
                 enc = (msg.encoding or "").lower()
@@ -509,6 +535,8 @@ class ControlGUI(QWidget):
         self._lin = 0.0
         self._ang = 0.0
         self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
+        self._teleop_enabled = False
+        self._sim_alive = False
 
         # QProcess for launch/build
         self._proc_launch = QProcess(self)
@@ -542,7 +570,6 @@ class ControlGUI(QWidget):
             try: self.setWindowIcon(QIcon(icon_path))
             except Exception: pass
 
-    # ---- UI
     def rounded_pane(self, w: QWidget, pad=10):
         f = QFrame(); f.setObjectName("pane")
         ly = QVBoxLayout(f); ly.setContentsMargins(pad, pad, pad, pad); ly.addWidget(w)
@@ -587,7 +614,6 @@ class ControlGUI(QWidget):
         left_col.addLayout(left_bottom, 2)
 
         # Right column: top = Map/Panel, bottom split 50/50 (tree counter + speed)
-        # --- Tree counter
         self.tree_total = 0
         self.tree_bad = 0
         self.tree_lbl = QLabel("Trees: 0 (bad 0)")
@@ -596,7 +622,6 @@ class ControlGUI(QWidget):
         self.tree_lbl.setStyleSheet("font-size: 18px; font-weight: 600;")
         tree_pane = self.rounded_pane(self.tree_lbl, pad=10)
 
-        # --- Speed slider + tick labels (vertical)
         self.speed = QSlider(Qt.Vertical); self.speed.setRange(0, 20); self.speed.setTickInterval(5)
         self.speed.setTickPosition(QSlider.TicksRight)
         self.speed.setFixedWidth(46)
@@ -624,9 +649,20 @@ class ControlGUI(QWidget):
         right_bottom.addWidget(speed_pane, 1)
         right_col.addLayout(right_bottom, 2)
 
-        # Bottom bar: running LED + Run Sim + Rebuild Code + E-stop
+        # Bottom bar: Teleop LED + Depth Cloud + Run/Build/E-stop
         run = QHBoxLayout()
-        run.addWidget(QLabel("Running")); self.led = LedIndicator(); run.addWidget(self.led); run.addStretch(1)
+        run.addWidget(QLabel("Teleop"))
+        self.led = LedIndicator("#666666")
+        run.addWidget(self.led)
+
+        self.pc_name = QLabel("Depth Cloud")
+        self.pc_name.setStyleSheet("color:#bbb; margin-left:14px;")
+        self.pc_val  = QLabel("~0")
+        self.pc_val.setStyleSheet("font-weight:600;")
+        run.addWidget(self.pc_name)
+        run.addWidget(self.pc_val)
+
+        run.addStretch(1)
         run_w = QWidget(); run_w.setLayout(run)
 
         self.launch_btn = QPushButton("Run Sim")
@@ -634,7 +670,6 @@ class ControlGUI(QWidget):
         self.launch_btn.clicked.connect(self._toggle_launch)
 
         self.build_btn = QPushButton("Rebuild Code")
-        self.build_btn.setCheckable(False)
         self.build_btn.clicked.connect(self._start_build)
 
         self.estop = QPushButton("E Stop"); self.estop.setObjectName("estop"); self.estop.setMinimumSize(140, 44)
@@ -647,14 +682,11 @@ class ControlGUI(QWidget):
         bottom.addWidget(self.build_btn, 0)
         bottom.addWidget(self.estop, 0, Qt.AlignRight)
 
-        # Root
         root = QVBoxLayout(self)
         top = QHBoxLayout(); top.addLayout(left_col, 3); top.addLayout(right_col, 2)
         root.addLayout(top, 1); root.addLayout(bottom)
-
         self._apply_dark_theme()
 
-    # ---- Dark theme
     def _apply_dark_theme(self):
         try: QApplication.instance().setStyle(QStyleFactory.create("Fusion"))
         except Exception: pass
@@ -697,7 +729,6 @@ class ControlGUI(QWidget):
             QPushButton#estop:pressed { background-color: #c62828; }
         """)
 
-    # ---- Behaviour
     def _wire_behaviour(self):
         self.btn_up.pressed.connect(lambda: self._set_motion(forward=True))
         self.btn_up.released.connect(lambda: self._set_motion(forward=False))
@@ -720,10 +751,11 @@ class ControlGUI(QWidget):
         self.ros.signals.image.connect(self._update_camera)
         self.ros.signals.map_image.connect(self._update_map)
         self.ros.signals.log.connect(self._append_log)
-        self.ros.signals.running.connect(self._set_running_led)
         self.ros.signals.ok.connect(lambda ok, msg: self._append_log(("OK " if ok else "ERR ") + msg))
         self.ros.signals.bump_speed.connect(self._bump_speed)
         self.ros.signals.tree_counts.connect(self._update_tree_counts)
+        self.ros.signals.pc_points.connect(self._update_pc_points)
+        self.ros.signals.teleop_led.connect(self._set_teleop_led)
         self.send_cmd = self.ros.send_cmd
         self.ros.start()
 
@@ -741,7 +773,7 @@ class ControlGUI(QWidget):
             self._ang = (MAX_ANGULAR_RPS * s) if left else 0.0 if not right else self._ang
         if right is not None:
             self._ang = (-MAX_ANGULAR_RPS * s) if right else 0.0 if not left else self._ang
-        self._update_running_led()
+        self._update_teleop_led_color()
 
     def _bump_speed(self, delta_steps: int):
         v = int(self.speed.value())
@@ -755,19 +787,38 @@ class ControlGUI(QWidget):
         self._append_log(f"[INFO] GUI speed scale -> {s:.2f}")
 
     def _on_slider_changed(self, _v: int):
-        self._update_running_led()
+        self._update_teleop_led_color()
 
     def _publish_cmd(self):
         if not hasattr(self, "ros") or not self.ros.ready(): return
-        if self._estopped: self.send_cmd(0.0, 0.0); return
-        if not self._drive_enabled: return
+        if self._estopped:
+            self.send_cmd(0.0, 0.0)
+            return
+        if REQUIRE_TELEOP_BTN and not self._teleop_enabled:
+            return
         self.send_cmd(self._lin, self._ang)
 
     def _on_estop(self):
         self._lin = 0.0; self._ang = 0.0; self._estopped = True
-        self._update_running_led()
         self._append_log(">>> EMERGENCY STOP PRESSED! <<<")
         QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))
+        self._update_teleop_led_color()
+
+    # Teleop LED handling
+    @Slot(bool, bool)
+    def _set_teleop_led(self, teleop_enabled: bool, sim_alive: bool):
+        self._teleop_enabled = teleop_enabled
+        self._sim_alive = sim_alive
+        self._update_teleop_led_color()
+
+    def _update_teleop_led_color(self):
+        # Green: teleop held; Yellow: sim alive; Grey: otherwise
+        if self._teleop_enabled:
+            self.led.set_color("#46d160")
+        elif self._sim_alive:
+            self.led.set_color("#f6c343")
+        else:
+            self.led.set_color("#666666")
 
     # ---- Launch control (QProcess) ----
     def _toggle_launch(self, checked: bool):
@@ -818,11 +869,10 @@ class ControlGUI(QWidget):
         self.build_btn.setEnabled(False)
         pre = DEFAULT_BUILD_PRE.strip()
         cmd = DEFAULT_BUILD_CMD
-        full_cmd = f"{pre}; {cmd}" if pre else cmd
+        full_cmd = f"{pre}; {cmd}"
         cwd = DEFAULT_BUILD_CWD or os.getcwd()
         self._append_log(f"[INFO] Rebuilding in {cwd} -> `{cmd}`")
         self._proc_build.setWorkingDirectory(cwd)
-        env = os.environ.copy()
         self._proc_build.start("bash", ["-lc", full_cmd])
         if not self._proc_build.waitForStarted(3000):
             self._append_log("[ERROR] failed to start build")
@@ -844,13 +894,6 @@ class ControlGUI(QWidget):
         self.build_btn.setEnabled(True)
 
     # ---- UI updates
-    def _update_running_led(self):
-        running = (abs(self._lin) > 1e-3 or abs(self._ang) > 1e-3) and not self._estopped
-        self.led.set_color("#46d160" if running else "#666666")
-
-    def _set_running_led(self, running: bool):
-        self.led.set_color("#46d160" if running else "#666666")
-
     def _update_tree_counts(self, total: int, bad: int):
         self.tree_total, self.tree_bad = total, bad
         self.tree_lbl.setText(f"Trees: {total}  (bad {bad})")
@@ -858,6 +901,15 @@ class ControlGUI(QWidget):
     def _append_log(self, text: str):
         if not self._quitting:
             self.log.append(text)
+
+    @Slot(int)
+    def _update_pc_points(self, n: int):
+        self.pc_val.setText(self._fmt_points(n))
+
+    def _fmt_points(self, n: int) -> str:
+        if n >= 1_000_000: return f"~{n/1_000_000:.1f}M"
+        if n >= 1000:      return f"~{n/1000:.0f}k"
+        return f"~{n}"
 
     @Slot(object)
     def _update_camera(self, rgb_np):
@@ -901,13 +953,15 @@ class ControlGUI(QWidget):
             except Exception: pass
             try: self.ros.signals.log.disconnect(self._append_log)
             except Exception: pass
-            try: self.ros.signals.running.disconnect(self._set_running_led)
-            except Exception: pass
             try: self.ros.signals.ok.disconnect()
             except Exception: pass
             try: self.ros.signals.bump_speed.disconnect(self._bump_speed)
             except Exception: pass
             try: self.ros.signals.tree_counts.disconnect(self._update_tree_counts)
+            except Exception: pass
+            try: self.ros.signals.pc_points.disconnect(self._update_pc_points)
+            except Exception: pass
+            try: self.ros.signals.teleop_led.disconnect(self._set_teleop_led)
             except Exception: pass
 
             self.send_cmd = lambda *_a, **_k: None

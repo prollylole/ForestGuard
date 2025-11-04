@@ -15,8 +15,10 @@ from std_srvs.srv import Empty
 
 import tf2_ros
 
+
 def _polar_to_xy(r: float, ang: float) -> Tuple[float, float]:
     return (r * math.cos(ang), r * math.sin(ang))
+
 
 class LidarTreeMapper(Node):
     """
@@ -24,11 +26,11 @@ class LidarTreeMapper(Node):
     Clusters LaserScan -> centroid (base_link) -> TF to map -> de-dup by deadzone.
 
     Publishes:
-      /trees/markers (MarkerArray, frame_id=map)           [new hits]
-      /trees/poses   (PoseArray,   frame_id=map)           [all unique so far]
-      /trees/total   (UInt32)                              
-      /trees/bad     (UInt32)           [always 0 here; colour node can bump]
-      /tree_count    (Int32)            [legacy/compat]
+      /trees/markers (MarkerArray, frame_id=map)         [new hits]
+      /trees/poses   (PoseArray,   frame_id=map)         [all unique so far]
+      /trees/total   (UInt32)
+      /trees/bad     (UInt32)                            [always 0 here]
+      /tree_count    (Int32)                             [legacy/compat]
     """
     def __init__(self):
         super().__init__("lidar_tree_mapper")
@@ -38,15 +40,20 @@ class LidarTreeMapper(Node):
         self.declare_parameter("base_frame", "base_link")
         self.declare_parameter("map_frame",  "map")
 
-        self.declare_parameter("min_sep_m", 3.0)           # from world gen
+        self.declare_parameter("min_sep_m", 3.0)           # expected spawn spacing
         self.declare_parameter("deadzone_frac", 0.5)       # deadzone = frac * min_sep
 
         self.declare_parameter("min_cluster_pts", 5)
-        self.declare_parameter("cluster_break_m", 0.20)
+        self.declare_parameter("cluster_break_m", 0.20)    # base break distance
         self.declare_parameter("max_range_m", 12.0)
         self.declare_parameter("min_arc_deg", 20.0)
         self.declare_parameter("trunk_r_min_m", 0.06)
         self.declare_parameter("trunk_r_max_m", 0.50)
+
+        # hill/wall rejection
+        self.declare_parameter("adaptive_break_k", 2.0)    # scales with r * dtheta
+        self.declare_parameter("max_cluster_span_m", 1.2)  # reject wide blobs/walls
+        self.declare_parameter("circularity_min", 0.35)    # λ_min / λ_max threshold
 
         self.declare_parameter("marker_scale_m", 0.35)
         self.declare_parameter("marker_lifetime_s", 0.0)   # 0 => forever
@@ -65,6 +72,10 @@ class LidarTreeMapper(Node):
         self.min_arc    = math.radians(float(self.get_parameter("min_arc_deg").value))
         self.min_r      = float(self.get_parameter("trunk_r_min_m").value)
         self.max_r      = float(self.get_parameter("trunk_r_max_m").value)
+
+        self.adapt_k    = float(self.get_parameter("adaptive_break_k").value)
+        self.max_span   = float(self.get_parameter("max_cluster_span_m").value)
+        self.circ_min   = float(self.get_parameter("circularity_min").value)
 
         self.marker_scale = float(self.get_parameter("marker_scale_m").value)
         self.marker_lifetime_s = float(self.get_parameter("marker_lifetime_s").value)
@@ -115,7 +126,7 @@ class LidarTreeMapper(Node):
 
     # -------------------- Scan callback --------------------
     def _on_scan(self, scan: LaserScan):
-        # 1) Gather points
+        # 1) Gather points (base_link)
         pts: List[Tuple[float, float, float]] = []
         ang = scan.angle_min
         for r in scan.ranges:
@@ -126,19 +137,31 @@ class LidarTreeMapper(Node):
         if not pts:
             return
 
-        # 2) Cluster by adjacency jump
+        # 2) Cluster with adaptive break (range- and dtheta-aware)
         clusters: List[List[Tuple[float, float, float]]] = []
         current = [pts[0]]
         for i in range(1, len(pts)):
-            x0, y0, _ = pts[i - 1]
-            x1, y1, _ = pts[i]
-            if math.hypot(x1 - x0, y1 - y0) > self.break_m:
+            x0, y0, a0 = pts[i - 1]
+            x1, y1, a1 = pts[i]
+            gap = math.hypot(x1 - x0, y1 - y0)
+            r_near = math.hypot(x0, y0)
+            dtheta = abs(a1 - a0)
+            adaptive = max(self.break_m, self.adapt_k * max(0.001, r_near) * max(0.0001, dtheta))
+            if gap > adaptive:
                 clusters.append(current); current = [pts[i]]
             else:
                 current.append(pts[i])
         clusters.append(current)
 
-        # 3) Filter clusters
+        # 3) Filter clusters (size, circularity, span, trunk radius)
+        def _eigvals_2x2(a: float, b: float, c: float) -> Tuple[float, float]:
+            tr = a + c
+            disc = (a - c)*(a - c) + 4.0*b*b
+            s = math.sqrt(max(0.0, disc))
+            l1 = 0.5 * (tr + s)
+            l2 = 0.5 * (tr - s)
+            return (l1, l2) if l1 >= l2 else (l2, l1)
+
         detections_base: List[Tuple[float, float, float]] = []
         for C in clusters:
             if len(C) < self.min_pts:
@@ -146,11 +169,33 @@ class LidarTreeMapper(Node):
             th_min, th_max = C[0][2], C[-1][2]
             if (th_max - th_min) < self.min_arc:
                 continue
+
             xs = [p[0] for p in C]; ys = [p[1] for p in C]
-            cx = sum(xs) / len(xs); cy = sum(ys) / len(ys)
-            r_est = sum(math.hypot(x - cx, y - cy) for x, y, _ in C) / len(C)
+            n = float(len(C))
+            cx = sum(xs) / n; cy = sum(ys) / n
+
+            # covariance about centroid
+            sxx = sum((x - cx)*(x - cx) for x in xs) / n
+            syy = sum((y - cy)*(y - cy) for y in ys) / n
+            sxy = sum((x - cx)*(y - cy) for x, y in zip(xs, ys)) / n
+            lam_max, lam_min = _eigvals_2x2(sxx, sxy, syy)
+            circ = (lam_min / lam_max) if lam_max > 1e-9 else 1.0  # ~1 round, ~0 line
+
+            # approximate physical span via bbox diagonal
+            minx, maxx = min(xs), max(xs)
+            miny, maxy = min(ys), max(ys)
+            span = math.hypot(maxx - minx, maxy - miny)
+
+            # mean radial residual -> trunk radius estimate
+            r_est = sum(math.hypot(x - cx, y - cy) for x, y in zip(xs, ys)) / n
+
+            if circ < self.circ_min:
+                continue            # line-like -> hillside/wall
+            if span > self.max_span:
+                continue            # too wide to be a trunk
             if not (self.min_r <= r_est <= self.max_r):
-                continue
+                continue            # not a plausible trunk
+
             detections_base.append((cx, cy, r_est))
         if not detections_base:
             return
@@ -159,10 +204,10 @@ class LidarTreeMapper(Node):
         try:
             tf = self.tfbuf.lookup_transform(self.map_frame, self.base_frame, Time())
         except Exception:
-            now = time.time()
-            if now - self._last_tf_warn > 2.0:
+            now_t = time.time()
+            if now_t - self._last_tf_warn > 2.0:
                 self.get_logger().warn("TF map<-base_link unavailable yet")
-                self._last_tf_warn = now
+                self._last_tf_warn = now_t
             return
 
         tx = tf.transform.translation
@@ -218,6 +263,7 @@ class LidarTreeMapper(Node):
         self.pub_count_i32.publish(Int32(data=total))  # legacy
         self.get_logger().info(f"Trees total: {total}")
 
+
 def main(args=None):
     rclpy.init(args=args)
     node = LidarTreeMapper()
@@ -229,6 +275,7 @@ def main(args=None):
         node.destroy_node()
         if rclpy.ok():
             rclpy.shutdown()
+
 
 if __name__ == "__main__":
     main()
