@@ -1,0 +1,86 @@
+[0.148s] Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake /home/john/git/RS1/john_branch/src/forestguard_controller -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/john/git/RS1/john_branch/install/forestguard_controller
+[0.291s] -- The C compiler identification is GNU 11.4.0
+[0.291s] -- The CXX compiler identification is GNU 11.4.0
+[0.291s] -- Detecting C compiler ABI info
+[0.291s] -- Detecting C compiler ABI info - done
+[0.291s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.291s] -- Detecting C compile features
+[0.292s] -- Detecting C compile features - done
+[0.292s] -- Detecting CXX compiler ABI info
+[0.326s] -- Detecting CXX compiler ABI info - done
+[0.330s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.331s] -- Detecting CXX compile features
+[0.331s] -- Detecting CXX compile features - done
+[0.332s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.450s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.492s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.511s] -- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)
+[0.537s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.540s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.545s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.551s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.562s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.591s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.592s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.651s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.670s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.708s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.717s] -- Looking for pthread.h
+[0.772s] -- Looking for pthread.h - found
+[0.773s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.829s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.830s] -- Found Threads: TRUE  
+[0.862s] -- Found rclcpp_action: 16.0.15 (/opt/ros/humble/share/rclcpp_action/cmake)
+[0.885s] -- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.893s] -- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.904s] -- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.917s] -- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)
+[0.930s] -- Found nav2_msgs: 1.1.19 (/opt/ros/humble/share/nav2_msgs/cmake)
+[0.946s] -- Found tf2_ros: 0.25.16 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.984s] -- Found tf2_geometry_msgs: 0.25.16 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[0.993s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.994s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[0.994s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.996s] -- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)
+[1.005s] -- Found OpenCV: /usr (found version "4.5.4") 
+[1.006s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.012s] -- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)
+[1.040s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.097s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.097s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/john/git/RS1/john_branch/src/forestguard_controller/include>
+[1.097s] -- Configured cppcheck exclude dirs and/or files: 
+[1.098s] -- Added test 'lint_cmake' to check CMake code style
+[1.098s] -- Added test 'uncrustify' to check C / C++ code style
+[1.099s] -- Configured uncrustify additional arguments: 
+[1.099s] -- Added test 'xmllint' to check XML markup files
+[1.100s] -- Configuring done
+[1.112s] -- Generating done
+[1.115s] -- Build files have been written to: /home/john/git/RS1/john_branch/build/forestguard_controller
+[1.123s] Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake /home/john/git/RS1/john_branch/src/forestguard_controller -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/john/git/RS1/john_branch/install/forestguard_controller
+[1.124s] Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_controller -- -j20 -l20
+[1.162s] [ 33%] [32mBuilding CXX object CMakeFiles/forestguard_controller.dir/src/controller_husky.cpp.o[0m
+[1.163s] [ 66%] [32mBuilding CXX object CMakeFiles/forestguard_controller.dir/src/main_husky.cpp.o[0m
+[12.122s] [100%] [32m[1mLinking CXX executable forestguard_controller[0m
+[12.908s] [100%] Built target forestguard_controller
+[12.916s] Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_controller -- -j20 -l20
+[12.916s] Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_controller
+[12.921s] -- Install configuration: ""
+[12.921s] -- Execute custom install script
+[12.922s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/lib/forestguard_controller/forestguard_controller
+[12.926s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/include/forestguard_controller/controller_husky.h
+[12.930s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/package_run_dependencies/forestguard_controller
+[12.935s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/parent_prefix_path/forestguard_controller
+[12.941s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.sh
+[12.948s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.dsv
+[12.952s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.sh
+[12.956s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.dsv
+[12.960s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.bash
+[12.966s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.sh
+[12.971s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.zsh
+[12.975s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.dsv
+[12.980s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.dsv
+[12.985s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/ament_index/resource_index/packages/forestguard_controller
+[12.989s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig.cmake
+[12.994s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig-version.cmake
+[12.998s] -- Symlinking: /home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.xml
+[13.004s] Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_controller
