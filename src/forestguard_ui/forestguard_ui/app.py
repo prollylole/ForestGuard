@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Robot UI (dark theme) — camera, D-pad (square), logs, tree counter, speed slider + Run Sim + Rebuild Code
+# Robot UI (dark theme) — camera, D-pad (square), logs, tree counter, speed slider + Run Sim + Rebuild Code + Map+Trees overlay
 from __future__ import annotations
 
-import sys, os, math, signal, shlex
-from typing import Optional
+import sys, os, math, signal, shlex, re
+from typing import Optional, Dict
 from threading import Lock
 
 from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF, QRect, QProcess
@@ -22,6 +22,12 @@ CMD_VEL_TOPIC        = "/cmd_vel"
 
 TREE_TOTAL_TOPIC = os.environ.get("UI_TREE_TOTAL_TOPIC", "/trees/total")
 TREE_BAD_TOPIC   = os.environ.get("UI_TREE_BAD_TOPIC",   "/trees/bad")
+
+# Map/markers topics (can override via env)
+MAP_TOPIC            = os.environ.get("UI_MAP_TOPIC", "/map")
+ROBOT_POSE_TOPIC     = os.environ.get("UI_ROBOT_POSE_TOPIC", "/amcl_pose")
+TREE_MARKERS_TOPIC_A = os.environ.get("UI_TREE_MARKERS", "/tree_markers")
+TREE_MARKERS_TOPIC_B = os.environ.get("UI_TREE_MARKER",  "/tree_marker")  # alt name
 
 CMD_PUB_RATE_HZ = 20
 MAX_LINEAR_MPS  = 0.40
@@ -74,7 +80,7 @@ from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from rclpy.logging import LoggingSeverity
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, PoseWithCovarianceStamped
 from sensor_msgs.msg import Image as RosImage
 from sensor_msgs.msg import CompressedImage as RosCompressedImage
 from sensor_msgs.msg import PointCloud2
@@ -82,6 +88,8 @@ import sensor_msgs_py.point_cloud2 as pc2
 from rcl_interfaces.msg import Log as RosLog
 from std_msgs.msg import String as RosString
 from std_msgs.msg import Int32, UInt32
+from nav_msgs.msg import OccupancyGrid
+from visualization_msgs.msg import MarkerArray
 
 # ========================= tiny widgets ===============================
 class LedIndicator(QLabel):
@@ -132,16 +140,20 @@ def _rosout_level_num(name: str) -> int:
     name = (name or "").strip().lower()
     return {"debug":10, "info":20, "warn":30, "warning":30, "error":40, "fatal":50}.get(name, 20)
 
-def _slider_to_scale(v: int) -> float:       # 0..20 -> 0.10..1.50
+def _slider_to_scale(v: int) -> float:
     return 0.10 + (float(v) / 20.0) * (1.50 - 0.10)
 
 def _scale_to_slider(s: float) -> int:
     s = max(0.10, min(1.50, float(s)))
     return int(round((s - 0.10) / (1.50 - 0.10) * 20.0))
 
+def _yaw_from_q(q):
+    return math.atan2(2*(q.w*q.z + q.x*q.y), 1 - 2*(q.y*q.y + q.z*q.z))
+
 # ========================= ROS <-> Qt bridge ========================
 class RosSignals(QObject):
     image = Signal(object)
+    map_image = Signal(object)
     log = Signal(str)
     running = Signal(bool)
     ok = Signal(bool, str)
@@ -208,13 +220,13 @@ class GuiRosNode(Node):
         except Exception:
             pass
 
-        # tree counters — subscribe ONCE with the correct type
+        # tree counters
         self._tree_total = 0
         self._tree_bad   = 0
         self._sub_total = self._subscribe_int_counter(TREE_TOTAL_TOPIC, is_bad=False)
         self._sub_bad   = self._subscribe_int_counter(TREE_BAD_TOPIC,   is_bad=True)
 
-        # ---- Joy D-pad -> bump slider ----
+        # joystick bump
         joy_topic = os.environ.get("UI_JOY_TOPIC", "/joy")
         self._hat_axis_v = int(os.environ.get("UI_JOY_HAT_AXIS_V", "7"))
         self._btn_up = int(os.environ.get("UI_JOY_BTN_UP", "-1"))
@@ -228,9 +240,27 @@ class GuiRosNode(Node):
         except Exception as e:
             self.get_logger().warn(f"Joy subscribe failed: {e}")
 
+        # ---- Map + trees overlay state ----
+        self._map_msg: Optional[OccupancyGrid] = None
+        self._map_lock = Lock()
+        self._map_res = None
+        self._map_origin = None  # (ox, oy)
+        self._robot_pose = None  # (x, y, yaw)
+        # id -> {x,y,bgr}
+        self._trees: Dict[str, Dict[str, float]] = {}
+
+        self.create_subscription(OccupancyGrid, MAP_TOPIC, self._on_map, 1)
+        self.create_subscription(PoseWithCovarianceStamped, ROBOT_POSE_TOPIC, self._on_pose, 10)
+        # accept both possible marker topic names
+        self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_A, self._on_markers, 10)
+        if TREE_MARKERS_TOPIC_B != TREE_MARKERS_TOPIC_A:
+            self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_B, self._on_markers, 10)
+        # redraw timer (10 Hz)
+        self._map_timer = self.create_timer(0.1, self._emit_map_image)
+
         self.signals.ok.emit(True, "ROS node initialised")
 
-    # ---- subscribe helper (Int32/UInt32 autodetect, no duplicates)
+    # ---- subscribe helper (Int32/UInt32 autodetect)
     def _subscribe_int_counter(self, topic_name: str, is_bad: bool):
         types_map = dict(self.get_topic_names_and_types())
         preferred = None
@@ -240,7 +270,6 @@ class GuiRosNode(Node):
                 preferred = Int32
             elif "std_msgs/msg/UInt32" in tname:
                 preferred = UInt32
-
         order = ([preferred] if preferred is not None else []) + [Int32, UInt32]
         seen = set()
         for candidate in order:
@@ -294,11 +323,9 @@ class GuiRosNode(Node):
             try: self.destroy_subscription(self._camera_sub)
             except Exception: pass
             self._camera_sub = None
-
         if not self._prefer_compressed and topic_base.rstrip('/').endswith("/compressed"):
             topic_base = topic_base.rstrip('/')[:-len("/compressed")]
         self._camera_topic_raw = topic_base.rstrip('/')
-
         if self._prefer_compressed:
             comp_topic = self._camera_topic_raw + "/compressed" if not self._camera_topic_raw.endswith("/compressed") else self._camera_topic_raw
             try:
@@ -307,7 +334,6 @@ class GuiRosNode(Node):
                 return
             except Exception as e:
                 self.get_logger().warn(f"Compressed subscribe failed ({e}); falling back to raw.")
-
         self._camera_sub = self.create_subscription(RosImage, self._camera_topic_raw, self._on_image_raw, self.sensor_qos)
         self.get_logger().info(f"Subscribed camera (raw): {self._camera_topic_raw}")
 
@@ -369,6 +395,84 @@ class GuiRosNode(Node):
         if down and not self._prev_down: self.signals.bump_speed.emit(-1)
         self._prev_up, self._prev_down = up, down
 
+    # ---- Map + trees callbacks ----
+    def _on_map(self, msg: OccupancyGrid):
+        with self._map_lock:
+            self._map_msg = msg
+            self._map_res = msg.info.resolution
+            self._map_origin = (msg.info.origin.position.x, msg.info.origin.position.y)
+
+    def _on_pose(self, msg: PoseWithCovarianceStamped):
+        p = msg.pose.pose.position
+        self._robot_pose = (p.x, p.y, _yaw_from_q(msg.pose.pose.orientation))
+
+    def _on_markers(self, msg: MarkerArray):
+        # id from ns:id if available, else id
+        for m in msg.markers:
+            mid = f"{m.ns}:{m.id}" if m.ns else str(m.id)
+            x, y = m.pose.position.x, m.pose.position.y
+            c = getattr(m, "color", None)
+            if c is not None:
+                bgr = (int(c.b*255), int(c.g*255), int(c.r*255))
+            else:
+                bgr = (0,255,0)
+            self._trees[str(mid)] = {"x": float(x), "y": float(y), "bgr": bgr}
+
+    def _grid_to_bgr(self, grid: OccupancyGrid):
+        if np is None:
+            return None
+        w, h = grid.info.width, grid.info.height
+        data = np.frombuffer(bytes(grid.data), dtype=np.int8).astype(np.int16).reshape(h, w)
+        img = np.full((h, w), 128, dtype=np.uint8)
+        img[data == 0]  = 255
+        img[data >= 50] = 0
+        if cv2 is None:
+            return np.stack([img, img, img], axis=-1)
+        return cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+
+    def _world_to_px(self, x: float, y: float, img_h: int):
+        ox, oy = self._map_origin
+        col = int((x - ox) / self._map_res)
+        row = int((y - oy) / self._map_res)
+        row = img_h - 1 - row
+        return col, row
+
+    def _emit_map_image(self):
+        if np is None:
+            return
+        with self._map_lock:
+            grid = self._map_msg
+        if grid is None or self._map_res is None or self._map_origin is None:
+            return
+        bgr = self._grid_to_bgr(grid)
+        if bgr is None:
+            return
+        h, w = bgr.shape[:2]
+
+        # draw trees
+        if cv2 is not None:
+            for tid, t in self._trees.items():
+                try:
+                    cx, cy = self._world_to_px(t["x"], t["y"], h)
+                    cv2.circle(bgr, (cx, cy), 4, t["bgr"], -1)
+                    cv2.putText(bgr, str(tid), (cx+6, cy-6), cv2.FONT_HERSHEY_SIMPLEX, 0.35, t["bgr"], 1, cv2.LINE_AA)
+                except Exception:
+                    pass
+            # robot
+            if self._robot_pose:
+                rx, ry, yaw = self._robot_pose
+                cx, cy = self._world_to_px(rx, ry, h)
+                cv2.circle(bgr, (cx, cy), 5, (0,0,255), -1)
+                tip = (int(cx + 15*math.cos(yaw)), int(cy - 15*math.sin(yaw)))
+                cv2.arrowedLine(bgr, (cx, cy), tip, (0,0,255), 2, tipLength=0.3)
+
+            rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+        else:
+            # no cv2, just show gray map
+            rgb = bgr[:, :, ::-1]
+
+        self.signals.map_image.emit(rgb)
+
     # ------------------- helpers ----------------------
     def _image_to_rgb_numpy(self, msg: RosImage):
         try:
@@ -406,7 +510,7 @@ class ControlGUI(QWidget):
         self._ang = 0.0
         self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
 
-        # QProcess for launch/build (keeps IO on Qt thread; no crashes)
+        # QProcess for launch/build
         self._proc_launch = QProcess(self)
         self._proc_launch.setProcessChannelMode(QProcess.MergedChannels)
         self._proc_launch.readyReadStandardOutput.connect(self._on_launch_output)
@@ -452,11 +556,11 @@ class ControlGUI(QWidget):
         self.camera_lbl.setMinimumHeight(200)
         cam = self.rounded_pane(self.camera_lbl, pad=10)
 
-        # Right-top placeholder (map / future)
-        self.right_top = QLabel("Map / Panel")
-        self.right_top.setAlignment(Qt.AlignCenter)
-        self.right_top.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        right_top_pane = self.rounded_pane(self.right_top, pad=10)
+        # Map panel
+        self.map_lbl = QLabel("Map / Trees")
+        self.map_lbl.setAlignment(Qt.AlignCenter)
+        self.map_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        right_top_pane = self.rounded_pane(self.map_lbl, pad=10)
 
         # D-Pad — square
         dpad_core = QWidget(); g = QGridLayout(dpad_core)
@@ -614,6 +718,7 @@ class ControlGUI(QWidget):
     def _start_ros(self):
         self.ros = RosWorker()
         self.ros.signals.image.connect(self._update_camera)
+        self.ros.signals.map_image.connect(self._update_map)
         self.ros.signals.log.connect(self._append_log)
         self.ros.signals.running.connect(self._set_running_led)
         self.ros.signals.ok.connect(lambda ok, msg: self._append_log(("OK " if ok else "ERR ") + msg))
@@ -662,7 +767,7 @@ class ControlGUI(QWidget):
         self._lin = 0.0; self._ang = 0.0; self._estopped = True
         self._update_running_led()
         self._append_log(">>> EMERGENCY STOP PRESSED! <<<")
-        QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))  # remove to latch
+        QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))
 
     # ---- Launch control (QProcess) ----
     def _toggle_launch(self, checked: bool):
@@ -677,7 +782,6 @@ class ControlGUI(QWidget):
             self.launch_btn.setChecked(True)
             return
         self._append_log(f"[INFO] Launching: {cmd}")
-        # Use bash -lc so sourced env/aliases work (UI should be started from a sourced shell anyway)
         self._proc_launch.start("bash", ["-lc", cmd])
         if not self._proc_launch.waitForStarted(3000):
             self._append_log("[ERROR] failed to start launch process")
@@ -712,17 +816,13 @@ class ControlGUI(QWidget):
             self._append_log("[WARN] build already running")
             return
         self.build_btn.setEnabled(False)
-
         pre = DEFAULT_BUILD_PRE.strip()
         cmd = DEFAULT_BUILD_CMD
         full_cmd = f"{pre}; {cmd}" if pre else cmd
         cwd = DEFAULT_BUILD_CWD or os.getcwd()
-
         self._append_log(f"[INFO] Rebuilding in {cwd} -> `{cmd}`")
         self._proc_build.setWorkingDirectory(cwd)
-        # ensure same env as our process (already sourced when launching the UI)
         env = os.environ.copy()
-        # Use bash -lc so `source` works inside the shell
         self._proc_build.start("bash", ["-lc", full_cmd])
         if not self._proc_build.waitForStarted(3000):
             self._append_log("[ERROR] failed to start build")
@@ -769,6 +869,16 @@ class ControlGUI(QWidget):
             self.camera_lbl.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
         ))
 
+    @Slot(object)
+    def _update_map(self, rgb_np):
+        if self._quitting or rgb_np is None: return
+        h, w, _ = rgb_np.shape
+        qimg = QImage(rgb_np.data, w, h, 3*w, QImage.Format_RGB888)
+        pix = QPixmap.fromImage(qimg)
+        self.map_lbl.setPixmap(pix.scaled(
+            self.map_lbl.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
+        ))
+
     # ---- Clean shutdown
     def closeEvent(self, event):
         try:
@@ -786,6 +896,8 @@ class ControlGUI(QWidget):
                 except Exception: pass
 
             try: self.ros.signals.image.disconnect(self._update_camera)
+            except Exception: pass
+            try: self.ros.signals.map_image.disconnect(self._update_map)
             except Exception: pass
             try: self.ros.signals.log.disconnect(self._append_log)
             except Exception: pass
