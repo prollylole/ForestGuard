@@ -32,7 +32,7 @@
     </camera>
   </library_cameras>
   <library_effects>
-    <effect id="Material_002-effect">
+    <effect id="Material_00-effect">
       <profile_COMMON>
         <newparam sid="empty_grass_png-surface">
           <surface type="2D">
