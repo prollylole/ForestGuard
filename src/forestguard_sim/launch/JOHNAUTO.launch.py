@@ -54,7 +54,7 @@ def _setup(context, *args, **kwargs):
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
         arguments=[
             '-topic', '/robot_description',
-            '-x', spawn_x, '-y', spawn_y, '-z', '0.4',
+            '-x', '11.0', spawn_x, '-y', '11.0', spawn_y, '-z', '0.2',
             '-Y', spawn_yaw,
             '-wait', '5'
         ]

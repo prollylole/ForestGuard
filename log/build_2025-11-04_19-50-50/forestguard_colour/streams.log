@@ -1,0 +1,22 @@
+[0.494s] Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_colour': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_colour/build --no-deps symlink_data
+[0.631s] running develop
+[0.717s] running egg_info
+[0.717s] writing forestguard_colour.egg-info/PKG-INFO
+[0.718s] writing dependency_links to forestguard_colour.egg-info/dependency_links.txt
+[0.718s] writing entry points to forestguard_colour.egg-info/entry_points.txt
+[0.718s] writing requirements to forestguard_colour.egg-info/requires.txt
+[0.718s] writing top-level names to forestguard_colour.egg-info/top_level.txt
+[0.719s] reading manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+[0.719s] writing manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+[0.720s] running build_ext
+[0.720s] Creating /home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard-colour.egg-link (link to .)
+[0.720s] Installing camera_tree_mapper script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+[0.720s] Installing hsv_calibrator script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+[0.720s] Installing lidar_tree_mapper script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+[0.721s] Installing tree_colour_confirmer script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+[0.721s] Installing tree_detector script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+[0.721s] Installing tree_detector_v2 script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+[0.721s] 
+[0.721s] Installed /home/john/git/RS1/john_branch/build/forestguard_colour
+[0.721s] running symlink_data
+[0.737s] Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_colour' returned '0': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_colour/build --no-deps symlink_data
