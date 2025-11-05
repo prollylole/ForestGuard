@@ -1,0 +1,9 @@
+/home/student/git/nathan_branch/build/john/CMakeFiles/uninstall.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/john_uninstall.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/test.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/edit_cache.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/rebuild_cache.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/list_install_components.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/install.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/install/local.dir
+/home/student/git/nathan_branch/build/john/CMakeFiles/install/strip.dir

@@ -1,0 +1,26 @@
+[1.185s] Invoking command in '/home/student/git/nathan_branch/build/forestguard_ui': PYTHONPATH=/home/student/git/nathan_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/git/nathan_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/git/nathan_branch/build/forestguard_ui/build --no-deps symlink_data
+[1.559s] running develop
+[1.796s] running egg_info
+[1.796s] creating forestguard_ui.egg-info
+[1.796s] writing forestguard_ui.egg-info/PKG-INFO
+[1.797s] writing dependency_links to forestguard_ui.egg-info/dependency_links.txt
+[1.797s] writing entry points to forestguard_ui.egg-info/entry_points.txt
+[1.797s] writing requirements to forestguard_ui.egg-info/requires.txt
+[1.797s] writing top-level names to forestguard_ui.egg-info/top_level.txt
+[1.797s] writing manifest file 'forestguard_ui.egg-info/SOURCES.txt'
+[1.799s] reading manifest file 'forestguard_ui.egg-info/SOURCES.txt'
+[1.800s] writing manifest file 'forestguard_ui.egg-info/SOURCES.txt'
+[1.801s] running build_ext
+[1.802s] Creating /home/student/git/nathan_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard-ui.egg-link (link to .)
+[1.803s] Installing controller_bridge script to /home/student/git/nathan_branch/install/forestguard_ui/lib/forestguard_ui
+[1.803s] Installing run_ui script to /home/student/git/nathan_branch/install/forestguard_ui/lib/forestguard_ui
+[1.803s] Installing twist_scaler script to /home/student/git/nathan_branch/install/forestguard_ui/lib/forestguard_ui
+[1.803s] 
+[1.803s] Installed /home/student/git/nathan_branch/build/forestguard_ui
+[1.804s] running symlink_data
+[1.804s] creating /home/student/git/nathan_branch/install/forestguard_ui/share/ament_index
+[1.804s] creating /home/student/git/nathan_branch/install/forestguard_ui/share/ament_index/resource_index
+[1.804s] creating /home/student/git/nathan_branch/install/forestguard_ui/share/ament_index/resource_index/packages
+[1.804s] symbolically linking /home/student/git/nathan_branch/build/forestguard_ui/resource/forestguard_ui -> /home/student/git/nathan_branch/install/forestguard_ui/share/ament_index/resource_index/packages
+[1.804s] symbolically linking /home/student/git/nathan_branch/build/forestguard_ui/package.xml -> /home/student/git/nathan_branch/install/forestguard_ui/share/forestguard_ui
+[1.846s] Invoked command in '/home/student/git/nathan_branch/build/forestguard_ui' returned '0': PYTHONPATH=/home/student/git/nathan_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/git/nathan_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/git/nathan_branch/build/forestguard_ui/build --no-deps symlink_data

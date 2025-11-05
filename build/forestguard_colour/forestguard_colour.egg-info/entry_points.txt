@@ -1,0 +1,8 @@
+[console_scripts]
+camera_tree_mapper = forestguard_colour.camera_tree_mapper:main
+hsv_calibrator = forestguard_colour.hsv_calibrator:main
+lidar_tree_mapper = forestguard_colour.lidar_tree_mapper:main
+tree_colour_confirmer = forestguard_colour.tree_colour_confirmer:main
+tree_detector = forestguard_colour.tree_detector_node:main
+tree_detector_v2 = forestguard_colour.tree_detector_v2:main
+

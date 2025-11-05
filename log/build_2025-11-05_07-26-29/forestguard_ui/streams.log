@@ -1,0 +1,19 @@
+[1.079s] Invoking command in '/home/student/git/nathan_branch/build/forestguard_ui': PYTHONPATH=/home/student/git/nathan_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/git/nathan_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/git/nathan_branch/build/forestguard_ui/build --no-deps symlink_data
+[1.376s] running develop
+[1.590s] running egg_info
+[1.590s] writing forestguard_ui.egg-info/PKG-INFO
+[1.590s] writing dependency_links to forestguard_ui.egg-info/dependency_links.txt
+[1.591s] writing entry points to forestguard_ui.egg-info/entry_points.txt
+[1.591s] writing requirements to forestguard_ui.egg-info/requires.txt
+[1.591s] writing top-level names to forestguard_ui.egg-info/top_level.txt
+[1.593s] reading manifest file 'forestguard_ui.egg-info/SOURCES.txt'
+[1.594s] writing manifest file 'forestguard_ui.egg-info/SOURCES.txt'
+[1.595s] running build_ext
+[1.595s] Creating /home/student/git/nathan_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard-ui.egg-link (link to .)
+[1.596s] Installing controller_bridge script to /home/student/git/nathan_branch/install/forestguard_ui/lib/forestguard_ui
+[1.596s] Installing run_ui script to /home/student/git/nathan_branch/install/forestguard_ui/lib/forestguard_ui
+[1.597s] Installing twist_scaler script to /home/student/git/nathan_branch/install/forestguard_ui/lib/forestguard_ui
+[1.597s] 
+[1.597s] Installed /home/student/git/nathan_branch/build/forestguard_ui
+[1.597s] running symlink_data
+[1.632s] Invoked command in '/home/student/git/nathan_branch/build/forestguard_ui' returned '0': PYTHONPATH=/home/student/git/nathan_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/student/git/nathan_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/student/git/nathan_branch/build/forestguard_ui/build --no-deps symlink_data
