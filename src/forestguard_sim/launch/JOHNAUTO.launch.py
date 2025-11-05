@@ -16,14 +16,14 @@ from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
 
-import os, math, random
+import os, math
 
 # ------------------------
 # Helpers
 # ------------------------
 def _resolve_spawn_arg(context, name, lo, hi):
     val = LaunchConfiguration(name).perform(context)
-    return str(random.uniform(lo, hi)) if val == 'RANDOM' else val
+    return val
 
 # ------------------------
 # Setup: start Gazebo with existing world, spawn robot
@@ -54,7 +54,7 @@ def _setup(context, *args, **kwargs):
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
         arguments=[
             '-topic', '/robot_description',
-            '-x', '11.0', spawn_x, '-y', '11.0', spawn_y, '-z', '0.2',
+            '-x', spawn_x, '-y', spawn_y, '-z', '0.2',
             '-Y', spawn_yaw,
             '-wait', '5'
         ]
@@ -85,9 +85,9 @@ def generate_launch_description():
     ld.add_action(DeclareLaunchArgument('teleop', default_value='True'))
 
     # Spawn pose (keep RANDOM support if you want it)
-    ld.add_action(DeclareLaunchArgument('spawn_x', default_value='RANDOM'))
-    ld.add_action(DeclareLaunchArgument('spawn_y', default_value='RANDOM'))
-    ld.add_action(DeclareLaunchArgument('spawn_yaw', default_value='RANDOM'))
+    ld.add_action(DeclareLaunchArgument('spawn_x', default_value='0.0'))
+    ld.add_action(DeclareLaunchArgument('spawn_y', default_value='0.0'))
+    ld.add_action(DeclareLaunchArgument('spawn_yaw', default_value='0.0'))
 
     # Robot description
     robot_description = ParameterValue(

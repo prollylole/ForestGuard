@@ -27,6 +27,7 @@ class TreeColourConfirmer(Node):
 
         # --- params
         self.declare_parameter('image_topic', '/camera/image')
+        self.declare_parameter('tree_pose_topic', '/trees/poses')
         self.declare_parameter('map_frame',   'map')
         self.declare_parameter('base_frame',  'base_link')
         self.declare_parameter('camera_hfov_deg', 120.0)   # matches URDF (2.0944 rad)
@@ -47,8 +48,9 @@ class TreeColourConfirmer(Node):
         self.declare_parameter('red2_high',  [179,255,255])
 
         img_topic = self.get_parameter('image_topic').value
+        poses_topic = self.get_parameter('tree_pose_topic').value
         self.create_subscription(Image, img_topic, self.on_image, 10)
-        self.create_subscription(PoseArray, '/tree_positions', self.on_positions, 10)
+        self.create_subscription(PoseArray, poses_topic, self.on_positions, 10)
 
         self.pub_counts  = self.create_publisher(Int32MultiArray, '/tree_colour_counts', 10)
         self.pub_markers = self.create_publisher(MarkerArray, '/trees_coloured', 10)
@@ -60,6 +62,7 @@ class TreeColourConfirmer(Node):
         self.get_logger().info(
             "TreeColourConfirmer ready\n"
             f"  image_topic={img_topic}\n"
+            f"  tree_pose_topic={poses_topic}\n"
             f"  camera_hfov_deg={self.get_parameter('camera_hfov_deg').value}\n"
             f"  green_low={self.get_parameter('green_low').value}, green_high={self.get_parameter('green_high').value}\n"
             f"  red1_low={self.get_parameter('red1_low').value}, red1_high={self.get_parameter('red1_high').value}\n"
