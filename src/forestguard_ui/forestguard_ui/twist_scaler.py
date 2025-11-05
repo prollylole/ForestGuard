@@ -131,6 +131,8 @@ class TwistScaler(Node):
         out.angular.x = msg.angular.x * s
         out.angular.y  = msg.angular.y * s
         out.angular.z  = msg.angular.z * s
+        if out.linear.x < -1e-4:
+            out.angular.z = -out.angular.z
         self.pub_cmd.publish(out)
 
         # throttled debug (2 Hz)

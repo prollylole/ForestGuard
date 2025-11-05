@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # forestguard_colour/tree_colour_confirmer.py
 import math, numpy as np, cv2
+from typing import Dict, Tuple
 import rclpy
 from rclpy.node import Node
 from rclpy.time import Time
 from rclpy.duration import Duration
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import PoseArray
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Int32MultiArray, UInt32
 from visualization_msgs.msg import MarkerArray, Marker
 from cv_bridge import CvBridge
 from tf2_ros import Buffer, TransformListener
@@ -34,6 +35,7 @@ class TreeColourConfirmer(Node):
         self.declare_parameter('roi_ymin_frac', 0.35)      # only check bottom 65% of image
         self.declare_parameter('stripe_half_px', 16)       # half-width of the vertical stripe
         self.declare_parameter('min_votes', 40)            # min coloured pixels to accept a label
+        self.declare_parameter('confirm_range_m', 8.0)     # require proximity before colouring
 
         # NOTE: launch may already inject use_sim_time; don't redeclare if present
         if not self.has_parameter('use_sim_time'):
@@ -54,9 +56,11 @@ class TreeColourConfirmer(Node):
 
         self.pub_counts  = self.create_publisher(Int32MultiArray, '/tree_colour_counts', 10)
         self.pub_markers = self.create_publisher(MarkerArray, '/trees_coloured', 10)
+        self.pub_bad     = self.create_publisher(UInt32, '/trees/bad', 10)
 
         self.tf = Buffer()
         self.tfl = TransformListener(self.tf, self)
+        self._label_cache: Dict[Tuple[int, int], str] = {}
 
         # Startup log of resolved params (handy sanity check)
         self.get_logger().info(
@@ -64,6 +68,7 @@ class TreeColourConfirmer(Node):
             f"  image_topic={img_topic}\n"
             f"  tree_pose_topic={poses_topic}\n"
             f"  camera_hfov_deg={self.get_parameter('camera_hfov_deg').value}\n"
+            f"  confirm_range_m={self.get_parameter('confirm_range_m').value}\n"
             f"  green_low={self.get_parameter('green_low').value}, green_high={self.get_parameter('green_high').value}\n"
             f"  red1_low={self.get_parameter('red1_low').value}, red1_high={self.get_parameter('red1_high').value}\n"
             f"  red2_low={self.get_parameter('red2_low').value}, red2_high={self.get_parameter('red2_high').value}"
@@ -109,8 +114,10 @@ class TreeColourConfirmer(Node):
         cy, sy = math.cos(yaw), math.sin(yaw)
 
         hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
-        greens = reds = 0
-        marray = MarkerArray()
+        confirm_range = max(0.01, float(self.get_parameter('confirm_range_m').value))
+
+        updated_labels: Dict[Tuple[int, int], str] = {}
+        markers = MarkerArray()
 
         for i, p in enumerate(poses.poses):
             mx, my = p.position.x, p.position.y
@@ -118,35 +125,39 @@ class TreeColourConfirmer(Node):
             # map -> base: [bx, by] = R*yaw * [mx, my] + t
             bx = cy*mx - sy*my + tx
             by = sy*mx + cy*my + ty
+            key = (int(round(mx * 100.0)), int(round(my * 100.0)))
+            prev = self._label_cache.get(key, 'unknown')
+            dist = math.hypot(bx, by)
+            bearing = math.atan2(by, bx)
+            within_fov = (bx > 0.3) and (abs(bearing) <= hfov / 2)
 
-            # forward-only (ignore stuff behind camera)
-            if bx <= 0.3:
-                continue
+            measured = 'unknown'
+            if within_fov:
+                u = int((bearing / (hfov / 2)) * (W / 2) + (W / 2))
+                u0 = max(0, u - half)
+                u1 = min(W, u + half)
+                stripe = hsv[roi_ymin:H, u0:u1]
+                if stripe.size > 0 and dist <= confirm_range:
+                    mg = cv2.inRange(stripe, gL, gH)
+                    mr = cv2.inRange(stripe, r1L, r1H) | cv2.inRange(stripe, r2L, r2H)
+                    vg = int(np.count_nonzero(mg))
+                    vr = int(np.count_nonzero(mr))
+                    if vg >= min_votes or vr >= min_votes:
+                        measured = 'green' if vg > vr else 'red'
 
-            bearing = math.atan2(by, bx)  # in base frame (rad)
-            if abs(bearing) > hfov/2:
-                continue
+            if prev == 'red' and measured != 'red':
+                label = 'red'
+            elif measured == 'red':
+                label = 'red'
+            elif measured == 'green':
+                label = 'green'
+            elif measured == 'unknown' and prev in ('green', 'red'):
+                label = prev
+            else:
+                label = measured
 
-            # bearing -> image column u
-            u = int((bearing/(hfov/2)) * (W/2) + (W/2))
-            u0 = max(0, u - half)
-            u1 = min(W, u + half)
-
-            stripe = hsv[roi_ymin:H, u0:u1]
-            if stripe.size == 0:
-                continue
-
-            mg = cv2.inRange(stripe, gL, gH)
-            mr = cv2.inRange(stripe, r1L, r1H) | cv2.inRange(stripe, r2L, r2H)
-            vg = int(np.count_nonzero(mg))
-            vr = int(np.count_nonzero(mr))
-
-            label = 'unknown'
-            if vg >= min_votes or vr >= min_votes:
-                if vg > vr:
-                    label = 'green'; greens += 1
-                else:
-                    label = 'red';   reds += 1
+            if prev != label and label == 'red':
+                self.get_logger().info(f"Tree at ({mx:.2f}, {my:.2f}) marked BAD")
 
             # coloured marker at tree position (map frame)
             m = Marker()
@@ -163,12 +174,30 @@ class TreeColourConfirmer(Node):
                 m.color.r, m.color.g, m.color.b, m.color.a = 0.9, 0.1, 0.1, 0.9
             else:
                 m.color.r, m.color.g, m.color.b, m.color.a = 0.6, 0.6, 0.6, 0.6
-            marray.markers.append(m)
+
+            confidence = 0.0
+            if dist <= confirm_range:
+                confidence = max(0.0, min(1.0, 1.0 - (dist / confirm_range)))
+            display_alpha = 0.4 + 0.5 * confidence
+            m.color.a = float(min(1.0, max(0.05, display_alpha)))
+
+            markers.markers.append(m)
+            updated_labels[key] = label
+            self._label_cache[key] = label
+
+        # prune entries that vanished from poses
+        stale = set(self._label_cache.keys()) - set(updated_labels.keys())
+        for k in stale:
+            del self._label_cache[k]
+
+        greens = sum(1 for v in self._label_cache.values() if v == 'green')
+        reds = sum(1 for v in self._label_cache.values() if v == 'red')
 
         # publish counts and coloured markers
-        self.pub_markers.publish(marray)
+        self.pub_markers.publish(markers)
         counts = Int32MultiArray(); counts.data = [greens, reds]
         self.pub_counts.publish(counts)
+        self.pub_bad.publish(UInt32(data=reds))
 
 def main():
     rclpy.init()

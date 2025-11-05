@@ -194,14 +194,14 @@ class TreeMapperNode(Node):
                         best_d2 = d2; best = tid
                 if best is None:
                     tid = self.next_id; self.next_id += 1
-                    self.tree_db[tid] = TrackedTree(tid, cls, mx, my)
+                    self.tree_db[tid] = TrackedTree(tid, 'unknown', mx, my)
                 else:
                     tt = self.tree_db[best]
                     tt.x = 0.7*tt.x + 0.3*mx
                     tt.y = 0.7*tt.y + 0.3*my
                     tt.hits += 1
                     tt.last_seen = now
-                    if tt.hits < 3: tt.cls = cls
+                    if tt.hits < 3: tt.cls = 'unknown'
 
     def maintenance_tick(self):
         now = time.time()
@@ -234,10 +234,7 @@ class TreeMapperNode(Node):
                 m.pose.position.x = tt.x; m.pose.position.y = tt.y; m.pose.position.z = h*0.5
                 m.pose.orientation.w = 1.0
                 m.scale.x = 2*r; m.scale.y = 2*r; m.scale.z = h
-                if tt.cls == 'green':
-                    m.color.r, m.color.g, m.color.b, m.color.a = (0.1, 0.9, 0.2, 0.9)
-                else:
-                    m.color.r, m.color.g, m.color.b, m.color.a = (0.9, 0.2, 0.2, 0.9)
+                m.color.r, m.color.g, m.color.b, m.color.a = (0.1, 0.8, 0.1, 0.9)
                 m.lifetime = Duration(seconds=2.0).to_msg()
                 markers.markers.append(m)
 

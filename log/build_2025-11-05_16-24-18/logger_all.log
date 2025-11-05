@@ -1,0 +1,390 @@
+[0.083s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install', '--packages-select', 'forestguard_colour', 'forestguard_controller', 'forestguard_localisation', 'forestguard_sim', 'forestguard_ui', 'john']
+[0.083s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=20, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['forestguard_colour', 'forestguard_controller', 'forestguard_localisation', 'forestguard_sim', 'forestguard_ui', 'john'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x75200c75a5c0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x75200c71c070>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x75200c71c070>>, mixin_verb=('build',))
+[0.209s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.209s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.209s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.209s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.209s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.209s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.209s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/john/git/RS1/john_branch'
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.209s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.217s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore_ament_install'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_pkg']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_pkg'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_meta']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_meta'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ros']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ros'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['cmake', 'python']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'cmake'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['python_setup_py']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python_setup_py'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extension 'ignore'
+[0.218s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extension 'ignore_ament_install'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extensions ['colcon_pkg']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extension 'colcon_pkg'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extensions ['colcon_meta']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extension 'colcon_meta'
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extensions ['ros']
+[0.219s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_colour) by extension 'ros'
+[0.220s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forestguard_colour' with type 'ros.ament_python' and name 'forestguard_colour'
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.220s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extension 'ignore'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extension 'ignore_ament_install'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extensions ['colcon_pkg']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extension 'colcon_pkg'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extensions ['colcon_meta']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extension 'colcon_meta'
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extensions ['ros']
+[0.221s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_controller) by extension 'ros'
+[0.222s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forestguard_controller' with type 'ros.ament_cmake' and name 'forestguard_controller'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extensions ['ignore', 'ignore_ament_install']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extension 'ignore'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extension 'ignore_ament_install'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extensions ['colcon_pkg']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extension 'colcon_pkg'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extensions ['colcon_meta']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extension 'colcon_meta'
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extensions ['ros']
+[0.222s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_localisation) by extension 'ros'
+[0.223s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forestguard_localisation' with type 'ros.ament_cmake' and name 'forestguard_localisation'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extensions ['ignore', 'ignore_ament_install']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extension 'ignore'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extension 'ignore_ament_install'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extensions ['colcon_pkg']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extension 'colcon_pkg'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extensions ['colcon_meta']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extension 'colcon_meta'
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extensions ['ros']
+[0.223s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_sim) by extension 'ros'
+[0.224s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forestguard_sim' with type 'ros.ament_cmake' and name 'john'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extensions ['ignore', 'ignore_ament_install']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extension 'ignore'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extension 'ignore_ament_install'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extensions ['colcon_pkg']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extension 'colcon_pkg'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extensions ['colcon_meta']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extension 'colcon_meta'
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extensions ['ros']
+[0.224s] Level 1:colcon.colcon_core.package_identification:_identify(src/forestguard_ui) by extension 'ros'
+[0.225s] DEBUG:colcon.colcon_core.package_identification:Package 'src/forestguard_ui' with type 'ros.ament_python' and name 'forestguard_ui'
+[0.225s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.225s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.225s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.225s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.225s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.225s] WARNING:colcon.colcon_core.package_selection:ignoring unknown package 'forestguard_sim' in --packages-select
+[0.248s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.248s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.250s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 5 installed packages in /home/john/git/RS1/john_branch/install
+[0.251s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 373 installed packages in /opt/ros/humble
+[0.252s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'cmake_args' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'cmake_target' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'cmake_clean_cache' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'cmake_clean_first' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'cmake_force_configure' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'ament_cmake_args' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'catkin_cmake_args' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_colour' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.282s] DEBUG:colcon.colcon_core.verb:Building package 'forestguard_colour' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/john/git/RS1/john_branch/build/forestguard_colour', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/john/git/RS1/john_branch/install/forestguard_colour', 'merge_install': False, 'path': '/home/john/git/RS1/john_branch/src/forestguard_colour', 'symlink_install': True, 'test_result_base': None}
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'cmake_args' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'cmake_target' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'cmake_clean_first' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'cmake_force_configure' from command line to 'False'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'ament_cmake_args' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[0.282s] Level 5:colcon.colcon_core.verb:set package 'forestguard_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.282s] DEBUG:colcon.colcon_core.verb:Building package 'forestguard_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/john/git/RS1/john_branch/build/forestguard_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/john/git/RS1/john_branch/install/forestguard_controller', 'merge_install': False, 'path': '/home/john/git/RS1/john_branch/src/forestguard_controller', 'symlink_install': True, 'test_result_base': None}
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'cmake_target' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'cmake_clean_cache' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'cmake_clean_first' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'cmake_force_configure' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'ament_cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'catkin_cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_localisation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.283s] DEBUG:colcon.colcon_core.verb:Building package 'forestguard_localisation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/john/git/RS1/john_branch/build/forestguard_localisation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/john/git/RS1/john_branch/install/forestguard_localisation', 'merge_install': False, 'path': '/home/john/git/RS1/john_branch/src/forestguard_localisation', 'symlink_install': True, 'test_result_base': None}
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'cmake_target' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'cmake_clean_cache' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'cmake_clean_first' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'cmake_force_configure' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'ament_cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'catkin_cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'forestguard_ui' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.283s] DEBUG:colcon.colcon_core.verb:Building package 'forestguard_ui' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/john/git/RS1/john_branch/build/forestguard_ui', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/john/git/RS1/john_branch/install/forestguard_ui', 'merge_install': False, 'path': '/home/john/git/RS1/john_branch/src/forestguard_ui', 'symlink_install': True, 'test_result_base': None}
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'cmake_target' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'cmake_clean_cache' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'cmake_clean_first' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'cmake_force_configure' from command line to 'False'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'ament_cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'catkin_cmake_args' from command line to 'None'
+[0.283s] Level 5:colcon.colcon_core.verb:set package 'john' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.283s] DEBUG:colcon.colcon_core.verb:Building package 'john' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/john/git/RS1/john_branch/build/john', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/john/git/RS1/john_branch/install/john', 'merge_install': False, 'path': '/home/john/git/RS1/john_branch/src/forestguard_sim', 'symlink_install': True, 'test_result_base': None}
+[0.284s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.284s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.285s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/john/git/RS1/john_branch/src/forestguard_colour' with build type 'ament_python'
+[0.285s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_colour', 'ament_prefix_path')
+[0.287s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.287s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/hook/ament_prefix_path.ps1'
+[0.288s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/hook/ament_prefix_path.dsv'
+[0.288s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/hook/ament_prefix_path.sh'
+[0.289s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.289s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.293s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/john/git/RS1/john_branch/src/forestguard_controller' with build type 'ament_cmake'
+[0.294s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/john/git/RS1/john_branch/src/forestguard_controller'
+[0.294s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.294s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.297s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/john/git/RS1/john_branch/src/forestguard_localisation' with build type 'ament_cmake'
+[0.297s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/john/git/RS1/john_branch/src/forestguard_localisation'
+[0.298s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.298s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.300s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/john/git/RS1/john_branch/src/forestguard_ui' with build type 'ament_python'
+[0.300s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_ui', 'ament_prefix_path')
+[0.300s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/hook/ament_prefix_path.ps1'
+[0.301s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/hook/ament_prefix_path.dsv'
+[0.301s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/hook/ament_prefix_path.sh'
+[0.302s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.302s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.304s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/john/git/RS1/john_branch/src/forestguard_sim' with build type 'ament_cmake'
+[0.304s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/john/git/RS1/john_branch/src/forestguard_sim'
+[0.304s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.304s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.521s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/john/git/RS1/john_branch/src/forestguard_colour'
+[0.521s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.521s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.528s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_controller -- -j20 -l20
+[0.531s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_localisation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_localisation -- -j20 -l20
+[0.726s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/john/git/RS1/john_branch/src/forestguard_ui'
+[0.727s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.727s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.734s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/john -- -j20 -l20
+[0.736s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_controller -- -j20 -l20
+[0.745s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_controller
+[0.746s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_localisation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/forestguard_localisation -- -j20 -l20
+[0.747s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_localisation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_localisation
+[0.762s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forestguard_controller)
+[0.762s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_controller
+[0.764s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller' for CMake module files
+[0.764s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller' for CMake config files
+[0.764s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_controller', 'cmake_prefix_path')
+[0.764s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/hook/cmake_prefix_path.ps1'
+[0.765s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/hook/cmake_prefix_path.dsv'
+[0.765s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/hook/cmake_prefix_path.sh'
+[0.765s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/lib'
+[0.765s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/bin'
+[0.765s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/lib/pkgconfig/forestguard_controller.pc'
+[0.766s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/lib/python3.10/site-packages'
+[0.766s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/bin'
+[0.766s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.ps1'
+[0.767s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.dsv'
+[0.767s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.sh'
+[0.767s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.bash'
+[0.768s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.zsh'
+[0.768s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/forestguard_controller/share/colcon-core/packages/forestguard_controller)
+[0.769s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forestguard_controller)
+[0.769s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller' for CMake module files
+[0.769s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller' for CMake config files
+[0.769s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_controller', 'cmake_prefix_path')
+[0.770s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/hook/cmake_prefix_path.ps1'
+[0.770s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/hook/cmake_prefix_path.dsv'
+[0.770s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/hook/cmake_prefix_path.sh'
+[0.770s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/lib'
+[0.771s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/bin'
+[0.771s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/lib/pkgconfig/forestguard_controller.pc'
+[0.771s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/lib/python3.10/site-packages'
+[0.771s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_controller/bin'
+[0.771s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.ps1'
+[0.772s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.dsv'
+[0.772s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.sh'
+[0.772s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.bash'
+[0.772s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_controller/share/forestguard_controller/package.zsh'
+[0.773s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/forestguard_controller/share/colcon-core/packages/forestguard_controller)
+[0.776s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forestguard_localisation)
+[0.776s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/john' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/john/git/RS1/john_branch/build/john -- -j20 -l20
+[0.776s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation' for CMake module files
+[0.777s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/john
+[0.778s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_localisation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/forestguard_localisation
+[0.778s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation' for CMake config files
+[0.778s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_localisation', 'cmake_prefix_path')
+[0.779s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/hook/cmake_prefix_path.ps1'
+[0.779s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/hook/cmake_prefix_path.dsv'
+[0.779s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/hook/cmake_prefix_path.sh'
+[0.780s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/lib'
+[0.780s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/bin'
+[0.780s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/lib/pkgconfig/forestguard_localisation.pc'
+[0.780s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/lib/python3.10/site-packages'
+[0.781s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/bin'
+[0.781s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.ps1'
+[0.781s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.dsv'
+[0.782s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.sh'
+[0.782s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.bash'
+[0.782s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.zsh'
+[0.783s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/forestguard_localisation/share/colcon-core/packages/forestguard_localisation)
+[0.783s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forestguard_localisation)
+[0.783s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation' for CMake module files
+[0.783s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation' for CMake config files
+[0.784s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_localisation', 'cmake_prefix_path')
+[0.784s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/hook/cmake_prefix_path.ps1'
+[0.784s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/hook/cmake_prefix_path.dsv'
+[0.784s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/hook/cmake_prefix_path.sh'
+[0.785s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/lib'
+[0.785s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/bin'
+[0.785s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/lib/pkgconfig/forestguard_localisation.pc'
+[0.785s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/lib/python3.10/site-packages'
+[0.785s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_localisation/bin'
+[0.786s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.ps1'
+[0.786s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.dsv'
+[0.786s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.sh'
+[0.787s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.bash'
+[0.787s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.zsh'
+[0.787s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/forestguard_localisation/share/colcon-core/packages/forestguard_localisation)
+[0.799s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(john)
+[0.800s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john' for CMake module files
+[0.800s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/john' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/john/git/RS1/john_branch/install/forestguard_ui:/home/john/git/RS1/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/john/git/RS1/john_branch/build/john
+[0.801s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john' for CMake config files
+[0.801s] Level 1:colcon.colcon_core.shell:create_environment_hook('john', 'cmake_prefix_path')
+[0.801s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/john/share/john/hook/cmake_prefix_path.ps1'
+[0.802s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/john/share/john/hook/cmake_prefix_path.dsv'
+[0.802s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/john/share/john/hook/cmake_prefix_path.sh'
+[0.803s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/bin'
+[0.803s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/lib/pkgconfig/john.pc'
+[0.803s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/lib/python3.10/site-packages'
+[0.804s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/bin'
+[0.804s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.ps1'
+[0.805s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/john/share/john/package.dsv'
+[0.806s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.sh'
+[0.806s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.bash'
+[0.807s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.zsh'
+[0.807s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/john/share/colcon-core/packages/john)
+[0.808s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(john)
+[0.808s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john' for CMake module files
+[0.809s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john' for CMake config files
+[0.809s] Level 1:colcon.colcon_core.shell:create_environment_hook('john', 'cmake_prefix_path')
+[0.810s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/john/share/john/hook/cmake_prefix_path.ps1'
+[0.810s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/john/share/john/hook/cmake_prefix_path.dsv'
+[0.811s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/john/share/john/hook/cmake_prefix_path.sh'
+[0.811s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/bin'
+[0.812s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/lib/pkgconfig/john.pc'
+[0.812s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/lib/python3.10/site-packages'
+[0.812s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/john/bin'
+[0.813s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.ps1'
+[0.813s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/john/share/john/package.dsv'
+[0.814s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.sh'
+[0.814s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.bash'
+[0.815s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/john/share/john/package.zsh'
+[0.815s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/john/share/colcon-core/packages/john)
+[1.037s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_ui': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_ui/build --no-deps symlink_data
+[1.066s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_colour': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_colour/build --no-deps symlink_data
+[1.413s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_ui', 'pythonpath_develop')
+[1.413s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/build/forestguard_ui/share/forestguard_ui/hook/pythonpath_develop.ps1'
+[1.413s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_ui' returned '0': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_ui/build --no-deps symlink_data
+[1.414s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/build/forestguard_ui/share/forestguard_ui/hook/pythonpath_develop.dsv'
+[1.414s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/build/forestguard_ui/share/forestguard_ui/hook/pythonpath_develop.sh'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_ui' for CMake module files
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_ui' for CMake config files
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_ui/lib'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_ui/bin'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_ui/lib/pkgconfig/forestguard_ui.pc'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_ui/lib/python3.10/site-packages'
+[1.415s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_ui', 'pythonpath')
+[1.416s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/hook/pythonpath.ps1'
+[1.416s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/hook/pythonpath.dsv'
+[1.416s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/hook/pythonpath.sh'
+[1.417s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_ui/bin'
+[1.417s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forestguard_ui)
+[1.417s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/package.ps1'
+[1.417s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/package.dsv'
+[1.418s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/package.sh'
+[1.418s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/package.bash'
+[1.418s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_ui/share/forestguard_ui/package.zsh'
+[1.419s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/forestguard_ui/share/colcon-core/packages/forestguard_ui)
+[1.471s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_colour', 'pythonpath_develop')
+[1.472s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/build/forestguard_colour/share/forestguard_colour/hook/pythonpath_develop.ps1'
+[1.472s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_colour' returned '0': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_colour/build --no-deps symlink_data
+[1.473s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/build/forestguard_colour/share/forestguard_colour/hook/pythonpath_develop.dsv'
+[1.473s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/build/forestguard_colour/share/forestguard_colour/hook/pythonpath_develop.sh'
+[1.473s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_colour' for CMake module files
+[1.474s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_colour' for CMake config files
+[1.474s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_colour/lib'
+[1.474s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_colour/bin'
+[1.474s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_colour/lib/pkgconfig/forestguard_colour.pc'
+[1.474s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages'
+[1.474s] Level 1:colcon.colcon_core.shell:create_environment_hook('forestguard_colour', 'pythonpath')
+[1.475s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/hook/pythonpath.ps1'
+[1.475s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/hook/pythonpath.dsv'
+[1.475s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/hook/pythonpath.sh'
+[1.476s] Level 1:colcon.colcon_core.environment:checking '/home/john/git/RS1/john_branch/install/forestguard_colour/bin'
+[1.476s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(forestguard_colour)
+[1.476s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/package.ps1'
+[1.477s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/package.dsv'
+[1.477s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/package.sh'
+[1.478s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/package.bash'
+[1.478s] INFO:colcon.colcon_core.shell:Creating package script '/home/john/git/RS1/john_branch/install/forestguard_colour/share/forestguard_colour/package.zsh'
+[1.478s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/john/git/RS1/john_branch/install/forestguard_colour/share/colcon-core/packages/forestguard_colour)
+[1.479s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.479s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.479s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.479s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.485s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.485s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.485s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.496s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.497s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/john/git/RS1/john_branch/install/local_setup.ps1'
+[1.498s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/john/git/RS1/john_branch/install/_local_setup_util_ps1.py'
+[1.500s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/john/git/RS1/john_branch/install/setup.ps1'
+[1.501s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/john/git/RS1/john_branch/install/local_setup.sh'
+[1.502s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/john/git/RS1/john_branch/install/_local_setup_util_sh.py'
+[1.502s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/john/git/RS1/john_branch/install/setup.sh'
+[1.504s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/john/git/RS1/john_branch/install/local_setup.bash'
+[1.505s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/john/git/RS1/john_branch/install/setup.bash'
+[1.506s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/john/git/RS1/john_branch/install/local_setup.zsh'
+[1.507s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/john/git/RS1/john_branch/install/setup.zsh'

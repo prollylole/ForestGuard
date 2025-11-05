@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import sys, os, math, signal
-from typing import Optional, Dict
+from typing import Optional, Dict, Tuple, List
 from threading import Lock
 
 from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF, QRect, QProcess
@@ -12,7 +12,7 @@ from PySide6.QtGui import QColor, QPainter, QBrush, QImage, QPixmap, QIcon, QPal
 from PySide6.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QTextEdit, QSlider, QFrame,
     QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy, QGraphicsDropShadowEffect,
-    QStyleFactory
+    QStyleFactory, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView, QStackedLayout
 )
 
 # ---------- topics / env ----------
@@ -27,8 +27,8 @@ TREE_BAD_TOPIC   = os.environ.get("UI_TREE_BAD_TOPIC",   "/trees/bad")
 # Map/markers topics (can override via env)
 MAP_TOPIC            = os.environ.get("UI_MAP_TOPIC", "/map")
 ROBOT_POSE_TOPIC     = os.environ.get("UI_ROBOT_POSE_TOPIC", "/amcl_pose")
-TREE_MARKERS_TOPIC_A = os.environ.get("UI_TREE_MARKERS", "/trees_markers")
-TREE_MARKERS_TOPIC_B = os.environ.get("UI_TREE_MARKER",  "/tree_marker")  # alt name
+TREE_MARKERS_TOPIC_A = os.environ.get("UI_TREE_MARKERS", "/trees/markers")
+TREE_MARKERS_TOPIC_B = os.environ.get("UI_TREE_MARKER",  "/trees_coloured")  # alt/fused colours
 
 # Point cloud source shown next to the Teleop LED
 PC_TOPIC = os.environ.get("UI_PC_TOPIC", "/camera/depth/points")
@@ -96,7 +96,7 @@ from rcl_interfaces.msg import Log as RosLog
 from std_msgs.msg import String as RosString
 from std_msgs.msg import Int32, UInt32
 from nav_msgs.msg import OccupancyGrid
-from visualization_msgs.msg import MarkerArray
+from visualization_msgs.msg import Marker, MarkerArray
 from rosgraph_msgs.msg import Clock
 
 # ========================= tiny widgets ===============================
@@ -167,6 +167,7 @@ class RosSignals(QObject):
     bump_speed = Signal(int)
     tree_counts = Signal(int, int)    # (total, bad)
     pc_points = Signal(int)           # depth/scan cloud point count
+    tree_table = Signal(object)       # list of tree dicts
 
 class GuiRosNode(Node):
     def __init__(self, signals: RosSignals):
@@ -219,6 +220,17 @@ class GuiRosNode(Node):
         self._img_lock = Lock()
         self._emit_timer = self.create_timer(1.0 / self._emit_hz, self._emit_image_tick)
         self._subscribe_camera(self._camera_topic_raw)
+        self._camera_mode = 'rgb'
+        self._prev_cycle_btn = False
+        self._btn_cycle = int(os.environ.get("UI_JOY_BTN_CAMERA", "3"))
+        self._hsv_ready = (np is not None and cv2 is not None)
+        if self._hsv_ready:
+            self._green_low = np.array([50,130,25], dtype=np.uint8)
+            self._green_high = np.array([70,255,255], dtype=np.uint8)
+            self._red1_low = np.array([0,155,75], dtype=np.uint8)
+            self._red1_high = np.array([34,255,255], dtype=np.uint8)
+            self._red2_low = np.array([170,160,77], dtype=np.uint8)
+            self._red2_high = np.array([179,255,255], dtype=np.uint8)
 
         # point cloud quick stats (shown next to Teleop LED)
         try:
@@ -266,7 +278,9 @@ class GuiRosNode(Node):
         self._map_res = None
         self._map_origin = None  # (ox, oy)
         self._robot_pose = None  # (x, y, yaw)
-        self._trees: Dict[str, Dict[str, float]] = {}
+        self._tree_lock = Lock()
+        self._tree_states: Dict[Tuple[float, float], Dict[str, object]] = {}
+        self._confirm_range_hint = float(os.environ.get("UI_CONFIRM_RANGE", "8.0"))
 
         self.create_subscription(OccupancyGrid, MAP_TOPIC, self._on_map, 1)
         self.create_subscription(PoseWithCovarianceStamped, ROBOT_POSE_TOPIC, self._on_pose, 10)
@@ -376,7 +390,11 @@ class GuiRosNode(Node):
                 rgb = self._latest_rgb
                 self._latest_rgb = None
         if rgb is not None:
-            self.signals.image.emit(rgb)
+            if self._camera_mode == 'hsv' and self._hsv_ready:
+                view = self._make_hsv_view(rgb)
+            else:
+                view = rgb
+            self.signals.image.emit(view)
 
     def _on_pc(self, msg: PointCloud2):
         try:
@@ -393,6 +411,32 @@ class GuiRosNode(Node):
             self.signals.pc_points.emit(int(self._pc_latest_count))
             self._pc_latest_count = 0
 
+    def _cycle_camera_mode(self):
+        if self._camera_mode == 'rgb' and self._hsv_ready:
+            self._camera_mode = 'hsv'
+            self.signals.ok.emit(True, "Camera view: HSV mask")
+        else:
+            self._camera_mode = 'rgb'
+            if not self._hsv_ready:
+                self.signals.ok.emit(False, "HSV view unavailable (missing OpenCV/Numpy)")
+            else:
+                self.signals.ok.emit(True, "Camera view: RGB")
+
+    def _make_hsv_view(self, rgb_np):
+        if not self._hsv_ready:
+            return rgb_np
+        try:
+            bgr = cv2.cvtColor(rgb_np, cv2.COLOR_RGB2BGR)
+            hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
+            mask_g = cv2.inRange(hsv, self._green_low, self._green_high)
+            mask_r = cv2.inRange(hsv, self._red1_low, self._red1_high) | cv2.inRange(hsv, self._red2_low, self._red2_high)
+            overlay = np.zeros_like(bgr)
+            overlay[mask_g > 0] = (0, 255, 0)
+            overlay[mask_r > 0] = (0, 0, 255)
+            return cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB)
+        except Exception:
+            return rgb_np
+
     def _on_joy(self, msg):
         up = down = False
         if self._hat_axis_v is not None and self._hat_axis_v >= 0:
@@ -408,6 +452,13 @@ class GuiRosNode(Node):
             try: down = down or (msg.buttons[self._btn_down] > 0)
             except Exception: pass
 
+        cycle_pressed = False
+        if self._btn_cycle >= 0:
+            try:
+                cycle_pressed = bool(msg.buttons[self._btn_cycle] > 0)
+            except Exception:
+                cycle_pressed = False
+
         # Teleop enable (RB)
         try:
             self._teleop_enabled = bool(msg.buttons[self._teleop_btn] > 0)
@@ -419,6 +470,9 @@ class GuiRosNode(Node):
         if up and not self._prev_up:   self.signals.bump_speed.emit(+1)
         if down and not self._prev_down: self.signals.bump_speed.emit(-1)
         self._prev_up, self._prev_down = up, down
+        if cycle_pressed and not self._prev_cycle_btn:
+            self._cycle_camera_mode()
+        self._prev_cycle_btn = cycle_pressed
 
     # ---- Sim heartbeat ----
     def _on_clock(self, _msg: Clock):
@@ -441,17 +495,55 @@ class GuiRosNode(Node):
     def _on_pose(self, msg: PoseWithCovarianceStamped):
         p = msg.pose.pose.position
         self._robot_pose = (p.x, p.y, _yaw_from_q(msg.pose.pose.orientation))
+        self._emit_tree_table()
 
     def _on_markers(self, msg: MarkerArray):
-        for m in msg.markers:
-            mid = f"{m.ns}:{m.id}" if m.ns else str(m.id)
-            x, y = m.pose.position.x, m.pose.position.y
-            c = getattr(m, "color", None)
-            if c is not None:
-                bgr = (int(c.b*255), int(c.g*255), int(c.r*255))
-            else:
-                bgr = (0,255,0)
-            self._trees[str(mid)] = {"x": float(x), "y": float(y), "bgr": bgr}
+        changed = False
+        now_ns = self.get_clock().now().nanoseconds
+        with self._tree_lock:
+            for m in msg.markers:
+                if m.action == Marker.DELETEALL:
+                    self._tree_states.clear()
+                    changed = True
+                    continue
+                if m.action == Marker.DELETE:
+                    # keyed by rounded position; without metadata we skip delete
+                    continue
+                x, y, z = float(m.pose.position.x), float(m.pose.position.y), float(m.pose.position.z)
+                key = (round(x, 2), round(y, 2))
+                entry = self._tree_states.get(key, {
+                    "x": x, "y": y, "z": z,
+                    "status": "unknown",
+                    "source": "",
+                    "alpha": 1.0,
+                    "updated_ns": now_ns,
+                })
+                entry["x"] = x; entry["y"] = y; entry["z"] = z
+                entry["alpha"] = float(getattr(m.color, "a", 1.0))
+                entry["updated_ns"] = now_ns
+                if getattr(m, "color", None) is not None:
+                    entry["bgr"] = (
+                        int(m.color.b * 255),
+                        int(m.color.g * 255),
+                        int(m.color.r * 255),
+                    )
+                    if m.ns == 'trees_coloured':
+                        entry["source"] = "coloured"
+                        if entry["bgr"][2] > entry["bgr"][1]:
+                            entry["status"] = "bad"
+                        elif entry["bgr"][1] > entry["bgr"][2]:
+                            entry["status"] = "good"
+                        else:
+                            entry["status"] = "unknown"
+                    elif entry.get("source") != "coloured":
+                        entry["source"] = m.ns or "raw"
+                        entry["status"] = "unknown"
+                else:
+                    entry["bgr"] = (64, 224, 64)
+                self._tree_states[key] = entry
+                changed = True
+        if changed:
+            self._emit_tree_table()
 
     def _grid_to_bgr(self, grid: OccupancyGrid):
         if np is None: return None
@@ -483,23 +575,51 @@ class GuiRosNode(Node):
         h, w = bgr.shape[:2]
 
         if cv2 is not None:
-            for tid, t in self._trees.items():
+            with self._tree_lock:
+                tree_items = list(self._tree_states.values())
+            for idx, t in enumerate(tree_items):
                 try:
                     cx, cy = self._world_to_px(t["x"], t["y"], h)
-                    cv2.circle(bgr, (cx, cy), 4, t["bgr"], -1)
-                    cv2.putText(bgr, str(tid), (cx+6, cy-6), cv2.FONT_HERSHEY_SIMPLEX, 0.35, t["bgr"], 1, cv2.LINE_AA)
+                    color = t.get("bgr", (64, 224, 64))
+                    cv2.circle(bgr, (cx, cy), 5, color, -1)
+                    label = t.get("status", "unknown")
+                    cv2.putText(bgr, label[:3].upper(), (cx+6, cy-4), cv2.FONT_HERSHEY_SIMPLEX, 0.35, color, 1, cv2.LINE_AA)
                 except Exception:
                     pass
             if self._robot_pose:
                 rx, ry, yaw = self._robot_pose
                 cx, cy = self._world_to_px(rx, ry, h)
-                cv2.circle(bgr, (cx, cy), 5, (0,0,255), -1)
-                tip = (int(cx + 15*math.cos(yaw)), int(cy - 15*math.sin(yaw)))
-                cv2.arrowedLine(bgr, (cx, cy), tip, (0,0,255), 2, tipLength=0.3)
+                cv2.circle(bgr, (cx, cy), 7, (0, 0, 255), -1)
+                tip = (int(cx + 18*math.cos(yaw)), int(cy - 18*math.sin(yaw)))
+                cv2.arrowedLine(bgr, (cx, cy), tip, (0,0,255), 2, tipLength=0.35)
             rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
         else:
             rgb = bgr[:, :, ::-1]
         self.signals.map_image.emit(rgb)
+
+    def _emit_tree_table(self):
+        with self._tree_lock:
+            entries = list(self._tree_states.values())
+        rp = self._robot_pose
+        rows = []
+        for entry in entries:
+            dist = float('nan')
+            if rp is not None:
+                dist = math.hypot(entry["x"] - rp[0], entry["y"] - rp[1])
+            uncertainty = 1.0
+            if math.isfinite(dist) and self._confirm_range_hint > 0.0:
+                uncertainty = max(0.0, min(1.0, dist / self._confirm_range_hint))
+            rows.append({
+                "x": entry["x"],
+                "y": entry["y"],
+                "z": entry.get("z", 0.0),
+                "status": entry.get("status", "unknown"),
+                "uncertainty": uncertainty,
+                "distance": dist,
+            })
+        rows.sort(key=lambda r: (0 if r["status"] == "bad" else 1,
+                                 r["distance"] if math.isfinite(r["distance"]) else float('inf')))
+        self.signals.tree_table.emit(rows)
 
     # ------------------- helpers ----------------------
     def _image_to_rgb_numpy(self, msg: RosImage):
@@ -590,6 +710,7 @@ class ControlGUI(QWidget):
         right_top_pane = self.rounded_pane(self.map_lbl, pad=10)
 
         # D-Pad — square
+        self.dpad_stack = QStackedLayout()   # <-- create it
         dpad_core = QWidget(); g = QGridLayout(dpad_core)
         g.setSpacing(6); g.setContentsMargins(0, 0, 0, 0)
         def btn(t): b = QPushButton(t); b.setFixedSize(48, 36); return b
@@ -600,13 +721,43 @@ class ControlGUI(QWidget):
         dpad = self.rounded_pane(dpad_square, pad=10)
         dpad.setMinimumWidth(240)
 
+        self.tree_table = QTableWidget(0, 6)
+        self.tree_table.setHorizontalHeaderLabels(["X", "Y", "Z", "Status", "Uncertainty", "Distance"])
+        header = self.tree_table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(5, QHeaderView.Stretch)
+        self.tree_table.verticalHeader().setVisible(False)
+        self.tree_table.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.tree_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.tree_table.setFocusPolicy(Qt.NoFocus)
+        self.tree_table.setAlternatingRowColors(True)
+        tree_table_pane = self.rounded_pane(self.tree_table, pad=8)
+
+        # self.dpad_stack = QStackedLayout()
+        self.dpad_stack.addWidget(dpad)
+        self.dpad_stack.addWidget(tree_table_pane)
+        self.dpad_stack.setCurrentIndex(0)
+        dpad_holder = QWidget(); dpad_holder.setLayout(self.dpad_stack)
+
+        self.toggle_tree_btn = QPushButton("Show Tree Table")
+        self.toggle_tree_btn.setCheckable(True)
+        self.toggle_tree_btn.toggled.connect(self._toggle_tree_table)
+
+        dpad_column = QVBoxLayout()
+        dpad_column.addWidget(self.toggle_tree_btn, 0, Qt.AlignTop)
+        dpad_column.addWidget(dpad_holder, 1)
+
         # Log Panel
         self.log = QTextEdit(); self.log.setReadOnly(True); self.log.setPlaceholderText("Log")
         logpane = self.rounded_pane(self.log, pad=8); logpane.setMinimumSize(300, 160)
 
         # Left bottom row: D-pad (square) + Log
         left_bottom = QHBoxLayout()
-        left_bottom.addWidget(dpad, 0)
+        left_bottom.addLayout(dpad_column, 0)
         left_bottom.addWidget(logpane, 1)
 
         left_col = QVBoxLayout()
@@ -624,7 +775,7 @@ class ControlGUI(QWidget):
 
         self.speed = QSlider(Qt.Vertical); self.speed.setRange(0, 20); self.speed.setTickInterval(5)
         self.speed.setTickPosition(QSlider.TicksRight)
-        self.speed.setFixedWidth(46)
+        self.speed.setFixedWidth(26)
         tick_col = QVBoxLayout()
         for i, v in enumerate([20, 15, 10, 5, 0]):
             lab = QLabel(str(v)); lab.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
@@ -754,6 +905,7 @@ class ControlGUI(QWidget):
         self.ros.signals.ok.connect(lambda ok, msg: self._append_log(("OK " if ok else "ERR ") + msg))
         self.ros.signals.bump_speed.connect(self._bump_speed)
         self.ros.signals.tree_counts.connect(self._update_tree_counts)
+        self.ros.signals.tree_table.connect(self._update_tree_table)
         self.ros.signals.pc_points.connect(self._update_pc_points)
         self.ros.signals.teleop_led.connect(self._set_teleop_led)
         self.send_cmd = self.ros.send_cmd
@@ -898,6 +1050,42 @@ class ControlGUI(QWidget):
         self.tree_total, self.tree_bad = total, bad
         self.tree_lbl.setText(f"Trees: {total}  (bad {bad})")
 
+    def _update_tree_table(self, rows: List[Dict[str, object]]):
+        if not hasattr(self, "tree_table"):
+            return
+        self.tree_table.setRowCount(len(rows))
+        for r, row in enumerate(rows):
+            self._set_tree_cell(r, 0, f"{row['x']:.2f}")
+            self._set_tree_cell(r, 1, f"{row['y']:.2f}")
+            self._set_tree_cell(r, 2, f"{row['z']:.2f}")
+            status = row.get("status", "unknown")
+            color = None
+            if status == "bad":
+                color = QColor("#ff6666")
+            elif status == "good":
+                color = QColor("#66ff66")
+            self._set_tree_cell(r, 3, status.capitalize(), color)
+            uncertainty = row.get("uncertainty", 1.0)
+            self._set_tree_cell(r, 4, f"{uncertainty:.2f}")
+            dist = row.get("distance", float("nan"))
+            self._set_tree_cell(r, 5, f"{dist:.2f}" if math.isfinite(dist) else "--")
+        self.tree_table.resizeRowsToContents()
+
+    def _set_tree_cell(self, row: int, col: int, text: str, color: Optional[QColor] = None):
+        item = QTableWidgetItem(text)
+        item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
+        if color is not None:
+            item.setForeground(color)
+        self.tree_table.setItem(row, col, item)
+
+    def _toggle_tree_table(self, checked: bool):
+        if checked:
+            self.toggle_tree_btn.setText("Show D-pad")
+            self.dpad_stack.setCurrentIndex(1)
+        else:
+            self.toggle_tree_btn.setText("Show Tree Table")
+            self.dpad_stack.setCurrentIndex(0)
+
     def _append_log(self, text: str):
         if not self._quitting:
             self.log.append(text)
@@ -958,6 +1146,8 @@ class ControlGUI(QWidget):
             try: self.ros.signals.bump_speed.disconnect(self._bump_speed)
             except Exception: pass
             try: self.ros.signals.tree_counts.disconnect(self._update_tree_counts)
+            except Exception: pass
+            try: self.ros.signals.tree_table.disconnect(self._update_tree_table)
             except Exception: pass
             try: self.ros.signals.pc_points.disconnect(self._update_pc_points)
             except Exception: pass
