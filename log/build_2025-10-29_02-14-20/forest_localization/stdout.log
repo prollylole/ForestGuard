@@ -1,0 +1,20 @@
+[100%] Built target forest_localization
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/lib/forest_localization/forest_localization
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/include/forest_localization/amcl_localization.h
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/ament_index/resource_index/package_run_dependencies/forest_localization
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/ament_index/resource_index/parent_prefix_path/forest_localization
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/environment/path.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/environment/path.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/local_setup.bash
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/local_setup.sh
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/local_setup.zsh
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/local_setup.dsv
+-- Symlinking: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.dsv
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/ament_index/resource_index/packages/forest_localization
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig.cmake
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/cmake/forest_localizationConfig-version.cmake
+-- Up-to-date symlink: /home/claudia/ForestGuard/install/forest_localization/share/forest_localization/package.xml

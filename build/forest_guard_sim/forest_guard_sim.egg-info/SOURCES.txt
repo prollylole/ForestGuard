@@ -17,6 +17,7 @@ forest_guard_sim.egg-info/zip-safe
 launch/41068_ignition.launch.py
 launch/autonomous_forest.launch.py
 launch/forest_mapping.launch.py
+launch/forest_perception.launch.py
 launch/forest_random.launch.py
 launch/forest_world.launch.py
 launch/large_forest_husky.launch.py

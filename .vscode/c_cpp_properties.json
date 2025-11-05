@@ -6,6 +6,8 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
+        "/home/claudia/ForestGuard/install/forest_localization/include/**",
+        "/home/claudia/ForestGuard/install/forest_controller/include/**",
         "/opt/ros/humble/include/**",
         "/home/claudia/ForestGuard/src/forest_controller/include/**",
         "/home/claudia/ForestGuard/src/forest_localization/include/**",
