@@ -1,0 +1,15 @@
+package.xml
+setup.cfg
+setup.py
+forestguard_ui/__init__.py
+forestguard_ui/app.py
+forestguard_ui/controller_bridge.py
+forestguard_ui/twist_scaler.py
+forestguard_ui.egg-info/PKG-INFO
+forestguard_ui.egg-info/SOURCES.txt
+forestguard_ui.egg-info/dependency_links.txt
+forestguard_ui.egg-info/entry_points.txt
+forestguard_ui.egg-info/requires.txt
+forestguard_ui.egg-info/top_level.txt
+forestguard_ui.egg-info/zip-safe
+resource/forestguard_ui

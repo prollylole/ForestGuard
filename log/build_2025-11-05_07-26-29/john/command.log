@@ -1,0 +1,4 @@
+Invoking command in '/home/student/git/nathan_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/student/git/nathan_branch/build/john -- -j8 -l8
+Invoked command in '/home/student/git/nathan_branch/build/john' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/student/git/nathan_branch/build/john -- -j8 -l8
+Invoking command in '/home/student/git/nathan_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/student/git/nathan_branch/build/john
+Invoked command in '/home/student/git/nathan_branch/build/john' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/student/git/nathan_branch/build/john

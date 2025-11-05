@@ -1,0 +1,1 @@
+/home/student/git/nathan_branch/build/john/ament_cmake_environment_hooks/local_setup.zsh

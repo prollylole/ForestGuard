@@ -1,0 +1,1 @@
+/home/student/git/nathan_branch/src/forestguard_controller/include/forestguard_controller/controller_husky.h

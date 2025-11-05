@@ -1,0 +1,4 @@
+source;share/forestguard_controller/local_setup.bash
+source;share/forestguard_controller/local_setup.dsv
+source;share/forestguard_controller/local_setup.sh
+source;share/forestguard_controller/local_setup.zsh
