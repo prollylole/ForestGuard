@@ -23,6 +23,7 @@ class ControllerBridge(Node):
         self.fallback_cameras = [
             '/camera/image',
             self.hsv_topic,
+            '/camera/depth/image',
             '/camera/front/image_raw',
             '/camera/left/image_raw',
             '/camera/back/image_raw',

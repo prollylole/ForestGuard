@@ -97,6 +97,7 @@ from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from rclpy.logging import LoggingSeverity
+from rclpy.time import Time
 from geometry_msgs.msg import Twist, PoseWithCovarianceStamped
 from sensor_msgs.msg import Image as RosImage
 from sensor_msgs.msg import CompressedImage as RosCompressedImage
@@ -108,6 +109,7 @@ from std_msgs.msg import Int32, UInt32
 from nav_msgs.msg import OccupancyGrid
 from visualization_msgs.msg import Marker, MarkerArray
 from rosgraph_msgs.msg import Clock
+from tf2_ros import Buffer, TransformListener
 
 # ========================= tiny widgets ===============================
 class LedIndicator(QLabel):
@@ -289,6 +291,10 @@ class GuiRosNode(Node):
         self._tree_lock = Lock()
         self._tree_states: Dict[Tuple[float, float], Dict[str, object]] = {}
         self._confirm_range_hint = float(os.environ.get("UI_CONFIRM_RANGE", "8.0"))
+        self._map_frame_name = os.environ.get("UI_TREE_MAP_FRAME", "map")
+        self._base_frame_name = os.environ.get("UI_TREE_BASE_FRAME", "base_link")
+        self._tf_buffer = Buffer()
+        self._tf_listener = TransformListener(self._tf_buffer, self)
 
         self.create_subscription(OccupancyGrid, MAP_TOPIC, self._on_map, 1)
         self.create_subscription(PoseWithCovarianceStamped, ROBOT_POSE_TOPIC, self._on_pose, 10)
@@ -671,6 +677,22 @@ class GuiRosNode(Node):
         with self._tree_lock:
             entries = list(self._tree_states.items())
         rp = self._robot_pose
+        if rp is None and self._tf_buffer is not None:
+            try:
+                tf = self._tf_buffer.lookup_transform(
+                    self._map_frame_name,
+                    self._base_frame_name,
+                    Time())
+                tx = tf.transform.translation
+                q = tf.transform.rotation
+                yaw = math.atan2(
+                    2.0 * (q.w * q.z + q.x * q.y),
+                    1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+                )
+                rp = (tx.x, tx.y, yaw)
+                self._robot_pose = rp
+            except Exception:
+                rp = None
         rows = []
         for key, entry in entries:
             dist = float('nan')
@@ -1280,6 +1302,9 @@ class ControlGUI(QWidget):
                 self.cmd_timer.stop()
                 try: self.cmd_timer.timeout.disconnect(self._publish_cmd)
                 except Exception: pass
+            if hasattr(self, "_cpu_timer"):
+                try: self._cpu_timer.stop()
+                except Exception: pass
 
             try: self._stop_launch()
             except Exception: pass
@@ -1301,6 +1326,8 @@ class ControlGUI(QWidget):
             try: self.ros.signals.tree_counts.disconnect(self._update_tree_counts)
             except Exception: pass
             try: self.ros.signals.tree_table.disconnect(self._update_tree_table)
+            except Exception: pass
+            try: self.ros.signals.camera_mode.disconnect(self._reflect_camera_mode)
             except Exception: pass
             try: self.ros.signals.pc_points.disconnect(self._update_pc_points)
             except Exception: pass
