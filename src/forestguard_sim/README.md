@@ -1,6 +1,6 @@
-# John
+# forestguard_sim
 
-  Bringup for *John*. Launches a Husky robot in a custom simulation world with trees and grass. We use **ROS2 Humble** and **Ignition Gazebo Fortress**.
+  Bringup for *forestguard_sim*. Launches a Husky robot in a custom simulation world with trees and grass. We use **ROS2 Humble** and **Ignition Gazebo Fortress**.
 
 * Do this
   ```bash
@@ -16,7 +16,7 @@
 
 * Then do this
   ```bash
-  ros2 launch john john.launch.py slam:=true nav2:=true rviz:=true world:=large_demo
+  ros2 launch forestguard_sim forestguard_sim.launch.py slam:=true nav2:=true rviz:=true world:=large_demo
   ```
 * When launching with rviz, you can send a waypoint to the robot by clicking the "2D Goal pose" and then a location in the map. The robot is navigating using the nav2 package. If it gets stuck, you can try the buttons in the Navigation 2 panel in the top right of RVIZ.
 

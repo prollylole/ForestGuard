@@ -29,7 +29,7 @@ def _resolve_spawn_arg(context, name, lo, hi):
 # Setup: start Gazebo with existing world, spawn robot
 # ------------------------
 def _setup(context, *args, **kwargs):
-    pkg_path = get_package_share_directory('john')
+    pkg_path = get_package_share_directory('forestguard_sim')
     world_path = os.path.join(pkg_path, 'worlds', 'forest_trees.sdf')
 
     # Spawn pose (keep your behavior: fixed values or RANDOM)
@@ -65,7 +65,7 @@ def _setup(context, *args, **kwargs):
 # Main launch description
 # ------------------------
 def generate_launch_description():
-    pkg_path = get_package_share_directory('john')
+    pkg_path = get_package_share_directory('forestguard_sim')
     resource_path = os.pathsep.join([
         os.path.join(pkg_path, 'models'),
         os.path.join(pkg_path, 'worlds'),
