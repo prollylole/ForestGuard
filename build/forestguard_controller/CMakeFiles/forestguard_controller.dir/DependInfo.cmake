@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_controller/src/controller_husky.cpp" "CMakeFiles/forestguard_controller.dir/src/controller_husky.cpp.o" "gcc" "CMakeFiles/forestguard_controller.dir/src/controller_husky.cpp.o.d"
-  "/home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_controller/src/main_husky.cpp" "CMakeFiles/forestguard_controller.dir/src/main_husky.cpp.o" "gcc" "CMakeFiles/forestguard_controller.dir/src/main_husky.cpp.o.d"
+  "/home/john/git/RS1/john_branch/src/forestguard_controller/src/controller_husky.cpp" "CMakeFiles/forestguard_controller.dir/src/controller_husky.cpp.o" "gcc" "CMakeFiles/forestguard_controller.dir/src/controller_husky.cpp.o.d"
+  "/home/john/git/RS1/john_branch/src/forestguard_controller/src/main_husky.cpp" "CMakeFiles/forestguard_controller.dir/src/main_husky.cpp.o" "gcc" "CMakeFiles/forestguard_controller.dir/src/main_husky.cpp.o.d"
   )
 
 # Targets to which this target links.

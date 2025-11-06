@@ -1,13 +1,12 @@
-Metadata-Version: 2.4
-Name: forestguard_ui
+Metadata-Version: 2.1
+Name: forestguard-ui
 Version: 0.0.0
 Summary: TODO: Package description
+Home-page: UNKNOWN
 Maintainer: yut
 Maintainer-email: yuto.j.boittiaux@student.uts.edu.au
 License: TODO: License declaration
-Requires-Dist: setuptools
-Dynamic: license
-Dynamic: maintainer
-Dynamic: maintainer-email
-Dynamic: requires-dist
-Dynamic: summary
+Platform: UNKNOWN
+
+UNKNOWN
+

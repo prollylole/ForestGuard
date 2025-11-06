@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/john/git/RS1/john_branch/build/forestguard_localisation/forestguard_localisation" "TARGETS" "forestguard_localisation" "DESTINATION" "lib/forestguard_localisation")

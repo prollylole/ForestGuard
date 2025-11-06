@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_localisation
+CMAKE_SOURCE_DIR = /home/john/git/RS1/john_branch/src/forestguard_localisation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation
+CMAKE_BINARY_DIR = /home/john/git/RS1/john_branch/build/forestguard_localisation
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,9 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation/CMakeFiles /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/git/RS1/john_branch/build/forestguard_localisation/CMakeFiles /home/john/git/RS1/john_branch/build/forestguard_localisation//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/git/RS1/john_branch/build/forestguard_localisation/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

@@ -1,13 +1,12 @@
-Metadata-Version: 2.4
-Name: forestguard_colour
+Metadata-Version: 2.1
+Name: forestguard-colour
 Version: 0.0.1
 Summary: Colour-based perception for ForestGuard
+Home-page: UNKNOWN
 Maintainer: john
 Maintainer-email: john@example.com
 License: Apache-2.0
-Requires-Dist: setuptools
-Dynamic: license
-Dynamic: maintainer
-Dynamic: maintainer-email
-Dynamic: requires-dist
-Dynamic: summary
+Platform: UNKNOWN
+
+UNKNOWN
+

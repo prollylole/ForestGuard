@@ -1,2 +1,1 @@
-source;share/forestguard_controller/environment/ament_prefix_path.sh
-source;share/forestguard_controller/environment/path.sh
+/home/john/git/RS1/john_branch/build/forestguard_controller/ament_cmake_environment_hooks/local_setup.dsv
