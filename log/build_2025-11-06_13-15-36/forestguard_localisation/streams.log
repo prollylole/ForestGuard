@@ -1,0 +1,25 @@
+[0.196s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation -- -j12 -l12
+[0.383s] [100%] Built target forestguard_localisation
+[0.383s] Invoked command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation -- -j12 -l12
+[0.392s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation
+[0.399s] -- Install configuration: ""
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/lib/forestguard_localisation/forestguard_localisation
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/include
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/include/forestguard_localisation
+[0.400s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/include/forestguard_localisation/amcl_localisation.h
+[0.400s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/ament_index/resource_index/package_run_dependencies/forestguard_localisation
+[0.400s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/ament_index/resource_index/parent_prefix_path/forestguard_localisation
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/ament_prefix_path.sh
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/ament_prefix_path.dsv
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/path.sh
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/environment/path.dsv
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.bash
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.sh
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.zsh
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/local_setup.dsv
+[0.401s] -- Installing: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.dsv
+[0.401s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/ament_index/resource_index/packages/forestguard_localisation
+[0.402s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/cmake/forestguard_localisationConfig.cmake
+[0.402s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/cmake/forestguard_localisationConfig-version.cmake
+[0.402s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_localisation/share/forestguard_localisation/package.xml
+[0.404s] Invoked command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_localisation

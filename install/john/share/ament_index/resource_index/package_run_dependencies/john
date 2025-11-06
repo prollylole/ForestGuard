@@ -1,1 +1,1 @@
-/home/john/git/RS1/john_branch/build/john/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/john
+ros_ign_interfaces;ros_ign_gazebo;ros_ign_bridge;robot_localization;ament_lint_auto;ament_lint_common

@@ -1,0 +1,56 @@
+[1.285s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_colour': PYTHONPATH=/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/forestguard_colour build --build-base /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build install --record /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/install.log --single-version-externally-managed install_data
+[1.672s] running egg_info
+[1.702s] creating ../../build/forestguard_colour/forestguard_colour.egg-info
+[1.702s] writing ../../build/forestguard_colour/forestguard_colour.egg-info/PKG-INFO
+[1.703s] writing dependency_links to ../../build/forestguard_colour/forestguard_colour.egg-info/dependency_links.txt
+[1.703s] writing entry points to ../../build/forestguard_colour/forestguard_colour.egg-info/entry_points.txt
+[1.703s] writing requirements to ../../build/forestguard_colour/forestguard_colour.egg-info/requires.txt
+[1.703s] writing top-level names to ../../build/forestguard_colour/forestguard_colour.egg-info/top_level.txt
+[1.704s] writing manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+[1.772s] reading manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+[1.775s] writing manifest file '../../build/forestguard_colour/forestguard_colour.egg-info/SOURCES.txt'
+[1.775s] running build
+[1.775s] running build_py
+[1.776s] creating /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.776s] copying forestguard_colour/lidar_tree_mapper.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.776s] copying forestguard_colour/tree_detector_node.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.777s] copying forestguard_colour/tree_detector_v2.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.777s] copying forestguard_colour/hsv_calibrator.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.778s] copying forestguard_colour/camera_tree_mapper.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.778s] copying forestguard_colour/tree_colour_confirmer.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.778s] copying forestguard_colour/__init__.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour
+[1.778s] running install
+[1.785s] running install_lib
+[1.821s] creating /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.821s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour/lidar_tree_mapper.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.821s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour/tree_detector_node.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.821s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour/tree_detector_v2.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.821s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour/hsv_calibrator.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.821s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour/camera_tree_mapper.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.822s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour/tree_colour_confirmer.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.822s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build/lib/forestguard_colour/__init__.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour
+[1.822s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/lidar_tree_mapper.py to lidar_tree_mapper.cpython-310.pyc
+[1.826s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/tree_detector_node.py to tree_detector_node.cpython-310.pyc
+[1.829s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/tree_detector_v2.py to tree_detector_v2.cpython-310.pyc
+[1.831s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/hsv_calibrator.py to hsv_calibrator.cpython-310.pyc
+[1.833s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/camera_tree_mapper.py to camera_tree_mapper.cpython-310.pyc
+[1.836s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/tree_colour_confirmer.py to tree_colour_confirmer.cpython-310.pyc
+[1.844s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour/__init__.py to __init__.cpython-310.pyc
+[1.844s] running install_data
+[1.844s] creating /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/share/ament_index/resource_index/packages
+[1.844s] copying resource/forestguard_colour -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/share/ament_index/resource_index/packages
+[1.844s] copying package.xml -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/share/forestguard_colour
+[1.844s] creating /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/share/forestguard_colour/launch
+[1.845s] copying launch/tree_mapper.launch.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/share/forestguard_colour/launch
+[1.845s] copying launch/colour_detector.launch.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/share/forestguard_colour/launch
+[1.846s] running install_egg_info
+[1.879s] Copying ../../build/forestguard_colour/forestguard_colour.egg-info to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard_colour-0.0.1-py3.10.egg-info
+[1.881s] running install_scripts
+[1.936s] Installing camera_tree_mapper script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/forestguard_colour
+[1.936s] Installing hsv_calibrator script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/forestguard_colour
+[1.936s] Installing lidar_tree_mapper script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/forestguard_colour
+[1.936s] Installing tree_colour_confirmer script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/forestguard_colour
+[1.936s] Installing tree_detector script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/forestguard_colour
+[1.937s] Installing tree_detector_v2 script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/forestguard_colour
+[1.937s] writing list of installed files to '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/install.log'
+[2.018s] Invoked command in '/home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_colour' returned '0': PYTHONPATH=/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/forestguard_colour build --build-base /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/build install --record /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_colour/install.log --single-version-externally-managed install_data

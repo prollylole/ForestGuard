@@ -1,1 +1,7 @@
-/home/john/git/RS1/john_branch/src/forestguard_sim/maps/forest_map.yaml
+image: forest_map.pgm
+mode: trinary
+resolution: 0.05
+origin: [-22.5, -21.8, 0.0]
+occupied_thresh: 0.65
+free_thresh: 0.25
+negate: 0

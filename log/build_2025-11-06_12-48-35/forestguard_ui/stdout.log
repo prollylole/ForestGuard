@@ -1,0 +1,39 @@
+running egg_info
+creating ../../build/forestguard_ui/forestguard_ui.egg-info
+writing ../../build/forestguard_ui/forestguard_ui.egg-info/PKG-INFO
+writing dependency_links to ../../build/forestguard_ui/forestguard_ui.egg-info/dependency_links.txt
+writing entry points to ../../build/forestguard_ui/forestguard_ui.egg-info/entry_points.txt
+writing requirements to ../../build/forestguard_ui/forestguard_ui.egg-info/requires.txt
+writing top-level names to ../../build/forestguard_ui/forestguard_ui.egg-info/top_level.txt
+writing manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+reading manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+writing manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+copying forestguard_ui/twist_scaler.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+copying forestguard_ui/controller_bridge.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+copying forestguard_ui/app.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+copying forestguard_ui/__init__.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+running install
+running install_lib
+creating /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/twist_scaler.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/controller_bridge.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/app.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/__init__.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/twist_scaler.py to twist_scaler.cpython-310.pyc
+byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/controller_bridge.py to controller_bridge.cpython-310.pyc
+byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/app.py to app.cpython-310.pyc
+byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/share/ament_index/resource_index/packages
+copying resource/forestguard_ui -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/share/ament_index/resource_index/packages
+copying package.xml -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/share/forestguard_ui
+running install_egg_info
+Copying ../../build/forestguard_ui/forestguard_ui.egg-info to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui-0.0.0-py3.10.egg-info
+running install_scripts
+Installing controller_bridge script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/forestguard_ui
+Installing run_ui script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/forestguard_ui
+Installing twist_scaler script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/forestguard_ui
+writing list of installed files to '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/install.log'

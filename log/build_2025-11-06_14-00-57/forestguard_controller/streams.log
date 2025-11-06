@@ -1,0 +1,25 @@
+[0.192s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller -- -j12 -l12
+[0.380s] [100%] Built target forestguard_controller
+[0.384s] Invoked command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --build /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller -- -j12 -l12
+[0.391s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller
+[0.397s] -- Install configuration: ""
+[0.397s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/lib/forestguard_controller/forestguard_controller
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/include
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/include/forestguard_controller
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/include/forestguard_controller/controller_husky.h
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/ament_index/resource_index/package_run_dependencies/forestguard_controller
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/ament_index/resource_index/parent_prefix_path/forestguard_controller
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.sh
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/environment/ament_prefix_path.dsv
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.sh
+[0.398s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/environment/path.dsv
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.bash
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.sh
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.zsh
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/local_setup.dsv
+[0.399s] -- Installing: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/package.dsv
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/ament_index/resource_index/packages/forestguard_controller
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig.cmake
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/cmake/forestguard_controllerConfig-version.cmake
+[0.399s] -- Up-to-date: /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_controller/share/forestguard_controller/package.xml
+[0.402s] Invoked command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_colour:/opt/ros/humble /usr/bin/cmake --install /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_controller
