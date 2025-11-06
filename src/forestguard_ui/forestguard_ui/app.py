@@ -718,6 +718,12 @@ class ControlGUI(QWidget):
         self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
         self._teleop_enabled = False
         self._sim_alive = False
+        self._forward_pressed = False
+        self._back_pressed = False
+        self._left_pressed = False
+        self._right_pressed = False
+        self._ui_drive_active = False
+        self._last_gui_command_active = False
 
         # QProcess for launch/build
         self._proc_launch = QProcess(self)
@@ -986,13 +992,32 @@ class ControlGUI(QWidget):
     def _set_motion(self, forward=None, back=None, left=None, right=None):
         s = self._current_scale()
         if forward is not None:
-            self._lin = (MAX_LINEAR_MPS * s) if forward else 0.0 if not back else self._lin
+            self._forward_pressed = bool(forward)
         if back is not None:
-            self._lin = (-MAX_LINEAR_MPS * s) if back else 0.0 if not forward else self._lin
+            self._back_pressed = bool(back)
         if left is not None:
-            self._ang = (MAX_ANGULAR_RPS * s) if left else 0.0 if not right else self._ang
+            self._left_pressed = bool(left)
         if right is not None:
-            self._ang = (-MAX_ANGULAR_RPS * s) if right else 0.0 if not left else self._ang
+            self._right_pressed = bool(right)
+
+        lin = 0.0
+        ang = 0.0
+        if self._forward_pressed and not self._back_pressed:
+            lin = MAX_LINEAR_MPS * s
+        elif self._back_pressed and not self._forward_pressed:
+            lin = -MAX_LINEAR_MPS * s
+
+        if self._left_pressed and not self._right_pressed:
+            ang = MAX_ANGULAR_RPS * s
+        elif self._right_pressed and not self._left_pressed:
+            ang = -MAX_ANGULAR_RPS * s
+
+        self._lin = lin
+        self._ang = ang
+        self._ui_drive_active = (
+            self._forward_pressed or self._back_pressed or
+            self._left_pressed or self._right_pressed
+        )
         self._update_teleop_led_color()
 
     def _bump_speed(self, delta_steps: int):
@@ -1013,13 +1038,21 @@ class ControlGUI(QWidget):
         if not hasattr(self, "ros") or not self.ros.ready(): return
         if self._estopped:
             self.send_cmd(0.0, 0.0)
+            self._last_gui_command_active = False
             return
-        if REQUIRE_TELEOP_BTN and not self._teleop_enabled:
-            return
-        self.send_cmd(self._lin, self._ang)
+        if self._ui_drive_active:
+            self.send_cmd(self._lin, self._ang)
+            self._last_gui_command_active = True
+        elif self._last_gui_command_active:
+            self.send_cmd(0.0, 0.0)
+            self._last_gui_command_active = False
 
     def _on_estop(self):
         self._lin = 0.0; self._ang = 0.0; self._estopped = True
+        self._forward_pressed = self._back_pressed = False
+        self._left_pressed = self._right_pressed = False
+        self._ui_drive_active = False
+        self._last_gui_command_active = False
         self._append_log(">>> EMERGENCY STOP PRESSED! <<<")
         QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))
         self._update_teleop_led_color()
