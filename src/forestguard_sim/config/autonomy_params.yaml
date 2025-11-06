@@ -10,3 +10,4 @@ autonomy_behaviour:
     min_separation_m: 2.0
     furthest_bias: true
     joy_rb_index: 5
+    auto_start: false

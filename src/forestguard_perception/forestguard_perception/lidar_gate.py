@@ -11,7 +11,6 @@ class LidarGate(Node):
     def __init__(self):
         super().__init__("lidar_gate")
         self.declare_parameter("room_radius_m", 0.0)
-        self.declare_parameter("room_radius_m", 0.0)
         self.declare_parameter("room_polygon_xy", "[]")
         self.room_r = float(self.get_parameter("room_radius_m").value)
         poly_str = str(self.get_parameter("room_polygon_xy").value or "[]")
