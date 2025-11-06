@@ -57,7 +57,7 @@ def _setup(context, *args, **kwargs):
 
 def generate_launch_description():
     pkg_path = get_package_share_directory('forestguard_sim')
-    colour_pkg_path = get_package_share_directory('forestguard_colour')
+    colour_pkg_path = get_package_share_directory('forestguard_perception')
     resource_path = os.pathsep.join([
         os.path.join(pkg_path, 'models'),
         os.path.join(pkg_path, 'worlds'),
@@ -131,9 +131,14 @@ def generate_launch_description():
         package='forestguard_ui', executable='twist_scaler', name='twist_scaler',
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
+    ld.add_action(Node(
+        package='forestguard_ui', executable='hsv_mask_node', name='hsv_mask_node',
+        parameters=[{'image_topic': '/camera/image', 'mask_topic': '/camera/image_hsv_mask'}],
+        condition=IfCondition(LaunchConfiguration('ui'))
+    ))
 
     ld.add_action(Node(
-        package='forestguard_colour',
+        package='forestguard_perception',
         executable='lidar_tree_mapper',
         name='lidar_tree_mapper',
         output='screen',
@@ -158,7 +163,7 @@ def generate_launch_description():
     ))
 
     ld.add_action(Node(
-        package='forestguard_colour',
+        package='forestguard_perception',
         executable='camera_tree_mapper',
         name='camera_tree_mapper',
         output='screen',
@@ -173,7 +178,7 @@ def generate_launch_description():
     ))
 
     ld.add_action(Node(
-        package='forestguard_colour',
+        package='forestguard_perception',
         executable='tree_colour_confirmer',
         name='tree_colour_confirmer',
         output='screen',

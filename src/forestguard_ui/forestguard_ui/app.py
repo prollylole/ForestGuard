@@ -17,6 +17,7 @@ from PySide6.QtWidgets import (
 
 # ---------- topics / env ----------
 CAMERA_TOPIC_DEFAULT = "/camera/image"
+CAMERA_HSV_TOPIC     = os.environ.get("UI_CAMERA_HSV_TOPIC", "/camera/image_hsv_mask")
 ROSOUT_TOPIC         = "/rosout"
 CAMERA_TOPIC_CTRL    = "/ui/camera_topic"
 CMD_VEL_TOPIC        = "/cmd_vel"
@@ -43,6 +44,8 @@ REQUIRE_TELEOP_BTN = os.environ.get("UI_REQUIRE_TELEOP_BTN", "1") == "1"
 # Sim heartbeat (uses /clock)
 SIM_HEARTBEAT_TOPIC = os.environ.get("UI_SIM_HEARTBEAT_TOPIC", "/clock")
 SIM_TIMEOUT_S = float(os.environ.get("UI_SIM_TIMEOUT_S", "1.0"))
+MAP_EMIT_PERIOD_S = float(os.environ.get("UI_MAP_EMIT_PERIOD", "0.4"))
+CPU_SAMPLE_PERIOD_S = float(os.environ.get("UI_CPU_SAMPLE_PERIOD", "1.0"))
 
 CMD_PUB_RATE_HZ = 20
 MAX_LINEAR_MPS  = 0.40
@@ -51,7 +54,7 @@ MAX_ANGULAR_RPS = 1.50
 # Launch control (Run Sim button)
 DEFAULT_LAUNCH_CMD = os.environ.get(
     "UI_LAUNCH_CMD",
-    "ros2 launch forestguard_sim JOHNAUTO.launch.py rviz:=false ui:=false teleop:=true amcl:=true slam:=false map:=true"
+    "ros2 launch forestguard_sim johnAUTO2.launch.py ui:=true teleop:=true amcl:=true slam:=false map:=true"
 )
 
 # Build control (Rebuild Code button)
@@ -61,7 +64,7 @@ DEFAULT_BUILD_PRE = os.environ.get("UI_BUILD_PRE", "source /opt/ros/humble/setup
 DEFAULT_BUILD_CMD = os.environ.get(
     "UI_BUILD_CMD",
     "colcon build --symlink-install "
-    "--packages-select forestguard_colour forestguard_controller "
+    "--packages-select forestguard_perception forestguard_controller "
     "forestguard_localisation forestguard_sim forestguard_ui"
 )
 
@@ -82,6 +85,11 @@ try:
 except Exception:
     CvBridge = None
     _CV_BRIDGE_OK = False
+
+try:
+    import psutil
+except Exception:
+    psutil = None
 
 # ---- ROS 2 imports
 import rclpy
@@ -171,6 +179,7 @@ class RosSignals(QObject):
     pc_points = Signal(int)
     tree_table = Signal(object)
     battery = Signal(float, float, bool)  # percent [0-100], voltage [V] (nan if unknown), charging
+    camera_mode = Signal(str)
 
 # ========================= ROS Node ================================
 class GuiRosNode(Node):
@@ -219,22 +228,17 @@ class GuiRosNode(Node):
 
         # camera state
         self._camera_sub = None
-        self._camera_topic_raw = CAMERA_TOPIC_DEFAULT
+        self._camera_topic_raw = CAMERA_TOPIC_DEFAULT.rstrip('/')
+        self._rgb_topic = self._camera_topic_raw
+        self._hsv_topic = CAMERA_HSV_TOPIC.rstrip('/')
+        self._camera_mode = 'rgb'
         self._latest_rgb = None
         self._img_lock = Lock()
         self._emit_timer = self.create_timer(1.0 / self._emit_hz, self._emit_image_tick)
         self._subscribe_camera(self._camera_topic_raw)
-        self._camera_mode = 'rgb'
         self._prev_cycle_btn = False
         self._btn_cycle = int(os.environ.get("UI_JOY_BTN_CAMERA", "3"))
-        self._hsv_ready = (np is not None and cv2 is not None)
-        if self._hsv_ready:
-            self._green_low = np.array([50,130,25], dtype=np.uint8)
-            self._green_high = np.array([70,255,255], dtype=np.uint8)
-            self._red1_low = np.array([0,155,75], dtype=np.uint8)
-            self._red1_high = np.array([34,255,255], dtype=np.uint8)
-            self._red2_low = np.array([170,160,77], dtype=np.uint8)
-            self._red2_high = np.array([179,255,255], dtype=np.uint8)
+        self.signals.camera_mode.emit(self._camera_mode)
 
         # point cloud quick stats (shown next to Teleop LED)
         try:
@@ -291,7 +295,7 @@ class GuiRosNode(Node):
         self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_A, self._on_markers, 10)
         if TREE_MARKERS_TOPIC_B != TREE_MARKERS_TOPIC_A:
             self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_B, self._on_markers, 10)
-        self._map_timer = self.create_timer(0.1, self._emit_map_image)
+        self._map_timer = self.create_timer(MAP_EMIT_PERIOD_S, self._emit_map_image)
 
         self.signals.ok.emit(True, "ROS node initialised")
         # store downsampled XY for map overlays if you want them later
@@ -396,16 +400,21 @@ class GuiRosNode(Node):
 
     def _on_camera_topic_switch(self, msg: RosString):
         topic = (msg.data or "").strip()
-        if not topic: return
-        if topic == self._camera_topic_raw or topic.rstrip('/') == self._camera_topic_raw.rstrip('/'):
+        if not topic:
             return
-        try:
-            self._subscribe_camera(topic)
-            self.signals.ok.emit(True, f"Switched camera to: {topic}")
-        except Exception as e:
-            self.signals.ok.emit(False, f"Failed to switch camera: {e}")
+        topic = topic.rstrip('/')
+        if topic == self._hsv_topic:
+            self.set_camera_mode('hsv')
+            return
+        if topic == self._camera_topic_raw and self._camera_mode == 'rgb':
+            return
+        self._rgb_topic = topic
+        self.set_camera_mode('rgb')
 
     def _subscribe_camera(self, topic_base: str):
+        topic_base = (topic_base or "").strip()
+        if not topic_base:
+            return
         if self._camera_sub is not None:
             try: self.destroy_subscription(self._camera_sub)
             except Exception: pass
@@ -413,6 +422,8 @@ class GuiRosNode(Node):
         if not self._prefer_compressed and topic_base.rstrip('/').endswith("/compressed"):
             topic_base = topic_base.rstrip('/')[:-len("/compressed")]
         self._camera_topic_raw = topic_base.rstrip('/')
+        if self._camera_topic_raw != self._hsv_topic:
+            self._rgb_topic = self._camera_topic_raw
         if self._prefer_compressed:
             comp_topic = self._camera_topic_raw + "/compressed" if not self._camera_topic_raw.endswith("/compressed") else self._camera_topic_raw
             try:
@@ -447,11 +458,7 @@ class GuiRosNode(Node):
                 rgb = self._latest_rgb
                 self._latest_rgb = None
         if rgb is not None:
-            if self._camera_mode == 'hsv' and self._hsv_ready:
-                view = self._make_hsv_view(rgb)
-            else:
-                view = rgb
-            self.signals.image.emit(view)
+            self.signals.image.emit(rgb)
 
     def _on_pc(self, msg: PointCloud2):
         try:
@@ -475,31 +482,32 @@ class GuiRosNode(Node):
             self.signals.pc_points.emit(int(self._pc_latest_count))
             self._pc_latest_count = 0
 
-    def _cycle_camera_mode(self):
-        if self._camera_mode == 'rgb' and self._hsv_ready:
-            self._camera_mode = 'hsv'
-            self.signals.ok.emit(True, "Camera view: HSV mask")
-        else:
-            self._camera_mode = 'rgb'
-            if not self._hsv_ready:
-                self.signals.ok.emit(False, "HSV view unavailable (missing OpenCV/Numpy)")
-            else:
-                self.signals.ok.emit(True, "Camera view: RGB")
+    def set_camera_mode(self, mode: str, notify: bool = True):
+        target_mode = 'hsv' if str(mode).lower() == 'hsv' else 'rgb'
+        target_topic = self._hsv_topic if target_mode == 'hsv' else self._rgb_topic
+        if not target_topic:
+            return
+        if target_topic != self._camera_topic_raw:
+            self._subscribe_camera(target_topic)
+        if target_mode != self._camera_mode:
+            self._camera_mode = target_mode
+            if notify:
+                self.signals.ok.emit(True, "Camera view: HSV mask" if target_mode == 'hsv' else "Camera view: Camera")
+        self.signals.camera_mode.emit(self._camera_mode)
 
-    def _make_hsv_view(self, rgb_np):
-        if not self._hsv_ready:
-            return rgb_np
-        try:
-            bgr = cv2.cvtColor(rgb_np, cv2.COLOR_RGB2BGR)
-            hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-            mask_g = cv2.inRange(hsv, self._green_low, self._green_high)
-            mask_r = cv2.inRange(hsv, self._red1_low, self._red2_high) | cv2.inRange(hsv, self._red2_low, self._red2_high)
-            overlay = np.zeros_like(bgr)
-            overlay[mask_g > 0] = (0, 255, 0)
-            overlay[mask_r > 0] = (0, 0, 255)
-            return cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB)
-        except Exception:
-            return rgb_np
+    def set_camera_topic(self, topic: str):
+        topic = (topic or "").strip()
+        if not topic:
+            return
+        topic = topic.rstrip('/')
+        if topic == self._hsv_topic:
+            self.set_camera_mode('hsv')
+            return
+        self._rgb_topic = topic
+        self.set_camera_mode('rgb', notify=False)
+
+    def _cycle_camera_mode(self):
+        self.set_camera_mode('hsv' if self._camera_mode == 'rgb' else 'rgb')
 
     def _on_joy(self, msg):
         up = down = False
@@ -600,7 +608,8 @@ class GuiRosNode(Node):
                         entry["source"] = m.ns or "raw"
                         entry["status"] = "unknown"
                 else:
-                    entry["bgr"] = (64, 224, 64)
+                    entry["bgr"] = (255, 255, 0)
+                entry["key"] = key
                 self._tree_states[key] = entry
                 changed = True
         if changed:
@@ -641,7 +650,7 @@ class GuiRosNode(Node):
             for t in tree_items:
                 try:
                     cx, cy = self._world_to_px(t["x"], t["y"], h)
-                    color = t.get("bgr", (64, 224, 64))
+                    color = t.get("bgr", (255, 255, 0))
                     cv2.circle(bgr, (cx, cy), 5, color, -1)
                     label = t.get("status", "unknown")
                     cv2.putText(bgr, label[:3].upper(), (cx+6, cy-4), cv2.FONT_HERSHEY_SIMPLEX, 0.35, color, 1, cv2.LINE_AA)
@@ -660,10 +669,10 @@ class GuiRosNode(Node):
 
     def _emit_tree_table(self):
         with self._tree_lock:
-            entries = list(self._tree_states.values())
+            entries = list(self._tree_states.items())
         rp = self._robot_pose
         rows = []
-        for entry in entries:
+        for key, entry in entries:
             dist = float('nan')
             if rp is not None:
                 dist = math.hypot(entry["x"] - rp[0], entry["y"] - rp[1])
@@ -671,6 +680,7 @@ class GuiRosNode(Node):
             if math.isfinite(dist) and self._confirm_range_hint > 0.0:
                 uncertainty = max(0.0, min(1.0, dist / self._confirm_range_hint))
             rows.append({
+                "key": key,
                 "x": entry["x"],
                 "y": entry["y"],
                 "z": entry.get("z", 0.0),
@@ -680,6 +690,11 @@ class GuiRosNode(Node):
             })
         rows.sort(key=lambda r: (0 if r["status"] == "bad" else 1,
                                  r["distance"] if math.isfinite(r["distance"]) else float('inf')))
+        total = len(rows)
+        bad_count = sum(1 for r in rows if r["status"] == "bad")
+        self._tree_total = total
+        self._tree_bad = bad_count
+        self.signals.tree_counts.emit(total, bad_count)
         self.signals.tree_table.emit(rows)
 
     # ------------------- helpers ----------------------
@@ -715,9 +730,17 @@ class ControlGUI(QWidget):
         self._estopped = False
         self._lin = 0.0
         self._ang = 0.0
-        self._drive_enabled = os.environ.get("UI_ENABLE_DRIVE", "0") == "1"
         self._teleop_enabled = False
         self._sim_alive = False
+        self._tree_table_keys: List[Tuple[float, float]] = []
+        self._tree_table_cache: Dict[Tuple[float, float], Dict[str, object]] = {}
+        self._cpu_process = psutil.Process(os.getpid()) if psutil else None
+        if self._cpu_process:
+            try:
+                self._cpu_process.cpu_percent(None)
+                psutil.cpu_percent(None)
+            except Exception:
+                pass
 
         # QProcess for launch/build
         self._proc_launch = QProcess(self)
@@ -735,6 +758,8 @@ class ControlGUI(QWidget):
         self._wire_behaviour()
         self._start_ros()
         self.speed.setValue(_scale_to_slider(0.60))
+        self._reflect_camera_mode('rgb')
+        self._update_cpu()
 
     def _apply_icon(self):
         icon_path = os.environ.get("UI_APP_ICON", "")
@@ -762,24 +787,21 @@ class ControlGUI(QWidget):
         self.camera_lbl.setAlignment(Qt.AlignCenter)
         self.camera_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.camera_lbl.setMinimumHeight(200)
-        cam = self.rounded_pane(self.camera_lbl, pad=10)
+        self.cam_mode_btn = QPushButton("View: Camera")
+        self.cam_mode_btn.setCheckable(True)
+        self.cam_mode_btn.toggled.connect(self._toggle_cam_mode_btn)
+        cam_box = QWidget(); cam_col = QVBoxLayout(cam_box)
+        cam_col.setContentsMargins(0, 0, 0, 0)
+        cam_col.setSpacing(6)
+        cam_col.addWidget(self.cam_mode_btn, 0, Qt.AlignLeft)
+        cam_col.addWidget(self.camera_lbl, 1)
+        cam = self.rounded_pane(cam_box, pad=10)
 
         # Map panel
         self.map_lbl = QLabel("Map / Trees")
         self.map_lbl.setAlignment(Qt.AlignCenter)
         self.map_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         right_top_pane = self.rounded_pane(self.map_lbl, pad=10)
-
-        # D-Pad — square (kept fixed; no longer stacked)
-        dpad_core = QWidget(); g = QGridLayout(dpad_core)
-        g.setSpacing(6); g.setContentsMargins(0, 0, 0, 0)
-        def btn(t): b = QPushButton(t); b.setFixedSize(48, 36); return b
-        self.btn_up, self.btn_left, self.btn_right, self.btn_down = btn("▲"), btn("◀"), btn("▶"), btn("▼")
-        g.addWidget(self.btn_up, 0, 1); g.addWidget(self.btn_left, 1, 0)
-        g.addWidget(self.btn_right, 1, 2); g.addWidget(self.btn_down, 2, 1)
-        dpad_square = SquareContainer(dpad_core)
-        dpad = self.rounded_pane(dpad_square, pad=10)
-        dpad.setMinimumWidth(240)
 
         # Tree table (used in stacked Log/Table panel)
         self.tree_table = QTableWidget(0, 6)
@@ -802,7 +824,7 @@ class ControlGUI(QWidget):
         self.log = QTextEdit(); self.log.setReadOnly(True); self.log.setPlaceholderText("Log")
         logpane = self.rounded_pane(self.log, pad=8); logpane.setMinimumSize(300, 160)
 
-        # Stacked panel: Log <-> Tree Table (this replaces previous D-pad stack)
+        # Stacked panel: Log <-> Tree Table
         self.log_table_stack = QStackedLayout()
         self.log_table_stack.addWidget(logpane)         # index 0: Log
         self.log_table_stack.addWidget(tree_table_pane) # index 1: Tree Table
@@ -812,18 +834,15 @@ class ControlGUI(QWidget):
         self.toggle_log_table_btn.setCheckable(True)
         self.toggle_log_table_btn.toggled.connect(self._toggle_log_table)
 
-        # Left bottom row: D-pad (fixed) + Log/Table stack
-        left_bottom = QHBoxLayout()
-        left_bottom.addWidget(dpad, 0)
-        stack_holder = QWidget(); stack_col = QVBoxLayout(stack_holder)
-        stack_col.setContentsMargins(0,0,0,0)
+        stack_holder = QWidget()
+        stack_col = QVBoxLayout(stack_holder)
+        stack_col.setContentsMargins(0, 0, 0, 0)
         stack_col.addWidget(self.toggle_log_table_btn, 0, Qt.AlignLeft)
         stack_col.addLayout(self.log_table_stack, 1)
-        left_bottom.addWidget(stack_holder, 1)
 
         left_col = QVBoxLayout()
         left_col.addWidget(cam, 3)
-        left_col.addLayout(left_bottom, 2)
+        left_col.addWidget(stack_holder, 2)
 
         # Right column: top = Map/Panel, bottom split 50/50 (tree counter + speed)
         self.tree_total = 0
@@ -879,6 +898,10 @@ class ControlGUI(QWidget):
         self.batt_lbl = QLabel("—%")
         self.batt_lbl.setStyleSheet("font-weight:700; margin-left:6px;")
         run.addWidget(self.batt_lbl)
+        self.cpu_lbl = QLabel("CPU: --")
+        self.cpu_lbl.setStyleSheet("color:#bbb; margin-left:14px;")
+        self.cpu_lbl.setToolTip("Use `top` (watch controller_bridge, run_ui) and `ros2 topic hz /camera/image` for rate.")
+        run.addWidget(self.cpu_lbl)
 
         run.addStretch(1)
         run_w = QWidget(); run_w.setLayout(run)
@@ -948,21 +971,15 @@ class ControlGUI(QWidget):
         """)
 
     def _wire_behaviour(self):
-        self.btn_up.pressed.connect(lambda: self._set_motion(forward=True))
-        self.btn_up.released.connect(lambda: self._set_motion(forward=False))
-        self.btn_down.pressed.connect(lambda: self._set_motion(back=True))
-        self.btn_down.released.connect(lambda: self._set_motion(back=False))
-        self.btn_left.pressed.connect(lambda: self._set_motion(left=True))
-        self.btn_left.released.connect(lambda: self._set_motion(left=False))
-        self.btn_right.pressed.connect(lambda: self._set_motion(right=True))
-        self.btn_right.released.connect(lambda: self._set_motion(right=False))
-
         self.speed.valueChanged.connect(self._on_slider_changed)
         self.estop.clicked.connect(self._on_estop)
 
         self.cmd_timer = QTimer(self)
         self.cmd_timer.timeout.connect(self._publish_cmd)
         self.cmd_timer.start(int(1000 / CMD_PUB_RATE_HZ))
+        self._cpu_timer = QTimer(self)
+        self._cpu_timer.timeout.connect(self._update_cpu)
+        self._cpu_timer.start(int(max(0.5, CPU_SAMPLE_PERIOD_S) * 1000))
 
     def _start_ros(self):
         self.ros = RosWorker()
@@ -973,6 +990,7 @@ class ControlGUI(QWidget):
         self.ros.signals.bump_speed.connect(self._bump_speed)
         self.ros.signals.tree_counts.connect(self._update_tree_counts)
         self.ros.signals.tree_table.connect(self._update_tree_table)
+        self.ros.signals.camera_mode.connect(self._reflect_camera_mode)
         self.ros.signals.pc_points.connect(self._update_pc_points)
         self.ros.signals.teleop_led.connect(self._set_teleop_led)
         self.ros.signals.battery.connect(self._update_battery)
@@ -983,27 +1001,11 @@ class ControlGUI(QWidget):
     def _current_scale(self) -> float:
         return _slider_to_scale(self.speed.value())
 
-    def _set_motion(self, forward=None, back=None, left=None, right=None):
-        s = self._current_scale()
-        if forward is not None:
-            self._lin = (MAX_LINEAR_MPS * s) if forward else 0.0 if not back else self._lin
-        if back is not None:
-            self._lin = (-MAX_LINEAR_MPS * s) if back else 0.0 if not forward else self._lin
-        if left is not None:
-            self._ang = (MAX_ANGULAR_RPS * s) if left else 0.0 if not right else self._ang
-        if right is not None:
-            self._ang = (-MAX_ANGULAR_RPS * s) if right else 0.0 if not left else self._ang
-        self._update_teleop_led_color()
-
     def _bump_speed(self, delta_steps: int):
         v = int(self.speed.value())
         v = max(self.speed.minimum(), min(self.speed.maximum(), v + int(delta_steps)))
         self.speed.setValue(v)
         s = self._current_scale()
-        sign_lin = (1.0 if self._lin > 0 else -1.0 if self._lin < 0 else 0.0)
-        sign_ang = (1.0 if self._ang > 0 else -1.0 if self._ang < 0 else 0.0)
-        if sign_lin != 0.0: self._lin = sign_lin * MAX_LINEAR_MPS * s
-        if sign_ang != 0.0: self._ang = sign_ang * MAX_ANGULAR_RPS * s
         self._append_log(f"[INFO] GUI speed scale -> {s:.2f}")
 
     def _on_slider_changed(self, _v: int):
@@ -1014,7 +1016,7 @@ class ControlGUI(QWidget):
         if self._estopped:
             self.send_cmd(0.0, 0.0)
             return
-        self.send_cmd(self._lin, self._ang)
+        # Joystick / twist_scaler pipeline handles teleop; UI stays passive.
 
     def _on_estop(self):
         self._lin = 0.0; self._ang = 0.0; self._estopped = True
@@ -1040,6 +1042,66 @@ class ControlGUI(QWidget):
     def _toggle_log_table(self, checked: bool):
         self.log_table_stack.setCurrentIndex(1 if checked else 0)
         self.toggle_log_table_btn.setText("Show Log" if checked else "Show Tree Table")
+
+    def _toggle_cam_mode_btn(self, checked: bool):
+        mode = 'hsv' if checked else 'rgb'
+        if hasattr(self, "ros"):
+            self.ros.set_camera_mode(mode)
+        self._reflect_camera_mode(mode)
+
+    @Slot(str)
+    def _reflect_camera_mode(self, mode: str):
+        checked = (str(mode).lower() == 'hsv')
+        if hasattr(self, "cam_mode_btn"):
+            self.cam_mode_btn.blockSignals(True)
+            self.cam_mode_btn.setChecked(checked)
+            self.cam_mode_btn.setText("View: HSV mask" if checked else "View: Camera")
+            self.cam_mode_btn.blockSignals(False)
+
+    def _format_tree_row(self, row: Dict[str, object]):
+        status = str(row.get("status", "unknown")).lower()
+        color = None
+        if status == "bad":
+            color = QColor("#ff6666")
+        elif status == "good":
+            color = QColor("#66ff66")
+        dist = float(row.get("distance", float('nan')))
+        return [
+            f"{float(row.get('x', 0.0)):.2f}",
+            f"{float(row.get('y', 0.0)):.2f}",
+            f"{float(row.get('z', 0.0)):.2f}",
+            (status.capitalize(), color),
+            f"{float(row.get('uncertainty', 1.0)):.2f}",
+            f"{dist:.2f}" if math.isfinite(dist) else "--",
+        ]
+
+    def _populate_tree_row(self, index: int, row: Dict[str, object]):
+        display = self._format_tree_row(row)
+        for col, val in enumerate(display):
+            if col == 3:
+                text, color = val
+                self._set_tree_cell(index, col, text, color)
+            else:
+                self._set_tree_cell(index, col, val)
+
+    def _update_tree_row(self, index: int, row: Dict[str, object]):
+        key = row.get("key")
+        prev_entry = self._tree_table_cache.get(key, {})
+        prev_display = prev_entry.get("display")
+        new_display = self._format_tree_row(row)
+        if not prev_display:
+            self._populate_tree_row(index, row)
+        else:
+            for col, val in enumerate(new_display):
+                if col == 3:
+                    text, color = val
+                    prev_text, prev_color = prev_display[col]
+                    if text != prev_text or color != prev_color:
+                        self._set_tree_cell(index, col, text, color)
+                else:
+                    if prev_display[col] != val:
+                        self._set_tree_cell(index, col, val)
+        self._tree_table_cache[key] = {"display": new_display}
 
     # ---- Launch control (QProcess) ----
     def _toggle_launch(self, checked: bool):
@@ -1122,22 +1184,19 @@ class ControlGUI(QWidget):
     def _update_tree_table(self, rows: List[Dict[str, object]]):
         if not hasattr(self, "tree_table"):
             return
-        self.tree_table.setRowCount(len(rows))
-        for r, row in enumerate(rows):
-            self._set_tree_cell(r, 0, f"{row['x']:.2f}")
-            self._set_tree_cell(r, 1, f"{row['y']:.2f}")
-            self._set_tree_cell(r, 2, f"{row['z']:.2f}")
-            status = row.get("status", "unknown")
-            color = None
-            if status == "bad":
-                color = QColor("#ff6666")
-            elif status == "good":
-                color = QColor("#66ff66")
-            self._set_tree_cell(r, 3, status.capitalize(), color)
-            uncertainty = row.get("uncertainty", 1.0)
-            self._set_tree_cell(r, 4, f"{uncertainty:.2f}")
-            dist = row.get("distance", float("nan"))
-            self._set_tree_cell(r, 5, f"{dist:.2f}" if math.isfinite(dist) else "--")
+        keys = [tuple(row.get("key", (round(row.get("x", 0.0), 2), round(row.get("y", 0.0), 2)))) for row in rows]
+        if keys != self._tree_table_keys:
+            self.tree_table.setRowCount(len(rows))
+            for idx, row in enumerate(rows):
+                self._populate_tree_row(idx, row)
+            self._tree_table_keys = keys
+        else:
+            for idx, row in enumerate(rows):
+                self._update_tree_row(idx, row)
+        self._tree_table_cache = {
+            key: {"display": self._format_tree_row(row)}
+            for key, row in zip(keys, rows)
+        }
         self.tree_table.resizeRowsToContents()
 
     def _set_tree_cell(self, row: int, col: int, text: str, color: Optional[QColor] = None):
@@ -1159,6 +1218,20 @@ class ControlGUI(QWidget):
         if n >= 1_000_000: return f"~{n/1_000_000:.1f}M"
         if n >= 1000:      return f"~{n/1000:.0f}k"
         return f"~{n}"
+
+    @Slot()
+    def _update_cpu(self):
+        if not hasattr(self, "cpu_lbl"):
+            return
+        if self._cpu_process and psutil:
+            try:
+                proc_pct = self._cpu_process.cpu_percent(interval=None)
+                sys_pct = psutil.cpu_percent(interval=None)
+                self.cpu_lbl.setText(f"CPU: app {proc_pct:.1f}% | sys {sys_pct:.0f}%")
+                return
+            except Exception:
+                pass
+        self.cpu_lbl.setText("CPU: use top • ros2 topic hz /camera/image")
 
     @Slot(float, float, bool)
     def _update_battery(self, pct, volt, charging):
@@ -1300,6 +1373,13 @@ class RosWorker(QThread):
             return self._ready and not self._stop and rclpy.ok()
         except Exception:
             return False
+
+    @Slot(str)
+    def set_camera_mode(self, mode: str):
+        if self._node is not None and self._ready and not self._stop:
+            try: self._node.set_camera_mode(mode)
+            except Exception:
+                pass
 
 # ============================== main ================================
 def _apply_qt_logging_rules_from_env():

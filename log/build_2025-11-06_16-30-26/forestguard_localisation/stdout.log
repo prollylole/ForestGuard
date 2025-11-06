@@ -1,0 +1,4 @@
+[ 66%] [32mBuilding CXX object CMakeFiles/forestguard_localisation.dir/src/amcl_localisation.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/forestguard_localisation.dir/src/main_amcl.cpp.o[0m
+[100%] [32m[1mLinking CXX executable forestguard_localisation[0m
+[100%] Built target forestguard_localisation
