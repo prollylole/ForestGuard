@@ -9,7 +9,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="file://$(find john)/urdf/meshes/wheel.dae"/>
+          <mesh filename="file://$(find forestguard_sim)/urdf/meshes/wheel.dae"/>
         </geometry>
       </visual>
 

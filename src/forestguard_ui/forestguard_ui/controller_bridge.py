@@ -1,3 +1,5 @@
+import os
+
 import rclpy
 from rclpy.node import Node
 from rclpy.duration import Duration
@@ -17,8 +19,10 @@ class ControllerBridge(Node):
         self.ang_scale = 1.0  # kept for parity if you later add angular adjustments
 
         # Camera topic discovery + fallbacks
+        self.hsv_topic = os.environ.get("UI_CAMERA_HSV_TOPIC", "/camera/image_hsv_mask")
         self.fallback_cameras = [
             '/camera/image',
+            self.hsv_topic,
             '/camera/depth/image',
             '/camera/front/image_raw',
             '/camera/left/image_raw',
