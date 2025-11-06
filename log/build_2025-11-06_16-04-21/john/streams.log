@@ -1,0 +1,5 @@
+[0.373s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/yut/git/rs1-2025s-ytu77/john_branch/build/john -- -j12 -l12
+[0.388s] [0mCMake Error: The current CMakeCache.txt directory /home/yut/git/rs1-2025s-ytu77/john_branch/build/john/CMakeCache.txt is different than the directory /home/john/git/RS1/john_branch/build/john where CMakeCache.txt was created. This may result in binaries being created in the wrong place. If you are not sure, reedit the CMakeCache.txt[0m
+[0.388s] [0mCMake Error: The source directory "/home/john/git/RS1/john_branch/src/forestguard_sim" does not exist.
+[0.388s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.389s] gmake: *** [Makefile:226: cmake_check_build_system] Error 1
