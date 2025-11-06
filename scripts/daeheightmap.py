@@ -5,7 +5,7 @@ import argparse, math, csv
 import numpy as np
 import trimesh
 
-def load_terrain(mesh_path, scale=(45,45,45), pose=(0,0,0,0,0,0)):
+def load_terrain(mesh_path, scale=(17.5,17.5,17.5), pose=(0,0,0,0,0,0)):
     m = trimesh.load(mesh_path, force="mesh")
     m.apply_scale(scale)
     x, y, z, r, p, yy = pose  # only supporting translation + yaw=0 here; extend if needed

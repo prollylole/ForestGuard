@@ -1,7 +1,6 @@
 [console_scripts]
 battery_sim = forestguard_sim.battery_sim:main
 controller_bridge = forestguard_ui.controller_bridge:main
-hsv_mask_node = forestguard_ui.hsv_mask_node:main
 run_ui = forestguard_ui.app:main
 twist_scaler = forestguard_ui.twist_scaler:main
 

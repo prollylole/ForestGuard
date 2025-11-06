@@ -8,7 +8,7 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    config_path = PathJoinSubstitution([FindPackageShare('forestguard_sim'), 'config'])
+    config_path = PathJoinSubstitution([FindPackageShare('john'), 'config'])
 
     # Additional command line arguments
     use_sim_time = LaunchConfiguration('use_sim_time')

@@ -897,62 +897,9 @@ class ControlGUI(QWidget):
 
         right_col = QVBoxLayout()
         right_col.addWidget(right_top_pane, 3)
-        # On-screen D-pad (optional)
-        dpad_core = QWidget(); g = QGridLayout(dpad_core)
-        g.setSpacing(6); g.setContentsMargins(0, 0, 0, 0)
-        def btn(name, text): 
-            b = QPushButton(text)
-            b.setFixedSize(48, 36)
-            b.setObjectName(name)
-            return b
-        self.btn_up = btn("dpad_up", "▲")
-        self.btn_left = btn("dpad_left", "◀")
-        self.btn_right = btn("dpad_right", "▶")
-        self.btn_down = btn("dpad_down", "▼")
-        g.addWidget(self.btn_up, 0, 1)
-        g.addWidget(self.btn_left, 1, 0)
-        g.addWidget(self.btn_right, 1, 2)
-        g.addWidget(self.btn_down, 2, 1)
-        dpad_square = SquareContainer(dpad_core)
-        dpad = self.rounded_pane(dpad_square, pad=10)
-        dpad.setMinimumWidth(180)
-
-        speed_dpad_col = QVBoxLayout()
-        speed_dpad_col.addWidget(speed_pane, 1)
-        speed_dpad_col.addWidget(dpad, 0)
-
-        # D-pad pane (optional on-screen nudging)
-        dpad_core = QWidget()
-        g = QGridLayout(dpad_core)
-        g.setSpacing(6)
-        g.setContentsMargins(0, 0, 0, 0)
-
-        def _mk_btn(name: str, text: str) -> QPushButton:
-            b = QPushButton(text)
-            b.setFixedSize(48, 36)
-            b.setObjectName(name)
-            return b
-
-        self.btn_up = _mk_btn("dpad_up", "▲")
-        self.btn_left = _mk_btn("dpad_left", "◀")
-        self.btn_right = _mk_btn("dpad_right", "▶")
-        self.btn_down = _mk_btn("dpad_down", "▼")
-        g.addWidget(self.btn_up, 0, 1)
-        g.addWidget(self.btn_left, 1, 0)
-        g.addWidget(self.btn_right, 1, 2)
-        g.addWidget(self.btn_down, 2, 1)
-        dpad_square = SquareContainer(dpad_core)
-        dpad = self.rounded_pane(dpad_square, pad=10)
-        dpad.setMinimumWidth(200)
-
-        right_bottom = QHBoxLayout()
+        right_bottom = QVBoxLayout()
         right_bottom.addWidget(tree_pane, 1)
-
-        speed_dpad_col = QVBoxLayout()
-        speed_dpad_col.addWidget(speed_pane, 1)
-        speed_dpad_col.addWidget(dpad, 0)
-
-        right_bottom.addLayout(speed_dpad_col, 1)
+        right_bottom.addWidget(speed_pane, 1)
         right_col.addLayout(right_bottom, 2)
 
         # Bottom bar: Teleop LED + Depth Cloud + Battery + Run/Build/E-stop
@@ -1049,15 +996,6 @@ class ControlGUI(QWidget):
         self.speed.valueChanged.connect(self._on_slider_changed)
         self.estop.clicked.connect(self._on_estop)
 
-        self.btn_up.pressed.connect(lambda: self._set_motion(forward=True))
-        self.btn_up.released.connect(lambda: self._set_motion(forward=False))
-        self.btn_down.pressed.connect(lambda: self._set_motion(back=True))
-        self.btn_down.released.connect(lambda: self._set_motion(back=False))
-        self.btn_left.pressed.connect(lambda: self._set_motion(left=True))
-        self.btn_left.released.connect(lambda: self._set_motion(left=False))
-        self.btn_right.pressed.connect(lambda: self._set_motion(right=True))
-        self.btn_right.released.connect(lambda: self._set_motion(right=False))
-
         self.cmd_timer = QTimer(self)
         self.cmd_timer.timeout.connect(self._publish_cmd)
         self.cmd_timer.start(int(1000 / CMD_PUB_RATE_HZ))
@@ -1096,11 +1034,11 @@ class ControlGUI(QWidget):
         self._update_teleop_led_color()
 
     def _publish_cmd(self):
-        if not hasattr(self, "ros") or not self.ros.ready():
-            return
+        if not hasattr(self, "ros") or not self.ros.ready(): return
         if self._estopped:
             self.send_cmd(0.0, 0.0)
             return
+        # Joystick / twist_scaler pipeline handles teleop; UI stays passive.
 
     def _on_estop(self):
         self._lin = 0.0; self._ang = 0.0; self._estopped = True
@@ -1494,11 +1432,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-        self.btn_up.pressed.connect(lambda: self._set_motion(forward=True))
-        self.btn_up.released.connect(lambda: self._set_motion(forward=False))
-        self.btn_down.pressed.connect(lambda: self._set_motion(back=True))
-        self.btn_down.released.connect(lambda: self._set_motion(back=False))
-        self.btn_left.pressed.connect(lambda: self._set_motion(left=True))
-        self.btn_left.released.connect(lambda: self._set_motion(left=False))
-        self.btn_right.pressed.connect(lambda: self._set_motion(right=True))
-        self.btn_right.released.connect(lambda: self._set_motion(right=False))

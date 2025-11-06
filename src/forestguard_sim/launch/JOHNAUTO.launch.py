@@ -29,7 +29,7 @@ def _resolve_spawn_arg(context, name, lo, hi):
 # Setup: start Gazebo with existing world, spawn robot
 # ------------------------
 def _setup(context, *args, **kwargs):
-    pkg_path = get_package_share_directory('forestguard_sim')
+    pkg_path = get_package_share_directory('john')
     world_path = os.path.join(pkg_path, 'worlds', 'forest_trees.sdf')
 
     # Spawn pose (keep your behavior: fixed values or RANDOM)
@@ -65,7 +65,7 @@ def _setup(context, *args, **kwargs):
 # Main launch description
 # ------------------------
 def generate_launch_description():
-    pkg_path = get_package_share_directory('forestguard_sim')
+    pkg_path = get_package_share_directory('john')
     resource_path = os.pathsep.join([
         os.path.join(pkg_path, 'models'),
         os.path.join(pkg_path, 'worlds'),
@@ -146,29 +146,24 @@ def generate_launch_description():
         package='forestguard_ui', executable='twist_scaler', name='twist_scaler',
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
-    ld.add_action(Node(
-        package='forestguard_ui', executable='hsv_mask_node', name='hsv_mask_node',
-        parameters=[{'image_topic': '/camera/image', 'mask_topic': '/camera/image_hsv_mask'}],
-        condition=IfCondition(LaunchConfiguration('ui'))
-    ))
 
-    # # Battery simulator (drains faster when moving)
-    # ld.add_action(Node(
-    #     package='forestguard_ui', executable='battery_sim', name='battery_sim',
-    #     output='screen', parameters=[{
-    #         'use_sim_time': LaunchConfiguration('use_sim_time'),
-    #         'battery_topic': '/battery_state',
-    #         'cmd_topic': '/cmd_vel',
-    #         # tuneables (optional):
-    #         # 'idle_drain_per_sec': 1.0/600.0,   # 10 min to empty if stationary
-    #         # 'k_lin': 3.0,
-    #         # 'k_ang': 1.5,
-    #         # 'v_max': 0.6,
-    #         # 'w_max': 1.5,
-    #         # 'voltage_full': 12.6,
-    #         # 'voltage_empty': 9.6,
-    #     }]
-    # ))
+    # Battery simulator (drains faster when moving)
+    ld.add_action(Node(
+        package='forestguard_ui', executable='battery_sim', name='battery_sim',
+        output='screen', parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time'),
+            'battery_topic': '/battery_state',
+            'cmd_topic': '/cmd_vel',
+            # tuneables (optional):
+            # 'idle_drain_per_sec': 1.0/600.0,   # 10 min to empty if stationary
+            # 'k_lin': 3.0,
+            # 'k_ang': 1.5,
+            # 'v_max': 0.6,
+            # 'w_max': 1.5,
+            # 'voltage_full': 12.6,
+            # 'voltage_empty': 9.6,
+        }]
+    ))
 
     # RViz (optional)
     rviz_node = Node(
