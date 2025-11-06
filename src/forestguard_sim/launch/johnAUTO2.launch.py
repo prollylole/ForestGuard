@@ -132,12 +132,6 @@ def generate_launch_description():
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
     ld.add_action(Node(
-        package='forestguard_ui', executable='hsv_mask_node', name='hsv_mask_node',
-        parameters=[{'image_topic': '/camera/image', 'mask_topic': '/camera/image_hsv_mask'}],
-        condition=IfCondition(LaunchConfiguration('ui'))
-    ))
-
-    ld.add_action(Node(
         package='forestguard_perception',
         executable='lidar_tree_mapper',
         name='lidar_tree_mapper',

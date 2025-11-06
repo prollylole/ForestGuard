@@ -23,7 +23,6 @@ setup(
         'run_ui             = forestguard_ui.app:main',
         'controller_bridge  = forestguard_ui.controller_bridge:main',
         'twist_scaler       = forestguard_ui.twist_scaler:main',
-        'hsv_mask_node      = forestguard_ui.hsv_mask_node:main',
         'battery_sim        = forestguard_sim.battery_sim:main',
     ],
     }

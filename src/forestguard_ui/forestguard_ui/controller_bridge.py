@@ -19,18 +19,16 @@ class ControllerBridge(Node):
         self.ang_scale = 1.0  # kept for parity if you later add angular adjustments
 
         # Camera topic discovery + fallbacks
-        self.hsv_topic = os.environ.get("UI_CAMERA_HSV_TOPIC", "/camera/image_hsv_mask")
         self.fallback_cameras = [
             '/camera/image',
-            self.hsv_topic,
-            '/camera/depth/image',
             '/camera/front/image_raw',
             '/camera/left/image_raw',
-            '/camera/back/image_raw',
             '/camera/right/image_raw',
+            '/camera/back/image_raw',
         ]
         self._live_cameras = []     # discovered Image topics with >=1 publisher
         self.current_cam_idx = -1   # start at -1 so first cycle picks index 0
+        self._display_mode = 'rgb'
 
         # Debounce state
         self._prev_buttons = []
@@ -63,6 +61,9 @@ class ControllerBridge(Node):
             if IMG_MSG_TYPE in types and self.count_publishers(t) > 0:
                 live.append(t)
         live.sort()
+        filtered = [t for t in live if t in self.fallback_cameras]
+        if filtered:
+            live = filtered
         if live != self._live_cameras:
             self._live_cameras = live
             self.get_logger().info(f'Live camera topics: {self._live_cameras}')
@@ -132,10 +133,17 @@ class ControllerBridge(Node):
         self.event_pub.publish(String(data='E-STOP'))
 
     def _cycle_camera(self):
-        pool = self._image_topic_pool()
+        pool = [t for t in self._image_topic_pool() if t]
         if not pool:
             self.get_logger().warn('No camera topics available to cycle.')
             self.event_pub.publish(String(data='CAM:NONE'))
+            return
+        if len(pool) == 1:
+            self._display_mode = 'hsv' if self._display_mode == 'rgb' else 'rgb'
+            mode_msg = f'MODE:{self._display_mode}'
+            self.cam_pub.publish(String(data=mode_msg))
+            self.event_pub.publish(String(data=mode_msg))
+            self.get_logger().info(f'Camera mode -> {self._display_mode}')
             return
         self.current_cam_idx = (self.current_cam_idx + 1) % len(pool)
         topic = pool[self.current_cam_idx]

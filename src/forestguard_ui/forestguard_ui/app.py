@@ -17,7 +17,6 @@ from PySide6.QtWidgets import (
 
 # ---------- topics / env ----------
 CAMERA_TOPIC_DEFAULT = "/camera/image"
-CAMERA_HSV_TOPIC     = os.environ.get("UI_CAMERA_HSV_TOPIC", "/camera/image_hsv_mask")
 ROSOUT_TOPIC         = "/rosout"
 CAMERA_TOPIC_CTRL    = "/ui/camera_topic"
 CMD_VEL_TOPIC        = "/cmd_vel"
@@ -231,8 +230,6 @@ class GuiRosNode(Node):
         # camera state
         self._camera_sub = None
         self._camera_topic_raw = CAMERA_TOPIC_DEFAULT.rstrip('/')
-        self._rgb_topic = self._camera_topic_raw
-        self._hsv_topic = CAMERA_HSV_TOPIC.rstrip('/')
         self._camera_mode = 'rgb'
         self._latest_rgb = None
         self._img_lock = Lock()
@@ -240,7 +237,16 @@ class GuiRosNode(Node):
         self._subscribe_camera(self._camera_topic_raw)
         self._prev_cycle_btn = False
         self._btn_cycle = int(os.environ.get("UI_JOY_BTN_CAMERA", "3"))
-        self.signals.camera_mode.emit(self._camera_mode)
+        self._hsv_ready = (np is not None and cv2 is not None)
+        if self._hsv_ready:
+            self._green_low = np.array([50, 130, 25], dtype=np.uint8)
+            self._green_high = np.array([70, 255, 255], dtype=np.uint8)
+            self._red1_low = np.array([0, 155, 75], dtype=np.uint8)
+            self._red1_high = np.array([34, 255, 255], dtype=np.uint8)
+            self._red2_low = np.array([170, 160, 77], dtype=np.uint8)
+            self._red2_high = np.array([179, 255, 255], dtype=np.uint8)
+        else:
+            self.get_logger().warn("HSV view unavailable (missing OpenCV/NumPy)")
 
         # point cloud quick stats (shown next to Teleop LED)
         try:
@@ -408,14 +414,14 @@ class GuiRosNode(Node):
         topic = (msg.data or "").strip()
         if not topic:
             return
+        if topic.upper().startswith('MODE:'):
+            mode = topic.split(':', 1)[1]
+            self.set_camera_mode(mode)
+            return
         topic = topic.rstrip('/')
-        if topic == self._hsv_topic:
-            self.set_camera_mode('hsv')
+        if topic == self._camera_topic_raw:
             return
-        if topic == self._camera_topic_raw and self._camera_mode == 'rgb':
-            return
-        self._rgb_topic = topic
-        self.set_camera_mode('rgb')
+        self._subscribe_camera(topic)
 
     def _subscribe_camera(self, topic_base: str):
         topic_base = (topic_base or "").strip()
@@ -428,8 +434,6 @@ class GuiRosNode(Node):
         if not self._prefer_compressed and topic_base.rstrip('/').endswith("/compressed"):
             topic_base = topic_base.rstrip('/')[:-len("/compressed")]
         self._camera_topic_raw = topic_base.rstrip('/')
-        if self._camera_topic_raw != self._hsv_topic:
-            self._rgb_topic = self._camera_topic_raw
         if self._prefer_compressed:
             comp_topic = self._camera_topic_raw + "/compressed" if not self._camera_topic_raw.endswith("/compressed") else self._camera_topic_raw
             try:
@@ -464,7 +468,15 @@ class GuiRosNode(Node):
                 rgb = self._latest_rgb
                 self._latest_rgb = None
         if rgb is not None:
-            self.signals.image.emit(rgb)
+            if self._camera_mode == 'hsv' and self._hsv_ready:
+                try:
+                    view = self._make_hsv_view(rgb)
+                except Exception as exc:
+                    self.get_logger().throttle(2000, f"HSV view failed: {exc}")
+                    view = rgb
+            else:
+                view = rgb
+            self.signals.image.emit(view)
 
     def _on_pc(self, msg: PointCloud2):
         try:
@@ -488,13 +500,24 @@ class GuiRosNode(Node):
             self.signals.pc_points.emit(int(self._pc_latest_count))
             self._pc_latest_count = 0
 
+    def _make_hsv_view(self, rgb_np):
+        if not self._hsv_ready:
+            return rgb_np
+        bgr = cv2.cvtColor(rgb_np, cv2.COLOR_RGB2BGR)
+        hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
+        mask_g = cv2.inRange(hsv, self._green_low, self._green_high)
+        mask_r = cv2.inRange(hsv, self._red1_low, self._red1_high) | cv2.inRange(hsv, self._red2_low, self._red2_high)
+        overlay = np.zeros_like(bgr)
+        overlay[mask_g > 0] = (0, 255, 0)
+        overlay[mask_r > 0] = (0, 0, 255)
+        return cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB)
+
     def set_camera_mode(self, mode: str, notify: bool = True):
         target_mode = 'hsv' if str(mode).lower() == 'hsv' else 'rgb'
-        target_topic = self._hsv_topic if target_mode == 'hsv' else self._rgb_topic
-        if not target_topic:
+        if target_mode == 'hsv' and not self._hsv_ready:
+            if notify:
+                self.signals.ok.emit(False, "HSV view unavailable (missing OpenCV/Numpy)")
             return
-        if target_topic != self._camera_topic_raw:
-            self._subscribe_camera(target_topic)
         if target_mode != self._camera_mode:
             self._camera_mode = target_mode
             if notify:
@@ -506,11 +529,9 @@ class GuiRosNode(Node):
         if not topic:
             return
         topic = topic.rstrip('/')
-        if topic == self._hsv_topic:
-            self.set_camera_mode('hsv')
+        if topic == self._camera_topic_raw:
             return
-        self._rgb_topic = topic
-        self.set_camera_mode('rgb', notify=False)
+        self._subscribe_camera(topic)
 
     def _cycle_camera_mode(self):
         self.set_camera_mode('hsv' if self._camera_mode == 'rgb' else 'rgb')
@@ -1494,4 +1515,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

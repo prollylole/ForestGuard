@@ -40,7 +40,7 @@ class LidarTreeMapper(Node):
         self.declare_parameter("base_frame", "base_link")
         self.declare_parameter("map_frame",  "map")
 
-        self.declare_parameter("min_sep_m", 3.0)           # expected spawn spacing
+        self.declare_parameter("min_sep_m", 4.0)           # expected spawn spacing
         self.declare_parameter("deadzone_frac", 0.5)       # deadzone = frac * min_sep
 
         self.declare_parameter("min_cluster_pts", 5)
