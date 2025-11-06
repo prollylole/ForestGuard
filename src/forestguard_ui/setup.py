@@ -20,9 +20,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
     'console_scripts': [
-        'run_ui = forestguard_ui.app:main',
-        'controller_bridge = forestguard_ui.controller_bridge:main',
-        'twist_scaler = forestguard_ui.twist_scaler:main',
+        'run_ui             = forestguard_ui.app:main',
+        'controller_bridge  = forestguard_ui.controller_bridge:main',
+        'twist_scaler       = forestguard_ui.twist_scaler:main',
+        'battery_sim        = forestguard_sim.battery_sim:main',
     ],
     }
 )

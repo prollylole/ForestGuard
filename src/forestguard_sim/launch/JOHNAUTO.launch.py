@@ -147,6 +147,24 @@ def generate_launch_description():
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
 
+    # Battery simulator (drains faster when moving)
+    ld.add_action(Node(
+        package='forestguard_ui', executable='battery_sim', name='battery_sim',
+        output='screen', parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time'),
+            'battery_topic': '/battery_state',
+            'cmd_topic': '/cmd_vel',
+            # tuneables (optional):
+            # 'idle_drain_per_sec': 1.0/600.0,   # 10 min to empty if stationary
+            # 'k_lin': 3.0,
+            # 'k_ang': 1.5,
+            # 'v_max': 0.6,
+            # 'w_max': 1.5,
+            # 'voltage_full': 12.6,
+            # 'voltage_empty': 9.6,
+        }]
+    ))
+
     # RViz (optional)
     rviz_node = Node(
         package='rviz2',

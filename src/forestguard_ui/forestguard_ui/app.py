@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# Robot UI (dark theme) — camera, D-pad (square), logs, tree counter, speed slider
-# + Run Sim + Rebuild Code + Map+Trees overlay + Depth Cloud counter + Teleop LED
+# Robot UI (dark theme) — camera, D-pad (square), logs/tree-table stack, tree counter, speed slider
+# + Run Sim + Rebuild Code + Map+Trees overlay + Depth Cloud counter + Teleop LED + Battery
 from __future__ import annotations
 
 import sys, os, math, signal
@@ -20,6 +20,8 @@ CAMERA_TOPIC_DEFAULT = "/camera/image"
 ROSOUT_TOPIC         = "/rosout"
 CAMERA_TOPIC_CTRL    = "/ui/camera_topic"
 CMD_VEL_TOPIC        = "/cmd_vel"
+
+BATTERY_TOPIC = os.environ.get("UI_BATTERY_TOPIC", "/battery_state")
 
 TREE_TOTAL_TOPIC = os.environ.get("UI_TREE_TOTAL_TOPIC", "/trees/count")
 TREE_BAD_TOPIC   = os.environ.get("UI_TREE_BAD_TOPIC",   "/trees/bad")
@@ -162,13 +164,15 @@ class RosSignals(QObject):
     image = Signal(object)
     map_image = Signal(object)
     log = Signal(str)
-    teleop_led = Signal(bool, bool)   # (teleop_enabled, sim_alive)
+    teleop_led = Signal(bool, bool)
     ok = Signal(bool, str)
     bump_speed = Signal(int)
-    tree_counts = Signal(int, int)    # (total, bad)
-    pc_points = Signal(int)           # depth/scan cloud point count
-    tree_table = Signal(object)       # list of tree dicts
+    tree_counts = Signal(int, int)
+    pc_points = Signal(int)
+    tree_table = Signal(object)
+    battery = Signal(float, float, bool)  # percent [0-100], voltage [V] (nan if unknown), charging
 
+# ========================= ROS Node ================================
 class GuiRosNode(Node):
     def __init__(self, signals: RosSignals):
         super().__init__("forestguard_ui")
@@ -290,6 +294,59 @@ class GuiRosNode(Node):
         self._map_timer = self.create_timer(0.1, self._emit_map_image)
 
         self.signals.ok.emit(True, "ROS node initialised")
+        # store downsampled XY for map overlays if you want them later
+        self._pc_xy_samples = []
+        self._pc_xy_lock = Lock()
+
+        # battery
+        self._battery_pct = float('nan')
+        self._battery_v   = float('nan')
+        self._battery_chg = False
+        try:
+            types_map = dict(self.get_topic_names_and_types())
+            bt_t = types_map.get(BATTERY_TOPIC, [])
+            from std_msgs.msg import Float32
+            try:
+                from sensor_msgs.msg import BatteryState
+                _BatteryState = BatteryState
+            except Exception:
+                _BatteryState = None
+
+            if _BatteryState and any("sensor_msgs/msg/BatteryState" in t for t in bt_t):
+                self.create_subscription(_BatteryState, BATTERY_TOPIC, self._on_battery_state, 10)
+                self.get_logger().info(f"Battery on {BATTERY_TOPIC} (BatteryState)")
+            else:
+                def _on_batt_f32(msg):
+                    try:
+                        v = float(getattr(msg, "data", float('nan')))
+                        if v <= 1.01: pct = max(0.0, min(100.0, v * 100.0))
+                        else:         pct = max(0.0, min(100.0, v))
+                        self._battery_pct = pct
+                        self.signals.battery.emit(self._battery_pct, self._battery_v, self._battery_chg)
+                    except Exception:
+                        pass
+                self.create_subscription(Float32, BATTERY_TOPIC, _on_batt_f32, 10)
+                self.get_logger().warn(f"Battery on {BATTERY_TOPIC} as Float32 (assuming percent)")
+        except Exception as e:
+            self.get_logger().warn(f"Battery subscribe failed: {e}")
+
+    def _on_battery_state(self, msg):
+        try:
+            pct = float(getattr(msg, "percentage", float('nan')))
+            if not math.isnan(pct):
+                pct = max(0.0, min(1.0, pct)) * 100.0
+            volt = float(getattr(msg, "voltage", float('nan')))
+            chg_flag = False
+            try:
+                chg_flag = int(getattr(msg, "power_supply_status", 0)) == 1
+            except Exception:
+                chg_flag = False
+            self._battery_pct = pct
+            self._battery_v = volt
+            self._battery_chg = chg_flag
+            self.signals.battery.emit(self._battery_pct, self._battery_v, self._battery_chg)
+        except Exception:
+            pass
 
     # ---- subscribe helper (Int32/UInt32 autodetect)
     def _subscribe_int_counter(self, topic_name: str, is_bad: bool):
@@ -399,10 +456,17 @@ class GuiRosNode(Node):
     def _on_pc(self, msg: PointCloud2):
         try:
             cnt = 0
-            for i, _ in enumerate(pc2.read_points(msg, field_names=('x','y','z'), skip_nans=True)):
-                if i % 10 == 0: cnt += 1
-                if cnt >= 20000: break
-            self._pc_latest_count = cnt * 10
+            xy = []
+            step = 10  # sample every 10th point
+            for i, p in enumerate(pc2.read_points(msg, field_names=('x','y','z'), skip_nans=True)):
+                if i % step == 0:
+                    xy.append((float(p[0]), float(p[1])))
+                    cnt += 1
+                    if cnt >= 5000:  # cap for perf
+                        break
+            with self._pc_xy_lock:
+                self._pc_xy_samples = xy
+            self._pc_latest_count = cnt * step
         except Exception:
             pass
 
@@ -429,7 +493,7 @@ class GuiRosNode(Node):
             bgr = cv2.cvtColor(rgb_np, cv2.COLOR_RGB2BGR)
             hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
             mask_g = cv2.inRange(hsv, self._green_low, self._green_high)
-            mask_r = cv2.inRange(hsv, self._red1_low, self._red1_high) | cv2.inRange(hsv, self._red2_low, self._red2_high)
+            mask_r = cv2.inRange(hsv, self._red1_low, self._red2_high) | cv2.inRange(hsv, self._red2_low, self._red2_high)
             overlay = np.zeros_like(bgr)
             overlay[mask_g > 0] = (0, 255, 0)
             overlay[mask_r > 0] = (0, 0, 255)
@@ -459,13 +523,11 @@ class GuiRosNode(Node):
             except Exception:
                 cycle_pressed = False
 
-        # Teleop enable (RB)
         try:
             self._teleop_enabled = bool(msg.buttons[self._teleop_btn] > 0)
         except Exception:
             self._teleop_enabled = False
 
-        # Notify GUI for LED & speed bumps
         self.signals.teleop_led.emit(self._teleop_enabled, self._sim_alive)
         if up and not self._prev_up:   self.signals.bump_speed.emit(+1)
         if down and not self._prev_down: self.signals.bump_speed.emit(-1)
@@ -507,7 +569,6 @@ class GuiRosNode(Node):
                     changed = True
                     continue
                 if m.action == Marker.DELETE:
-                    # keyed by rounded position; without metadata we skip delete
                     continue
                 x, y, z = float(m.pose.position.x), float(m.pose.position.y), float(m.pose.position.z)
                 key = (round(x, 2), round(y, 2))
@@ -577,7 +638,7 @@ class GuiRosNode(Node):
         if cv2 is not None:
             with self._tree_lock:
                 tree_items = list(self._tree_states.values())
-            for idx, t in enumerate(tree_items):
+            for t in tree_items:
                 try:
                     cx, cy = self._world_to_px(t["x"], t["y"], h)
                     color = t.get("bgr", (64, 224, 64))
@@ -709,8 +770,7 @@ class ControlGUI(QWidget):
         self.map_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         right_top_pane = self.rounded_pane(self.map_lbl, pad=10)
 
-        # D-Pad — square
-        self.dpad_stack = QStackedLayout()   # <-- create it
+        # D-Pad — square (kept fixed; no longer stacked)
         dpad_core = QWidget(); g = QGridLayout(dpad_core)
         g.setSpacing(6); g.setContentsMargins(0, 0, 0, 0)
         def btn(t): b = QPushButton(t); b.setFixedSize(48, 36); return b
@@ -721,6 +781,7 @@ class ControlGUI(QWidget):
         dpad = self.rounded_pane(dpad_square, pad=10)
         dpad.setMinimumWidth(240)
 
+        # Tree table (used in stacked Log/Table panel)
         self.tree_table = QTableWidget(0, 6)
         self.tree_table.setHorizontalHeaderLabels(["X", "Y", "Z", "Status", "Uncertainty", "Distance"])
         header = self.tree_table.horizontalHeader()
@@ -737,28 +798,28 @@ class ControlGUI(QWidget):
         self.tree_table.setAlternatingRowColors(True)
         tree_table_pane = self.rounded_pane(self.tree_table, pad=8)
 
-        # self.dpad_stack = QStackedLayout()
-        self.dpad_stack.addWidget(dpad)
-        self.dpad_stack.addWidget(tree_table_pane)
-        self.dpad_stack.setCurrentIndex(0)
-        dpad_holder = QWidget(); dpad_holder.setLayout(self.dpad_stack)
-
-        self.toggle_tree_btn = QPushButton("Show Tree Table")
-        self.toggle_tree_btn.setCheckable(True)
-        self.toggle_tree_btn.toggled.connect(self._toggle_tree_table)
-
-        dpad_column = QVBoxLayout()
-        dpad_column.addWidget(self.toggle_tree_btn, 0, Qt.AlignTop)
-        dpad_column.addWidget(dpad_holder, 1)
-
-        # Log Panel
+        # Log Panel (will be in stacked panel with tree table)
         self.log = QTextEdit(); self.log.setReadOnly(True); self.log.setPlaceholderText("Log")
         logpane = self.rounded_pane(self.log, pad=8); logpane.setMinimumSize(300, 160)
 
-        # Left bottom row: D-pad (square) + Log
+        # Stacked panel: Log <-> Tree Table (this replaces previous D-pad stack)
+        self.log_table_stack = QStackedLayout()
+        self.log_table_stack.addWidget(logpane)         # index 0: Log
+        self.log_table_stack.addWidget(tree_table_pane) # index 1: Tree Table
+        self.log_table_stack.setCurrentIndex(0)
+
+        self.toggle_log_table_btn = QPushButton("Show Tree Table")
+        self.toggle_log_table_btn.setCheckable(True)
+        self.toggle_log_table_btn.toggled.connect(self._toggle_log_table)
+
+        # Left bottom row: D-pad (fixed) + Log/Table stack
         left_bottom = QHBoxLayout()
-        left_bottom.addLayout(dpad_column, 0)
-        left_bottom.addWidget(logpane, 1)
+        left_bottom.addWidget(dpad, 0)
+        stack_holder = QWidget(); stack_col = QVBoxLayout(stack_holder)
+        stack_col.setContentsMargins(0,0,0,0)
+        stack_col.addWidget(self.toggle_log_table_btn, 0, Qt.AlignLeft)
+        stack_col.addLayout(self.log_table_stack, 1)
+        left_bottom.addWidget(stack_holder, 1)
 
         left_col = QVBoxLayout()
         left_col.addWidget(cam, 3)
@@ -800,7 +861,7 @@ class ControlGUI(QWidget):
         right_bottom.addWidget(speed_pane, 1)
         right_col.addLayout(right_bottom, 2)
 
-        # Bottom bar: Teleop LED + Depth Cloud + Run/Build/E-stop
+        # Bottom bar: Teleop LED + Depth Cloud + Battery + Run/Build/E-stop
         run = QHBoxLayout()
         run.addWidget(QLabel("Teleop"))
         self.led = LedIndicator("#666666")
@@ -812,6 +873,12 @@ class ControlGUI(QWidget):
         self.pc_val.setStyleSheet("font-weight:600;")
         run.addWidget(self.pc_name)
         run.addWidget(self.pc_val)
+
+        # Battery
+        run.addWidget(QLabel("Battery"))
+        self.batt_lbl = QLabel("—%")
+        self.batt_lbl.setStyleSheet("font-weight:700; margin-left:6px;")
+        run.addWidget(self.batt_lbl)
 
         run.addStretch(1)
         run_w = QWidget(); run_w.setLayout(run)
@@ -908,6 +975,7 @@ class ControlGUI(QWidget):
         self.ros.signals.tree_table.connect(self._update_tree_table)
         self.ros.signals.pc_points.connect(self._update_pc_points)
         self.ros.signals.teleop_led.connect(self._set_teleop_led)
+        self.ros.signals.battery.connect(self._update_battery)
         self.send_cmd = self.ros.send_cmd
         self.ros.start()
 
@@ -964,13 +1032,16 @@ class ControlGUI(QWidget):
         self._update_teleop_led_color()
 
     def _update_teleop_led_color(self):
-        # Green: teleop held; Yellow: sim alive; Grey: otherwise
         if self._teleop_enabled:
             self.led.set_color("#46d160")
         elif self._sim_alive:
             self.led.set_color("#f6c343")
         else:
             self.led.set_color("#666666")
+
+    def _toggle_log_table(self, checked: bool):
+        self.log_table_stack.setCurrentIndex(1 if checked else 0)
+        self.toggle_log_table_btn.setText("Show Log" if checked else "Show Tree Table")
 
     # ---- Launch control (QProcess) ----
     def _toggle_launch(self, checked: bool):
@@ -1078,14 +1149,6 @@ class ControlGUI(QWidget):
             item.setForeground(color)
         self.tree_table.setItem(row, col, item)
 
-    def _toggle_tree_table(self, checked: bool):
-        if checked:
-            self.toggle_tree_btn.setText("Show D-pad")
-            self.dpad_stack.setCurrentIndex(1)
-        else:
-            self.toggle_tree_btn.setText("Show Tree Table")
-            self.dpad_stack.setCurrentIndex(0)
-
     def _append_log(self, text: str):
         if not self._quitting:
             self.log.append(text)
@@ -1098,6 +1161,25 @@ class ControlGUI(QWidget):
         if n >= 1_000_000: return f"~{n/1_000_000:.1f}M"
         if n >= 1000:      return f"~{n/1000:.0f}k"
         return f"~{n}"
+
+    @Slot(float, float, bool)
+    def _update_battery(self, pct, volt, charging):
+        try:
+            if pct is None or math.isnan(pct):
+                txt = "—%"
+                col = "#bbb"
+            else:
+                txt = f"{pct:.0f}%"
+                col = "#46d160" if pct >= 60 else "#f6c343" if pct >= 25 else "#e53935"
+                if charging: col = "#46d160"
+            if volt is not None and not math.isnan(volt):
+                txt += f" ({volt:.1f}V)"
+            if charging:
+                txt += " ⚡"
+            self.batt_lbl.setText(txt)
+            self.batt_lbl.setStyleSheet(f"font-weight:700; margin-left:6px; color:{col};")
+        except Exception:
+            pass
 
     @Slot(object)
     def _update_camera(self, rgb_np):
@@ -1152,6 +1234,8 @@ class ControlGUI(QWidget):
             try: self.ros.signals.pc_points.disconnect(self._update_pc_points)
             except Exception: pass
             try: self.ros.signals.teleop_led.disconnect(self._set_teleop_led)
+            except Exception: pass
+            try: self.ros.signals.battery.disconnect(self._update_battery)
             except Exception: pass
 
             self.send_cmd = lambda *_a, **_k: None
