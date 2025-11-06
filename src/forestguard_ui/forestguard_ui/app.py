@@ -113,7 +113,7 @@ from sensor_msgs.msg import PointCloud2
 import sensor_msgs_py.point_cloud2 as pc2
 from rcl_interfaces.msg import Log as RosLog
 from std_msgs.msg import String as RosString
-from std_msgs.msg import Int32, UInt32, Float32
+from std_msgs.msg import Int32, UInt32, Float32, String, Bool
 from nav_msgs.msg import OccupancyGrid, Path
 from visualization_msgs.msg import Marker, MarkerArray
 from rosgraph_msgs.msg import Clock
@@ -340,6 +340,8 @@ class RosSignals(QObject):
     tree_table = Signal(object)
     battery = Signal(float, float, bool)  # percent [0-100], voltage [V] (nan if unknown), charging
     camera_mode = Signal(str)
+    autonomy = Signal(str) # "idle"/"scanning"/"planning"/"executing"/"teleop"/"complete"
+    mission_done = Signal(bool)
 
 # ========================= ROS Node ================================
 class GuiRosNode(Node):
@@ -485,6 +487,8 @@ class GuiRosNode(Node):
         self.create_subscription(OccupancyGrid, GLOBAL_COSTMAP_TOPIC, self._on_global_costmap, 1)
         self.create_subscription(OccupancyGrid, LOCAL_COSTMAP_TOPIC, self._on_local_costmap, 1)
         self._map_timer = self.create_timer(MAP_EMIT_PERIOD_S, self._emit_map_image)
+        self.create_subscription(String, "/ui/autonomy_state", lambda m: self.signals.autonomy.emit(m.data or ""), 10)
+        self.create_subscription(Bool, "/ui/mission_complete", lambda m: self.signals.mission_done.emit(bool(m.data)), 10)
 
         self.signals.ok.emit(True, "ROS node initialised")
         # store downsampled XY for map overlays if you want them later
@@ -1229,16 +1233,9 @@ class ControlGUI(QWidget):
 
         self.send_waypoints = lambda _rows: None
         self._install_sigint_handler()
-        self._build_ui()
-        self._wire_behaviour()
-        self._start_ros()
-        self.speed.setValue(_scale_to_slider(0.60))
-        self._reflect_camera_mode('rgb')
-        self._update_cpu()
-
         self._hsv_params = {
-            "green_low": [50, 130, 25],
-            "green_high": [70, 255, 255],
+            "green_low": [50, 140, 13],
+            "green_high": [57, 255, 255],
             "red1_low": [0, 155, 75],
             "red1_high": [34, 255, 255],
             "red2_low": [170, 160, 77],
@@ -1246,6 +1243,12 @@ class ControlGUI(QWidget):
         }
         self._hsv_inputs = {}
         self._hsv_pending = False
+        self._build_ui()
+        self._wire_behaviour()
+        self._start_ros()
+        self.speed.setValue(_scale_to_slider(0.60))
+        self._reflect_camera_mode('rgb')
+        self._update_cpu()
 
     def _apply_icon(self):
         icon_path = os.environ.get("UI_APP_ICON", "")
@@ -1361,20 +1364,21 @@ class ControlGUI(QWidget):
         self.tree_lbl = QLabel("Trees: 0 (bad 0)")
         self.tree_lbl.setAlignment(Qt.AlignCenter)
         self.tree_lbl.setWordWrap(True)
-        self.tree_lbl.setStyleSheet("font-size: 16px; font-weight: 600; padding:4px 6px;")
+        self.tree_lbl.setStyleSheet("font-size: 20px; font-weight: 600; padding:4px 6px;")
         tree_frame = QFrame()
         tree_frame.setObjectName("pane")
         tree_layout = QVBoxLayout(tree_frame)
         tree_layout.setContentsMargins(6, 6, 6, 6)
         tree_layout.addWidget(self.tree_lbl)
 
-        self.odom_lbl = QLabel("Pose: x=0.00 y=0.00 yaw=0.0°")
+        self.odom_lbl = QLabel("x=0.00\ny=0.00\nyaw=0.0°")
         self.odom_lbl.setAlignment(Qt.AlignLeft)
         odom_frame = QFrame()
         odom_frame.setObjectName("pane")
         odom_layout = QVBoxLayout(odom_frame)
         odom_layout.setContentsMargins(6, 6, 6, 6)
         odom_layout.setSpacing(4)
+        
         odom_layout.addWidget(QLabel("Odometry", alignment=Qt.AlignLeft))
         odom_layout.addWidget(self.odom_lbl)
 
@@ -1423,23 +1427,23 @@ class ControlGUI(QWidget):
         g.addWidget(self.btn_down, 2, 1)
         dpad_square = SquareContainer(dpad_core)
         dpad_square.setMinimumSize(160, 160)
-        dpad_square.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
+        dpad_square.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         dpad = self.rounded_pane(dpad_square, pad=6)
         dpad.setMinimumWidth(180)
-        dpad.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
+        dpad.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         left_controls = QWidget()
         left_stack = QVBoxLayout(left_controls)
         left_stack.setContentsMargins(0, 0, 0, 0)
         left_stack.setSpacing(8)
         left_stack.addWidget(tree_frame, 0)
-        left_stack.addWidget(odom_frame, 0)
+        left_stack.addWidget(odom_frame, 0, Qt.AlignLeft)
         left_stack.addStretch(1)
 
         right_bottom = QHBoxLayout()
         right_bottom.setSpacing(12)
         right_bottom.addWidget(left_controls, 1)
-        right_bottom.addWidget(dpad, 0, Qt.AlignRight | Qt.AlignVCenter)
+        right_bottom.addWidget(dpad, 2)
         right_bottom.addWidget(speed_pane, 0)
         right_col.addLayout(right_bottom, 2)
 
@@ -1455,6 +1459,9 @@ class ControlGUI(QWidget):
         self.pc_val.setStyleSheet("font-weight:600;")
         run.addWidget(self.pc_name)
         run.addWidget(self.pc_val)
+        self.auto_name = QLabel("Autonomy")
+        self.auto_led = LedIndicator("#666666")
+        run.addWidget(self.auto_name); run.addWidget(self.auto_led)
 
         # Battery
         run.addWidget(QLabel("Battery"))
@@ -1512,7 +1519,7 @@ class ControlGUI(QWidget):
         QApplication.instance().setPalette(pal)
 
         self.setStyleSheet("""
-            QWidget { font-size: 14px; color: #eaeaea; }
+            QWidget { font-size: 18px; color: #eaeaea; }
             QFrame#pane {
                 border: 1px solid #2e2e2e;
                 border-radius: 12px;
@@ -1575,6 +1582,8 @@ class ControlGUI(QWidget):
         self.send_speed_scale = self.ros.set_speed_scale
         self.cancel_waypoints = self.ros.cancel_waypoints
         self.send_hsv_params  = self.ros.set_hsv_params
+        self.ros.signals.autonomy.connect(self._on_autonomy_state)
+        self.ros.signals.mission_done.connect(self._on_mission_done)
         self.ros.start()
         QTimer.singleShot(250, self._notify_speed_change)
 
@@ -1875,18 +1884,18 @@ class ControlGUI(QWidget):
         }
         self.tree_table.resizeRowsToContents()
 
-    @Slot(object)
-    def _update_robot_pose(self, pose_obj):
-        try:
-            if pose_obj is None:
-                return
-            x, y, yaw = pose_obj
-            self._robot_pose = (float(x), float(y), float(yaw))
-            if hasattr(self, "odom_lbl"):
-                self.odom_lbl.setText(f"Pose: x={float(x):.2f}  y={float(y):.2f}  yaw={math.degrees(float(yaw)):.1f}°")
-        except Exception:
+    @Slot(object) 
+    def _update_robot_pose(self, pose_obj): 
+        try: 
+            if pose_obj is None: 
+                return 
+            x, y, yaw = pose_obj 
+            self._robot_pose = (float(x), float(y), float(yaw)) 
+            if hasattr(self, "odom_lbl"): 
+                self.odom_lbl.setText(f"Pose: x={float(x):.2f} y={float(y):.2f} yaw={math.degrees(float(yaw)):.1f}°") 
+        except Exception: 
             pass
-
+    
     def _get_current_robot_pose(self):
         return self._robot_pose
 
@@ -2218,6 +2227,28 @@ class RosWorker(QThread):
             except Exception:
                 pass
 
+    @Slot(str)
+    def _on_autonomy_state(self, s: str):
+        s = (s or "").lower()
+        # same palette as the node uses
+        color_map = {
+            "idle":      "#666666",
+            "scanning":  "#4aa3ff",
+            "planning":  "#ffcc00",
+            "executing": "#46d160",
+            "teleop":    "#f6c343",
+            "complete":  "#9c27b0",
+        }
+        self.auto_led.set_color(color_map.get(s, "#666666"))
+        self._append_log(f"[AUTO] {s}")
+
+    @Slot(bool)
+    def _on_mission_done(self, ok: bool):
+        if ok:
+            self._append_log(">>> MISSION COMPLETE ✅")
+            self.auto_led.set_color("#9c27b0")  # purple flash on completion
+
+            
 # ============================== main ================================
 def _apply_qt_logging_rules_from_env():
     if os.environ.get("UI_SUPPRESS_QT_DEBUG", "1") == "1" and "QT_LOGGING_RULES" not in os.environ:
