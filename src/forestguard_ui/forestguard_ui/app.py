@@ -3,7 +3,7 @@
 # + Run Sim + Rebuild Code + Map+Trees overlay + Depth Cloud counter + Teleop LED + Battery
 from __future__ import annotations
 
-import sys, os, math, signal
+import sys, os, math, signal, time
 from typing import Optional, Dict, Tuple, List
 from threading import Lock
 
@@ -78,7 +78,7 @@ DEFAULT_BUILD_CMD = os.environ.get(
     "UI_BUILD_CMD",
     "colcon build --symlink-install "
     "--packages-select forestguard_perception forestguard_controller "
-    "forestguard_localisation forestguard_sim forestguard_ui"
+    "forestguard_localisation forestguard_sim forestguard_behaviour forestguard_ui"
 )
 
 # ---------- optional deps ----------
@@ -435,6 +435,10 @@ class GuiRosNode(Node):
         self.waypoint_pub = self.create_publisher(PoseArray, WAYPOINT_TOPIC, 10)
         self.speed_cmd_pub = self.create_publisher(Float32, SPEED_CMD_TOPIC, 10)
         self.autonomy_cmd_pub = self.create_publisher(Bool, AUTONOMY_START_TOPIC, 10)
+        try:
+            self.autonomy_cmd_pub.publish(Bool(data=False))
+        except Exception:
+            pass
 
         self.create_subscription(String, AUTONOMY_TOPIC, self._on_autonomy_state, 10)
         self.create_subscription(Bool, MISSION_DONE_TOPIC, self._on_autonomy_done, 10)
@@ -461,11 +465,11 @@ class GuiRosNode(Node):
         self._btn_cycle = int(os.environ.get("UI_JOY_BTN_CAMERA", "3"))
         self._hsv_ready = (np is not None and cv2 is not None)
         if self._hsv_ready:
-            self._green_low = np.array([50, 130, 25], dtype=np.uint8)
-            self._green_high = np.array([70, 255, 255], dtype=np.uint8)
+            self._green_low = np.array([25, 130, 13], dtype=np.uint8)
+            self._green_high = np.array([58, 255, 255], dtype=np.uint8)
             self._red1_low = np.array([0, 155, 75], dtype=np.uint8)
-            self._red1_high = np.array([34, 255, 255], dtype=np.uint8)
-            self._red2_low = np.array([170, 160, 77], dtype=np.uint8)
+            self._red1_high = np.array([32, 255, 255], dtype=np.uint8)
+            self._red2_low = np.array([179, 160, 77], dtype=np.uint8)
             self._red2_high = np.array([179, 255, 255], dtype=np.uint8)
         else:
             self.get_logger().warn("HSV view unavailable (missing OpenCV/NumPy)")
@@ -688,7 +692,7 @@ class GuiRosNode(Node):
         try:
             msg = Bool(data=bool(start))
             self.autonomy_cmd_pub.publish(msg)
-            self.signals.ok.emit(True, "Autonomy start command sent" if start else "Autonomy command sent")
+            self.signals.ok.emit(True, "Autonomy start command sent" if start else "Autonomy stop command sent")
         except Exception as e:
             self.signals.ok.emit(False, f"Autonomy command failed: {e}")
 
@@ -703,8 +707,20 @@ class GuiRosNode(Node):
             if not self._follow_client.server_is_ready():
                 self.signals.ok.emit(False, "Waypoint server not ready")
                 return
-            future = self._follow_client.cancel_all_goals()
-            future.add_done_callback(lambda _f: self.signals.ok.emit(True, "Waypoint goals cancelled"))
+            cancel_fn = getattr(self._follow_client, "cancel_all_goals_async", None)
+            if cancel_fn is None:
+                cancel_fn = getattr(self._follow_client, "cancel_all_goals", None)
+            if cancel_fn is None:
+                self.signals.ok.emit(False, "Cancel not supported on this platform")
+                return
+            future = cancel_fn()
+            if future is None:
+                self.signals.ok.emit(True, "Waypoint goals cancelled")
+            else:
+                try:
+                    future.add_done_callback(lambda _f: self.signals.ok.emit(True, "Waypoint goals cancelled"))
+                except Exception:
+                    self.signals.ok.emit(True, "Waypoint cancel requested")
         except Exception as e:
             self.signals.ok.emit(False, f"Cancel failed: {e}")
 
@@ -1322,6 +1338,10 @@ class ControlGUI(QWidget):
         self._mission_complete = False
         self._tree_table_keys: List[Tuple[float, float]] = []
         self._tree_table_cache: Dict[Tuple[float, float], Dict[str, object]] = {}
+        self.stage_leds: Dict[str, LedIndicator] = {}
+        self._last_pose_confirm_time = 0.0
+        self._last_manual_resume_time = 0.0
+        self._autonomy_requested = False
         self._cpu_process = psutil.Process(os.getpid()) if psutil else None
         if self._cpu_process:
             try:
@@ -1345,11 +1365,11 @@ class ControlGUI(QWidget):
         self.send_autonomy_cmd = lambda _start: None
         self._install_sigint_handler()
         self._hsv_params = {
-            "green_low": [50, 140, 13],
-            "green_high": [57, 255, 255],
+            "green_low": [25, 140, 13],
+            "green_high": [58, 255, 255],
             "red1_low": [0, 155, 75],
-            "red1_high": [34, 255, 255],
-            "red2_low": [170, 160, 77],
+            "red1_high": [32, 255, 255],
+            "red2_low": [179, 160, 77],
             "red2_high": [179, 255, 255],
         }
         self._hsv_inputs = {}
@@ -1382,6 +1402,116 @@ class ControlGUI(QWidget):
         f = QFrame(); f.setObjectName("pane")
         ly = QVBoxLayout(f); ly.setContentsMargins(pad, pad, pad, pad); ly.addWidget(w)
         return f
+
+    def _build_status_panel(self) -> QWidget:
+        panel = QWidget()
+        layout = QVBoxLayout(panel)
+        layout.setContentsMargins(4, 4, 4, 4)
+        layout.setSpacing(10)
+
+        title = QLabel("Mission Status")
+        title.setStyleSheet("font-weight:700;")
+        layout.addWidget(title)
+
+        def make_led_row(name: str, led: LedIndicator, extra: Optional[QWidget] = None):
+            row = QHBoxLayout()
+            row.setSpacing(6)
+            row.addWidget(led)
+            lbl = QLabel(name)
+            lbl.setStyleSheet("color:#ddd;")
+            row.addWidget(lbl)
+            if extra is not None:
+                row.addWidget(extra)
+            row.addStretch(1)
+            return row
+
+        # Teleop + autonomy summary
+        self.led = LedIndicator("#666666")
+        teleop_row = make_led_row("Teleop", self.led)
+        layout.addLayout(teleop_row)
+
+        self.auto_led = LedIndicator("#666666")
+        self.auto_state = QLabel("—")
+        self.auto_state.setStyleSheet("color:#bbb; margin-left:6px;")
+        auto_row = make_led_row("Autonomy", self.auto_led, self.auto_state)
+        layout.addLayout(auto_row)
+
+        self.mission_lbl = QLabel("")
+        self.mission_lbl.setWordWrap(True)
+        self.mission_lbl.setStyleSheet("font-weight:700;")
+        layout.addWidget(self.mission_lbl)
+
+        # Behaviour pipeline LEDs
+        pipeline_lbl = QLabel("Pipeline")
+        pipeline_lbl.setStyleSheet("font-weight:600; margin-top:4px;")
+        layout.addWidget(pipeline_lbl)
+
+        stage_def = [
+            ("spawn", "1. Spawn / Init"),
+            ("scan", "2. Perception Scan"),
+            ("waypoint", "3. Set Waypoint"),
+            ("move", "4. Move to Waypoint"),
+            ("confirm", "5. Confirm Tree"),
+        ]
+        self.stage_leds = {}
+        for key, text in stage_def:
+            led = LedIndicator("#444444")
+            self.stage_leds[key] = led
+            layout.addLayout(make_led_row(text, led))
+
+        layout.addSpacing(6)
+
+        # Metrics
+        metrics_lbl = QLabel("System Metrics")
+        metrics_lbl.setStyleSheet("font-weight:600; margin-top:4px;")
+        layout.addWidget(metrics_lbl)
+
+        metrics = QVBoxLayout()
+        metrics.setSpacing(4)
+
+        depth_row = QHBoxLayout()
+        depth_row.addWidget(QLabel("Depth Cloud"))
+        self.pc_val = QLabel("~0")
+        self.pc_val.setStyleSheet("font-weight:600;")
+        depth_row.addStretch(1)
+        depth_row.addWidget(self.pc_val)
+        metrics.addLayout(depth_row)
+
+        batt_row = QHBoxLayout()
+        batt_row.addWidget(QLabel("Battery"))
+        self.batt_lbl = QLabel("—%")
+        self.batt_lbl.setStyleSheet("font-weight:700; margin-left:6px; color:#bbb;")
+        batt_row.addStretch(1)
+        batt_row.addWidget(self.batt_lbl)
+        metrics.addLayout(batt_row)
+
+        cpu_row = QHBoxLayout()
+        cpu_row.addWidget(QLabel("CPU"))
+        self.cpu_lbl = QLabel("—")
+        self.cpu_lbl.setStyleSheet("color:#bbb;")
+        self.cpu_lbl.setToolTip("Use `top` (watch controller_bridge, run_ui) and `ros2 topic hz /camera/image` for rate.")
+        cpu_row.addStretch(1)
+        cpu_row.addWidget(self.cpu_lbl)
+        metrics.addLayout(cpu_row)
+
+        layout.addLayout(metrics)
+        layout.addStretch(1)
+        self._update_stage_leds()
+        return panel
+
+    def _set_autonomy_button_idle(self, label: str = "Start Mission", enabled: bool = True):
+        if not hasattr(self, "autonomy_btn"):
+            return
+        self.autonomy_btn.setEnabled(enabled)
+        self.autonomy_btn.setText(label)
+        self.autonomy_btn.setStyleSheet("background:#2e7d32; color:white; font-weight:700; border-radius:12px;")
+
+    def _set_autonomy_button_running(self, text: str = "Mission running…"):
+        if not hasattr(self, "autonomy_btn"):
+            return
+        self.autonomy_btn.setEnabled(False)
+        self.autonomy_btn.setText(text)
+        self.autonomy_btn.setStyleSheet("background:#1976d2; color:white; font-weight:700; border-radius:12px;")
 
     def _build_ui(self):
         # Camera
@@ -1471,6 +1601,16 @@ class ControlGUI(QWidget):
         self.waypoint_panel.set_pose_provider(self._get_current_robot_pose)
 
         tabs_holder = self.rounded_pane(self.tabs, pad=6)
+        status_holder = self.rounded_pane(self._build_status_panel(), pad=6)
+
+        tabs_split = QHBoxLayout()
+        tabs_split.setContentsMargins(0, 0, 0, 0)
+        tabs_split.setSpacing(12)
+        tabs_split.addWidget(status_holder, 1)
+        tabs_split.addWidget(tabs_holder, 2)
+        tabs_container = QWidget()
+        tabs_container.setLayout(tabs_split)
+        tabs_container.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         # Right column: top = Map/Panel, bottom split 50/50 (tree counter + speed)
         self.tree_total = 0
@@ -1559,48 +1699,6 @@ class ControlGUI(QWidget):
         right_bottom.addWidget(dpad, 2)
         right_bottom.addWidget(speed_pane, 0)
 
-        # Bottom bar: Teleop LED + Depth Cloud + Battery + Run/Build/E-stop
-        run = QHBoxLayout()
-        # Teleop LED
-        run.addWidget(QLabel("Teleop"))
-        self.led = LedIndicator("#666666")
-        run.addWidget(self.led)
-
-        # Autonomy LED + state text
-        run.addSpacing(16)
-        run.addWidget(QLabel("Autonomy"))
-        self.auto_led = LedIndicator("#666666")
-        run.addWidget(self.auto_led)
-        self.auto_state = QLabel("—")
-        self.auto_state.setStyleSheet("color:#bbb; margin-left:6px;")
-        run.addWidget(self.auto_state)
-
-        # Mission banner (appears when mission_done=True)
-        run.addSpacing(16)
-        self.mission_lbl = QLabel("")  # hidden until set
-        self.mission_lbl.setStyleSheet("font-weight:700;")
-        run.addWidget(self.mission_lbl)
-
-        self.pc_name = QLabel("Depth Cloud")
-        self.pc_name.setStyleSheet("color:#bbb; margin-left:14px;")
-        self.pc_val  = QLabel("~0")
-        self.pc_val.setStyleSheet("font-weight:600;")
-        run.addWidget(self.pc_name)
-        run.addWidget(self.pc_val)
-
-        # Battery
-        run.addWidget(QLabel("Battery"))
-        self.batt_lbl = QLabel("—%")
-        self.batt_lbl.setStyleSheet("font-weight:700; margin-left:6px;")
-        run.addWidget(self.batt_lbl)
-        self.cpu_lbl = QLabel("CPU: --")
-        self.cpu_lbl.setStyleSheet("color:#bbb; margin-left:14px;")
-        self.cpu_lbl.setToolTip("Use `top` (watch controller_bridge, run_ui) and `ros2 topic hz /camera/image` for rate.")
-        run.addWidget(self.cpu_lbl)
-
-        run.addStretch(1)
-        run_w = QWidget(); run_w.setLayout(run)
-
         self.launch_btn = QPushButton("Run Sim")
         self.launch_btn.setCheckable(True)
         self.launch_btn.clicked.connect(self._toggle_launch)
@@ -1619,18 +1717,19 @@ class ControlGUI(QWidget):
         self.autonomy_btn.clicked.connect(self._start_autonomy_clicked)
 
         bottom = QHBoxLayout()
-        bottom.addWidget(run_w, 1)
+        bottom.setSpacing(12)
+        bottom.addStretch(1)
         bottom.addWidget(self.launch_btn, 0)
         bottom.addWidget(self.build_btn, 0)
         bottom.addWidget(self.autonomy_btn, 0)
-        bottom.addWidget(self.estop, 0, Qt.AlignRight)
+        bottom.addWidget(self.estop, 0)
 
         top_grid = QGridLayout()
         top_grid.setContentsMargins(0, 0, 0, 0)
         top_grid.setSpacing(12)
         top_grid.addWidget(self.camera_group, 0, 0)
         top_grid.addWidget(self.map_group, 0, 1)
-        top_grid.addWidget(tabs_holder, 1, 0)
+        top_grid.addWidget(tabs_container, 1, 0)
         top_grid.addLayout(right_bottom, 1, 1)
         top_grid.setRowStretch(0, 3)
         top_grid.setRowStretch(1, 2)
@@ -1679,7 +1778,7 @@ class ControlGUI(QWidget):
             }
             QPushButton:hover { background: #3a3a3a; }
             QPushButton#estop {
-                background-color: #e53935; color: white; border: 2px solid #b71c1c; border-radius: 18px;
+                background-color: #e53935; color: white; border: 2px solid #b71c1c; border-radius: 12px;
                 padding: 8px 18px; font-weight: 700;
             }
             QPushButton#estop:hover   { background-color: #f44336; }
@@ -1793,6 +1892,7 @@ class ControlGUI(QWidget):
         self._dpad_engaged = self._dpad_forward or self._dpad_back or self._dpad_left or self._dpad_right
 
     def _set_motion(self, forward=None, back=None, left=None, right=None):
+        prev = self._dpad_engaged
         if forward is not None:
             self._dpad_forward = bool(forward)
         if back is not None:
@@ -1802,6 +1902,10 @@ class ControlGUI(QWidget):
         if right is not None:
             self._dpad_right = bool(right)
         self._recompute_dpad_motion()
+        if prev and not self._dpad_engaged and not self._teleop_enabled:
+            self._on_manual_override_end()
+        else:
+            self._update_teleop_led_color()
 
     def _bump_speed(self, delta_steps: int):
         v = int(self.speed.value())
@@ -1836,20 +1940,99 @@ class ControlGUI(QWidget):
     # Teleop LED handling
     @Slot(bool, bool)
     def _set_teleop_led(self, teleop_enabled: bool, sim_alive: bool):
+        prev_enabled = self._teleop_enabled
         self._teleop_enabled = teleop_enabled
         self._sim_alive = sim_alive
         self._update_teleop_led_color()
+        if prev_enabled and not teleop_enabled and not self._dpad_engaged:
+            self._on_manual_override_end()
 
     def _update_teleop_led_color(self):
         if getattr(self, "_estopped", False):
             self.led.set_color("#e53935")
             return
-        if self._teleop_enabled:
+        if self._teleop_enabled or self._dpad_engaged:
             self.led.set_color("#46d160")
         elif self._sim_alive:
             self.led.set_color("#f6c343")
         else:
             self.led.set_color("#666666")
+        self._update_stage_leds()
+
+    def _on_manual_override_end(self):
+        now = time.time()
+        if not getattr(self, "_autonomy_requested", False):
+            return
+        if now - getattr(self, "_last_manual_resume_time", 0.0) < 1.0:
+            return
+        self._last_manual_resume_time = now
+        if getattr(self, "_estopped", False):
+            return
+        if (self._last_autonomy_state or "").lower() in ("", "idle", "complete"):
+            return
+        if callable(getattr(self, "send_autonomy_cmd", None)):
+            try:
+                self._append_log("[AUTO] Resuming autonomy after teleop release")
+            except Exception:
+                pass
+            try:
+                self.send_autonomy_cmd(True)
+            except Exception:
+                pass
+        self._set_autonomy_button_running()
+        self._update_stage_leds()
+
+    def _stop_autonomy(self, reason: str = "", button_label: str = "Start Mission"):
+        was_running = getattr(self, "_autonomy_requested", False)
+        self._autonomy_requested = False
+        self._last_manual_resume_time = 0.0
+        if was_running and callable(getattr(self, "send_autonomy_cmd", None)):
+            try:
+                msg = "[AUTO] Stopping autonomy"
+                if reason:
+                    msg += f" ({reason})"
+                self._append_log(msg)
+            except Exception:
+                pass
+            try:
+                self.send_autonomy_cmd(False)
+            except Exception:
+                pass
+        self._set_autonomy_button_idle(label=button_label)
+
+    def _update_stage_leds(self):
+        if not getattr(self, "stage_leds", None):
+            return
+        now = time.time()
+        if getattr(self, "_estopped", False):
+            for led in self.stage_leds.values():
+                led.set_color("#444444")
+            try:
+                self.auto_led.set_color("#e53935")
+            except Exception:
+                pass
+            return
+        state = (self._last_autonomy_state or "").lower() if self._last_autonomy_state else ""
+        active = {key: False for key in self.stage_leds}
+
+        if self._teleop_enabled:
+            active["move"] = True
+        elif state in ("idle", "init", "settling"):
+            active["spawn"] = True
+        elif state == "scanning":
+            active["scan"] = True
+        elif state == "planning":
+            active["waypoint"] = True
+        elif state == "executing":
+            active["move"] = True
+        elif state == "complete":
+            active["confirm"] = True
+
+        if state in ("planning", "complete") and now - getattr(self, "_last_pose_confirm_time", 0.0) <= 2.0:
+            active["confirm"] = True
+
+        for key, led in self.stage_leds.items():
+            led.set_color("#46d160" if active.get(key, False) else "#444444")
 
     def _notify_speed_change(self):
         scale = self._current_scale()
@@ -1907,9 +2090,15 @@ class ControlGUI(QWidget):
                     self.cancel_waypoints()
                 except Exception:
                     pass
+            self._stop_autonomy("E-STOP")
+            try:
+                self.auto_led.set_color("#e53935")
+            except Exception:
+                pass
 
         else:
             self._append_log(">>> E-STOP released <<<" + (" (controller)" if source == "pad" else ""))
+            self._update_stage_leds()
 
         self._update_teleop_led_color()
         if latched:
@@ -1938,11 +2127,13 @@ class ControlGUI(QWidget):
         except Exception:
             pass
         self._mission_complete = False
+        self._autonomy_requested = True
         if hasattr(self, "send_autonomy_cmd"):
             self.send_autonomy_cmd(True)
         self.autonomy_btn.setEnabled(False)
         self.autonomy_btn.setText("Starting…")
         self.autonomy_btn.setStyleSheet("background:#1976d2; color:white; font-weight:700; border-radius:12px;")
+        self._update_stage_leds()
 
     def _format_tree_row(self, row: Dict[str, object]):
         status = str(row.get("status", "unknown")).lower()
@@ -2085,18 +2276,22 @@ class ControlGUI(QWidget):
         }
         self.tree_table.resizeRowsToContents()
 
-    @Slot(object) 
-    def _update_robot_pose(self, pose_obj): 
-        try: 
-            if pose_obj is None: 
-                return 
-            x, y, yaw = pose_obj 
-            self._robot_pose = (float(x), float(y), float(yaw)) 
-            if hasattr(self, "odom_lbl"): 
-                self.odom_lbl.setText(f"Pose: x={float(x):.2f} y={float(y):.2f} yaw={math.degrees(float(yaw)):.1f}°") 
-        except Exception: 
+    @Slot(object)
+    def _update_robot_pose(self, pose_obj):
+        try:
+            if pose_obj is None:
+                return
+            x, y, yaw = pose_obj
+            self._robot_pose = (float(x), float(y), float(yaw))
+            self._last_pose_confirm_time = time.time()
+            if hasattr(self, "odom_lbl"):
+                self.odom_lbl.setText(
+                    f"Pose: x={float(x):.2f} y={float(y):.2f} yaw={math.degrees(float(yaw)):.1f}°"
+                )
+            self._update_stage_leds()
+        except Exception:
             pass
-    
+
     def _get_current_robot_pose(self):
         return self._robot_pose
 
@@ -2144,12 +2339,12 @@ class ControlGUI(QWidget):
                 cores_total = max(1, psutil.cpu_count() or 1)
                 core_equiv = proc_pct / 100.0
                 self.cpu_lbl.setText(
-                    f"CPU: app {proc_pct:.0f}% (~{core_equiv:.2f} cores of {cores_total}) | sys {sys_pct:.0f}%"
+                    f"app {proc_pct:.0f}% (~{core_equiv:.2f} cores / {cores_total}) | sys {sys_pct:.0f}%"
                 )
                 return
             except Exception:
                 pass
-        self.cpu_lbl.setText("CPU: use top • ros2 topic hz /camera/image")
+        self.cpu_lbl.setText("use top • ros2 topic hz /camera/image")
 
     @Slot(float, float, bool)
     def _update_battery(self, pct, volt, charging):
@@ -2208,6 +2403,10 @@ class ControlGUI(QWidget):
     def closeEvent(self, event):
         try:
             self._quitting = True
+            try:
+                self._stop_autonomy("UI closing")
+            except Exception:
+                pass
             if hasattr(self, "cmd_timer"):
                 self.cmd_timer.stop()
                 try: self.cmd_timer.timeout.disconnect(self._publish_cmd)
@@ -2379,20 +2578,27 @@ class ControlGUI(QWidget):
             pass
 
         if s in ("idle", "complete"):
-            self.autonomy_btn.setEnabled(True)
-            self.autonomy_btn.setText("Restart Mission" if s == "complete" else "Start Mission")
-            self.autonomy_btn.setStyleSheet("background:#2e7d32; color:white; font-weight:700; border-radius:12px;")
+            if s == "idle":
+                self._autonomy_requested = False
+            label = "Restart Mission" if s == "complete" else "Start Mission"
+            self._set_autonomy_button_idle(label=label, enabled=True)
         elif s == "teleop":
-            self.autonomy_btn.setEnabled(False)
-            self.autonomy_btn.setText("Teleop override")
-            self.autonomy_btn.setStyleSheet("background:#f6c343; color:#111; font-weight:700; border-radius:12px;")
+            if self._autonomy_requested:
+                if self._teleop_enabled or self._dpad_engaged:
+                    if hasattr(self, "autonomy_btn"):
+                        self.autonomy_btn.setEnabled(False)
+                        self.autonomy_btn.setText("Teleop override")
+                        self.autonomy_btn.setStyleSheet("background:#f6c343; color:#111; font-weight:700; border-radius:12px;")
+                else:
+                    self._set_autonomy_button_running()
+            else:
+                self._set_autonomy_button_idle()
         else:
-            self.autonomy_btn.setEnabled(False)
-            self.autonomy_btn.setText("Mission running…")
-            self.autonomy_btn.setStyleSheet("background:#1976d2; color:white; font-weight:700; border-radius:12px;")
+            self._set_autonomy_button_running()
 
         if s != prev:
             self._append_log(f"[AUTO] {s if s else 'unknown'}")
+        self._update_stage_leds()
 
     @Slot(bool)
     def _on_mission_done(self, ok: bool):
@@ -2405,9 +2611,7 @@ class ControlGUI(QWidget):
                 self.mission_lbl.setStyleSheet("color:#9c27b0; font-weight:800;")
             except Exception:
                 pass
-            self.autonomy_btn.setEnabled(True)
-            self.autonomy_btn.setText("Restart Mission")
-            self.autonomy_btn.setStyleSheet("background:#6a1b9a; color:white; font-weight:700; border-radius:12px;")
+            self._stop_autonomy("Mission complete", button_label="Restart Mission")
         else:
             self._mission_complete = False
             # if someone ever publishes 'false' to reset, clear banner
@@ -2415,6 +2619,7 @@ class ControlGUI(QWidget):
                 self.mission_lbl.setText("")
             except Exception:
                 pass
+        self._update_stage_leds()
 
 # ============================ ROS worker ============================
 class RosWorker(QThread):

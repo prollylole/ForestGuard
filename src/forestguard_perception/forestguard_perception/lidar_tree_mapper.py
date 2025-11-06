@@ -10,7 +10,7 @@ from rclpy.time import Time
 from sensor_msgs.msg import LaserScan
 from visualization_msgs.msg import Marker, MarkerArray
 from geometry_msgs.msg import PoseArray, Pose
-from std_msgs.msg import Int32, UInt32
+from std_msgs.msg import Int32, UInt32, Bool
 from std_srvs.srv import Empty
 
 import tf2_ros
@@ -57,6 +57,7 @@ class LidarTreeMapper(Node):
 
         self.declare_parameter("marker_scale_m", 0.35)
         self.declare_parameter("marker_lifetime_s", 0.0)   # 0 => forever
+        self.declare_parameter("mission_topic", "/ui/autonomy_start")
 
         # Read params
         self.scan_topic = self.get_parameter("scan_topic").value
@@ -96,10 +97,15 @@ class LidarTreeMapper(Node):
         self._next_marker_id = 0
         self._bad_count = 0
         self._last_tf_warn = 0.0
+        self._mission_active = False
 
         # ---- Sub/Service ----
         self.create_subscription(LaserScan, self.scan_topic, self._on_scan, 10)
         self.create_service(Empty, "/lidar_tree_mapper/reset", self._on_reset)
+        mission_topic = str(self.get_parameter("mission_topic").value or "")
+        if mission_topic:
+            self.create_subscription(Bool, mission_topic, self._on_mission_toggle, 10)
+            self.get_logger().info(f"Mission gating on {mission_topic}")
 
         self.get_logger().info(
             f"LiDAR mapper on {self.scan_topic} | min_sep={self.min_sep:.2f} m, "
@@ -108,12 +114,18 @@ class LidarTreeMapper(Node):
 
     # -------------------- Reset --------------------
     def _on_reset(self, _req, _res):
+        self._clear_outputs()
+        self.get_logger().info("State reset.")
+        return _res
+
+    def _clear_outputs(self):
         self.trees_map.clear()
         self._next_marker_id = 0
         self._bad_count = 0
 
         kill = Marker()
         kill.header.frame_id = self.map_frame
+        kill.header.stamp = self.get_clock().now().to_msg()
         kill.action = Marker.DELETEALL
         ma = MarkerArray(); ma.markers.append(kill)
         self.pub_markers.publish(ma)
@@ -121,11 +133,21 @@ class LidarTreeMapper(Node):
         self.pub_total_u32.publish(UInt32(data=0))
         self.pub_bad_u32.publish(UInt32(data=0))
         self.pub_count_i32.publish(Int32(data=0))
-        self.get_logger().info("State reset.")
-        return _res
+
+    def _on_mission_toggle(self, msg: Bool):
+        active = bool(getattr(msg, "data", False))
+        if active and not self._mission_active:
+            self._mission_active = True
+            self.get_logger().info("Mission active: enabling LiDAR tree mapper.")
+        elif not active and self._mission_active:
+            self._mission_active = False
+            self.get_logger().info("Mission inactive: clearing LiDAR detections.")
+            self._clear_outputs()
 
     # -------------------- Scan callback --------------------
     def _on_scan(self, scan: LaserScan):
+        if not self._mission_active:
+            return
         # 1) Gather points (base_link)
         pts: List[Tuple[float, float, float]] = []
         ang = scan.angle_min

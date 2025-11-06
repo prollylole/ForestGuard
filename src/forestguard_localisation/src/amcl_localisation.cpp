@@ -30,8 +30,8 @@ Amcllocalisation::Amcllocalisation()
   this->declare_parameter("initial_x", 0.0);
   this->declare_parameter("initial_y", 0.0);
   this->declare_parameter("initial_yaw", 0.0);
-  this->declare_parameter("cov_threshold", 0.05);
-  this->declare_parameter("rotation_speed", 0.2);
+  this->declare_parameter("cov_threshold", 0.15);
+  this->declare_parameter("rotation_speed", 1.0);
 
   this->get_parameter("initial_x", init_x_);
   this->get_parameter("initial_y", init_y_);

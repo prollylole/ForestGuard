@@ -8,6 +8,7 @@
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/config/xbox_teleop.yaml
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/launch/41068_ignition.launch.py
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/launch/JOHNAUTO.launch.py
+/home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/launch/__pycache__/johnAUTO2.launch.cpython-310.pyc
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/launch/autonomous_forest.launch.py
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/launch/forest_mapping.launch.py
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/launch/forest_random.launch.py
@@ -23,12 +24,16 @@
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/launch/sample
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/maps/forest_map.pgm
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/maps/forest_map.yaml
+/home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/maps/forest_map2.pgm
+/home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/maps/forest_map2.yaml
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/materials/textures/empty_grass.png
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment.dae
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment1.dae
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment2.dae
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment3.dae
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment4.dae
+/home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment5.dae
+/home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/RockMountain0127_350.jpg
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/empty_grass.png
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/empty_grass.png.001.png
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/grass-5efe540a8d596-1250.jpg

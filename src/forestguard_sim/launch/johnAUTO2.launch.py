@@ -47,7 +47,7 @@ def _setup(context, *args, **kwargs):
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
         arguments=[
             '-topic', '/robot_description',
-            '-x', spawn_x, '-y', spawn_y, '-z', '0.2',
+            '-x', spawn_x, '-y', spawn_y, '-z', '0.0',
             '-Y', spawn_yaw,
             '-wait', '5'
         ]
@@ -62,6 +62,7 @@ def generate_launch_description():
         os.path.join(pkg_path, 'models'),
         os.path.join(pkg_path, 'worlds'),
     ])
+    autonomy_params_path = PathJoinSubstitution([pkg_path, 'config', 'autonomy_params.yaml'])
 
     ld = LaunchDescription()
 
@@ -73,6 +74,7 @@ def generate_launch_description():
     ld.add_action(DeclareLaunchArgument('nav2', default_value='True'))
     ld.add_action(DeclareLaunchArgument('ui', default_value='True'))
     ld.add_action(DeclareLaunchArgument('teleop', default_value='True'))
+    ld.add_action(DeclareLaunchArgument('autonomy', default_value='True'))
 
     ld.add_action(DeclareLaunchArgument('spawn_x', default_value='0.0'))
     ld.add_action(DeclareLaunchArgument('spawn_y', default_value='0.0'))
@@ -191,6 +193,18 @@ def generate_launch_description():
         name='forestguard_controller',
         output='screen',
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
+    ))
+
+    ld.add_action(Node(
+        package='forestguard_behaviour',
+        executable='autonomy',
+        name='autonomy_behaviour',
+        output='screen',
+        parameters=[
+            autonomy_params_path,
+            {'use_sim_time': LaunchConfiguration('use_sim_time')}
+        ],
+        condition=IfCondition(LaunchConfiguration('autonomy'))
     ))
 
     # Battery simulator (drains faster when moving)
