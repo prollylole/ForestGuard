@@ -1,0 +1,32 @@
+[0.461s] Invoking command in '/home/john/git/RS1/john_branch/build/forestguard_perception': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_perception/build --no-deps symlink_data
+[0.598s] running develop
+[0.686s] running egg_info
+[0.686s] creating forestguard_perception.egg-info
+[0.686s] writing forestguard_perception.egg-info/PKG-INFO
+[0.686s] writing dependency_links to forestguard_perception.egg-info/dependency_links.txt
+[0.686s] writing entry points to forestguard_perception.egg-info/entry_points.txt
+[0.686s] writing requirements to forestguard_perception.egg-info/requires.txt
+[0.686s] writing top-level names to forestguard_perception.egg-info/top_level.txt
+[0.686s] writing manifest file 'forestguard_perception.egg-info/SOURCES.txt'
+[0.687s] reading manifest file 'forestguard_perception.egg-info/SOURCES.txt'
+[0.687s] writing manifest file 'forestguard_perception.egg-info/SOURCES.txt'
+[0.688s] running build_ext
+[0.688s] Creating /home/john/git/RS1/john_branch/install/forestguard_perception/lib/python3.10/site-packages/forestguard-perception.egg-link (link to .)
+[0.689s] Installing camera_tree_mapper script to /home/john/git/RS1/john_branch/install/forestguard_perception/lib/forestguard_perception
+[0.689s] Installing hsv_calibrator script to /home/john/git/RS1/john_branch/install/forestguard_perception/lib/forestguard_perception
+[0.689s] Installing lidar_tree_mapper script to /home/john/git/RS1/john_branch/install/forestguard_perception/lib/forestguard_perception
+[0.689s] Installing tree_colour_confirmer script to /home/john/git/RS1/john_branch/install/forestguard_perception/lib/forestguard_perception
+[0.689s] Installing tree_detector script to /home/john/git/RS1/john_branch/install/forestguard_perception/lib/forestguard_perception
+[0.689s] Installing tree_detector_v2 script to /home/john/git/RS1/john_branch/install/forestguard_perception/lib/forestguard_perception
+[0.689s] 
+[0.689s] Installed /home/john/git/RS1/john_branch/build/forestguard_perception
+[0.689s] running symlink_data
+[0.689s] creating /home/john/git/RS1/john_branch/install/forestguard_perception/share/ament_index
+[0.690s] creating /home/john/git/RS1/john_branch/install/forestguard_perception/share/ament_index/resource_index
+[0.690s] creating /home/john/git/RS1/john_branch/install/forestguard_perception/share/ament_index/resource_index/packages
+[0.690s] symbolically linking /home/john/git/RS1/john_branch/build/forestguard_perception/resource/forestguard_perception -> /home/john/git/RS1/john_branch/install/forestguard_perception/share/ament_index/resource_index/packages
+[0.690s] symbolically linking /home/john/git/RS1/john_branch/build/forestguard_perception/package.xml -> /home/john/git/RS1/john_branch/install/forestguard_perception/share/forestguard_perception
+[0.690s] creating /home/john/git/RS1/john_branch/install/forestguard_perception/share/forestguard_perception/launch
+[0.690s] symbolically linking /home/john/git/RS1/john_branch/build/forestguard_perception/launch/colour_detector.launch.py -> /home/john/git/RS1/john_branch/install/forestguard_perception/share/forestguard_perception/launch
+[0.690s] symbolically linking /home/john/git/RS1/john_branch/build/forestguard_perception/launch/tree_mapper.launch.py -> /home/john/git/RS1/john_branch/install/forestguard_perception/share/forestguard_perception/launch
+[0.706s] Invoked command in '/home/john/git/RS1/john_branch/build/forestguard_perception' returned '0': PYTHONPATH=/home/john/git/RS1/john_branch/build/forestguard_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/john/git/RS1/john_branch/install/forestguard_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/john/git/RS1/john_branch/build/forestguard_perception/build --no-deps symlink_data

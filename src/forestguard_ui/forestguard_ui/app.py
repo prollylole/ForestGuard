@@ -1494,11 +1494,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-        self.btn_up.pressed.connect(lambda: self._set_motion(forward=True))
-        self.btn_up.released.connect(lambda: self._set_motion(forward=False))
-        self.btn_down.pressed.connect(lambda: self._set_motion(back=True))
-        self.btn_down.released.connect(lambda: self._set_motion(back=False))
-        self.btn_left.pressed.connect(lambda: self._set_motion(left=True))
-        self.btn_left.released.connect(lambda: self._set_motion(left=False))
-        self.btn_right.pressed.connect(lambda: self._set_motion(right=True))
-        self.btn_right.released.connect(lambda: self._set_motion(right=False))
+

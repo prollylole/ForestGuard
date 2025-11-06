@@ -1,1 +1,0 @@
-[0.398s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/build/john': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_sim -DCMAKE_INSTALL_PREFIX=/home/yut/git/rs1-2025s-ytu77/john_branch/install/john
