@@ -10,4 +10,8 @@ autonomy_behaviour:
     min_separation_m: 2.0
     furthest_bias: true
     joy_rb_index: 5
-    auto_start: false
+    min_markers_to_start: 1
+    perception_trigger_service: "/perception/snapshot"
+    start_topic: "/ui/autonomy_start"
+    amcl_topic: "/amcl_pose"
+    max_scan_retries: 2

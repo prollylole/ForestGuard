@@ -38,10 +38,11 @@ class Autonomy(Node):
         self.declare_parameter("min_separation_m", 2.0)
         self.declare_parameter("furthest_bias",  True)
         self.declare_parameter("joy_rb_index",   5)
-        self.declare_parameter("min_markers_to_start", 3)  # wait for at least N trees seen
+        self.declare_parameter("min_markers_to_start", 1)  # wait for at least N trees seen
         self.declare_parameter("perception_trigger_service", "/perception/snapshot")  # std_srvs/Trigger
         self.declare_parameter("start_topic", "/ui/start_mission")  # std_msgs/Bool true
         self.declare_parameter("amcl_topic", "/amcl_pose")
+        self.declare_parameter("max_scan_retries", 2)
 
         self.settle_s       = float(self.get_parameter("settle_time_s").value)
         self.scan_s         = float(self.get_parameter("scan_time_s").value)
@@ -55,6 +56,7 @@ class Autonomy(Node):
         self._min_markers   = int(self.get_parameter("min_markers_to_start").value)
         self._start_topic   = str(self.get_parameter("start_topic").value)
         self._amcl_topic    = str(self.get_parameter("amcl_topic").value)
+        self._max_scan_retries = max(0, int(self.get_parameter("max_scan_retries").value))
 
         # parse polygon once
         poly_str = str(self.get_parameter("room_polygon_xy").value or "[]")
@@ -89,6 +91,7 @@ class Autonomy(Node):
 
         # services
         self._perception = self.create_client(Trigger, self.get_parameter("perception_trigger_service").value)
+        self._perception_warned = False
 
         # internal state
         self._t0 = self.get_clock().now()
@@ -101,18 +104,41 @@ class Autonomy(Node):
         self._last_sent: Optional[List[Tuple[float,float]]] = None
         self._last_markers_stamp = None
         self._waypoint_goal_handle = None
+        self._scan_attempts = 0
 
         self._tick_timer = self.create_timer(0.25, self._tick)
         self._announce("idle")
 
     # ------------- inputs -------------
     def _on_start(self, msg: Bool):
-        if msg.data and not self._armed:
-            self._armed = True
-            self._phase = "init"
-            self._t0 = self.get_clock().now()
-            self.get_logger().info("Commencing mission!")
-            self._announce("init")
+        try:
+            requested = bool(getattr(msg, "data", False))
+        except Exception:
+            requested = False
+        if requested:
+            if not self._armed:
+                self._armed = True
+                self._phase = "init"
+                self._t0 = self.get_clock().now()
+                self._scan_attempts = 0
+                self._trees.clear()
+                self._perception_warned = False
+                self.get_logger().info("Commencing mission!")
+                self._announce("init")
+        else:
+            if self._armed or self._phase not in ("idle", "complete"):
+                self.get_logger().info("Autonomy stop requested.")
+            self._armed = False
+            self._phase = "idle"
+            self._scan_attempts = 0
+            self._trees.clear()
+            self._perception_warned = False
+            self._cancel_active_goal()
+            try:
+                self.done_pub.publish(Bool(data=False))
+            except Exception:
+                pass
+            self._announce("idle")
 
     def _on_amcl(self, msg: PoseWithCovarianceStamped):
         self._robot_xy = (float(msg.pose.pose.position.x), float(msg.pose.pose.position.y))
@@ -226,15 +252,38 @@ class Autonomy(Node):
             if (self.get_clock().now() - self._t0) >= Duration(seconds=self.settle_s):
                 self._phase = "scanning"
                 self._scan_t0 = self.get_clock().now()
+                self._scan_attempts = 0
                 self._announce("scanning")
                 self.get_logger().info(f"Scanning for {self.scan_s:.1f}s…")
 
         elif self._phase == "scanning":
             # wait for scan window AND at least some markers
             enough = (len(self._trees) >= self._min_markers)
-            if (self.get_clock().now() - self._scan_t0) >= Duration(seconds=self.scan_s) and enough:
+            elapsed = self.get_clock().now() - self._scan_t0
+            if enough:
                 self._phase = "planning"
                 self._announce("planning")
+                self._scan_attempts = 0
+            elif elapsed >= Duration(seconds=self.scan_s):
+                if self._scan_attempts >= self._max_scan_retries:
+                    if self._max_scan_retries > 0:
+                        self.get_logger().warn("Scan retries exhausted without markers; proceeding to planning.")
+                    if not self._trees:
+                        # Nothing seen yet; stay in scanning and try again later.
+                        self._scan_attempts = 0
+                        self._scan_t0 = self.get_clock().now()
+                        self._announce("scanning")
+                        self._call_perception_once()
+                        return
+                    self._phase = "planning"
+                    self._announce("planning")
+                    self._scan_attempts = 0
+                else:
+                    self._scan_attempts += 1
+                    self.get_logger().info("No trees seen yet; triggering perception burst and rescanning.")
+                    self._call_perception_once()
+                    self._scan_t0 = self.get_clock().now()
+                    return
 
         elif self._phase == "planning":
             targets = self._choose_targets()
@@ -243,13 +292,11 @@ class Autonomy(Node):
                 if self._last_markers_stamp is None or (self.get_clock().now() - self._last_markers_stamp) > Duration(seconds=5.0):
                     self._phase = "scanning"
                     self._scan_t0 = self.get_clock().now()
+                    self._scan_attempts = 0
                     self._announce("scanning")
                     return
                 # else declare complete
-                self._phase = "complete"
-                self._announce("complete")
-                self.done_pub.publish(Bool(data=True))
-                self.get_logger().info("Mission complete.")
+                self._transition_to_complete()
                 return
             self._send_waypoints(targets)
             self._phase = "executing"
@@ -344,13 +391,29 @@ class Autonomy(Node):
         self._announce("planning")
 
     def _call_perception_once(self):
-        if not self._perception.service_is_ready():
-            self._perception.wait_for_service(timeout_sec=0.1)
-        if self._perception.service_is_ready():
-            req = Trigger.Request()
-            self._perception.call_async(req)  # fire-and-forget, we only need the burst
-        else:
-            self.get_logger().warn("Perception trigger service not ready.")
+        try:
+            if self._perception.service_is_ready():
+                req = Trigger.Request()
+                self._perception.call_async(req)  # fire-and-forget, we only need the burst
+                self._perception_warned = False
+                return
+        except Exception:
+            pass
+        if not self._perception_warned:
+            self.get_logger().info("Perception trigger service not available; continuing without snapshot.")
+            self._perception_warned = True
+
+    def _transition_to_complete(self):
+        if self._phase == "complete":
+            return
+        self._phase = "complete"
+        self._announce("complete")
+        try:
+            self.done_pub.publish(Bool(data=True))
+        except Exception:
+            pass
+        self._armed = False
+        self.get_logger().info("Mission complete.")
 
     def _announce(self, name: str):
         self.state_pub.publish(String(data=name))
