@@ -43,6 +43,7 @@ class ControllerBridge(Node):
 
         # UI / helper pubs
         self.speed_pub = self.create_publisher(Float32, '/ui/speed', 10)
+        self.speed_cmd_pub = self.create_publisher(Float32, '/ui/speed_cmd', 10)
         self.cam_pub   = self.create_publisher(String,  '/ui/camera_topic', 10)
         self.event_pub = self.create_publisher(String,  '/ui/event', 10)
 
@@ -105,8 +106,8 @@ class ControllerBridge(Node):
         if self._axis_edge(msg.axes, 7, -1.0):
             self._adjust_speed(-0.1)
 
-        # LB (index 4) -> E-STOP (rising edge + cooldown)
-        if self._button_rising(msg.buttons, 4, use_cooldown=True):
+        # B button (index 1) -> E-STOP toggle (rising edge + cooldown)
+        if self._button_rising(msg.buttons, 1, use_cooldown=True):
             self._estop()
 
         # Y (index 3) -> cycle camera (rising edge + cooldown)
@@ -123,6 +124,7 @@ class ControllerBridge(Node):
         self.lin_scale = max(0.1, min(1.5, self.lin_scale + delta))
         self.get_logger().info(f'Speed scale {self.lin_scale:.2f}')
         self.speed_pub.publish(Float32(data=self.lin_scale))
+        self.speed_cmd_pub.publish(Float32(data=self.lin_scale))
         self.event_pub.publish(String(data=f'SPEED:{self.lin_scale:.2f}'))
 
     def _estop(self):

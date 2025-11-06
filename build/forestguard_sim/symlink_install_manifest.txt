@@ -27,6 +27,7 @@
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment1.dae
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment2.dae
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment3.dae
+/home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/Environment4.dae
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/empty_grass.png
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/empty_grass.png.001.png
 /home/john/git/RS1/john_branch/install/forestguard_sim/share/forestguard_sim/models/forest_env/meshes/grass-5efe540a8d596-1250.jpg

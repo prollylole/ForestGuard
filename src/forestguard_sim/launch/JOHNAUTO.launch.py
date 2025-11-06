@@ -147,6 +147,14 @@ def generate_launch_description():
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
 
+    ld.add_action(Node(
+        package='forestguard_controller',
+        executable='forestguard_controller',
+        name='forestguard_controller',
+        output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
+    ))
+
     # # Battery simulator (drains faster when moving)
     # ld.add_action(Node(
     #     package='forestguard_ui', executable='battery_sim', name='battery_sim',
