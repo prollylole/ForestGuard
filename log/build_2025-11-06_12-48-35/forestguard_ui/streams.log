@@ -1,0 +1,43 @@
+[1.270s] Invoking command in '/home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_ui': PYTHONPATH=/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/forestguard_ui build --build-base /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build install --record /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/install.log --single-version-externally-managed install_data
+[1.499s] /home/yut/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:289: UserWarning: Unknown distribution option: 'tests_require'
+[1.499s]   warnings.warn(msg)
+[1.667s] running egg_info
+[1.698s] creating ../../build/forestguard_ui/forestguard_ui.egg-info
+[1.698s] writing ../../build/forestguard_ui/forestguard_ui.egg-info/PKG-INFO
+[1.699s] writing dependency_links to ../../build/forestguard_ui/forestguard_ui.egg-info/dependency_links.txt
+[1.699s] writing entry points to ../../build/forestguard_ui/forestguard_ui.egg-info/entry_points.txt
+[1.699s] writing requirements to ../../build/forestguard_ui/forestguard_ui.egg-info/requires.txt
+[1.699s] writing top-level names to ../../build/forestguard_ui/forestguard_ui.egg-info/top_level.txt
+[1.700s] writing manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+[1.777s] reading manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+[1.778s] writing manifest file '../../build/forestguard_ui/forestguard_ui.egg-info/SOURCES.txt'
+[1.778s] running build
+[1.779s] running build_py
+[1.779s] creating /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+[1.779s] copying forestguard_ui/twist_scaler.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+[1.779s] copying forestguard_ui/controller_bridge.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+[1.779s] copying forestguard_ui/app.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+[1.780s] copying forestguard_ui/__init__.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui
+[1.780s] running install
+[1.787s] running install_lib
+[1.819s] creating /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+[1.823s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/twist_scaler.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+[1.823s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/controller_bridge.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+[1.823s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/app.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+[1.823s] copying /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build/lib/forestguard_ui/__init__.py -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui
+[1.823s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/twist_scaler.py to twist_scaler.cpython-310.pyc
+[1.824s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/controller_bridge.py to controller_bridge.cpython-310.pyc
+[1.827s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/app.py to app.cpython-310.pyc
+[1.840s] byte-compiling /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui/__init__.py to __init__.cpython-310.pyc
+[1.840s] running install_data
+[1.840s] creating /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/share/ament_index/resource_index/packages
+[1.841s] copying resource/forestguard_ui -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/share/ament_index/resource_index/packages
+[1.841s] copying package.xml -> /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/share/forestguard_ui
+[1.841s] running install_egg_info
+[1.868s] Copying ../../build/forestguard_ui/forestguard_ui.egg-info to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages/forestguard_ui-0.0.0-py3.10.egg-info
+[1.869s] running install_scripts
+[1.926s] Installing controller_bridge script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/forestguard_ui
+[1.926s] Installing run_ui script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/forestguard_ui
+[1.927s] Installing twist_scaler script to /home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/forestguard_ui
+[1.927s] writing list of installed files to '/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/install.log'
+[1.982s] Invoked command in '/home/yut/git/rs1-2025s-ytu77/john_branch/src/forestguard_ui' returned '0': PYTHONPATH=/home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/yut/git/rs1-2025s-ytu77/john_branch/install/forestguard_ui/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/forestguard_ui build --build-base /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/build install --record /home/yut/git/rs1-2025s-ytu77/john_branch/build/forestguard_ui/install.log --single-version-externally-managed install_data
