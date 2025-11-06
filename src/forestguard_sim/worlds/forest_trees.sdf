@@ -50,9 +50,45 @@
       <pose>0 0 0 0 0 0</pose>
     </include>
     <!-- Trees -->
-  <include><uri>model://tree1</uri><name>tree1_0</name><pose>0.080 -4.921 0.046 0 0 0.000000</pose></include>
-
-  <include><uri>model://tree2</uri><name>tree2_2</name><pose>-8.993 -1.590 0.372 0 0 0.000000</pose></include>
-
+  <include><uri>model://tree1</uri><name>tree1_0</name><pose>0.443 -27.337 -0.263 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_1</name><pose>1.682 -23.337 -0.243 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_2</name><pose>-1.761 -34.532 -0.334 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_3</name><pose>-5.776 -25.461 -0.276 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_4</name><pose>-4.273 -20.367 -0.242 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_5</name><pose>5.968 -24.328 -0.254 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_6</name><pose>-10.439 -25.416 -0.312 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_7</name><pose>-14.723 -21.534 -0.311 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_8</name><pose>4.874 -31.504 -0.250 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_9</name><pose>-7.729 -39.364 -0.050 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_10</name><pose>-7.296 -29.651 -0.301 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_11</name><pose>8.761 -17.819 -0.216 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_12</name><pose>11.497 -13.411 -0.197 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_13</name><pose>11.081 -24.488 -0.294 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_14</name><pose>-3.813 -41.505 -0.042 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_15</name><pose>-3.364 -30.448 -0.276 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_16</name><pose>4.314 -37.423 -0.175 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_17</name><pose>15.999 -29.879 -0.089 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_18</name><pose>3.245 -17.919 -0.214 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_19</name><pose>-10.779 -43.330 2.978 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_20</name><pose>-9.320 -33.832 -0.341 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_21</name><pose>0.230 -39.196 0.016 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_22</name><pose>-15.359 -46.610 4.004 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_23</name><pose>4.402 -13.081 -0.246 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_24</name><pose>-17.642 -25.409 -0.372 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_25</name><pose>3.160 -42.293 -0.057 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_26</name><pose>15.461 -35.747 -0.046 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_27</name><pose>-8.364 -49.350 3.562 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_28</name><pose>10.530 -33.819 -0.162 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_29</name><pose>-12.961 -31.820 -0.381 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_30</name><pose>-1.981 -14.553 -0.260 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_31</name><pose>-14.082 -38.450 0.020 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_32</name><pose>-16.965 -32.613 -0.391 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_33</name><pose>-20.286 -45.905 3.225 0 0 0.000000</pose></include>
+  <include><uri>model://tree1</uri><name>tree1_34</name><pose>-21.377 -32.030 -0.394 0 0 0.000000</pose></include>
+  <include><uri>model://tree2</uri><name>tree2_0</name><pose>-6.395 -16.145 -0.237 0 0 0.000000</pose></include>
+  <include><uri>model://tree2</uri><name>tree2_1</name><pose>7.405 -8.957 -0.291 0 0 0.000000</pose></include>
+  <include><uri>model://tree2</uri><name>tree2_2</name><pose>-10.980 -19.921 -0.270 0 0 0.000000</pose></include>
+  <include><uri>model://tree2</uri><name>tree2_3</name><pose>-6.699 -44.902 5.307 0 0 0.000000</pose></include>
+  <include><uri>model://tree2</uri><name>tree2_4</name><pose>-1.699 -47.263 3.763 0 0 0.000000</pose></include>
   </world>
 </sdf>

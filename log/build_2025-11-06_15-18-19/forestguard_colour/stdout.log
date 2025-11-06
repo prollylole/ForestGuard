@@ -1,0 +1,20 @@
+running develop
+running egg_info
+writing forestguard_colour.egg-info/PKG-INFO
+writing dependency_links to forestguard_colour.egg-info/dependency_links.txt
+writing entry points to forestguard_colour.egg-info/entry_points.txt
+writing requirements to forestguard_colour.egg-info/requires.txt
+writing top-level names to forestguard_colour.egg-info/top_level.txt
+reading manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+writing manifest file 'forestguard_colour.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/john/git/RS1/john_branch/install/forestguard_colour/lib/python3.10/site-packages/forestguard-colour.egg-link (link to .)
+Installing camera_tree_mapper script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+Installing hsv_calibrator script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+Installing lidar_tree_mapper script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+Installing tree_colour_confirmer script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+Installing tree_detector script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+Installing tree_detector_v2 script to /home/john/git/RS1/john_branch/install/forestguard_colour/lib/forestguard_colour
+
+Installed /home/john/git/RS1/john_branch/build/forestguard_colour
+running symlink_data
