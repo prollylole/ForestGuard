@@ -4,6 +4,7 @@ setup.py
 forestguard_perception/__init__.py
 forestguard_perception/camera_tree_mapper.py
 forestguard_perception/hsv_calibrator.py
+forestguard_perception/lidar_gate.py
 forestguard_perception/lidar_tree_mapper.py
 forestguard_perception/tree_colour_confirmer.py
 forestguard_perception/tree_detector_node.py

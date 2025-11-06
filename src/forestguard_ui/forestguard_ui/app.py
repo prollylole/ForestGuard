@@ -17,6 +17,9 @@ from PySide6.QtWidgets import (
 )
 
 # ---------- topics / env ----------
+AUTONOMY_TOPIC      = os.environ.get("UI_AUTONOMY_TOPIC", "/ui/autonomy_state")
+MISSION_DONE_TOPIC  = os.environ.get("UI_MISSION_DONE_TOPIC", "/ui/mission_complete")
+
 CAMERA_TOPIC_DEFAULT = "/camera/image"
 ROSOUT_TOPIC         = "/rosout"
 CAMERA_TOPIC_CTRL    = "/ui/camera_topic"
@@ -340,7 +343,7 @@ class RosSignals(QObject):
     tree_table = Signal(object)
     battery = Signal(float, float, bool)  # percent [0-100], voltage [V] (nan if unknown), charging
     camera_mode = Signal(str)
-    autonomy = Signal(str) # "idle"/"scanning"/"planning"/"executing"/"teleop"/"complete"
+    autonomy = Signal()
     mission_done = Signal(bool)
 
 # ========================= ROS Node ================================
@@ -379,6 +382,9 @@ class GuiRosNode(Node):
         self.cmd_pub = self.create_publisher(Twist, CMD_VEL_TOPIC, 10)
         self.waypoint_pub = self.create_publisher(PoseArray, WAYPOINT_TOPIC, 10)
         self.speed_cmd_pub = self.create_publisher(Float32, SPEED_CMD_TOPIC, 10)
+
+        self.create_subscription(String, AUTONOMY_TOPIC, lambda m: self.signals.autonomy.emit(m.data or ""), 10)
+        self.create_subscription(Bool, MISSION_DONE_TOPIC, lambda m: self.signals.mission_done.emit(bool(m.data)), 10)
 
         # /rosout
         if os.environ.get("UI_DISABLE_ROSOUT", "0") != "1":
@@ -487,8 +493,6 @@ class GuiRosNode(Node):
         self.create_subscription(OccupancyGrid, GLOBAL_COSTMAP_TOPIC, self._on_global_costmap, 1)
         self.create_subscription(OccupancyGrid, LOCAL_COSTMAP_TOPIC, self._on_local_costmap, 1)
         self._map_timer = self.create_timer(MAP_EMIT_PERIOD_S, self._emit_map_image)
-        self.create_subscription(String, "/ui/autonomy_state", lambda m: self.signals.autonomy.emit(m.data or ""), 10)
-        self.create_subscription(Bool, "/ui/mission_complete", lambda m: self.signals.mission_done.emit(bool(m.data)), 10)
 
         self.signals.ok.emit(True, "ROS node initialised")
         # store downsampled XY for map overlays if you want them later
@@ -1276,6 +1280,7 @@ class ControlGUI(QWidget):
         self.camera_lbl.setAlignment(Qt.AlignCenter)
         self.camera_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.camera_lbl.setMinimumHeight(200)
+        # self.camera_lbl.setMaximumHeight(600)
         self.cam_mode_btn = QPushButton("View: Camera")
         self.cam_mode_btn.setCheckable(True)
         self.cam_mode_btn.toggled.connect(self._toggle_cam_mode_btn)
@@ -1290,11 +1295,13 @@ class ControlGUI(QWidget):
         self.map_tree_lbl = QLabel("Map – Trees")
         self.map_tree_lbl.setAlignment(Qt.AlignCenter)
         self.map_tree_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.map_tree_lbl.setMaximumHeight(600)
         tree_holder = self.rounded_pane(self.map_tree_lbl, pad=10)
 
         self.map_nav_lbl = QLabel("Map – Nav Layers")
         self.map_nav_lbl.setAlignment(Qt.AlignCenter)
         self.map_nav_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.map_nav_lbl.setMaximumHeight(600)
         nav_holder = self.rounded_pane(self.map_nav_lbl, pad=10)
 
         self.hsv_widget = self._build_hsv_tab()
@@ -1333,6 +1340,7 @@ class ControlGUI(QWidget):
         self.log.setReadOnly(True)
         self.log.setPlaceholderText("Log")
         self.log.setMinimumSize(300, 160)
+        self.log.setMinimumHeight(400)
         log_tab = QWidget()
         log_tab_layout = QVBoxLayout(log_tab)
         log_tab_layout.setContentsMargins(6, 6, 6, 6)
@@ -1353,10 +1361,6 @@ class ControlGUI(QWidget):
         self.waypoint_panel.set_pose_provider(self._get_current_robot_pose)
 
         tabs_holder = self.rounded_pane(self.tabs, pad=6)
-
-        left_col = QVBoxLayout()
-        left_col.addWidget(cam, 3)
-        left_col.addWidget(tabs_holder, 2)
 
         # Right column: top = Map/Panel, bottom split 50/50 (tree counter + speed)
         self.tree_total = 0
@@ -1402,8 +1406,7 @@ class ControlGUI(QWidget):
         sp_l.addLayout(speed_row, 1)
         sp_l.addWidget(QLabel("Speed", alignment=Qt.AlignHCenter))
 
-        right_col = QVBoxLayout()
-        right_col.addWidget(self.map_tabs, 3)
+        self.map_group = self.rounded_pane(self.map_tabs, pad=10)
         
         # D-pad pane (optional on-screen nudging)
         dpad_core = QWidget()
@@ -1445,13 +1448,28 @@ class ControlGUI(QWidget):
         right_bottom.addWidget(left_controls, 1)
         right_bottom.addWidget(dpad, 2)
         right_bottom.addWidget(speed_pane, 0)
-        right_col.addLayout(right_bottom, 2)
 
         # Bottom bar: Teleop LED + Depth Cloud + Battery + Run/Build/E-stop
         run = QHBoxLayout()
+        # Teleop LED
         run.addWidget(QLabel("Teleop"))
         self.led = LedIndicator("#666666")
         run.addWidget(self.led)
+
+        # Autonomy LED + state text
+        run.addSpacing(16)
+        run.addWidget(QLabel("Autonomy"))
+        self.auto_led = LedIndicator("#666666")
+        run.addWidget(self.auto_led)
+        self.auto_state = QLabel("—")
+        self.auto_state.setStyleSheet("color:#bbb; margin-left:6px;")
+        run.addWidget(self.auto_state)
+
+        # Mission banner (appears when mission_done=True)
+        run.addSpacing(16)
+        self.mission_lbl = QLabel("")  # hidden until set
+        self.mission_lbl.setStyleSheet("font-weight:700;")
+        run.addWidget(self.mission_lbl)
 
         self.pc_name = QLabel("Depth Cloud")
         self.pc_name.setStyleSheet("color:#bbb; margin-left:14px;")
@@ -1459,9 +1477,6 @@ class ControlGUI(QWidget):
         self.pc_val.setStyleSheet("font-weight:600;")
         run.addWidget(self.pc_name)
         run.addWidget(self.pc_val)
-        self.auto_name = QLabel("Autonomy")
-        self.auto_led = LedIndicator("#666666")
-        run.addWidget(self.auto_name); run.addWidget(self.auto_led)
 
         # Battery
         run.addWidget(QLabel("Battery"))
@@ -1494,9 +1509,23 @@ class ControlGUI(QWidget):
         bottom.addWidget(self.build_btn, 0)
         bottom.addWidget(self.estop, 0, Qt.AlignRight)
 
+        top_grid = QGridLayout()
+        top_grid.setContentsMargins(0, 0, 0, 0)
+        top_grid.setSpacing(12)
+        top_grid.addWidget(cam, 0, 0)
+        top_grid.addWidget(self.map_group, 0, 1)
+        top_grid.addWidget(tabs_holder, 1, 0)
+        top_grid.addLayout(right_bottom, 1, 1)
+        top_grid.setRowStretch(0, 3)
+        top_grid.setRowStretch(1, 2)
+        top_grid.setColumnStretch(0, 3)
+        top_grid.setColumnStretch(1, 2)
+
         root = QVBoxLayout(self)
-        top = QHBoxLayout(); top.addLayout(left_col, 3); top.addLayout(right_col, 2)
-        root.addLayout(top, 1); root.addLayout(bottom)
+        root.setContentsMargins(10, 10, 10, 10)
+        root.setSpacing(8)
+        root.addLayout(top_grid, 1)
+        root.addLayout(bottom)
         self._apply_dark_theme()
 
     def _apply_dark_theme(self):
@@ -1577,13 +1606,14 @@ class ControlGUI(QWidget):
         self.ros.signals.robot_pose.connect(self._update_robot_pose)
         self.ros.signals.speed_scale.connect(self._sync_speed_slider)
         self.ros.signals.estop_toggle.connect(self._toggle_estop_from_pad)
+        self.ros.signals.autonomy.connect(self._on_autonomy_state)
+        self.ros.signals.mission_done.connect(self._on_mission_done)
+
         self.send_cmd = self.ros.send_cmd
         self.send_waypoints = self.ros.send_waypoints
         self.send_speed_scale = self.ros.set_speed_scale
         self.cancel_waypoints = self.ros.cancel_waypoints
         self.send_hsv_params  = self.ros.set_hsv_params
-        self.ros.signals.autonomy.connect(self._on_autonomy_state)
-        self.ros.signals.mission_done.connect(self._on_mission_done)
         self.ros.start()
         QTimer.singleShot(250, self._notify_speed_change)
 
@@ -1727,6 +1757,9 @@ class ControlGUI(QWidget):
             self._append_log(">>> E-STOP released <<<" + (" (controller)" if source == "pad" else ""))
 
         self._update_teleop_led_color()
+        if latched:
+            try: self.mission_lbl.setText("")
+            except Exception: pass
 
     def _toggle_cam_mode_btn(self, checked: bool):
         mode = 'hsv' if checked else 'rgb'
@@ -2044,6 +2077,10 @@ class ControlGUI(QWidget):
             except Exception: pass
             try: self.ros.signals.estop_toggle.disconnect(self._toggle_estop_from_pad)
             except Exception: pass
+            try: self.ros.signals.autonomy.disconnect(self._on_autonomy_state)
+            except Exception: pass
+            try: self.ros.signals.mission_done.disconnect(self._on_mission_done)
+            except Exception: pass
 
             self.send_cmd = lambda *_a, **_k: None
             self.ros.stop(); self.ros.wait(2000)
@@ -2103,8 +2140,6 @@ class ControlGUI(QWidget):
             layout.addWidget(row)
 
         layout.addStretch(1)
-        self.hsv_status_lbl = QLabel("HSV sliders ready.")
-        layout.addWidget(self.hsv_status_lbl, alignment=Qt.AlignLeft)
         return widget
 
     def _on_hsv_spin_changed(self, key: str, idx: int, value: int):
@@ -2139,6 +2174,42 @@ class ControlGUI(QWidget):
         self._map_tab_index = idx
         if idx == 2 and hasattr(self, "hsv_status_lbl"):
             self.hsv_status_lbl.setText("HSV sliders ready.")
+
+    @Slot(str)
+    def _on_autonomy_state(self, s: str):
+        s = (s or "").strip().lower()
+        color_map = {
+            "idle":      "#666666",
+            "scanning":  "#4aa3ff",
+            "planning":  "#ffcc00",
+            "executing": "#46d160",
+            "teleop":    "#f6c343",
+            "complete":  "#9c27b0",
+        }
+        self.auto_led.set_color(color_map.get(s, "#666666"))
+        # update small text label
+        try:
+            self.auto_state.setText(s if s else "—")
+        except Exception:
+            pass
+        self._append_log(f"[AUTO] {s if s else 'unknown'}")
+
+    @Slot(bool)
+    def _on_mission_done(self, ok: bool):
+        if ok:
+            self._append_log(">>> MISSION COMPLETE ✅")
+            self.auto_led.set_color("#9c27b0")
+            try:
+                self.mission_lbl.setText("MISSION COMPLETE ✅")
+                self.mission_lbl.setStyleSheet("color:#9c27b0; font-weight:800;")
+            except Exception:
+                pass
+        else:
+            # if someone ever publishes 'false' to reset, clear banner
+            try:
+                self.mission_lbl.setText("")
+            except Exception:
+                pass
 
 # ============================ ROS worker ============================
 class RosWorker(QThread):
@@ -2227,28 +2298,6 @@ class RosWorker(QThread):
             except Exception:
                 pass
 
-    @Slot(str)
-    def _on_autonomy_state(self, s: str):
-        s = (s or "").lower()
-        # same palette as the node uses
-        color_map = {
-            "idle":      "#666666",
-            "scanning":  "#4aa3ff",
-            "planning":  "#ffcc00",
-            "executing": "#46d160",
-            "teleop":    "#f6c343",
-            "complete":  "#9c27b0",
-        }
-        self.auto_led.set_color(color_map.get(s, "#666666"))
-        self._append_log(f"[AUTO] {s}")
-
-    @Slot(bool)
-    def _on_mission_done(self, ok: bool):
-        if ok:
-            self._append_log(">>> MISSION COMPLETE ✅")
-            self.auto_led.set_color("#9c27b0")  # purple flash on completion
-
-            
 # ============================== main ================================
 def _apply_qt_logging_rules_from_env():
     if os.environ.get("UI_SUPPRESS_QT_DEBUG", "1") == "1" and "QT_LOGGING_RULES" not in os.environ:

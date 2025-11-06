@@ -32,6 +32,7 @@ setup(
             'camera_tree_mapper =   forestguard_perception.camera_tree_mapper:main',  
             'lidar_tree_mapper  =   forestguard_perception.lidar_tree_mapper:main',
             'tree_colour_confirmer = forestguard_perception.tree_colour_confirmer:main',
+            'lidar_gate         =   forestguard_perception.lidar_gate:main',
         ],
     },
 )

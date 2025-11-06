@@ -6,3 +6,6 @@
 log/latest
 log/latest_list
 log/list_2025-09-23_15-25-34/logger_all.log
+build/
+install/
+log/

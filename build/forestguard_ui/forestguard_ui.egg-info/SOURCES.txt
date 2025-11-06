@@ -3,6 +3,7 @@ setup.cfg
 setup.py
 forestguard_ui/__init__.py
 forestguard_ui/app.py
+forestguard_ui/autonomy.py
 forestguard_ui/battery_sim.py
 forestguard_ui/controller_bridge.py
 forestguard_ui/twist_scaler.py
