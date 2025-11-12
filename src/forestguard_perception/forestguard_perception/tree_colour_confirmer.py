@@ -8,7 +8,7 @@ from rclpy.time import Time
 from rclpy.duration import Duration
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import PoseArray
-from std_msgs.msg import Int32MultiArray, UInt32
+from std_msgs.msg import Int32MultiArray, UInt32, Bool
 from visualization_msgs.msg import MarkerArray, Marker
 from cv_bridge import CvBridge
 from tf2_ros import Buffer, TransformListener
@@ -36,6 +36,7 @@ class TreeColourConfirmer(Node):
         self.declare_parameter('stripe_half_px', 16)       # half-width of the vertical stripe
         self.declare_parameter('min_votes', 40)            # min coloured pixels to accept a label
         self.declare_parameter('confirm_range_m', 8.0)     # require proximity before colouring
+        self.declare_parameter('mission_topic', '/ui/autonomy_start')
 
         # NOTE: launch may already inject use_sim_time; don't redeclare if present
         if not self.has_parameter('use_sim_time'):
@@ -61,6 +62,7 @@ class TreeColourConfirmer(Node):
         self.tf = Buffer()
         self.tfl = TransformListener(self.tf, self)
         self._label_cache: Dict[Tuple[int, int], str] = {}
+        self._mission_active = False
 
         # Startup log of resolved params (handy sanity check)
         self.get_logger().info(
@@ -74,10 +76,30 @@ class TreeColourConfirmer(Node):
             f"  red2_low={self.get_parameter('red2_low').value}, red2_high={self.get_parameter('red2_high').value}"
         )
 
+        mission_topic = str(self.get_parameter('mission_topic').value or "")
+        if mission_topic:
+            self.create_subscription(Bool, mission_topic, self._on_mission_toggle, 10)
+            self.get_logger().info(f"Mission gating on {mission_topic}")
+
+    def _on_mission_toggle(self, msg: Bool):
+        active = bool(getattr(msg, "data", False))
+        if active and not self._mission_active:
+            self._mission_active = True
+            self.get_logger().info("Mission active: enabling colour confirmer.")
+        elif not active and self._mission_active:
+            self._mission_active = False
+            self.get_logger().info("Mission inactive: clearing colour labels.")
+            self.frame = None
+            self._clear_markers()
+
     def on_image(self, msg: Image):
+        if not self._mission_active:
+            return
         self.frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
 
     def on_positions(self, poses: PoseArray):
+        if not self._mission_active:
+            return
         if self.frame is None or not poses.poses:
             return
 
@@ -198,6 +220,18 @@ class TreeColourConfirmer(Node):
         counts = Int32MultiArray(); counts.data = [greens, reds]
         self.pub_counts.publish(counts)
         self.pub_bad.publish(UInt32(data=reds))
+
+    def _clear_markers(self):
+        self._label_cache.clear()
+        kill = Marker()
+        kill.header.frame_id = self.get_parameter('map_frame').value
+        kill.header.stamp = self.get_clock().now().to_msg()
+        kill.action = Marker.DELETEALL
+        ma = MarkerArray(); ma.markers.append(kill)
+        self.pub_markers.publish(ma)
+        counts = Int32MultiArray(); counts.data = [0, 0]
+        self.pub_counts.publish(counts)
+        self.pub_bad.publish(UInt32(data=0))
 
 def main():
     rclpy.init()

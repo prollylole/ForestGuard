@@ -1,1 +1,1 @@
-PySide6:geometry_msgs:rclpy:sensor_msgs
+PySide6:geometry_msgs:nav2_msgs:rclpy:sensor_msgs:std_msgs:visualization_msgs

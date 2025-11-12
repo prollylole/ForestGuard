@@ -13,8 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='yut',
-    maintainer_email='yuto.j.boittiaux@student.uts.edu.au',
+    maintainer='john',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
@@ -23,8 +22,8 @@ setup(
         'run_ui             = forestguard_ui.app:main',
         'controller_bridge  = forestguard_ui.controller_bridge:main',
         'twist_scaler       = forestguard_ui.twist_scaler:main',
-        'hsv_mask_node      = forestguard_ui.hsv_mask_node:main',
-        'battery_sim        = forestguard_sim.battery_sim:main',
+        'battery_sim        = forestguard_ui.battery_sim:main',
+        'autonomy           = forestguard_ui.autonomy:main',
     ],
     }
 )

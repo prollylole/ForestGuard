@@ -11,7 +11,7 @@ from rclpy.time import Time
 from rclpy.duration import Duration
 
 from sensor_msgs.msg import Image, LaserScan
-from std_msgs.msg import Int32
+from std_msgs.msg import Int32, Bool
 from geometry_msgs.msg import Pose, PoseArray, Quaternion
 from visualization_msgs.msg import Marker, MarkerArray
 from cv_bridge import CvBridge
@@ -59,6 +59,7 @@ class TreeMapperNode(Node):
         self.declare_parameter('prune_age_s', 60.0)
         self.declare_parameter('publish_height_m', 1.5)
         self.declare_parameter('marker_radius_m', 0.18)
+        self.declare_parameter('mission_topic', '/ui/autonomy_start')
 
         self.bridge = CvBridge()
         self.tf_buffer = Buffer()
@@ -81,14 +82,47 @@ class TreeMapperNode(Node):
         self.tree_db: Dict[int, TrackedTree] = {}
         self.next_id = 1
         self.db_lock = threading.Lock()
+        self._mission_active = False
 
         self.create_timer(0.5, self.maintenance_tick)
         self.get_logger().info(f"tree_mapper ready: image={img_topic} scan={scan_topic}")
+
+        mission_topic = str(self.get_parameter('mission_topic').value or "")
+        if mission_topic:
+            self.create_subscription(Bool, mission_topic, self._on_mission_toggle, 10)
+            self.get_logger().info(f"Mission gating on {mission_topic}")
+
+    def _on_mission_toggle(self, msg: Bool):
+        active = bool(getattr(msg, "data", False))
+        if active and not self._mission_active:
+            self._mission_active = True
+            self.get_logger().info("Mission active: enabling camera tree mapper.")
+        elif not active and self._mission_active:
+            self._mission_active = False
+            self.get_logger().info("Mission inactive: clearing camera tree database.")
+            self._clear_tracks()
+
+    def _clear_tracks(self):
+        with self.db_lock:
+            self.tree_db.clear()
+            self.next_id = 1
+        kill = Marker()
+        kill.header.frame_id = self.get_parameter('map_frame').value
+        kill.header.stamp = self.get_clock().now().to_msg()
+        kill.action = Marker.DELETEALL
+        ma = MarkerArray(); ma.markers.append(kill)
+        self.pub_markers.publish(ma)
+        self.pub_count.publish(Int32(data=0))
+        empty = PoseArray()
+        empty.header.frame_id = self.get_parameter('map_frame').value
+        self.pub_poses.publish(empty)
 
     def on_scan(self, msg: LaserScan):
         self.last_scan = msg
 
     def on_image(self, msg: Image):
+        if not self._mission_active:
+            return
         if self.last_scan is None:
             return
         try:
@@ -204,6 +238,8 @@ class TreeMapperNode(Node):
                     if tt.hits < 3: tt.cls = 'unknown'
 
     def maintenance_tick(self):
+        if not self._mission_active:
+            return
         now = time.time()
         prune_age = float(self.get_parameter('prune_age_s').value)
         h = float(self.get_parameter('publish_height_m').value)

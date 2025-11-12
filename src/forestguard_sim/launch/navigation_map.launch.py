@@ -11,8 +11,8 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # Get package paths
-    # CHANGED: use your 'john' package instead of 'forest_guard_sim'
-    john_pkg = FindPackageShare('john')
+    # CHANGED: use your 'forestguard_sim' package instead of 'forest_guard_sim'
+    forestguard_sim_pkg = FindPackageShare('forestguard_sim')
     nav2_bringup_pkg = FindPackageShare('nav2_bringup')
 
     # Launch arguments
@@ -26,17 +26,17 @@ def generate_launch_description():
         description='Use simulation (Gazebo) clock if true'
     )
 
-    # CHANGED: default map path now points inside your john package
+    # CHANGED: default map path now points inside your forestguard_sim package
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=PathJoinSubstitution([john_pkg, 'config', 'forest_map.yaml']),
+        default_value=PathJoinSubstitution([forestguard_sim_pkg, 'config', 'forest_map2.yaml']),
         description='Full path to map yaml file to load'
     )
 
-    # CHANGED: default params path now points inside your john package
+    # CHANGED: default params path now points inside your forestguard_sim package
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=PathJoinSubstitution([john_pkg, 'config', 'nav2_params.yaml']),
+        default_value=PathJoinSubstitution([forestguard_sim_pkg, 'config', 'nav2_params.yaml']),
         description='Full path to the ROS2 parameters file to use for all launched nodes'
     )
 
@@ -60,7 +60,7 @@ def generate_launch_description():
     #     output='screen',
     #     parameters=[{
     #         'use_sim_time': use_sim_time,
-    #         'yaml_filename': PathJoinSubstitution([john_pkg, 'config', 'amcl_params.yaml'])
+    #         'yaml_filename': PathJoinSubstitution([forestguard_sim_pkg, 'config', 'amcl_params.yaml'])
     #     }]
     # )
 

@@ -19,18 +19,16 @@ class ControllerBridge(Node):
         self.ang_scale = 1.0  # kept for parity if you later add angular adjustments
 
         # Camera topic discovery + fallbacks
-        self.hsv_topic = os.environ.get("UI_CAMERA_HSV_TOPIC", "/camera/image_hsv_mask")
         self.fallback_cameras = [
             '/camera/image',
-            self.hsv_topic,
-            '/camera/depth/image',
             '/camera/front/image_raw',
             '/camera/left/image_raw',
-            '/camera/back/image_raw',
             '/camera/right/image_raw',
+            '/camera/back/image_raw',
         ]
         self._live_cameras = []     # discovered Image topics with >=1 publisher
         self.current_cam_idx = -1   # start at -1 so first cycle picks index 0
+        self._display_mode = 'rgb'
 
         # Debounce state
         self._prev_buttons = []
@@ -45,6 +43,7 @@ class ControllerBridge(Node):
 
         # UI / helper pubs
         self.speed_pub = self.create_publisher(Float32, '/ui/speed', 10)
+        self.speed_cmd_pub = self.create_publisher(Float32, '/ui/speed_cmd', 10)
         self.cam_pub   = self.create_publisher(String,  '/ui/camera_topic', 10)
         self.event_pub = self.create_publisher(String,  '/ui/event', 10)
 
@@ -63,6 +62,9 @@ class ControllerBridge(Node):
             if IMG_MSG_TYPE in types and self.count_publishers(t) > 0:
                 live.append(t)
         live.sort()
+        filtered = [t for t in live if t in self.fallback_cameras]
+        if filtered:
+            live = filtered
         if live != self._live_cameras:
             self._live_cameras = live
             self.get_logger().info(f'Live camera topics: {self._live_cameras}')
@@ -104,8 +106,8 @@ class ControllerBridge(Node):
         if self._axis_edge(msg.axes, 7, -1.0):
             self._adjust_speed(-0.1)
 
-        # LB (index 4) -> E-STOP (rising edge + cooldown)
-        if self._button_rising(msg.buttons, 4, use_cooldown=True):
+        # B button (index 1) -> E-STOP toggle (rising edge + cooldown)
+        if self._button_rising(msg.buttons, 1, use_cooldown=True):
             self._estop()
 
         # Y (index 3) -> cycle camera (rising edge + cooldown)
@@ -122,6 +124,7 @@ class ControllerBridge(Node):
         self.lin_scale = max(0.1, min(1.5, self.lin_scale + delta))
         self.get_logger().info(f'Speed scale {self.lin_scale:.2f}')
         self.speed_pub.publish(Float32(data=self.lin_scale))
+        self.speed_cmd_pub.publish(Float32(data=self.lin_scale))
         self.event_pub.publish(String(data=f'SPEED:{self.lin_scale:.2f}'))
 
     def _estop(self):
@@ -132,10 +135,17 @@ class ControllerBridge(Node):
         self.event_pub.publish(String(data='E-STOP'))
 
     def _cycle_camera(self):
-        pool = self._image_topic_pool()
+        pool = [t for t in self._image_topic_pool() if t]
         if not pool:
             self.get_logger().warn('No camera topics available to cycle.')
             self.event_pub.publish(String(data='CAM:NONE'))
+            return
+        if len(pool) == 1:
+            self._display_mode = 'hsv' if self._display_mode == 'rgb' else 'rgb'
+            mode_msg = f'MODE:{self._display_mode}'
+            self.cam_pub.publish(String(data=mode_msg))
+            self.event_pub.publish(String(data=mode_msg))
+            self.get_logger().info(f'Camera mode -> {self._display_mode}')
             return
         self.current_cam_idx = (self.current_cam_idx + 1) % len(pool)
         topic = pool[self.current_cam_idx]

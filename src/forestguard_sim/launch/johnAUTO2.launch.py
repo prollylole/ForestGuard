@@ -47,7 +47,7 @@ def _setup(context, *args, **kwargs):
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
         arguments=[
             '-topic', '/robot_description',
-            '-x', spawn_x, '-y', spawn_y, '-z', '0.2',
+            '-x', spawn_x, '-y', spawn_y, '-z', '0.0',
             '-Y', spawn_yaw,
             '-wait', '5'
         ]
@@ -62,6 +62,7 @@ def generate_launch_description():
         os.path.join(pkg_path, 'models'),
         os.path.join(pkg_path, 'worlds'),
     ])
+    autonomy_params_path = PathJoinSubstitution([pkg_path, 'config', 'autonomy_params.yaml'])
 
     ld = LaunchDescription()
 
@@ -73,6 +74,7 @@ def generate_launch_description():
     ld.add_action(DeclareLaunchArgument('nav2', default_value='True'))
     ld.add_action(DeclareLaunchArgument('ui', default_value='True'))
     ld.add_action(DeclareLaunchArgument('teleop', default_value='True'))
+    ld.add_action(DeclareLaunchArgument('autonomy', default_value='True'))
 
     ld.add_action(DeclareLaunchArgument('spawn_x', default_value='0.0'))
     ld.add_action(DeclareLaunchArgument('spawn_y', default_value='0.0'))
@@ -132,12 +134,6 @@ def generate_launch_description():
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
     ld.add_action(Node(
-        package='forestguard_ui', executable='hsv_mask_node', name='hsv_mask_node',
-        parameters=[{'image_topic': '/camera/image', 'mask_topic': '/camera/image_hsv_mask'}],
-        condition=IfCondition(LaunchConfiguration('ui'))
-    ))
-
-    ld.add_action(Node(
         package='forestguard_perception',
         executable='lidar_tree_mapper',
         name='lidar_tree_mapper',
@@ -188,6 +184,44 @@ def generate_launch_description():
             'map_frame': 'map',
             'base_frame': 'base_link',
             'use_sim_time': LaunchConfiguration('use_sim_time'),
+        }]
+    ))
+
+    ld.add_action(Node(
+        package='forestguard_controller',
+        executable='forestguard_controller',
+        name='forestguard_controller',
+        output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
+    ))
+
+    ld.add_action(Node(
+        package='forestguard_behaviour',
+        executable='autonomy',
+        name='autonomy_behaviour',
+        output='screen',
+        parameters=[
+            autonomy_params_path,
+            {'use_sim_time': LaunchConfiguration('use_sim_time')}
+        ],
+        condition=IfCondition(LaunchConfiguration('autonomy'))
+    ))
+
+    # Battery simulator (drains faster when moving)
+    ld.add_action(Node(
+        package='forestguard_ui', executable='battery_sim', name='battery_sim',
+        output='screen', parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time'),
+            'battery_topic': '/battery_state',
+            'cmd_topic': '/cmd_vel',
+            # tuneables (optional):
+            # 'idle_drain_per_sec': 1.0/600.0,   # 10 min to empty if stationary
+            # 'k_lin': 3.
+            # 'k_ang': 1.5,
+            # 'v_max': 0.6,
+            # 'w_max': 1.5,
+            # 'voltage_full': 12.6,
+            # 'voltage_empty': 9.6,
         }]
     ))
 

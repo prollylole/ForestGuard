@@ -54,7 +54,7 @@ def _setup(context, *args, **kwargs):
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}],
         arguments=[
             '-topic', '/robot_description',
-            '-x', spawn_x, '-y', spawn_y, '-z', '0.2',
+            '-x', spawn_x, '-y', spawn_y, '-z', '0.1',
             '-Y', spawn_yaw,
             '-wait', '5'
         ]
@@ -146,10 +146,13 @@ def generate_launch_description():
         package='forestguard_ui', executable='twist_scaler', name='twist_scaler',
         parameters=[{'in_topic': '/cmd_vel_raw', 'out_topic': '/cmd_vel'}]
     ))
+
     ld.add_action(Node(
-        package='forestguard_ui', executable='hsv_mask_node', name='hsv_mask_node',
-        parameters=[{'image_topic': '/camera/image', 'mask_topic': '/camera/image_hsv_mask'}],
-        condition=IfCondition(LaunchConfiguration('ui'))
+        package='forestguard_controller',
+        executable='forestguard_controller',
+        name='forestguard_controller',
+        output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
     ))
 
     # # Battery simulator (drains faster when moving)

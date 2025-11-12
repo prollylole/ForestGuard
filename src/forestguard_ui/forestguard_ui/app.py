@@ -3,21 +3,25 @@
 # + Run Sim + Rebuild Code + Map+Trees overlay + Depth Cloud counter + Teleop LED + Battery
 from __future__ import annotations
 
-import sys, os, math, signal
+import sys, os, math, signal, time
 from typing import Optional, Dict, Tuple, List
 from threading import Lock
 
-from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF, QRect, QProcess
+from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF, QRect, QSize, QProcess
 from PySide6.QtGui import QColor, QPainter, QBrush, QImage, QPixmap, QIcon, QPalette
 from PySide6.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QTextEdit, QSlider, QFrame,
     QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy, QGraphicsDropShadowEffect,
-    QStyleFactory, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView, QStackedLayout
+    QStyleFactory, QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
+    QTabWidget, QDoubleSpinBox, QSpinBox
 )
 
 # ---------- topics / env ----------
+AUTONOMY_TOPIC      = os.environ.get("UI_AUTONOMY_TOPIC", "/ui/autonomy_state")
+MISSION_DONE_TOPIC  = os.environ.get("UI_MISSION_DONE_TOPIC", "/ui/mission_complete")
+AUTONOMY_START_TOPIC = os.environ.get("UI_AUTONOMY_START_TOPIC", "/ui/autonomy_start")
+
 CAMERA_TOPIC_DEFAULT = "/camera/image"
-CAMERA_HSV_TOPIC     = os.environ.get("UI_CAMERA_HSV_TOPIC", "/camera/image_hsv_mask")
 ROSOUT_TOPIC         = "/rosout"
 CAMERA_TOPIC_CTRL    = "/ui/camera_topic"
 CMD_VEL_TOPIC        = "/cmd_vel"
@@ -32,6 +36,15 @@ MAP_TOPIC            = os.environ.get("UI_MAP_TOPIC", "/map")
 ROBOT_POSE_TOPIC     = os.environ.get("UI_ROBOT_POSE_TOPIC", "/amcl_pose")
 TREE_MARKERS_TOPIC_A = os.environ.get("UI_TREE_MARKERS", "/trees/markers")
 TREE_MARKERS_TOPIC_B = os.environ.get("UI_TREE_MARKER",  "/trees_coloured")  # alt/fused colours
+ROBOT_ODOM_TOPIC     = os.environ.get("UI_ROBOT_ODOM_TOPIC", "/odom")
+
+WAYPOINT_TOPIC = os.environ.get("UI_WAYPOINT_TOPIC", "/goal_pose")
+SPEED_CMD_TOPIC = os.environ.get("UI_SPEED_CMD_TOPIC", "/ui/speed_cmd")
+SPEED_STATE_TOPIC = os.environ.get("UI_SPEED_STATE_TOPIC", "/ui/speed")
+GLOBAL_PATH_TOPIC = os.environ.get("UI_GLOBAL_PATH_TOPIC", "/plan")
+LOCAL_PATH_TOPIC = os.environ.get("UI_LOCAL_PATH_TOPIC", "/local_plan")
+GLOBAL_COSTMAP_TOPIC = os.environ.get("UI_GLOBAL_COSTMAP_TOPIC", "/global_costmap/costmap")
+LOCAL_COSTMAP_TOPIC = os.environ.get("UI_LOCAL_COSTMAP_TOPIC", "/local_costmap/costmap")
 
 # Point cloud source shown next to the Teleop LED
 PC_TOPIC = os.environ.get("UI_PC_TOPIC", "/camera/depth/points")
@@ -65,7 +78,7 @@ DEFAULT_BUILD_CMD = os.environ.get(
     "UI_BUILD_CMD",
     "colcon build --symlink-install "
     "--packages-select forestguard_perception forestguard_controller "
-    "forestguard_localisation forestguard_sim forestguard_ui"
+    "forestguard_localisation forestguard_sim forestguard_behaviour forestguard_ui"
 )
 
 # ---------- optional deps ----------
@@ -98,17 +111,19 @@ from rclpy.executors import MultiThreadedExecutor
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from rclpy.logging import LoggingSeverity
 from rclpy.time import Time
-from geometry_msgs.msg import Twist, PoseWithCovarianceStamped
+from geometry_msgs.msg import Twist, PoseWithCovarianceStamped, Pose, PoseArray
 from sensor_msgs.msg import Image as RosImage
 from sensor_msgs.msg import CompressedImage as RosCompressedImage
 from sensor_msgs.msg import PointCloud2
 import sensor_msgs_py.point_cloud2 as pc2
 from rcl_interfaces.msg import Log as RosLog
 from std_msgs.msg import String as RosString
-from std_msgs.msg import Int32, UInt32
-from nav_msgs.msg import OccupancyGrid
+from std_msgs.msg import Int32, UInt32, Float32, String, Bool
+from nav_msgs.msg import OccupancyGrid, Path, Odometry
 from visualization_msgs.msg import Marker, MarkerArray
 from rosgraph_msgs.msg import Clock
+from rclpy.action import ActionClient
+from nav2_msgs.action import FollowWaypoints
 from tf2_ros import Buffer, TransformListener
 
 # ========================= tiny widgets ===============================
@@ -143,6 +158,196 @@ class SquareContainer(QWidget):
         y = (h - side) // 2
         self._child.setGeometry(QRect(x, y, side, side))
 
+class AspectRatioWidget(QWidget):
+    """Keeps a single child at the requested width:height ratio."""
+    def __init__(self, child: QWidget, ratio: float = 1.0, parent=None):
+        super().__init__(parent)
+        self._child = child
+        self._child.setParent(self)
+        self._ratio = max(0.01, float(ratio))
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+    def set_ratio(self, ratio: float):
+        self._ratio = max(0.01, float(ratio))
+        self.updateGeometry()
+        self._relayout_child()
+
+    def sizeHint(self):
+        hint = self._child.sizeHint()
+        if hint.isValid():
+            w = hint.width()
+            h = max(1, int(w / self._ratio))
+            return QSize(w, h)
+        return super().sizeHint()
+
+    def minimumSizeHint(self):
+        hint = self._child.minimumSizeHint()
+        if hint.isValid():
+            w = hint.width()
+            h = max(1, int(w / self._ratio))
+            return QSize(w, h)
+        return super().minimumSizeHint()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._relayout_child()
+
+    def _relayout_child(self):
+        if not self._child:
+            return
+        avail_w = max(0, self.width())
+        avail_h = max(0, self.height())
+        if avail_w == 0 or avail_h == 0:
+            return
+        target_w = avail_w
+        target_h = int(target_w / self._ratio)
+        if target_h > avail_h:
+            target_h = avail_h
+            target_w = int(target_h * self._ratio)
+        x = (avail_w - target_w) // 2
+        y = (avail_h - target_h) // 2
+        self._child.setGeometry(QRect(x, y, target_w, target_h))
+
+class WaypointPanel(QWidget):
+    def __init__(self, send_callback, pose_provider=None, parent=None):
+        super().__init__(parent)
+        self._send_callback = send_callback
+        self._pose_provider = pose_provider
+        self._rows: List[Dict[str, float]] = []
+        self._build_ui()
+
+    def _build_ui(self):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(6)
+
+        control_row = QHBoxLayout()
+        control_row.setSpacing(8)
+        self.spin_x = QDoubleSpinBox()
+        self.spin_x.setRange(-1000.0, 1000.0)
+        self.spin_x.setDecimals(2)
+        self.spin_x.setSingleStep(0.25)
+        self.spin_x.setSuffix(" m")
+        self.spin_x.setPrefix("X: ")
+
+        self.spin_y = QDoubleSpinBox()
+        self.spin_y.setRange(-1000.0, 1000.0)
+        self.spin_y.setDecimals(2)
+        self.spin_y.setSingleStep(0.25)
+        self.spin_y.setSuffix(" m")
+        self.spin_y.setPrefix("Y: ")
+
+        self.spin_yaw = QDoubleSpinBox()
+        self.spin_yaw.setRange(-360.0, 360.0)
+        self.spin_yaw.setDecimals(1)
+        self.spin_yaw.setSingleStep(5.0)
+        self.spin_yaw.setSuffix("°")
+        self.spin_yaw.setPrefix("Yaw: ")
+
+        control_row.addWidget(self.spin_x)
+        control_row.addWidget(self.spin_y)
+        control_row.addWidget(self.spin_yaw)
+
+        add_btn = QPushButton("Add waypoint")
+        add_btn.clicked.connect(self._add_waypoint)
+        control_row.addWidget(add_btn)
+
+        pose_btn = QPushButton("Add current pose")
+        pose_btn.clicked.connect(self._add_current_pose)
+        control_row.addWidget(pose_btn)
+
+        control_row.addStretch(1)
+        layout.addLayout(control_row)
+
+        self.table = QTableWidget(0, 4, self)
+        self.table.setHorizontalHeaderLabels(["#", "X (m)", "Y (m)", "Yaw (deg)"])
+        header = self.table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(3, QHeaderView.Stretch)
+        self.table.verticalHeader().setVisible(False)
+        self.table.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table.setSelectionMode(QAbstractItemView.SingleSelection)
+        layout.addWidget(self.table, 1)
+
+        btn_row = QHBoxLayout()
+        btn_row.setSpacing(10)
+
+        remove_btn = QPushButton("Remove selected")
+        remove_btn.clicked.connect(self._remove_selected)
+        btn_row.addWidget(remove_btn)
+
+        clear_btn = QPushButton("Clear")
+        clear_btn.clicked.connect(self._clear_all)
+        btn_row.addWidget(clear_btn)
+
+        send_btn = QPushButton("Send to robot")
+        send_btn.clicked.connect(self._send)
+        btn_row.addWidget(send_btn)
+
+        btn_row.addStretch(1)
+        layout.addLayout(btn_row)
+
+    def set_pose_provider(self, provider):
+        self._pose_provider = provider
+
+    def _add_waypoint(self):
+        entry = {
+            "x": float(self.spin_x.value()),
+            "y": float(self.spin_y.value()),
+            "z": 0.0,
+            "yaw_deg": float(self.spin_yaw.value()),
+        }
+        self._rows.append(entry)
+        self._refresh_table()
+
+    def _add_current_pose(self):
+        if self._pose_provider is None:
+            return
+        pose = self._pose_provider()
+        if pose is None:
+            return
+        x, y, yaw = pose
+        entry = {"x": x, "y": y, "z": 0.0, "yaw_deg": math.degrees(yaw)}
+        self._rows.append(entry)
+        self._refresh_table()
+
+    def _remove_selected(self):
+        indexes = self.table.selectionModel().selectedRows()
+        if not indexes:
+            return
+        row = indexes[0].row()
+        if 0 <= row < len(self._rows):
+            self._rows.pop(row)
+            self._refresh_table()
+
+    def _clear_all(self):
+        if not self._rows:
+            return
+        self._rows.clear()
+        self._refresh_table()
+
+    def _send(self):
+        if self._send_callback is None:
+            return
+        self._send_callback(list(self._rows))
+
+    def _refresh_table(self):
+        self.table.setRowCount(len(self._rows))
+        for idx, entry in enumerate(self._rows):
+            cells = [
+                str(idx + 1),
+                f"{entry['x']:.2f}",
+                f"{entry['y']:.2f}",
+                f"{entry['yaw_deg']:.1f}",
+            ]
+            for col, text in enumerate(cells):
+                item = QTableWidgetItem(text)
+                item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
+                self.table.setItem(idx, col, item)
+
 # ========================= helpers ================================
 def _level_from_str(name: str) -> LoggingSeverity:
     name = (name or "").strip().lower()
@@ -169,10 +374,18 @@ def _scale_to_slider(s: float) -> int:
 def _yaw_from_q(q):
     return math.atan2(2*(q.w*q.z + q.x*q.y), 1 - 2*(q.y*q.y + q.z*q.z))
 
+def _quat_from_yaw(yaw: float):
+    cy = math.cos(yaw * 0.5)
+    sy = math.sin(yaw * 0.5)
+    return (0.0, 0.0, sy, cy)
+
 # ========================= ROS <-> Qt bridge ========================
 class RosSignals(QObject):
     image = Signal(object)
     map_image = Signal(object)
+    robot_pose = Signal(object)
+    speed_scale = Signal(float)
+    estop_toggle = Signal()
     log = Signal(str)
     teleop_led = Signal(bool, bool)
     ok = Signal(bool, str)
@@ -182,6 +395,8 @@ class RosSignals(QObject):
     tree_table = Signal(object)
     battery = Signal(float, float, bool)  # percent [0-100], voltage [V] (nan if unknown), charging
     camera_mode = Signal(str)
+    autonomy_state = Signal(str)
+    autonomy_done = Signal(bool)
 
 # ========================= ROS Node ================================
 class GuiRosNode(Node):
@@ -217,6 +432,16 @@ class GuiRosNode(Node):
 
         # pubs
         self.cmd_pub = self.create_publisher(Twist, CMD_VEL_TOPIC, 10)
+        self.waypoint_pub = self.create_publisher(PoseArray, WAYPOINT_TOPIC, 10)
+        self.speed_cmd_pub = self.create_publisher(Float32, SPEED_CMD_TOPIC, 10)
+        self.autonomy_cmd_pub = self.create_publisher(Bool, AUTONOMY_START_TOPIC, 10)
+        try:
+            self.autonomy_cmd_pub.publish(Bool(data=False))
+        except Exception:
+            pass
+
+        self.create_subscription(String, AUTONOMY_TOPIC, self._on_autonomy_state, 10)
+        self.create_subscription(Bool, MISSION_DONE_TOPIC, self._on_autonomy_done, 10)
 
         # /rosout
         if os.environ.get("UI_DISABLE_ROSOUT", "0") != "1":
@@ -231,8 +456,6 @@ class GuiRosNode(Node):
         # camera state
         self._camera_sub = None
         self._camera_topic_raw = CAMERA_TOPIC_DEFAULT.rstrip('/')
-        self._rgb_topic = self._camera_topic_raw
-        self._hsv_topic = CAMERA_HSV_TOPIC.rstrip('/')
         self._camera_mode = 'rgb'
         self._latest_rgb = None
         self._img_lock = Lock()
@@ -240,7 +463,16 @@ class GuiRosNode(Node):
         self._subscribe_camera(self._camera_topic_raw)
         self._prev_cycle_btn = False
         self._btn_cycle = int(os.environ.get("UI_JOY_BTN_CAMERA", "3"))
-        self.signals.camera_mode.emit(self._camera_mode)
+        self._hsv_ready = (np is not None and cv2 is not None)
+        if self._hsv_ready:
+            self._green_low = np.array([25, 130, 13], dtype=np.uint8)
+            self._green_high = np.array([58, 255, 255], dtype=np.uint8)
+            self._red1_low = np.array([0, 155, 75], dtype=np.uint8)
+            self._red1_high = np.array([32, 255, 255], dtype=np.uint8)
+            self._red2_low = np.array([179, 160, 77], dtype=np.uint8)
+            self._red2_high = np.array([179, 255, 255], dtype=np.uint8)
+        else:
+            self.get_logger().warn("HSV view unavailable (missing OpenCV/NumPy)")
 
         # point cloud quick stats (shown next to Teleop LED)
         try:
@@ -256,6 +488,10 @@ class GuiRosNode(Node):
         self._tree_bad   = 0
         self._sub_total = self._subscribe_int_counter(TREE_TOTAL_TOPIC, is_bad=False)
         self._sub_bad   = self._subscribe_int_counter(TREE_BAD_TOPIC,   is_bad=True)
+        self._speed_scale = float(os.environ.get("UI_SPEED_DEFAULT", "0.60"))
+        self.create_subscription(Float32, SPEED_STATE_TOPIC, self._on_speed_state, 10)
+        self._trail_points: List[Tuple[float, float]] = []
+        self._trail_max = int(os.environ.get("UI_TRAIL_MAX", "1200"))
 
         # joystick bump + teleop enable (RB)
         joy_topic = os.environ.get("UI_JOY_TOPIC", "/joy")
@@ -263,8 +499,10 @@ class GuiRosNode(Node):
         self._btn_up = int(os.environ.get("UI_JOY_BTN_UP", "-1"))
         self._btn_down = int(os.environ.get("UI_JOY_BTN_DOWN", "-1"))
         self._teleop_btn = JOY_TELEOP_BTN
+        self._btn_estop = int(os.environ.get("UI_JOY_BTN_ESTOP", "1"))
         self._prev_up = False
         self._prev_down = False
+        self._prev_estop_btn = False
         self._teleop_enabled = False
         try:
             from sensor_msgs.msg import Joy
@@ -291,22 +529,42 @@ class GuiRosNode(Node):
         self._tree_lock = Lock()
         self._tree_states: Dict[Tuple[float, float], Dict[str, object]] = {}
         self._confirm_range_hint = float(os.environ.get("UI_CONFIRM_RANGE", "8.0"))
+        self._path_lock = Lock()
+        self._global_path_pts: List[Tuple[float, float]] = []
+        self._local_path_pts: List[Tuple[float, float]] = []
+        self._costmap_lock = Lock()
+        self._global_costmap: Optional[OccupancyGrid] = None
+        self._local_costmap: Optional[OccupancyGrid] = None
         self._map_frame_name = os.environ.get("UI_TREE_MAP_FRAME", "map")
         self._base_frame_name = os.environ.get("UI_TREE_BASE_FRAME", "base_link")
         self._tf_buffer = Buffer()
         self._tf_listener = TransformListener(self._tf_buffer, self)
+        self._pose_source = "unknown"
+        self._last_amcl_pose_ns = 0
+        self._last_odom_emit_ns = 0
 
         self.create_subscription(OccupancyGrid, MAP_TOPIC, self._on_map, 1)
         self.create_subscription(PoseWithCovarianceStamped, ROBOT_POSE_TOPIC, self._on_pose, 10)
         self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_A, self._on_markers, 10)
         if TREE_MARKERS_TOPIC_B != TREE_MARKERS_TOPIC_A:
             self.create_subscription(MarkerArray, TREE_MARKERS_TOPIC_B, self._on_markers, 10)
+        self.create_subscription(Path, GLOBAL_PATH_TOPIC, self._on_global_path, 10)
+        self.create_subscription(Path, LOCAL_PATH_TOPIC, self._on_local_path, 10)
+        self.create_subscription(OccupancyGrid, GLOBAL_COSTMAP_TOPIC, self._on_global_costmap, 1)
+        self.create_subscription(OccupancyGrid, LOCAL_COSTMAP_TOPIC, self._on_local_costmap, 1)
+        if ROBOT_ODOM_TOPIC:
+            try:
+                self.create_subscription(Odometry, ROBOT_ODOM_TOPIC, self._on_odom, 10)
+                self.get_logger().info(f"Odom fallback on {ROBOT_ODOM_TOPIC}")
+            except Exception as e:
+                self.get_logger().warn(f"Odom subscribe failed ({e})")
         self._map_timer = self.create_timer(MAP_EMIT_PERIOD_S, self._emit_map_image)
 
         self.signals.ok.emit(True, "ROS node initialised")
         # store downsampled XY for map overlays if you want them later
         self._pc_xy_samples = []
         self._pc_xy_lock = Lock()
+        self._follow_client = ActionClient(self, FollowWaypoints, "/follow_waypoints")
 
         # battery
         self._battery_pct = float('nan')
@@ -315,7 +573,6 @@ class GuiRosNode(Node):
         try:
             types_map = dict(self.get_topic_names_and_types())
             bt_t = types_map.get(BATTERY_TOPIC, [])
-            from std_msgs.msg import Float32
             try:
                 from sensor_msgs.msg import BatteryState
                 _BatteryState = BatteryState
@@ -397,6 +654,100 @@ class GuiRosNode(Node):
         msg.linear.x = float(linear); msg.angular.z = float(angular)
         self.cmd_pub.publish(msg)
 
+    @Slot(float)
+    def set_speed_scale(self, scale: float):
+        value = max(0.05, min(2.0, float(scale)))
+        self._speed_scale = value
+        self.speed_cmd_pub.publish(Float32(data=float(value)))
+        self.signals.speed_scale.emit(value)
+
+    @Slot(object)
+    def publish_waypoints(self, waypoints: List[Dict[str, float]]):
+        if self.waypoint_pub is None:
+            self.signals.ok.emit(False, "Waypoint publisher not ready")
+            return
+        if not waypoints:
+            self.signals.ok.emit(False, "No waypoints to send")
+            return
+        pa = PoseArray()
+        pa.header.frame_id = self._map_frame_name
+        pa.header.stamp = self.get_clock().now().to_msg()
+        for entry in waypoints:
+            pose = Pose()
+            pose.position.x = float(entry.get("x", 0.0))
+            pose.position.y = float(entry.get("y", 0.0))
+            pose.position.z = float(entry.get("z", 0.0))
+            yaw_deg = float(entry.get("yaw_deg", 0.0))
+            qx, qy, qz, qw = _quat_from_yaw(math.radians(yaw_deg))
+            pose.orientation.x = qx
+            pose.orientation.y = qy
+            pose.orientation.z = qz
+            pose.orientation.w = qw
+            pa.poses.append(pose)
+        self.waypoint_pub.publish(pa)
+        self.signals.ok.emit(True, f"Sent {len(pa.poses)} waypoint(s)")
+
+    @Slot(bool)
+    def publish_autonomy(self, start: bool):
+        try:
+            msg = Bool(data=bool(start))
+            self.autonomy_cmd_pub.publish(msg)
+            self.signals.ok.emit(True, "Autonomy start command sent" if start else "Autonomy stop command sent")
+        except Exception as e:
+            self.signals.ok.emit(False, f"Autonomy command failed: {e}")
+
+    @Slot()
+    def cancel_waypoints(self):
+        if self._follow_client is None:
+            self.signals.ok.emit(False, "Waypoint client not available")
+            return
+        try:
+            if not self._follow_client.server_is_ready():
+                self._follow_client.wait_for_server(timeout_sec=0.2)
+            if not self._follow_client.server_is_ready():
+                self.signals.ok.emit(False, "Waypoint server not ready")
+                return
+            cancel_fn = getattr(self._follow_client, "cancel_all_goals_async", None)
+            if cancel_fn is None:
+                cancel_fn = getattr(self._follow_client, "cancel_all_goals", None)
+            if cancel_fn is None:
+                self.signals.ok.emit(False, "Cancel not supported on this platform")
+                return
+            future = cancel_fn()
+            if future is None:
+                self.signals.ok.emit(True, "Waypoint goals cancelled")
+            else:
+                try:
+                    future.add_done_callback(lambda _f: self.signals.ok.emit(True, "Waypoint goals cancelled"))
+                except Exception:
+                    self.signals.ok.emit(True, "Waypoint cancel requested")
+        except Exception as e:
+            self.signals.ok.emit(False, f"Cancel failed: {e}")
+
+    @Slot(object)
+    def set_hsv_params(self, params):
+        if not self._hsv_ready:
+            self.signals.ok.emit(False, "HSV view unavailable on this system")
+            return
+        try:
+            mapping = [
+                ("green_low", "_green_low"),
+                ("green_high", "_green_high"),
+                ("red1_low", "_red1_low"),
+                ("red1_high", "_red1_high"),
+                ("red2_low", "_red2_low"),
+                ("red2_high", "_red2_high"),
+            ]
+            for key, attr in mapping:
+                vals = params.get(key)
+                if vals is None:
+                    continue
+                arr = np.clip(np.array(list(vals), dtype=np.int16), 0, 255).astype(np.uint8)
+                setattr(self, attr, arr)
+            self.signals.ok.emit(True, "HSV thresholds updated")
+        except Exception as e:
+            self.signals.ok.emit(False, f"HSV update failed: {e}")
+
     # ------------------- subs/callbacks ----------------
     def _on_rosout(self, msg: RosLog):
         if int(getattr(msg, "level", 20)) < self._rosout_min_level:
@@ -408,14 +759,14 @@ class GuiRosNode(Node):
         topic = (msg.data or "").strip()
         if not topic:
             return
+        if topic.upper().startswith('MODE:'):
+            mode = topic.split(':', 1)[1]
+            self.set_camera_mode(mode)
+            return
         topic = topic.rstrip('/')
-        if topic == self._hsv_topic:
-            self.set_camera_mode('hsv')
+        if topic == self._camera_topic_raw:
             return
-        if topic == self._camera_topic_raw and self._camera_mode == 'rgb':
-            return
-        self._rgb_topic = topic
-        self.set_camera_mode('rgb')
+        self._subscribe_camera(topic)
 
     def _subscribe_camera(self, topic_base: str):
         topic_base = (topic_base or "").strip()
@@ -428,8 +779,6 @@ class GuiRosNode(Node):
         if not self._prefer_compressed and topic_base.rstrip('/').endswith("/compressed"):
             topic_base = topic_base.rstrip('/')[:-len("/compressed")]
         self._camera_topic_raw = topic_base.rstrip('/')
-        if self._camera_topic_raw != self._hsv_topic:
-            self._rgb_topic = self._camera_topic_raw
         if self._prefer_compressed:
             comp_topic = self._camera_topic_raw + "/compressed" if not self._camera_topic_raw.endswith("/compressed") else self._camera_topic_raw
             try:
@@ -464,7 +813,15 @@ class GuiRosNode(Node):
                 rgb = self._latest_rgb
                 self._latest_rgb = None
         if rgb is not None:
-            self.signals.image.emit(rgb)
+            if self._camera_mode == 'hsv' and self._hsv_ready:
+                try:
+                    view = self._make_hsv_view(rgb)
+                except Exception as exc:
+                    self.get_logger().throttle(2000, f"HSV view failed: {exc}")
+                    view = rgb
+            else:
+                view = rgb
+            self.signals.image.emit(view)
 
     def _on_pc(self, msg: PointCloud2):
         try:
@@ -488,13 +845,24 @@ class GuiRosNode(Node):
             self.signals.pc_points.emit(int(self._pc_latest_count))
             self._pc_latest_count = 0
 
+    def _make_hsv_view(self, rgb_np):
+        if not self._hsv_ready:
+            return rgb_np
+        bgr = cv2.cvtColor(rgb_np, cv2.COLOR_RGB2BGR)
+        hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
+        mask_g = cv2.inRange(hsv, self._green_low, self._green_high)
+        mask_r = cv2.inRange(hsv, self._red1_low, self._red1_high) | cv2.inRange(hsv, self._red2_low, self._red2_high)
+        overlay = np.zeros_like(bgr)
+        overlay[mask_g > 0] = (0, 255, 0)
+        overlay[mask_r > 0] = (0, 0, 255)
+        return cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB)
+
     def set_camera_mode(self, mode: str, notify: bool = True):
         target_mode = 'hsv' if str(mode).lower() == 'hsv' else 'rgb'
-        target_topic = self._hsv_topic if target_mode == 'hsv' else self._rgb_topic
-        if not target_topic:
+        if target_mode == 'hsv' and not self._hsv_ready:
+            if notify:
+                self.signals.ok.emit(False, "HSV view unavailable (missing OpenCV/Numpy)")
             return
-        if target_topic != self._camera_topic_raw:
-            self._subscribe_camera(target_topic)
         if target_mode != self._camera_mode:
             self._camera_mode = target_mode
             if notify:
@@ -506,11 +874,9 @@ class GuiRosNode(Node):
         if not topic:
             return
         topic = topic.rstrip('/')
-        if topic == self._hsv_topic:
-            self.set_camera_mode('hsv')
+        if topic == self._camera_topic_raw:
             return
-        self._rgb_topic = topic
-        self.set_camera_mode('rgb', notify=False)
+        self._subscribe_camera(topic)
 
     def _cycle_camera_mode(self):
         self.set_camera_mode('hsv' if self._camera_mode == 'rgb' else 'rgb')
@@ -550,6 +916,16 @@ class GuiRosNode(Node):
             self._cycle_camera_mode()
         self._prev_cycle_btn = cycle_pressed
 
+        estop_pressed = False
+        if self._btn_estop >= 0:
+            try:
+                estop_pressed = bool(msg.buttons[self._btn_estop] > 0)
+            except Exception:
+                estop_pressed = False
+        if estop_pressed and not self._prev_estop_btn:
+            self.signals.estop_toggle.emit()
+        self._prev_estop_btn = estop_pressed
+
     # ---- Sim heartbeat ----
     def _on_clock(self, _msg: Clock):
         self._last_clock_ns = self.get_clock().now().nanoseconds
@@ -568,10 +944,86 @@ class GuiRosNode(Node):
             self._map_res = msg.info.resolution
             self._map_origin = (msg.info.origin.position.x, msg.info.origin.position.y)
 
+    def _set_robot_pose(self, x: float, y: float, yaw: float, source: str):
+        if not (math.isfinite(x) and math.isfinite(y)):
+            return
+        self._robot_pose = (float(x), float(y), float(yaw))
+        self._pose_source = source
+        self.signals.robot_pose.emit(self._robot_pose)
+        self._trail_points.append((float(x), float(y)))
+        if len(self._trail_points) > self._trail_max:
+            del self._trail_points[0:len(self._trail_points) - self._trail_max]
+
     def _on_pose(self, msg: PoseWithCovarianceStamped):
-        p = msg.pose.pose.position
-        self._robot_pose = (p.x, p.y, _yaw_from_q(msg.pose.pose.orientation))
+        pos = msg.pose.pose.position
+        yaw = _yaw_from_q(msg.pose.pose.orientation)
+        self._last_amcl_pose_ns = self.get_clock().now().nanoseconds
+        self._last_odom_emit_ns = 0
+        self._set_robot_pose(pos.x, pos.y, yaw, "amcl")
         self._emit_tree_table()
+
+    def _on_odom(self, msg: Odometry):
+        now_ns = self.get_clock().now().nanoseconds
+        if self._last_amcl_pose_ns and (now_ns - self._last_amcl_pose_ns) < int(2e9):
+            return
+        if self._last_odom_emit_ns and (now_ns - self._last_odom_emit_ns) < int(2e8):
+            return
+        self._last_odom_emit_ns = now_ns
+        pos = msg.pose.pose.position
+        yaw = _yaw_from_q(msg.pose.pose.orientation)
+        self._set_robot_pose(pos.x, pos.y, yaw, "odom")
+        self._emit_tree_table()
+
+    def _on_speed_state(self, msg: Float32):
+        try:
+            scale = float(getattr(msg, "data", float('nan')))
+        except Exception:
+            return
+        if not math.isfinite(scale):
+            return
+        scale = max(0.05, min(2.0, scale))
+        if abs(scale - self._speed_scale) <= 1e-3:
+            return
+        self._speed_scale = scale
+        self.signals.speed_scale.emit(scale)
+
+    def _on_autonomy_state(self, msg: String):
+        try:
+            state = str(getattr(msg, "data", ""))
+        except Exception:
+            state = ""
+        self.signals.autonomy_state.emit(state)
+
+    def _on_autonomy_done(self, msg: Bool):
+        try:
+            done = bool(getattr(msg, "data", False))
+        except Exception:
+            done = False
+        self.signals.autonomy_done.emit(done)
+
+    def _on_global_path(self, msg: Path):
+        try:
+            pts = [(pose.pose.position.x, pose.pose.position.y) for pose in msg.poses]
+        except Exception:
+            pts = []
+        with self._path_lock:
+            self._global_path_pts = pts
+
+    def _on_local_path(self, msg: Path):
+        try:
+            pts = [(pose.pose.position.x, pose.pose.position.y) for pose in msg.poses]
+        except Exception:
+            pts = []
+        with self._path_lock:
+            self._local_path_pts = pts
+
+    def _on_global_costmap(self, msg: OccupancyGrid):
+        with self._costmap_lock:
+            self._global_costmap = msg
+
+    def _on_local_costmap(self, msg: OccupancyGrid):
+        with self._costmap_lock:
+            self._local_costmap = msg
 
     def _on_markers(self, msg: MarkerArray):
         changed = False
@@ -639,39 +1091,159 @@ class GuiRosNode(Node):
         row = img_h - 1 - row
         return col, row
 
+    def _draw_path(self, img, points: List[Tuple[float, float]], color: Tuple[int, int, int]):
+        if cv2 is None or not points:
+            return
+        pix = []
+        h = img.shape[0]
+        for wx, wy in points:
+            try:
+                px, py = self._world_to_px(wx, wy, h)
+            except Exception:
+                continue
+            if px < 0 or py < 0 or px >= img.shape[1] or py >= h:
+                continue
+            pix.append([px, py])
+        if len(pix) >= 2:
+            poly = np.array(pix, dtype=np.int32)
+            cv2.polylines(img, [poly], False, color, 2, cv2.LINE_AA)
+        elif len(pix) == 1:
+            cv2.circle(img, tuple(pix[0]), 3, color, -1)
+
+    def _overlay_costmap(self, img, grid: Optional[OccupancyGrid], color: Tuple[int, int, int]):
+        if grid is None or np is None or self._map_res is None or self._map_origin is None:
+            return
+        try:
+            data = np.frombuffer(bytes(grid.data), dtype=np.int8).reshape((grid.info.height, grid.info.width))
+        except Exception:
+            return
+        h_img = img.shape[0]
+        res = grid.info.resolution
+        ox = grid.info.origin.position.x
+        oy = grid.info.origin.position.y
+        nz = np.argwhere(data >= 50)
+        if nz.size == 0:
+            return
+        # subsample to keep drawing budget reasonable
+        step = max(1, int(len(nz) / 4000))
+        for cell in nz[::step]:
+            cy, cx = cell
+            wx = ox + (cx + 0.5) * res
+            wy = oy + (cy + 0.5) * res
+            try:
+                px, py = self._world_to_px(wx, wy, h_img)
+            except Exception:
+                continue
+            if 0 <= px < img.shape[1] and 0 <= py < h_img:
+                cv2.circle(img, (px, py), 2, color, -1)
+
+    def _draw_trail(self, img, pts: List[Tuple[float, float]]):
+        if cv2 is None or not pts:
+            return
+        h = img.shape[0]
+        pix = []
+        for wx, wy in pts:
+            try:
+                px, py = self._world_to_px(wx, wy, h)
+            except Exception:
+                continue
+            if 0 <= px < img.shape[1] and 0 <= py < h:
+                pix.append([px, py])
+        if len(pix) >= 2:
+            poly = np.array(pix, dtype=np.int32)
+            cv2.polylines(img, [poly], False, (0, 200, 255), 2, cv2.LINE_AA)
+
+    def _draw_scale_bar(self, img, meters: float = 5.0):
+        if cv2 is None or self._map_res is None:
+            return
+        px_per_m = 1.0 / self._map_res
+        length_px = int(meters * px_per_m)
+        if length_px < 20:
+            length_px = int(3 * px_per_m)
+            meters = 3.0
+        h, w = img.shape[:2]
+        pad = 16
+        y = h - pad
+        x_start = w - pad - length_px
+        x_end = w - pad
+        if x_start < pad:
+            x_start = pad
+        cv2.line(img, (x_start, y), (x_end, y), (255, 255, 255), 3, cv2.LINE_AA)
+        cv2.line(img, (x_start, y), (x_start, y-8), (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.line(img, (x_end, y), (x_end, y-8), (255, 255, 255), 2, cv2.LINE_AA)
+        label = f"{meters:.0f} m"
+        cv2.putText(img, label, (x_start, y-12), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 255, 255), 1, cv2.LINE_AA)
+
     def _emit_map_image(self):
-        if np is None: return
+        if np is None:
+            return
         with self._map_lock:
             grid = self._map_msg
         if grid is None or self._map_res is None or self._map_origin is None:
             return
-        bgr = self._grid_to_bgr(grid)
-        if bgr is None:
-            return
-        h, w = bgr.shape[:2]
 
-        if cv2 is not None:
-            with self._tree_lock:
-                tree_items = list(self._tree_states.values())
-            for t in tree_items:
-                try:
-                    cx, cy = self._world_to_px(t["x"], t["y"], h)
-                    color = t.get("bgr", (255, 255, 0))
-                    cv2.circle(bgr, (cx, cy), 5, color, -1)
-                    label = t.get("status", "unknown")
-                    cv2.putText(bgr, label[:3].upper(), (cx+6, cy-4), cv2.FONT_HERSHEY_SIMPLEX, 0.35, color, 1, cv2.LINE_AA)
-                except Exception:
-                    pass
-            if self._robot_pose:
+        base = self._grid_to_bgr(grid)
+        if base is None:
+            return
+
+        if cv2 is None:
+            rgb = base[:, :, ::-1]
+            self.signals.map_image.emit({"trees": rgb, "nav": rgb})
+            return
+
+        bgr_trees = base.copy()
+        bgr_nav = base.copy()
+        h, _ = bgr_trees.shape[:2]
+
+        # Trees (markers + labels)
+        with self._tree_lock:
+            tree_items = list(self._tree_states.values())
+        for t in tree_items:
+            try:
+                cx, cy = self._world_to_px(t["x"], t["y"], h)
+                color = t.get("bgr", (255, 255, 0))
+                cv2.circle(bgr_trees, (cx, cy), 5, color, -1)
+                label = t.get("status", "unknown")
+                cv2.putText(bgr_trees, label[:3].upper(), (cx+6, cy-4),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.35, color, 1, cv2.LINE_AA)
+            except Exception:
+                pass
+
+        # Nav overlays = costmaps + paths + trail + robot pose (no tree markers)
+        with self._costmap_lock:
+            global_cost = self._global_costmap
+            local_cost = self._local_costmap
+        self._overlay_costmap(bgr_nav, global_cost, (120, 120, 255))
+        self._overlay_costmap(bgr_nav, local_cost, (255, 180, 80))
+        with self._path_lock:
+            g_path = list(self._global_path_pts)
+            l_path = list(self._local_path_pts)
+        self._draw_path(bgr_nav, g_path, (255, 0, 255))
+        self._draw_path(bgr_nav, l_path, (0, 255, 255))
+        if self._trail_points:
+            self._draw_trail(bgr_nav, list(self._trail_points))
+
+        if self._robot_pose:
+            try:
                 rx, ry, yaw = self._robot_pose
                 cx, cy = self._world_to_px(rx, ry, h)
-                cv2.circle(bgr, (cx, cy), 7, (0, 0, 255), -1)
                 tip = (int(cx + 18*math.cos(yaw)), int(cy - 18*math.sin(yaw)))
-                cv2.arrowedLine(bgr, (cx, cy), tip, (0,0,255), 2, tipLength=0.35)
-            rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
-        else:
-            rgb = bgr[:, :, ::-1]
-        self.signals.map_image.emit(rgb)
+                cv2.circle(bgr_trees, (cx, cy), 7, (0, 0, 255), -1)
+                cv2.arrowedLine(bgr_trees, (cx, cy), tip, (0, 0, 255), 2, tipLength=0.35)
+                cv2.circle(bgr_nav, (cx, cy), 7, (0, 0, 255), -1)
+                cv2.arrowedLine(bgr_nav, (cx, cy), tip, (0, 0, 255), 2, tipLength=0.35)
+            except Exception:
+                pass
+
+        self._draw_scale_bar(bgr_trees)
+        self._draw_scale_bar(bgr_nav)
+
+        payload = {
+            "trees": cv2.cvtColor(bgr_trees, cv2.COLOR_BGR2RGB),
+            "nav":   cv2.cvtColor(bgr_nav,   cv2.COLOR_BGR2RGB),
+        }
+        self.signals.map_image.emit(payload)
+
 
     def _emit_tree_table(self):
         with self._tree_lock:
@@ -752,10 +1324,24 @@ class ControlGUI(QWidget):
         self._estopped = False
         self._lin = 0.0
         self._ang = 0.0
+        self._dpad_forward = False
+        self._dpad_back = False
+        self._dpad_left = False
+        self._dpad_right = False
+        self._dpad_engaged = False
         self._teleop_enabled = False
         self._sim_alive = False
+        self._robot_pose: Optional[Tuple[float, float, float]] = None
+        self._suppress_speed_emit = False
+        self._last_speed_sent: Optional[float] = None
+        self._last_autonomy_state: Optional[str] = None
+        self._mission_complete = False
         self._tree_table_keys: List[Tuple[float, float]] = []
         self._tree_table_cache: Dict[Tuple[float, float], Dict[str, object]] = {}
+        self.stage_leds: Dict[str, LedIndicator] = {}
+        self._last_pose_confirm_time = 0.0
+        self._last_manual_resume_time = 0.0
+        self._autonomy_requested = False
         self._cpu_process = psutil.Process(os.getpid()) if psutil else None
         if self._cpu_process:
             try:
@@ -775,13 +1361,27 @@ class ControlGUI(QWidget):
         self._proc_build.readyReadStandardOutput.connect(self._on_build_output)
         self._proc_build.finished.connect(self._on_build_finished)
 
+        self.send_waypoints = lambda _rows: None
+        self.send_autonomy_cmd = lambda _start: None
         self._install_sigint_handler()
+        self._hsv_params = {
+            "green_low": [25, 140, 13],
+            "green_high": [58, 255, 255],
+            "red1_low": [0, 155, 75],
+            "red1_high": [32, 255, 255],
+            "red2_low": [179, 160, 77],
+            "red2_high": [179, 255, 255],
+        }
+        self._hsv_inputs = {}
+        self._hsv_pending = False
+        self._map_height_sync_pending = False
         self._build_ui()
         self._wire_behaviour()
         self._start_ros()
         self.speed.setValue(_scale_to_slider(0.60))
         self._reflect_camera_mode('rgb')
         self._update_cpu()
+        self._schedule_map_sync()
 
     def _apply_icon(self):
         icon_path = os.environ.get("UI_APP_ICON", "")
@@ -803,12 +1403,123 @@ class ControlGUI(QWidget):
         ly = QVBoxLayout(f); ly.setContentsMargins(pad, pad, pad, pad); ly.addWidget(w)
         return f
 
+    def _build_status_panel(self) -> QWidget:
+        panel = QWidget()
+        layout = QVBoxLayout(panel)
+        layout.setContentsMargins(4, 4, 4, 4)
+        layout.setSpacing(10)
+
+        title = QLabel("Mission Status")
+        title.setStyleSheet("font-weight:700;")
+        layout.addWidget(title)
+
+        def make_led_row(name: str, led: LedIndicator, extra: Optional[QWidget] = None):
+            row = QHBoxLayout()
+            row.setSpacing(6)
+            row.addWidget(led)
+            lbl = QLabel(name)
+            lbl.setStyleSheet("color:#ddd;")
+            row.addWidget(lbl)
+            if extra is not None:
+                row.addWidget(extra)
+            row.addStretch(1)
+            return row
+
+        # Teleop + autonomy summary
+        self.led = LedIndicator("#666666")
+        teleop_row = make_led_row("Teleop", self.led)
+        layout.addLayout(teleop_row)
+
+        self.auto_led = LedIndicator("#666666")
+        self.auto_state = QLabel("—")
+        self.auto_state.setStyleSheet("color:#bbb; margin-left:6px;")
+        auto_row = make_led_row("Autonomy", self.auto_led, self.auto_state)
+        layout.addLayout(auto_row)
+
+        self.mission_lbl = QLabel("")
+        self.mission_lbl.setWordWrap(True)
+        self.mission_lbl.setStyleSheet("font-weight:700;")
+        layout.addWidget(self.mission_lbl)
+
+        # Behaviour pipeline LEDs
+        pipeline_lbl = QLabel("Pipeline")
+        pipeline_lbl.setStyleSheet("font-weight:600; margin-top:4px;")
+        layout.addWidget(pipeline_lbl)
+
+        stage_def = [
+            ("spawn", "1. Spawn / Init"),
+            ("scan", "2. Perception Scan"),
+            ("waypoint", "3. Set Waypoint"),
+            ("move", "4. Move to Waypoint"),
+            ("confirm", "5. Confirm Tree"),
+        ]
+        self.stage_leds = {}
+        for key, text in stage_def:
+            led = LedIndicator("#444444")
+            self.stage_leds[key] = led
+            layout.addLayout(make_led_row(text, led))
+
+        layout.addSpacing(6)
+
+        # Metrics
+        metrics_lbl = QLabel("System Metrics")
+        metrics_lbl.setStyleSheet("font-weight:600; margin-top:4px;")
+        layout.addWidget(metrics_lbl)
+
+        metrics = QVBoxLayout()
+        metrics.setSpacing(4)
+
+        depth_row = QHBoxLayout()
+        depth_row.addWidget(QLabel("Depth Cloud"))
+        self.pc_val = QLabel("~0")
+        self.pc_val.setStyleSheet("font-weight:600;")
+        depth_row.addStretch(1)
+        depth_row.addWidget(self.pc_val)
+        metrics.addLayout(depth_row)
+
+        batt_row = QHBoxLayout()
+        batt_row.addWidget(QLabel("Battery"))
+        self.batt_lbl = QLabel("—%")
+        self.batt_lbl.setStyleSheet("font-weight:700; margin-left:6px; color:#bbb;")
+        batt_row.addStretch(1)
+        batt_row.addWidget(self.batt_lbl)
+        metrics.addLayout(batt_row)
+
+        cpu_row = QHBoxLayout()
+        cpu_row.addWidget(QLabel("CPU"))
+        self.cpu_lbl = QLabel("—")
+        self.cpu_lbl.setStyleSheet("color:#bbb;")
+        self.cpu_lbl.setToolTip("Use `top` (watch controller_bridge, run_ui) and `ros2 topic hz /camera/image` for rate.")
+        cpu_row.addStretch(1)
+        cpu_row.addWidget(self.cpu_lbl)
+        metrics.addLayout(cpu_row)
+
+        layout.addLayout(metrics)
+        layout.addStretch(1)
+        self._update_stage_leds()
+        return panel
+
+    def _set_autonomy_button_idle(self, label: str = "Start Mission", enabled: bool = True):
+        if not hasattr(self, "autonomy_btn"):
+            return
+        self.autonomy_btn.setEnabled(enabled)
+        self.autonomy_btn.setText(label)
+        self.autonomy_btn.setStyleSheet("background:#2e7d32; color:white; font-weight:700; border-radius:12px;")
+
+    def _set_autonomy_button_running(self, text: str = "Mission running…"):
+        if not hasattr(self, "autonomy_btn"):
+            return
+        self.autonomy_btn.setEnabled(False)
+        self.autonomy_btn.setText(text)
+        self.autonomy_btn.setStyleSheet("background:#1976d2; color:white; font-weight:700; border-radius:12px;")
+
     def _build_ui(self):
         # Camera
         self.camera_lbl = QLabel("Camera")
         self.camera_lbl.setAlignment(Qt.AlignCenter)
         self.camera_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.camera_lbl.setMinimumHeight(200)
+        # self.camera_lbl.setMaximumHeight(600)
         self.cam_mode_btn = QPushButton("View: Camera")
         self.cam_mode_btn.setCheckable(True)
         self.cam_mode_btn.toggled.connect(self._toggle_cam_mode_btn)
@@ -817,16 +1528,34 @@ class ControlGUI(QWidget):
         cam_col.setSpacing(6)
         cam_col.addWidget(self.cam_mode_btn, 0, Qt.AlignLeft)
         cam_col.addWidget(self.camera_lbl, 1)
-        cam = self.rounded_pane(cam_box, pad=10)
+        self.camera_group = self.rounded_pane(cam_box, pad=10)
 
-        # Map panel
-        self.map_lbl = QLabel("Map / Trees")
-        self.map_lbl.setAlignment(Qt.AlignCenter)
-        self.map_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        right_top_pane = self.rounded_pane(self.map_lbl, pad=10)
+        # Map panels (tabs)
+        self.map_tree_lbl = QLabel("Map – Trees")
+        self.map_tree_lbl.setAlignment(Qt.AlignCenter)
+        self.map_tree_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.map_tree_lbl.setMaximumHeight(600)
+        tree_holder = self.rounded_pane(self.map_tree_lbl, pad=10)
 
-        # Tree table (used in stacked Log/Table panel)
-        self.tree_table = QTableWidget(0, 6)
+        self.map_nav_lbl = QLabel("Map – Nav Layers")
+        self.map_nav_lbl.setAlignment(Qt.AlignCenter)
+        self.map_nav_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.map_nav_lbl.setMaximumHeight(600)
+        nav_holder = self.rounded_pane(self.map_nav_lbl, pad=10)
+
+        self.hsv_widget = self._build_hsv_tab()
+        hsv_holder = self.rounded_pane(self.hsv_widget, pad=10)
+
+        self.map_tabs = QTabWidget()
+        self.map_tabs.addTab(tree_holder, "Trees")
+        self.map_tabs.addTab(nav_holder, "Nav Layers")
+        self.map_tabs.addTab(hsv_holder, "HSV Tuning")
+        self.map_tabs.currentChanged.connect(self._on_map_tab_changed)
+        self._map_tab_index = 0
+
+        self.map_tabs_container = AspectRatioWidget(self.map_tabs, ratio=1.0)
+        # Tree table tab
+        self.tree_table = QTableWidget(0, 6, self)
         self.tree_table.setHorizontalHeaderLabels(["X", "Y", "Z", "Status", "Uncertainty", "Distance"])
         header = self.tree_table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
@@ -840,31 +1569,48 @@ class ControlGUI(QWidget):
         self.tree_table.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.tree_table.setFocusPolicy(Qt.NoFocus)
         self.tree_table.setAlternatingRowColors(True)
-        tree_table_pane = self.rounded_pane(self.tree_table, pad=8)
 
-        # Log Panel (will be in stacked panel with tree table)
-        self.log = QTextEdit(); self.log.setReadOnly(True); self.log.setPlaceholderText("Log")
-        logpane = self.rounded_pane(self.log, pad=8); logpane.setMinimumSize(300, 160)
+        tree_tab = QWidget()
+        tree_tab_layout = QVBoxLayout(tree_tab)
+        tree_tab_layout.setContentsMargins(6, 6, 6, 6)
+        tree_tab_layout.addWidget(self.tree_table)
 
-        # Stacked panel: Log <-> Tree Table
-        self.log_table_stack = QStackedLayout()
-        self.log_table_stack.addWidget(logpane)         # index 0: Log
-        self.log_table_stack.addWidget(tree_table_pane) # index 1: Tree Table
-        self.log_table_stack.setCurrentIndex(0)
+        # Log tab
+        self.log = QTextEdit()
+        self.log.setReadOnly(True)
+        self.log.setPlaceholderText("Log")
+        self.log.setMinimumSize(300, 160)
+        self.log.setMinimumHeight(400)
+        log_tab = QWidget()
+        log_tab_layout = QVBoxLayout(log_tab)
+        log_tab_layout.setContentsMargins(6, 6, 6, 6)
+        log_tab_layout.addWidget(self.log)
 
-        self.toggle_log_table_btn = QPushButton("Show Tree Table")
-        self.toggle_log_table_btn.setCheckable(True)
-        self.toggle_log_table_btn.toggled.connect(self._toggle_log_table)
+        # Waypoint manager tab
+        self.waypoint_panel = WaypointPanel(self._send_waypoint_list, self._get_current_robot_pose)
+        waypoint_tab = QWidget()
+        waypoint_layout = QVBoxLayout(waypoint_tab)
+        waypoint_layout.setContentsMargins(6, 6, 6, 6)
+        waypoint_layout.addWidget(self.waypoint_panel)
 
-        stack_holder = QWidget()
-        stack_col = QVBoxLayout(stack_holder)
-        stack_col.setContentsMargins(0, 0, 0, 0)
-        stack_col.addWidget(self.toggle_log_table_btn, 0, Qt.AlignLeft)
-        stack_col.addLayout(self.log_table_stack, 1)
+        self.tabs = QTabWidget()
+        self.tabs.setDocumentMode(True)
+        self.tabs.addTab(log_tab, "Log")
+        self.tabs.addTab(tree_tab, "Tree Table")
+        self.tabs.addTab(waypoint_tab, "Waypoints")
+        self.waypoint_panel.set_pose_provider(self._get_current_robot_pose)
 
-        left_col = QVBoxLayout()
-        left_col.addWidget(cam, 3)
-        left_col.addWidget(stack_holder, 2)
+        tabs_holder = self.rounded_pane(self.tabs, pad=6)
+        status_holder = self.rounded_pane(self._build_status_panel(), pad=6)
+
+        tabs_split = QHBoxLayout()
+        tabs_split.setContentsMargins(0, 0, 0, 0)
+        tabs_split.setSpacing(12)
+        tabs_split.addWidget(status_holder, 1)
+        tabs_split.addWidget(tabs_holder, 2)
+        tabs_container = QWidget()
+        tabs_container.setLayout(tabs_split)
+        tabs_container.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         # Right column: top = Map/Panel, bottom split 50/50 (tree counter + speed)
         self.tree_total = 0
@@ -872,12 +1618,27 @@ class ControlGUI(QWidget):
         self.tree_lbl = QLabel("Trees: 0 (bad 0)")
         self.tree_lbl.setAlignment(Qt.AlignCenter)
         self.tree_lbl.setWordWrap(True)
-        self.tree_lbl.setStyleSheet("font-size: 18px; font-weight: 600;")
-        tree_pane = self.rounded_pane(self.tree_lbl, pad=10)
+        self.tree_lbl.setStyleSheet("font-size: 20px; font-weight: 600; padding:4px 6px;")
+        tree_frame = QFrame()
+        tree_frame.setObjectName("pane")
+        tree_layout = QVBoxLayout(tree_frame)
+        tree_layout.setContentsMargins(6, 6, 6, 6)
+        tree_layout.addWidget(self.tree_lbl)
+
+        self.odom_lbl = QLabel("x=0.00\ny=0.00\nyaw=0.0°")
+        self.odom_lbl.setAlignment(Qt.AlignLeft)
+        odom_frame = QFrame()
+        odom_frame.setObjectName("pane")
+        odom_layout = QVBoxLayout(odom_frame)
+        odom_layout.setContentsMargins(6, 6, 6, 6)
+        odom_layout.setSpacing(4)
+        
+        odom_layout.addWidget(QLabel("Odometry", alignment=Qt.AlignLeft))
+        odom_layout.addWidget(self.odom_lbl)
 
         self.speed = QSlider(Qt.Vertical); self.speed.setRange(0, 20); self.speed.setTickInterval(5)
         self.speed.setTickPosition(QSlider.TicksRight)
-        self.speed.setFixedWidth(26)
+        self.speed.setFixedWidth(34)
         tick_col = QVBoxLayout()
         for i, v in enumerate([20, 15, 10, 5, 0]):
             lab = QLabel(str(v)); lab.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
@@ -895,41 +1656,17 @@ class ControlGUI(QWidget):
         sp_l.addLayout(speed_row, 1)
         sp_l.addWidget(QLabel("Speed", alignment=Qt.AlignHCenter))
 
-        right_col = QVBoxLayout()
-        right_col.addWidget(right_top_pane, 3)
-        # On-screen D-pad (optional)
-        dpad_core = QWidget(); g = QGridLayout(dpad_core)
-        g.setSpacing(6); g.setContentsMargins(0, 0, 0, 0)
-        def btn(name, text): 
-            b = QPushButton(text)
-            b.setFixedSize(48, 36)
-            b.setObjectName(name)
-            return b
-        self.btn_up = btn("dpad_up", "▲")
-        self.btn_left = btn("dpad_left", "◀")
-        self.btn_right = btn("dpad_right", "▶")
-        self.btn_down = btn("dpad_down", "▼")
-        g.addWidget(self.btn_up, 0, 1)
-        g.addWidget(self.btn_left, 1, 0)
-        g.addWidget(self.btn_right, 1, 2)
-        g.addWidget(self.btn_down, 2, 1)
-        dpad_square = SquareContainer(dpad_core)
-        dpad = self.rounded_pane(dpad_square, pad=10)
-        dpad.setMinimumWidth(180)
-
-        speed_dpad_col = QVBoxLayout()
-        speed_dpad_col.addWidget(speed_pane, 1)
-        speed_dpad_col.addWidget(dpad, 0)
-
+        self.map_group = self.rounded_pane(self.map_tabs_container, pad=10)
+        
         # D-pad pane (optional on-screen nudging)
         dpad_core = QWidget()
         g = QGridLayout(dpad_core)
-        g.setSpacing(6)
+        g.setSpacing(4)
         g.setContentsMargins(0, 0, 0, 0)
 
         def _mk_btn(name: str, text: str) -> QPushButton:
             b = QPushButton(text)
-            b.setFixedSize(48, 36)
+            b.setFixedSize(60, 52)
             b.setObjectName(name)
             return b
 
@@ -942,44 +1679,25 @@ class ControlGUI(QWidget):
         g.addWidget(self.btn_right, 1, 2)
         g.addWidget(self.btn_down, 2, 1)
         dpad_square = SquareContainer(dpad_core)
-        dpad = self.rounded_pane(dpad_square, pad=10)
-        dpad.setMinimumWidth(200)
+        dpad_square.setMinimumSize(160, 160)
+        dpad_square.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        dpad = self.rounded_pane(dpad_square, pad=6)
+        dpad.setMinimumWidth(180)
+        dpad.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        left_controls = QWidget()
+        left_stack = QVBoxLayout(left_controls)
+        left_stack.setContentsMargins(0, 0, 0, 0)
+        left_stack.setSpacing(8)
+        left_stack.addWidget(tree_frame, 0)
+        left_stack.addWidget(odom_frame, 0, Qt.AlignLeft)
+        left_stack.addStretch(1)
 
         right_bottom = QHBoxLayout()
-        right_bottom.addWidget(tree_pane, 1)
-
-        speed_dpad_col = QVBoxLayout()
-        speed_dpad_col.addWidget(speed_pane, 1)
-        speed_dpad_col.addWidget(dpad, 0)
-
-        right_bottom.addLayout(speed_dpad_col, 1)
-        right_col.addLayout(right_bottom, 2)
-
-        # Bottom bar: Teleop LED + Depth Cloud + Battery + Run/Build/E-stop
-        run = QHBoxLayout()
-        run.addWidget(QLabel("Teleop"))
-        self.led = LedIndicator("#666666")
-        run.addWidget(self.led)
-
-        self.pc_name = QLabel("Depth Cloud")
-        self.pc_name.setStyleSheet("color:#bbb; margin-left:14px;")
-        self.pc_val  = QLabel("~0")
-        self.pc_val.setStyleSheet("font-weight:600;")
-        run.addWidget(self.pc_name)
-        run.addWidget(self.pc_val)
-
-        # Battery
-        run.addWidget(QLabel("Battery"))
-        self.batt_lbl = QLabel("—%")
-        self.batt_lbl.setStyleSheet("font-weight:700; margin-left:6px;")
-        run.addWidget(self.batt_lbl)
-        self.cpu_lbl = QLabel("CPU: --")
-        self.cpu_lbl.setStyleSheet("color:#bbb; margin-left:14px;")
-        self.cpu_lbl.setToolTip("Use `top` (watch controller_bridge, run_ui) and `ros2 topic hz /camera/image` for rate.")
-        run.addWidget(self.cpu_lbl)
-
-        run.addStretch(1)
-        run_w = QWidget(); run_w.setLayout(run)
+        right_bottom.setSpacing(12)
+        right_bottom.addWidget(left_controls, 1)
+        right_bottom.addWidget(dpad, 2)
+        right_bottom.addWidget(speed_pane, 0)
 
         self.launch_btn = QPushButton("Run Sim")
         self.launch_btn.setCheckable(True)
@@ -988,19 +1706,41 @@ class ControlGUI(QWidget):
         self.build_btn = QPushButton("Rebuild Code")
         self.build_btn.clicked.connect(self._start_build)
 
-        self.estop = QPushButton("E Stop"); self.estop.setObjectName("estop"); self.estop.setMinimumSize(140, 44)
+        self.estop = QPushButton("E-STOP"); self.estop.setObjectName("estop"); self.estop.setMinimumSize(140, 44)
+        self.estop.setCheckable(True)
         shadow = QGraphicsDropShadowEffect(blurRadius=16, offset=QPointF(0, 2))
         shadow.setColor(QColor(0, 0, 0, 160)); self.estop.setGraphicsEffect(shadow)
 
+        self.autonomy_btn = QPushButton("Start Mission")
+        self.autonomy_btn.setMinimumSize(150, 44)
+        self.autonomy_btn.setStyleSheet("background:#2e7d32; color:white; font-weight:700; border-radius:12px;")
+        self.autonomy_btn.clicked.connect(self._start_autonomy_clicked)
+
         bottom = QHBoxLayout()
-        bottom.addWidget(run_w, 1)
+        bottom.setSpacing(12)
+        bottom.addStretch(1)
         bottom.addWidget(self.launch_btn, 0)
         bottom.addWidget(self.build_btn, 0)
-        bottom.addWidget(self.estop, 0, Qt.AlignRight)
+        bottom.addWidget(self.autonomy_btn, 0)
+        bottom.addWidget(self.estop, 0)
+
+        top_grid = QGridLayout()
+        top_grid.setContentsMargins(0, 0, 0, 0)
+        top_grid.setSpacing(12)
+        top_grid.addWidget(self.camera_group, 0, 0)
+        top_grid.addWidget(self.map_group, 0, 1)
+        top_grid.addWidget(tabs_container, 1, 0)
+        top_grid.addLayout(right_bottom, 1, 1)
+        top_grid.setRowStretch(0, 3)
+        top_grid.setRowStretch(1, 2)
+        top_grid.setColumnStretch(0, 3)
+        top_grid.setColumnStretch(1, 2)
 
         root = QVBoxLayout(self)
-        top = QHBoxLayout(); top.addLayout(left_col, 3); top.addLayout(right_col, 2)
-        root.addLayout(top, 1); root.addLayout(bottom)
+        root.setContentsMargins(10, 10, 10, 10)
+        root.setSpacing(8)
+        root.addLayout(top_grid, 1)
+        root.addLayout(bottom)
         self._apply_dark_theme()
 
     def _apply_dark_theme(self):
@@ -1023,7 +1763,7 @@ class ControlGUI(QWidget):
         QApplication.instance().setPalette(pal)
 
         self.setStyleSheet("""
-            QWidget { font-size: 14px; color: #eaeaea; }
+            QWidget { font-size: 18px; color: #eaeaea; }
             QFrame#pane {
                 border: 1px solid #2e2e2e;
                 border-radius: 12px;
@@ -1038,7 +1778,7 @@ class ControlGUI(QWidget):
             }
             QPushButton:hover { background: #3a3a3a; }
             QPushButton#estop {
-                background-color: #e53935; color: white; border: 2px solid #b71c1c; border-radius: 18px;
+                background-color: #e53935; color: white; border: 2px solid #b71c1c; border-radius: 12px;
                 padding: 8px 18px; font-weight: 700;
             }
             QPushButton#estop:hover   { background-color: #f44336; }
@@ -1065,6 +1805,44 @@ class ControlGUI(QWidget):
         self._cpu_timer.timeout.connect(self._update_cpu)
         self._cpu_timer.start(int(max(0.5, CPU_SAMPLE_PERIOD_S) * 1000))
 
+    def resizeEvent(self, event):
+        self._release_map_height_limit()
+        super().resizeEvent(event)
+        self._schedule_map_sync()
+
+    def _release_map_height_limit(self):
+        if hasattr(self, "map_group"):
+            self.map_group.setMinimumHeight(0)
+            self.map_group.setMaximumHeight(16777215)  # Qt's large default
+
+    def _sync_top_heights(self):
+        if not hasattr(self, "camera_group") or not hasattr(self, "map_group"):
+            return
+        cam_h = max(self.camera_group.height(), self.camera_group.minimumHeight())
+        if cam_h <= 0:
+            return
+        current = self.map_group.height()
+        if abs(current - cam_h) <= 1:
+            cam_h = current  # already in sync, but still enforce bounds
+        self.map_group.setMinimumHeight(cam_h)
+        self.map_group.setMaximumHeight(cam_h)
+        if hasattr(self, "map_tabs_container"):
+            self.map_tabs_container.updateGeometry()
+        self.map_group.updateGeometry()
+
+    def _apply_map_height_sync(self):
+        self._map_height_sync_pending = False
+        self._sync_top_heights()
+
+    def _schedule_map_sync(self):
+        if not hasattr(self, "map_group"):
+            return
+        if self._map_height_sync_pending:
+            return
+        self._map_height_sync_pending = True
+        self._release_map_height_limit()
+        QTimer.singleShot(0, self._apply_map_height_sync)
+
     def _start_ros(self):
         self.ros = RosWorker()
         self.ros.signals.image.connect(self._update_camera)
@@ -1078,21 +1856,71 @@ class ControlGUI(QWidget):
         self.ros.signals.pc_points.connect(self._update_pc_points)
         self.ros.signals.teleop_led.connect(self._set_teleop_led)
         self.ros.signals.battery.connect(self._update_battery)
+        self.ros.signals.robot_pose.connect(self._update_robot_pose)
+        self.ros.signals.speed_scale.connect(self._sync_speed_slider)
+        self.ros.signals.estop_toggle.connect(self._toggle_estop_from_pad)
+        self.ros.signals.autonomy_state.connect(self._on_autonomy_state)
+        self.ros.signals.autonomy_done.connect(self._on_mission_done)
+
         self.send_cmd = self.ros.send_cmd
+        self.send_waypoints = self.ros.send_waypoints
+        self.send_speed_scale = self.ros.set_speed_scale
+        self.cancel_waypoints = self.ros.cancel_waypoints
+        self.send_hsv_params  = self.ros.set_hsv_params
+        self.send_autonomy_cmd = self.ros.publish_autonomy
         self.ros.start()
+        QTimer.singleShot(250, self._notify_speed_change)
 
     # ---- Motion logic
     def _current_scale(self) -> float:
         return _slider_to_scale(self.speed.value())
+
+    def _recompute_dpad_motion(self):
+        s = self._current_scale()
+        lin = 0.0
+        ang = 0.0
+        if self._dpad_forward and not self._dpad_back:
+            lin = MAX_LINEAR_MPS * s
+        elif self._dpad_back and not self._dpad_forward:
+            lin = -MAX_LINEAR_MPS * s
+        if self._dpad_left and not self._dpad_right:
+            ang = MAX_ANGULAR_RPS * s
+        elif self._dpad_right and not self._dpad_left:
+            ang = -MAX_ANGULAR_RPS * s
+        self._lin = lin
+        self._ang = ang
+        self._dpad_engaged = self._dpad_forward or self._dpad_back or self._dpad_left or self._dpad_right
+
+    def _set_motion(self, forward=None, back=None, left=None, right=None):
+        prev = self._dpad_engaged
+        if forward is not None:
+            self._dpad_forward = bool(forward)
+        if back is not None:
+            self._dpad_back = bool(back)
+        if left is not None:
+            self._dpad_left = bool(left)
+        if right is not None:
+            self._dpad_right = bool(right)
+        self._recompute_dpad_motion()
+        if prev and not self._dpad_engaged and not self._teleop_enabled:
+            self._on_manual_override_end()
+        else:
+            self._update_teleop_led_color()
 
     def _bump_speed(self, delta_steps: int):
         v = int(self.speed.value())
         v = max(self.speed.minimum(), min(self.speed.maximum(), v + int(delta_steps)))
         self.speed.setValue(v)
         s = self._current_scale()
+        if self._dpad_engaged:
+            self._recompute_dpad_motion()
         self._append_log(f"[INFO] GUI speed scale -> {s:.2f}")
 
     def _on_slider_changed(self, _v: int):
+        if not self._suppress_speed_emit:
+            self._notify_speed_change()
+        if self._dpad_engaged:
+            self._recompute_dpad_motion()
         self._update_teleop_led_color()
 
     def _publish_cmd(self):
@@ -1101,31 +1929,181 @@ class ControlGUI(QWidget):
         if self._estopped:
             self.send_cmd(0.0, 0.0)
             return
+        if REQUIRE_TELEOP_BTN and not self._teleop_enabled and not self._dpad_engaged:
+            self.send_cmd(0.0, 0.0)
+            return
+        self.send_cmd(self._lin, self._ang)
 
     def _on_estop(self):
-        self._lin = 0.0; self._ang = 0.0; self._estopped = True
-        self._append_log(">>> EMERGENCY STOP PRESSED! <<<")
-        QTimer.singleShot(0, lambda: setattr(self, "_estopped", False))
-        self._update_teleop_led_color()
+        self._set_estop(not getattr(self, "_estopped", False), source="gui")
 
     # Teleop LED handling
     @Slot(bool, bool)
     def _set_teleop_led(self, teleop_enabled: bool, sim_alive: bool):
+        prev_enabled = self._teleop_enabled
         self._teleop_enabled = teleop_enabled
         self._sim_alive = sim_alive
         self._update_teleop_led_color()
+        if prev_enabled and not teleop_enabled and not self._dpad_engaged:
+            self._on_manual_override_end()
 
     def _update_teleop_led_color(self):
-        if self._teleop_enabled:
+        if getattr(self, "_estopped", False):
+            self.led.set_color("#e53935")
+            return
+        if self._teleop_enabled or self._dpad_engaged:
             self.led.set_color("#46d160")
         elif self._sim_alive:
             self.led.set_color("#f6c343")
         else:
             self.led.set_color("#666666")
+        self._update_stage_leds()
 
-    def _toggle_log_table(self, checked: bool):
-        self.log_table_stack.setCurrentIndex(1 if checked else 0)
-        self.toggle_log_table_btn.setText("Show Log" if checked else "Show Tree Table")
+    def _on_manual_override_end(self):
+        now = time.time()
+        if not getattr(self, "_autonomy_requested", False):
+            return
+        if now - getattr(self, "_last_manual_resume_time", 0.0) < 1.0:
+            return
+        self._last_manual_resume_time = now
+        if getattr(self, "_estopped", False):
+            return
+        if (self._last_autonomy_state or "").lower() in ("", "idle", "complete"):
+            return
+        if callable(getattr(self, "send_autonomy_cmd", None)):
+            try:
+                self._append_log("[AUTO] Resuming autonomy after teleop release")
+            except Exception:
+                pass
+            try:
+                self.send_autonomy_cmd(True)
+            except Exception:
+                pass
+        self._set_autonomy_button_running()
+        self._update_stage_leds()
+
+    def _stop_autonomy(self, reason: str = "", button_label: str = "Start Mission"):
+        was_running = getattr(self, "_autonomy_requested", False)
+        self._autonomy_requested = False
+        self._last_manual_resume_time = 0.0
+        if was_running and callable(getattr(self, "send_autonomy_cmd", None)):
+            try:
+                msg = "[AUTO] Stopping autonomy"
+                if reason:
+                    msg += f" ({reason})"
+                self._append_log(msg)
+            except Exception:
+                pass
+            try:
+                self.send_autonomy_cmd(False)
+            except Exception:
+                pass
+        self._set_autonomy_button_idle(label=button_label)
+
+    def _update_stage_leds(self):
+        if not getattr(self, "stage_leds", None):
+            return
+        now = time.time()
+        if getattr(self, "_estopped", False):
+            for led in self.stage_leds.values():
+                led.set_color("#444444")
+            try:
+                self.auto_led.set_color("#e53935")
+            except Exception:
+                pass
+            return
+        state = (self._last_autonomy_state or "").lower() if self._last_autonomy_state else ""
+        active = {key: False for key in self.stage_leds}
+
+        if self._teleop_enabled:
+            active["move"] = True
+        elif state in ("idle", "init", "settling"):
+            active["spawn"] = True
+        elif state == "scanning":
+            active["scan"] = True
+        elif state == "planning":
+            active["waypoint"] = True
+        elif state == "executing":
+            active["move"] = True
+        elif state == "complete":
+            active["confirm"] = True
+
+        if state in ("planning", "complete") and now - getattr(self, "_last_pose_confirm_time", 0.0) <= 2.0:
+            active["confirm"] = True
+
+        for key, led in self.stage_leds.items():
+            led.set_color("#46d160" if active.get(key, False) else "#444444")
+
+    def _notify_speed_change(self):
+        scale = self._current_scale()
+        if self._last_speed_sent is not None and abs(self._last_speed_sent - scale) <= 1e-3:
+            return
+        self._last_speed_sent = scale
+        sender = getattr(self, "send_speed_scale", None)
+        if callable(sender):
+            try:
+                sender(scale)
+            except Exception:
+                pass
+
+    @Slot(float)
+    def _sync_speed_slider(self, scale: float):
+        scale = max(0.05, min(2.0, float(scale)))
+        target = _scale_to_slider(scale)
+        if self.speed.value() == target:
+            self._last_speed_sent = scale
+            return
+        self._suppress_speed_emit = True
+        self.speed.setValue(target)
+        self._suppress_speed_emit = False
+        self._last_speed_sent = scale
+
+    @Slot()
+    def _toggle_estop_from_pad(self):
+        self._set_estop(not getattr(self, "_estopped", False), source="pad")
+
+    def _set_estop(self, latched: bool, source: str = "gui"):
+        if getattr(self, "_estopped", False) == latched:
+            self.estop.setChecked(latched)
+            return
+        self._estopped = latched
+        self.estop.blockSignals(True)
+        self.estop.setChecked(latched)
+        self.estop.setText("Release E-STOP" if latched else "E-STOP")
+        self.estop.blockSignals(False)
+
+        if latched:
+            self._dpad_forward = self._dpad_back = self._dpad_left = self._dpad_right = False
+            self._dpad_engaged = False
+            self._lin = 0.0
+            self._ang = 0.0
+            self._append_log(">>> E-STOP engaged <<<" + (" (controller)" if source == "pad" else ""))
+            try:
+                if hasattr(self, "send_cmd"):
+                    self.send_cmd(0.0, 0.0)
+            except Exception:
+                pass
+
+            # cancel any active waypoint navigation when E-STOP is latched
+            if hasattr(self, "cancel_waypoints"):
+                try:
+                    self.cancel_waypoints()
+                except Exception:
+                    pass
+            self._stop_autonomy("E-STOP")
+            try:
+                self.auto_led.set_color("#e53935")
+            except Exception:
+                pass
+
+        else:
+            self._append_log(">>> E-STOP released <<<" + (" (controller)" if source == "pad" else ""))
+            self._update_stage_leds()
+
+        self._update_teleop_led_color()
+        if latched:
+            try: self.mission_lbl.setText("")
+            except Exception: pass
 
     def _toggle_cam_mode_btn(self, checked: bool):
         mode = 'hsv' if checked else 'rgb'
@@ -1141,6 +2119,21 @@ class ControlGUI(QWidget):
             self.cam_mode_btn.setChecked(checked)
             self.cam_mode_btn.setText("View: HSV mask" if checked else "View: Camera")
             self.cam_mode_btn.blockSignals(False)
+
+    def _start_autonomy_clicked(self):
+        self._append_log("Commencing mission!")
+        try:
+            self.mission_lbl.setText("")
+        except Exception:
+            pass
+        self._mission_complete = False
+        self._autonomy_requested = True
+        if hasattr(self, "send_autonomy_cmd"):
+            self.send_autonomy_cmd(True)
+        self.autonomy_btn.setEnabled(False)
+        self.autonomy_btn.setText("Starting…")
+        self.autonomy_btn.setStyleSheet("background:#1976d2; color:white; font-weight:700; border-radius:12px;")
+        self._update_stage_leds()
 
     def _format_tree_row(self, row: Dict[str, object]):
         status = str(row.get("status", "unknown")).lower()
@@ -1283,6 +2276,38 @@ class ControlGUI(QWidget):
         }
         self.tree_table.resizeRowsToContents()
 
+    @Slot(object)
+    def _update_robot_pose(self, pose_obj):
+        try:
+            if pose_obj is None:
+                return
+            x, y, yaw = pose_obj
+            self._robot_pose = (float(x), float(y), float(yaw))
+            self._last_pose_confirm_time = time.time()
+            if hasattr(self, "odom_lbl"):
+                self.odom_lbl.setText(
+                    f"Pose: x={float(x):.2f} y={float(y):.2f} yaw={math.degrees(float(yaw)):.1f}°"
+                )
+            self._update_stage_leds()
+        except Exception:
+            pass
+
+    def _get_current_robot_pose(self):
+        return self._robot_pose
+
+    def _send_waypoint_list(self, rows: List[Dict[str, float]]):
+        if not rows:
+            self._append_log("[WARN] No waypoints to send.")
+            return
+        if not hasattr(self, "ros") or not self.ros.ready():
+            self._append_log("[WARN] ROS node not ready; cannot send waypoints.")
+            return
+        try:
+            self.send_waypoints(rows)
+            self._append_log(f"[INFO] Sent {len(rows)} waypoint(s).")
+        except Exception as e:
+            self._append_log(f"[ERROR] Failed to send waypoints: {e}")
+
     def _set_tree_cell(self, row: int, col: int, text: str, color: Optional[QColor] = None):
         item = QTableWidgetItem(text)
         item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
@@ -1311,11 +2336,15 @@ class ControlGUI(QWidget):
             try:
                 proc_pct = self._cpu_process.cpu_percent(interval=None)
                 sys_pct = psutil.cpu_percent(interval=None)
-                self.cpu_lbl.setText(f"CPU: app {proc_pct:.1f}% | sys {sys_pct:.0f}%")
+                cores_total = max(1, psutil.cpu_count() or 1)
+                core_equiv = proc_pct / 100.0
+                self.cpu_lbl.setText(
+                    f"app {proc_pct:.0f}% (~{core_equiv:.2f} cores / {cores_total}) | sys {sys_pct:.0f}%"
+                )
                 return
             except Exception:
                 pass
-        self.cpu_lbl.setText("CPU: use top • ros2 topic hz /camera/image")
+        self.cpu_lbl.setText("use top • ros2 topic hz /camera/image")
 
     @Slot(float, float, bool)
     def _update_battery(self, pct, volt, charging):
@@ -1345,21 +2374,39 @@ class ControlGUI(QWidget):
         self.camera_lbl.setPixmap(pix.scaled(
             self.camera_lbl.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
         ))
+        self._schedule_map_sync()
 
-    @Slot(object)
-    def _update_map(self, rgb_np):
-        if self._quitting or rgb_np is None: return
+    def _set_map_pixmap(self, label: QLabel, rgb_np):
+        if label is None or rgb_np is None:
+            return
         h, w, _ = rgb_np.shape
         qimg = QImage(rgb_np.data, w, h, 3*w, QImage.Format_RGB888)
         pix = QPixmap.fromImage(qimg)
-        self.map_lbl.setPixmap(pix.scaled(
-            self.map_lbl.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
+        label.setPixmap(pix.scaled(
+            label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation
         ))
+
+    @Slot(object)
+    def _update_map(self, payload):
+        if self._quitting or payload is None:
+            return
+        if isinstance(payload, dict):
+            self._set_map_pixmap(self.map_tree_lbl, payload.get("trees"))
+            self._set_map_pixmap(self.map_nav_lbl, payload.get("nav"))
+        else:
+            # backward compatibility
+            self._set_map_pixmap(self.map_tree_lbl, payload)
+            self._set_map_pixmap(self.map_nav_lbl, payload)
+        self._schedule_map_sync()
 
     # ---- Clean shutdown
     def closeEvent(self, event):
         try:
             self._quitting = True
+            try:
+                self._stop_autonomy("UI closing")
+            except Exception:
+                pass
             if hasattr(self, "cmd_timer"):
                 self.cmd_timer.stop()
                 try: self.cmd_timer.timeout.disconnect(self._publish_cmd)
@@ -1397,8 +2444,19 @@ class ControlGUI(QWidget):
             except Exception: pass
             try: self.ros.signals.battery.disconnect(self._update_battery)
             except Exception: pass
+            try: self.ros.signals.robot_pose.disconnect(self._update_robot_pose)
+            except Exception: pass
+            try: self.ros.signals.speed_scale.disconnect(self._sync_speed_slider)
+            except Exception: pass
+            try: self.ros.signals.estop_toggle.disconnect(self._toggle_estop_from_pad)
+            except Exception: pass
+            try: self.ros.signals.autonomy_state.disconnect(self._on_autonomy_state)
+            except Exception: pass
+            try: self.ros.signals.autonomy_done.disconnect(self._on_mission_done)
+            except Exception: pass
 
             self.send_cmd = lambda *_a, **_k: None
+            self.send_autonomy_cmd = lambda _start: None
             self.ros.stop(); self.ros.wait(2000)
         except Exception:
             pass
@@ -1413,6 +2471,155 @@ class ControlGUI(QWidget):
                 signal.signal(signal.SIGINT, signal.SIG_DFL)
         try: signal.signal(signal.SIGINT, on_sigint)
         except Exception: pass
+
+    def _build_hsv_tab(self) -> QWidget:
+        widget = QWidget()
+        layout = QVBoxLayout(widget)
+        layout.setContentsMargins(4, 4, 4, 4)
+        layout.setSpacing(8)
+
+        note = QLabel("Adjust HSV thresholds for the UI mask. Values update live when in HSV view.")
+        note.setWordWrap(True)
+        layout.addWidget(note)
+
+        entries = [
+            ("Green Low", "green_low"),
+            ("Green High", "green_high"),
+            ("Red1 Low", "red1_low"),
+            ("Red1 High", "red1_high"),
+            ("Red2 Low", "red2_low"),
+            ("Red2 High", "red2_high"),
+        ]
+        channels = ["H", "S", "V"]
+        for title, key in entries:
+            row = QWidget()
+            row_layout = QHBoxLayout(row)
+            row_layout.setContentsMargins(0, 0, 0, 0)
+            row_layout.setSpacing(6)
+            lbl = QLabel(title)
+            lbl.setMinimumWidth(90)
+            row_layout.addWidget(lbl)
+            for idx, chan in enumerate(channels):
+                spin = QSpinBox()
+                spin.setButtonSymbols(QSpinBox.NoButtons)
+                spin.setFixedWidth(56)
+                max_val = 179 if chan == "H" else 255
+                spin.setRange(0, max_val)
+                spin.setValue(int(self._hsv_params.get(key, [0, 0, 0])[idx]))
+                spin.valueChanged.connect(lambda val, k=key, i=idx: self._on_hsv_spin_changed(k, i, val))
+                row_layout.addWidget(QLabel(chan))
+                row_layout.addWidget(spin)
+                self._hsv_inputs[(key, idx)] = spin
+            row_layout.addStretch(1)
+            layout.addWidget(row)
+
+        layout.addStretch(1)
+        return widget
+
+    def _on_hsv_spin_changed(self, key: str, idx: int, value: int):
+        arr = self._hsv_params.setdefault(key, [0, 0, 0])
+        arr[idx] = int(value)
+        self._queue_hsv_publish()
+
+    def _queue_hsv_publish(self):
+        if self._hsv_pending:
+            return
+        self._hsv_pending = True
+        QTimer.singleShot(150, self._publish_hsv_params)
+
+    def _publish_hsv_params(self):
+        self._hsv_pending = False
+        payload = {k: list(v) for k, v in self._hsv_params.items()}
+        sender = getattr(self, "send_hsv_params", None)
+        if callable(sender):
+            try:
+                sender(payload)
+                if hasattr(self, "hsv_status_lbl"):
+                    self.hsv_status_lbl.setText(
+                        f"HSV updated (G {payload['green_low']}-{payload['green_high']}, "
+                        f"R1 {payload['red1_low']}-{payload['red1_high']}, "
+                        f"R2 {payload['red2_low']}-{payload['red2_high']})"
+                    )
+            except Exception as e:
+                if hasattr(self, "hsv_status_lbl"):
+                    self.hsv_status_lbl.setText(f"HSV update failed: {e}")
+
+    def _on_map_tab_changed(self, idx: int):
+        self._map_tab_index = idx
+        if idx == 2 and hasattr(self, "hsv_status_lbl"):
+            self.hsv_status_lbl.setText("HSV sliders ready.")
+
+    @Slot(str)
+    def _on_autonomy_state(self, s: str):
+        s = (s or "").strip().lower()
+        if s == self._last_autonomy_state:
+            return
+        prev = self._last_autonomy_state
+        self._last_autonomy_state = s
+        color_map = {
+            "idle":      "#666666",
+            "settling":  "#64b5f6",
+            "scanning":  "#4aa3ff",
+            "planning":  "#ffcc00",
+            "executing": "#46d160",
+            "teleop":    "#f6c343",
+            "complete":  "#9c27b0",
+        }
+        self.auto_led.set_color(color_map.get(s, "#666666"))
+        if s != "complete" and self._mission_complete:
+            self._mission_complete = False
+            try:
+                self.mission_lbl.setText("")
+            except Exception:
+                pass
+        try:
+            self.auto_state.setText(s if s else "—")
+        except Exception:
+            pass
+
+        if s in ("idle", "complete"):
+            if s == "idle":
+                self._autonomy_requested = False
+            label = "Restart Mission" if s == "complete" else "Start Mission"
+            self._set_autonomy_button_idle(label=label, enabled=True)
+        elif s == "teleop":
+            if self._autonomy_requested:
+                if self._teleop_enabled or self._dpad_engaged:
+                    if hasattr(self, "autonomy_btn"):
+                        self.autonomy_btn.setEnabled(False)
+                        self.autonomy_btn.setText("Teleop override")
+                        self.autonomy_btn.setStyleSheet("background:#f6c343; color:#111; font-weight:700; border-radius:12px;")
+                else:
+                    self._set_autonomy_button_running()
+            else:
+                self._set_autonomy_button_idle()
+        else:
+            self._set_autonomy_button_running()
+
+        if s != prev:
+            self._append_log(f"[AUTO] {s if s else 'unknown'}")
+        self._update_stage_leds()
+
+    @Slot(bool)
+    def _on_mission_done(self, ok: bool):
+        if ok:
+            self._mission_complete = True
+            self._append_log(">>> MISSION COMPLETE ✅")
+            self.auto_led.set_color("#9c27b0")
+            try:
+                self.mission_lbl.setText("MISSION COMPLETE ✅")
+                self.mission_lbl.setStyleSheet("color:#9c27b0; font-weight:800;")
+            except Exception:
+                pass
+            self._stop_autonomy("Mission complete", button_label="Restart Mission")
+        else:
+            self._mission_complete = False
+            # if someone ever publishes 'false' to reset, clear banner
+            try:
+                self.mission_lbl.setText("")
+            except Exception:
+                pass
+        self._update_stage_leds()
 
 # ============================ ROS worker ============================
 class RosWorker(QThread):
@@ -1457,6 +2664,29 @@ class RosWorker(QThread):
             try: self._node.publish_cmd(linear, angular)
             except Exception: pass
 
+    @Slot(float)
+    def set_speed_scale(self, scale: float):
+        if self._node is not None and self._ready and not self._stop:
+            try:
+                self._node.set_speed_scale(scale)
+            except Exception:
+                pass
+
+    @Slot(object)
+    def send_waypoints(self, waypoints):
+        if self._node is not None and self._ready and not self._stop:
+            try: self._node.publish_waypoints(waypoints)
+            except Exception:
+                pass
+
+    @Slot(bool)
+    def publish_autonomy(self, start: bool):
+        if self._node is not None and self._ready and not self._stop:
+            try:
+                self._node.publish_autonomy(start)
+            except Exception:
+                pass
+
     def ready(self) -> bool:
         try:
             return self._ready and not self._stop and rclpy.ok()
@@ -1467,6 +2697,22 @@ class RosWorker(QThread):
     def set_camera_mode(self, mode: str):
         if self._node is not None and self._ready and not self._stop:
             try: self._node.set_camera_mode(mode)
+            except Exception:
+                pass
+
+    @Slot()
+    def cancel_waypoints(self):
+        if self._node is not None and self._ready and not self._stop:
+            try:
+                self._node.cancel_waypoints()
+            except Exception:
+                pass
+
+    @Slot(object)
+    def set_hsv_params(self, params):
+        if self._node is not None and self._ready and not self._stop:
+            try:
+                self._node.set_hsv_params(params)
             except Exception:
                 pass
 
@@ -1494,4 +2740,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
