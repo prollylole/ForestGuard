@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import sys, os, math, signal, time
-from typing import Optional, Dict, Tuple, List
+from typing import Optional, Dict, Tuple, List, Callable
 from threading import Lock
 
 from PySide6.QtCore import Qt, QObject, QThread, QTimer, Signal, Slot, QPointF, QRect, QSize, QProcess
@@ -22,6 +22,10 @@ MISSION_DONE_TOPIC  = os.environ.get("UI_MISSION_DONE_TOPIC", "/ui/mission_compl
 AUTONOMY_START_TOPIC = os.environ.get("UI_AUTONOMY_START_TOPIC", "/ui/autonomy_start")
 
 CAMERA_TOPIC_DEFAULT = "/camera/image"
+FRONT_CAMERA_TOPIC = os.environ.get("UI_FRONT_CAMERA_TOPIC", "/camera/image")
+REAR_CAMERA_TOPIC  = os.environ.get("UI_REAR_CAMERA_TOPIC",  "/rear_camera/image")
+LEFT_CAMERA_TOPIC  = os.environ.get("UI_LEFT_CAMERA_TOPIC",  "/left_camera/image")
+RIGHT_CAMERA_TOPIC = os.environ.get("UI_RIGHT_CAMERA_TOPIC", "/right_camera/image")
 ROSOUT_TOPIC         = "/rosout"
 CAMERA_TOPIC_CTRL    = "/ui/camera_topic"
 CMD_VEL_TOPIC        = "/cmd_vel"
@@ -67,11 +71,11 @@ MAX_ANGULAR_RPS = 1.50
 # Launch control (Run Sim button)
 DEFAULT_LAUNCH_CMD = os.environ.get(
     "UI_LAUNCH_CMD",
-    "ros2 launch forestguard_sim johnAUTO2.launch.py ui:=true teleop:=true amcl:=true slam:=false map:=true"
+    "ros2 launch forestguard_sim forestguardmission.launch.py ui:=true teleop:=true amcl:=true slam:=false map:=true"
 )
 
 # Build control (Rebuild Code button)
-_DEFAULT_WS = os.path.expanduser("~/git/RS1/john_branch")
+_DEFAULT_WS = os.path.expanduser("~/git/RS1-ForestGuard/main")
 DEFAULT_BUILD_CWD = os.environ.get("UI_BUILD_CWD", _DEFAULT_WS if os.path.isdir(_DEFAULT_WS) else os.getcwd())
 DEFAULT_BUILD_PRE = os.environ.get("UI_BUILD_PRE", "source /opt/ros/humble/setup.bash")
 DEFAULT_BUILD_CMD = os.environ.get(
@@ -379,6 +383,36 @@ def _quat_from_yaw(yaw: float):
     sy = math.sin(yaw * 0.5)
     return (0.0, 0.0, sy, cy)
 
+def _normalize_topic(topic: str) -> str:
+    return (topic or "").strip().rstrip('/')
+
+def _split_env_list(raw: str) -> List[str]:
+    if not raw:
+        return []
+    tmp = raw.replace(';', ',')
+    return [chunk.strip() for chunk in tmp.split(',') if chunk.strip()]
+
+def _init_camera_mode_list() -> List[str]:
+    env_val = os.environ.get("UI_CAMERA_MODES", "")
+    modes = [token.lower() for token in _split_env_list(env_val)]
+    if "rgb" not in modes:
+        modes.insert(0, "rgb")
+    if "hsv" not in modes:
+        modes.append("hsv")
+    if not modes:
+        modes = ["rgb"]
+    return modes
+
+def _mode_label(mode: str) -> str:
+    mapping = {
+        "rgb": "Camera",
+        "hsv": "HSV mask",
+    }
+    pretty = mapping.get(mode.lower())
+    if pretty:
+        return pretty
+    return mode.upper()
+
 # ========================= ROS <-> Qt bridge ========================
 class RosSignals(QObject):
     image = Signal(object)
@@ -395,6 +429,7 @@ class RosSignals(QObject):
     tree_table = Signal(object)
     battery = Signal(float, float, bool)  # percent [0-100], voltage [V] (nan if unknown), charging
     camera_mode = Signal(str)
+    camera_state = Signal(str, str, str)  # side, mode, topic
     autonomy_state = Signal(str)
     autonomy_done = Signal(bool)
 
@@ -453,16 +488,49 @@ class GuiRosNode(Node):
         # cv bridge
         self.bridge: Optional[object] = CvBridge() if _CV_BRIDGE_OK else None
 
-        # camera state
+        # camera state (front / rear selection + independent view mode)
         self._camera_sub = None
-        self._camera_topic_raw = CAMERA_TOPIC_DEFAULT.rstrip('/')
+        self._front_topic = _normalize_topic(FRONT_CAMERA_TOPIC) or "/camera/image"
+        self._rear_topic  = _normalize_topic(REAR_CAMERA_TOPIC) or self._front_topic
+        self._left_topic  = _normalize_topic(LEFT_CAMERA_TOPIC)
+        self._right_topic = _normalize_topic(RIGHT_CAMERA_TOPIC)
+        self._camera_modes = _init_camera_mode_list()
+        self._camera_mode_idx = 0
         self._camera_mode = 'rgb'
+        self._view_mode_handlers: Dict[str, Callable[[object], object]] = {}
+        self._camera_sources: List[Dict[str, str]] = []
+
+        def _add_camera_source(name: str, topic: Optional[str]):
+            topic_norm = _normalize_topic(topic or "")
+            if not topic_norm:
+                return
+            if any(src["topic"] == topic_norm for src in self._camera_sources):
+                return
+            self._camera_sources.append({"name": name, "topic": topic_norm})
+
+        _add_camera_source("front", self._front_topic)
+        _add_camera_source("rear", self._rear_topic)
+        _add_camera_source("left", self._left_topic)
+        _add_camera_source("right", self._right_topic)
+        if not self._camera_sources:
+            _add_camera_source("front", "/camera/image")
+
+        self._camera_state_idx = 0
+        self._camera_side = self._camera_sources[0]["name"]
+        self._camera_topic_raw = self._camera_sources[0]["topic"]
+
         self._latest_rgb = None
         self._img_lock = Lock()
         self._emit_timer = self.create_timer(1.0 / self._emit_hz, self._emit_image_tick)
         self._subscribe_camera(self._camera_topic_raw)
+        self._emit_camera_state()
+
+        # Y button cycles camera state
         self._prev_cycle_btn = False
-        self._btn_cycle = int(os.environ.get("UI_JOY_BTN_CAMERA", "3"))
+        self._btn_cycle = int(os.environ.get("UI_JOY_BTN_CAMERA", "0"))  # A button by default
+        self._prev_view_btn = False
+        self._btn_view = int(os.environ.get("UI_JOY_BTN_CAMERA_VIEW", "3"))  # Y button for HSV toggle
+
         self._hsv_ready = (np is not None and cv2 is not None)
         if self._hsv_ready:
             self._green_low = np.array([25, 130, 13], dtype=np.uint8)
@@ -471,6 +539,7 @@ class GuiRosNode(Node):
             self._red1_high = np.array([32, 255, 255], dtype=np.uint8)
             self._red2_low = np.array([179, 160, 77], dtype=np.uint8)
             self._red2_high = np.array([179, 255, 255], dtype=np.uint8)
+            self._view_mode_handlers["hsv"] = self._make_hsv_view
         else:
             self.get_logger().warn("HSV view unavailable (missing OpenCV/NumPy)")
 
@@ -596,6 +665,70 @@ class GuiRosNode(Node):
                 self.get_logger().warn(f"Battery on {BATTERY_TOPIC} as Float32 (assuming percent)")
         except Exception as e:
             self.get_logger().warn(f"Battery subscribe failed: {e}")
+    def _determine_camera_side(self, topic: str) -> str:
+        base = _normalize_topic(topic)
+        for source in self._camera_sources:
+            if base == source["topic"]:
+                return source["name"]
+        return "custom"
+
+    def _sync_camera_state_index(self, side: Optional[str] = None, topic: Optional[str] = None):
+        target_side = (side or self._camera_side or "").lower()
+        target_topic = _normalize_topic(topic or self._camera_topic_raw)
+        for idx, entry in enumerate(self._camera_sources):
+            if target_side and entry["name"] == target_side:
+                self._camera_state_idx = idx
+                return
+            if target_topic and entry["topic"] == target_topic:
+                self._camera_state_idx = idx
+                return
+
+    def _emit_camera_state(self):
+        try:
+            self.signals.camera_state.emit(self._camera_side, self._camera_mode, self._camera_topic_raw)
+        except Exception:
+            pass
+
+    def _apply_view_mode(self, rgb_np):
+        handler = self._view_mode_handlers.get(self._camera_mode)
+        if handler is None:
+            return rgb_np
+        return handler(rgb_np)
+
+    def _apply_camera_state(self):
+        """Apply current (front/rear/etc.) state (mode handled separately)."""
+        if not self._camera_sources:
+            return
+        self._camera_state_idx %= len(self._camera_sources)
+        entry = self._camera_sources[self._camera_state_idx]
+        self._subscribe_camera(entry["topic"])
+        self._camera_side = entry["name"]
+        self._emit_camera_state()
+
+        label = f"{entry['name']} • {_mode_label(self._camera_mode)}"
+        try:
+            self.signals.ok.emit(True, f"Camera: {label}")
+        except Exception:
+            pass
+
+    def _cycle_camera_state(self):
+        """Cycle through configured camera sources (front, rear, future extras)."""
+        if not self._camera_sources:
+            return
+        self._camera_state_idx = (self._camera_state_idx + 1) % len(self._camera_sources)
+        self._apply_camera_state()
+
+    def cycle_camera_state(self):
+        """Public entrypoint for UI/controller to cycle camera side+mode."""
+        self._cycle_camera_state()
+
+    def _cycle_camera_mode(self):
+        """Toggle among configured view modes (RGB, HSV, etc.)."""
+        if not self._camera_modes:
+            return
+        self._camera_mode_idx = (self._camera_mode_idx + 1) % len(self._camera_modes)
+        next_mode = self._camera_modes[self._camera_mode_idx]
+        self.set_camera_mode(next_mode)
 
     def _on_battery_state(self, msg):
         try:
@@ -767,6 +900,8 @@ class GuiRosNode(Node):
         if topic == self._camera_topic_raw:
             return
         self._subscribe_camera(topic)
+        self._sync_camera_state_index(topic=topic)
+        self._emit_camera_state()
 
     def _subscribe_camera(self, topic_base: str):
         topic_base = (topic_base or "").strip()
@@ -779,6 +914,7 @@ class GuiRosNode(Node):
         if not self._prefer_compressed and topic_base.rstrip('/').endswith("/compressed"):
             topic_base = topic_base.rstrip('/')[:-len("/compressed")]
         self._camera_topic_raw = topic_base.rstrip('/')
+        self._camera_side = self._determine_camera_side(self._camera_topic_raw)
         if self._prefer_compressed:
             comp_topic = self._camera_topic_raw + "/compressed" if not self._camera_topic_raw.endswith("/compressed") else self._camera_topic_raw
             try:
@@ -813,13 +949,10 @@ class GuiRosNode(Node):
                 rgb = self._latest_rgb
                 self._latest_rgb = None
         if rgb is not None:
-            if self._camera_mode == 'hsv' and self._hsv_ready:
-                try:
-                    view = self._make_hsv_view(rgb)
-                except Exception as exc:
-                    self.get_logger().throttle(2000, f"HSV view failed: {exc}")
-                    view = rgb
-            else:
+            try:
+                view = self._apply_view_mode(rgb)
+            except Exception as exc:
+                self.get_logger().throttle(2000, f"Camera view '{self._camera_mode}' failed: {exc}")
                 view = rgb
             self.signals.image.emit(view)
 
@@ -858,15 +991,22 @@ class GuiRosNode(Node):
         return cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB)
 
     def set_camera_mode(self, mode: str, notify: bool = True):
-        target_mode = 'hsv' if str(mode).lower() == 'hsv' else 'rgb'
-        if target_mode == 'hsv' and not self._hsv_ready:
+        target_mode = (mode or "").strip().lower() or self._camera_mode
+        if target_mode not in self._camera_modes:
+            target_mode = "rgb"
+        if target_mode == "hsv" and not self._hsv_ready:
             if notify:
                 self.signals.ok.emit(False, "HSV view unavailable (missing OpenCV/Numpy)")
             return
         if target_mode != self._camera_mode:
             self._camera_mode = target_mode
+            try:
+                self._camera_mode_idx = self._camera_modes.index(target_mode)
+            except ValueError:
+                self._camera_mode_idx = 0
             if notify:
-                self.signals.ok.emit(True, "Camera view: HSV mask" if target_mode == 'hsv' else "Camera view: Camera")
+                self.signals.ok.emit(True, f"Camera view: {_mode_label(target_mode)}")
+            self._emit_camera_state()
         self.signals.camera_mode.emit(self._camera_mode)
 
     def set_camera_topic(self, topic: str):
@@ -877,9 +1017,8 @@ class GuiRosNode(Node):
         if topic == self._camera_topic_raw:
             return
         self._subscribe_camera(topic)
-
-    def _cycle_camera_mode(self):
-        self.set_camera_mode('hsv' if self._camera_mode == 'rgb' else 'rgb')
+        self._sync_camera_state_index(topic=topic)
+        self._emit_camera_state()
 
     def _on_joy(self, msg):
         up = down = False
@@ -903,6 +1042,13 @@ class GuiRosNode(Node):
             except Exception:
                 cycle_pressed = False
 
+        view_pressed = False
+        if self._btn_view >= 0:
+            try:
+                view_pressed = bool(msg.buttons[self._btn_view] > 0)
+            except Exception:
+                view_pressed = False
+
         try:
             self._teleop_enabled = bool(msg.buttons[self._teleop_btn] > 0)
         except Exception:
@@ -913,8 +1059,11 @@ class GuiRosNode(Node):
         if down and not self._prev_down: self.signals.bump_speed.emit(-1)
         self._prev_up, self._prev_down = up, down
         if cycle_pressed and not self._prev_cycle_btn:
-            self._cycle_camera_mode()
+            self._cycle_camera_state()
         self._prev_cycle_btn = cycle_pressed
+        if view_pressed and not self._prev_view_btn:
+            self._cycle_camera_mode()
+        self._prev_view_btn = view_pressed
 
         estop_pressed = False
         if self._btn_estop >= 0:
@@ -1375,11 +1524,14 @@ class ControlGUI(QWidget):
         self._hsv_inputs = {}
         self._hsv_pending = False
         self._map_height_sync_pending = False
+        self._camera_modes = _init_camera_mode_list()
+        self._camera_mode_idx = 0
         self._build_ui()
         self._wire_behaviour()
         self._start_ros()
         self.speed.setValue(_scale_to_slider(0.60))
         self._reflect_camera_mode('rgb')
+        self._reflect_camera_state_btn('front', 'rgb', FRONT_CAMERA_TOPIC)
         self._update_cpu()
         self._schedule_map_sync()
 
@@ -1387,8 +1539,7 @@ class ControlGUI(QWidget):
         icon_path = os.environ.get("UI_APP_ICON", "")
         if not icon_path:
             guesses = [
-                "~/git/RS1/john_branch/src/forestguard_ui/assets/app_icon.png",
-                "~/git/RS1/john_branch/john/assets/app_icon.png",
+                "~/git/RS1-ForestGuard/main/src/forestguard_ui/assets/app_icon.png",
             ]
             for g in guesses:
                 p = os.path.expanduser(g)
@@ -1520,13 +1671,21 @@ class ControlGUI(QWidget):
         self.camera_lbl.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.camera_lbl.setMinimumHeight(200)
         # self.camera_lbl.setMaximumHeight(600)
+        self.cam_state_btn = QPushButton("Camera: Front")
+        self.cam_state_btn.setToolTip("Cycle through camera sources (front/rear/extra)")
+        self.cam_state_btn.clicked.connect(self._cycle_camera_state_btn)
         self.cam_mode_btn = QPushButton("View: Camera")
-        self.cam_mode_btn.setCheckable(True)
-        self.cam_mode_btn.toggled.connect(self._toggle_cam_mode_btn)
+        self.cam_mode_btn.setToolTip("Current camera view; click to cycle modes")
+        self.cam_mode_btn.clicked.connect(self._cycle_cam_mode_btn)
         cam_box = QWidget(); cam_col = QVBoxLayout(cam_box)
         cam_col.setContentsMargins(0, 0, 0, 0)
         cam_col.setSpacing(6)
-        cam_col.addWidget(self.cam_mode_btn, 0, Qt.AlignLeft)
+        cam_controls = QHBoxLayout()
+        cam_controls.setSpacing(6)
+        cam_controls.addWidget(self.cam_state_btn, 0)
+        cam_controls.addWidget(self.cam_mode_btn, 0)
+        cam_controls.addStretch(1)
+        cam_col.addLayout(cam_controls)
         cam_col.addWidget(self.camera_lbl, 1)
         self.camera_group = self.rounded_pane(cam_box, pad=10)
 
@@ -1853,6 +2012,7 @@ class ControlGUI(QWidget):
         self.ros.signals.tree_counts.connect(self._update_tree_counts)
         self.ros.signals.tree_table.connect(self._update_tree_table)
         self.ros.signals.camera_mode.connect(self._reflect_camera_mode)
+        self.ros.signals.camera_state.connect(self._reflect_camera_state_btn)
         self.ros.signals.pc_points.connect(self._update_pc_points)
         self.ros.signals.teleop_led.connect(self._set_teleop_led)
         self.ros.signals.battery.connect(self._update_battery)
@@ -2105,20 +2265,58 @@ class ControlGUI(QWidget):
             try: self.mission_lbl.setText("")
             except Exception: pass
 
-    def _toggle_cam_mode_btn(self, checked: bool):
-        mode = 'hsv' if checked else 'rgb'
+    def _cycle_camera_state_btn(self):
+        if hasattr(self, "ros"):
+            try:
+                self.ros.cycle_camera_state()
+            except Exception:
+                pass
+
+    def _cycle_cam_mode_btn(self):
+        if not getattr(self, "_camera_modes", None):
+            return
+        if not self._camera_modes:
+            return
+        next_idx = (self._camera_mode_idx + 1) % len(self._camera_modes)
+        mode = self._camera_modes[next_idx]
         if hasattr(self, "ros"):
             self.ros.set_camera_mode(mode)
-        self._reflect_camera_mode(mode)
 
     @Slot(str)
     def _reflect_camera_mode(self, mode: str):
-        checked = (str(mode).lower() == 'hsv')
+        mode_norm = (str(mode) or "").lower() or "rgb"
+        if getattr(self, "_camera_modes", None):
+            try:
+                self._camera_mode_idx = self._camera_modes.index(mode_norm)
+            except ValueError:
+                try:
+                    self._camera_mode_idx = self._camera_modes.index("rgb")
+                except ValueError:
+                    self._camera_mode_idx = 0
+        label = _mode_label(mode_norm)
         if hasattr(self, "cam_mode_btn"):
-            self.cam_mode_btn.blockSignals(True)
-            self.cam_mode_btn.setChecked(checked)
-            self.cam_mode_btn.setText("View: HSV mask" if checked else "View: Camera")
-            self.cam_mode_btn.blockSignals(False)
+            self.cam_mode_btn.setText(f"View: {label}")
+            self.cam_mode_btn.setToolTip(f"View mode: {label}\nClick to cycle modes")
+
+    @Slot(str, str, str)
+    def _reflect_camera_state_btn(self, side: str, mode: str, topic: str):
+        if not hasattr(self, "cam_state_btn"):
+            return
+        side_norm = str(side or "").lower()
+        if side_norm == "front":
+            side_label = "Front"
+        elif side_norm == "rear":
+            side_label = "Rear"
+        elif side_norm == "custom":
+            side_label = "Custom"
+        else:
+            side_label = side.title() if side else "Unknown"
+        mode_label = _mode_label(str(mode or "").lower() or "rgb")
+        self.cam_state_btn.setText(f"Camera: {side_label}")
+        topic_txt = topic or "—"
+        self.cam_state_btn.setToolTip(
+            f"Current camera topic: {topic_txt}\nActive view: {mode_label}\nClick to cycle camera sources"
+        )
 
     def _start_autonomy_clicked(self):
         self._append_log("Commencing mission!")
@@ -2701,6 +2899,14 @@ class RosWorker(QThread):
                 pass
 
     @Slot()
+    def cycle_camera_state(self):
+        if self._node is not None and self._ready and not self._stop:
+            try:
+                self._node.cycle_camera_state()
+            except Exception:
+                pass
+
+    @Slot()
     def cancel_waypoints(self):
         if self._node is not None and self._ready and not self._stop:
             try:
@@ -2729,7 +2935,7 @@ def main():
     app.setDesktopFileName("forestguard-ui")
 
     icon_path = os.environ.get("UI_APP_ICON", os.path.expanduser(
-        "~/git/RS1/john_branch/src/forestguard_ui/assets/app_icon.png"
+        "~/git/RS1-ForestGuard/main/src/forestguard_ui/assets/app_icon.png"
     ))
     if os.path.exists(icon_path):
         app.setWindowIcon(QIcon(icon_path))

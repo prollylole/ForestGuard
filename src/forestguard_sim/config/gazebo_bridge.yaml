@@ -68,12 +68,26 @@
   gz_type_name: "ignition.msgs.PointCloudPacked"
   direction: GZ_TO_ROS
 
-# # Camera: info
-# - ros_topic_name: "/camera/info"
-#   gz_topic_name: "/model/husky/camera/info"
-#   ros_type_name: "sensor_msgs/msg/CameraInfo"
-#   gz_type_name: "ignition.msgs.CameraInfo"
-#   direction: GZ_TO_ROS    
+# Rear camera
+- ros_topic_name: "/rear_camera/image"
+  gz_topic_name: "/model/husky/rear_camera/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "ignition.msgs.Image"
+  direction: GZ_TO_ROS
+
+# Left camera
+- ros_topic_name: "/left_camera/image"
+  gz_topic_name: "/model/husky/left_camera/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "ignition.msgs.Image"
+  direction: GZ_TO_ROS
+
+# Right camera
+- ros_topic_name: "/right_camera/image"
+  gz_topic_name: "/model/husky/right_camera/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "ignition.msgs.Image"
+  direction: GZ_TO_ROS
 
 # # GPS
 # - ros_topic_name: "/gps/fix"
