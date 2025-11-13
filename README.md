@@ -11,7 +11,7 @@ This README documents how to install, run, and tune the final integrated code (b
 GitHub repository:
 [https://github.com/prollylole/ForestGuard.git](https://github.com/prollylole/ForestGuard.git)
 
-Final integrated code lives on the `john_branch` branch.
+Final integrated code lives on the `main` branch.
 
 ---
 
