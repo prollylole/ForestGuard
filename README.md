@@ -1,5 +1,4 @@
-ForestGuard Simulation Bringup
-==============================
+# ForestGuard Simulation Bringup
 
 ForestGuard is a ROS 2 Humble–based simulation stack for a Husky-style UGV in a forest environment.
 
@@ -7,14 +6,14 @@ Everything (Ignition world, Nav2, SLAM, localisation, UI, joystick, autonomy) is
 
 This document explains:
 
-- how to build and launch the demo
-- how to use the UI
-- how the forest world + trees were generated
-- what to check if something breaks
+* how to build and launch the demo
+* how to use the UI
+* how the forest world + trees were generated
+* what to check if something breaks
 
---------------------------------------------------
-Quick start: build, source, run (single terminal)
---------------------------------------------------
+---
+
+## Quick start: build, source, run (single terminal)
 
 Open a terminal and run:
 
@@ -31,154 +30,145 @@ source install/setup.bash
 # 3. Launch full demo (sim + UI + SLAM + Nav2 + autonomy hooks)
 ros2 launch forestguard_sim forestguardmission.launch.py \
   rviz:=true ui:=true teleop:=true nav2:=true autonomy:=true
+```
 
 What you should see:
 
-    Ignition/Gazebo: forest world with Husky
+* **Ignition/Gazebo** – forest world with Husky
+* **RViz** – map, LiDAR scan, TF, costmaps, tree markers
+* **ForestGuard UI** – camera feed, LiDAR map, HSV tab, battery + joystick + mission controls
 
-    RViz: map, LiDAR scan, TF, costmaps, tree markers
+You do not need to run any extra `ros2 launch` or `ros2 run` commands for the normal workflow.
+`forestguardmission.launch.py` already starts:
 
-    ForestGuard UI: camera feed, LiDAR map, HSV tab, battery + joystick + mission controls
+* Ignition sim
+* `robot_state_publisher` + EKF
+* `ros_gz_bridge`
+* SLAM toolbox + Nav2
+* joystick / teleop stack
+* battery sim
+* ForestGuard UI
+* autonomy behaviour node
 
-You do not need to run any extra ros2 launch or ros2 run commands for the normal workflow.
-forestguardmission.launch.py already starts:
+---
 
-    Ignition sim
-
-    robot_state_publisher + EKF
-
-    ros_gz_bridge
-
-    SLAM toolbox + Nav2
-
-    joystick / teleop stack
-
-    battery sim
-
-    ForestGuard UI
-
-    autonomy behaviour node
-
-Using the UI
+## Using the UI
 
 Once the UI window appears:
 
-Teleop (manual driving)
+### Teleop (manual driving)
 
-    Plug in an Xbox-style controller (should show up as /dev/input/js0).
+* Plug in an Xbox-style controller (should show up as `/dev/input/js0`).
+* Hold **RB** (right bumper) → Teleop indicator in the UI turns **green**.
+* While RB is held, use the **left stick** to drive around the forest.
+* Use **D-pad up/down** to change speed. The UI shows the current speed scale.
 
-    Hold RB (right bumper) → Teleop indicator in the UI turns green.
+### Camera views
 
-    While RB is held, use the left stick to drive around the forest.
+* Press **Y** on the controller (or use the UI toggle) to switch between:
 
-    Use D-pad up/down to change speed. The UI shows the current speed scale.
+  * normal RGB camera feed
+  * HSV tuning view (to adjust colour thresholds for tree canopies)
+* There can be a small delay when switching feeds.
 
-Camera views
+### Mission / autonomy
 
-    Press Y on the controller (or use the UI toggle) to switch between:
+* SLAM + Nav2 are already running in the background.
+* Use **“Start mission”** (or equivalent mission button in the UI) to hand control to the autonomy behaviour.
+* The autonomy node will:
 
-        normal RGB camera feed
+  * wait for localisation to converge
+  * use LiDAR tree detections and Nav2
+  * execute the survey mission as defined in `autonomy_params.yaml`
+* At any time you can take over with teleop by holding RB; the command mux gives teleop priority.
 
-        HSV tuning view (to adjust colour thresholds for tree canopies)
+### Battery / status
 
-    There can be a small delay when switching feeds.
-
-Mission / autonomy
-
-    SLAM + Nav2 are already running in the background.
-
-    Use “Start mission” (or equivalent mission button in the UI) to hand control to the autonomy behaviour.
-
-    The autonomy node will:
-
-        wait for localisation to converge,
-
-        use LiDAR tree detections and Nav2,
-
-        execute the survey mission as defined in autonomy_params.yaml.
-
-    At any time you can take over with teleop by holding RB; the command mux gives teleop priority.
-
-Battery / status
-
-    The UI shows an estimated battery state of charge.
-
-    Driving fast (high linear/angular speeds) drains it more quickly.
-
-    This is simulated only, for UX and testing.
+* The UI shows an estimated battery state of charge.
+* Driving fast (high linear/angular speeds) drains it more quickly.
+* This is simulated only, for UX and testing.
 
 You can run almost the entire demo just by:
 
-    Running the single launch command.
+* running the single launch command, and
+* using the UI + controller.
 
-    Using the UI + controller.
+---
 
-World and tree generation workflow
+## World and tree generation workflow
 
-The forest world you see (forest_trees.sdf) is not hand-placed tree by tree. It is generated from:
+The forest world you see (`forest_trees.sdf`) is not hand-placed tree by tree. It is generated from:
 
-    A terrain mesh (DAE) with hills/ground.
+* a **terrain mesh** (DAE) with hills/ground
+* a set of **(x, y) tree positions**, typically generated by a Poisson disk sampler so trees are nicely spaced
+* Python scripts in `scripts/` that:
 
-    A set of (x, y) tree positions, typically generated by a Poisson disk sampler so trees are nicely spaced.
+  * snap tree positions onto the terrain height, and
+  * write an SDF world file with the tree models placed at those coordinates
 
-    Python scripts in scripts/ that:
+Key scripts (in `ForestGuard/scripts`):
 
-        snap tree positions onto the terrain height, and
+* **`mesh_height_to_sdf.py`**
+  Takes a terrain mesh and a list of tree (x, y) positions, casts rays down to find the correct z-height, and writes out an SDF with trees at the right height.
 
-        write an SDF world file with the tree models placed at those coordinates.
+* **`daeheightmap.py`**
+  Utility for working with DAE terrain and sampling heights / building heightmaps (used as part of the early world-building pipeline).
 
-Key scripts (in ForestGuard/scripts):
+### Typical workflow to make your own forest variant
 
-    mesh_height_to_sdf.py
-    Takes a terrain mesh and a list of tree (x, y) positions, casts rays down to find the correct z-height, and writes out an SDF with trees at the right height.
+1. **Generate tree XY points**
 
-    daeheightmap.py
-    Utility for working with DAE terrain and sampling heights / building heightmaps (used as part of the early world-building pipeline).
+   * Either use the existing CSV of tree positions, or generate your own Poisson-disk set (e.g. in Python, MATLAB, etc.).
+   * Make sure the coordinate frame matches the terrain mesh (usually metres in the same plane as the robot).
 
-Typical workflow to make your own forest variant:
+2. **Snap trees to terrain and build a new SDF**
 
-    Generate tree XY points
+   * Run `mesh_height_to_sdf.py` with your terrain mesh and tree CSV.
+   * For example (exact arguments may differ, check `--help`):
 
-        Either use the existing CSV of tree positions, or generate your own Poisson-disk set (e.g. in Python, MATLAB, etc.).
+     ```bash
+     cd ~/git/RS1/ForestGuard
+     python3 scripts/mesh_height_to_sdf.py --help
+     # then something like:
+     # python3 scripts/mesh_height_to_sdf.py \
+     #   --mesh forestguard_sim/worlds/forest_env.dae \
+     #   --trees data/trees_poisson.csv \
+     #   --output forestguard_sim/worlds/forest_trees_custom.sdf
+     ```
 
-        Make sure the coordinate frame matches the terrain mesh (usually metres in the same plane as the robot).
+3. **Point the launch file at your new world (optional)**
 
-    Snap trees to terrain and build a new SDF
+   In `forestguard_sim/launch/forestguardmission.launch.py` there is a line that sets:
 
-        Run mesh_height_to_sdf.py with your terrain mesh and tree CSV.
+   ```python
+   world_path = os.path.join(pkg_path, 'worlds', 'forest_trees.sdf')
+   ```
 
-        For example (exact arguments may differ, check --help):
+   Change `'forest_trees.sdf'` to your new file (e.g. `'forest_trees_custom.sdf'`), or overwrite the existing one.
 
-    cd ~/git/RS1/ForestGuard
-    python3 scripts/mesh_height_to_sdf.py --help
-    # then something like:
-    # python3 scripts/mesh_height_to_sdf.py \
-    #   --mesh forestguard_sim/worlds/forest_env.dae \
-    #   --trees data/trees_poisson.csv \
-    #   --output forestguard_sim/worlds/forest_trees_custom.sdf
+4. **Rebuild and run**
 
-Point the launch file at your new world (optional)
-
-    In forestguard_sim/launch/forestguardmission.launch.py there is a line that sets:
-
-    world_path = os.path.join(pkg_path, 'worlds', 'forest_trees.sdf')
-
-    Change 'forest_trees.sdf' to your new file (e.g. 'forest_trees_custom.sdf'), or overwrite the existing one.
-
-Rebuild and run
-
-    cd ~/git/RS1/ForestGuard
-    colcon build --symlink-install
-    source install/setup.bash
-    ros2 launch forestguard_sim forestguardmission.launch.py rviz:=true ui:=true teleop:=true nav2:=true autonomy:=true
+   ```bash
+   cd ~/git/RS1/ForestGuard
+   colcon build --symlink-install
+   source install/setup.bash
+   ros2 launch forestguard_sim forestguardmission.launch.py \
+     rviz:=true ui:=true teleop:=true nav2:=true autonomy:=true
+   ```
 
 You should now see your new tree layout in both Ignition and RViz (LiDAR tree markers, coloured trunks, etc.).
-Optional shortcuts (bashrc and helper script)
 
-If you are using this a lot, you can make it “feel” like an app installed on your machine.
+---
 
-    Put this at the end of ~/.bashrc:
+## Optional shortcuts (bashrc and helper script)
 
+If you are using this a lot, you can make it feel like an app installed on your machine.
+
+### `~/.bashrc`
+
+Put this at the end of `~/.bashrc`:
+
+```bash
 # ROS 2 Humble
 if [ -f /opt/ros/humble/setup.bash ]; then
   source /opt/ros/humble/setup.bash
@@ -195,22 +185,55 @@ export GZ_SIM_RESOURCE_PATH="$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard
 
 # User scripts
 export PATH="$HOME/bin:$PATH"
+```
 
-    Create forestguard_demo.sh in ~/bin (as above).
-    After that, a new terminal is enough to run:
+### Helper script
 
+Create `forestguard_demo.sh` in `~/bin`:
+
+```bash
+mkdir -p "$HOME/bin"
+
+cat > "$HOME/bin/forestguard_demo.sh" << 'EOF'
+#!/usr/bin/env bash
+# Launch full ForestGuard demo from a single command
+
+source /opt/ros/humble/setup.bash
+
+if [ -f "$HOME/git/RS1/install/setup.bash" ]; then
+  source "$HOME/git/RS1/install/setup.bash"
+fi
+
+export IGN_GAZEBO_RESOURCE_PATH="$IGN_GAZEBO_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
+export GZ_SIM_RESOURCE_PATH="$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
+
+ros2 launch forestguard_sim forestguardmission.launch.py \
+  rviz:=true ui:=true teleop:=true nav2:=true autonomy:=true
+EOF
+
+chmod +x "$HOME/bin/forestguard_demo.sh"
+```
+
+After that, a new terminal is enough to run:
+
+```bash
 forestguard_demo.sh
+```
 
 and the whole stack comes up.
-If something breaks (dependencies and fixes)
+
+---
+
+## If something breaks (dependencies and fixes)
 
 Most lab machines and dev environments for 41068 should already have the right stack.
 If you get errors, these are the main things to check.
 
-    colcon build fails with missing packages
+### `colcon build` fails with missing packages
 
 Install the main ROS packages:
 
+```bash
 sudo apt update
 
 sudo apt install \
@@ -219,62 +242,66 @@ sudo apt install \
   ros-humble-robot-state-publisher ros-humble-robot-localization \
   ros-humble-ros-gz-bridge ros-humble-ros-gz-sim \
   ros-humble-rviz2
+```
 
-    Python import errors
+### Python import errors
 
+```bash
 pip install numpy opencv-python shapely matplotlib pyyaml trimesh PySide6
+```
 
-    Gazebo can’t find the world / models
+### Gazebo can’t find the world / models
 
-Make sure the Ignition resource path is set (either via ~/.bashrc or before launching):
+Make sure the Ignition resource path is set (either via `~/.bashrc` or before launching):
 
+```bash
 export IGN_GAZEBO_RESOURCE_PATH=$IGN_GAZEBO_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds
 export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds
+```
 
-    Joystick does nothing
+### Joystick does nothing
 
-    Check the device exists:
+* Check the device exists:
 
-    ls /dev/input/js*
+  ```bash
+  ls /dev/input/js*
+  ```
 
-    Make sure your controller is seen as /dev/input/js0.
-    If not, adjust the joy_node parameters in the launch or unplug other gamepads.
+* Make sure your controller is seen as `/dev/input/js0`.
+  If not, adjust the `joy_node` parameters in the launch or unplug other gamepads.
 
-    Time / TF issues (RViz flashing, “Detected jump back in time”)
+### Time / TF issues (RViz flashing, “Detected jump back in time”)
 
-    Check you don’t have multiple Gazebo / Ignition instances running.
+* Check you don’t have multiple Gazebo / Ignition instances running.
+* Close any old sims, then re-run `forestguardmission.launch.py`.
 
-    Close any old sims, then re-run forestguardmission.launch.py.
-
-    Rendering / Ogre / Qt issues
+### Rendering / Ogre / Qt issues
 
 If Ignition complains about GL context or Qt platform, try:
 
+```bash
 export QT_QPA_PLATFORM=xcb
+```
 
 before launching the sim.
-Where to tune parameters
+
+---
+
+## Where to tune parameters
 
 Parameter files live mostly under:
 
-    forestguard_sim/config
-
-    forestguard_behaviour/config
-
-    forestguard_localisation/config
-
-    perception configs in forestguard_perception
+* `forestguard_sim/config`
+* `forestguard_behaviour/config`
+* `forestguard_localisation/config`
+* perception configs in `forestguard_perception`
 
 Key files:
 
-    nav2_params.yaml – Nav2 + costmap settings
-
-    slam_params.yaml – SLAM toolbox configuration
-
-    robot_localization.yaml – EKF for localisation
-
-    autonomy_params.yaml – mission logic (what autonomy does after “Start mission”)
-
-    perception node parameters in the forestguard_perception package
+* `nav2_params.yaml` – Nav2 + costmap settings
+* `slam_params.yaml` – SLAM toolbox configuration
+* `robot_localization.yaml` – EKF for localisation
+* `autonomy_params.yaml` – mission logic (what autonomy does after “Start mission”)
+* perception node parameters in the `forestguard_perception` package
 
 These are the main knobs to tweak if you want to change how the robot drives, plans, or detects trees.
