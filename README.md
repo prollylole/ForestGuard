@@ -1,5 +1,3 @@
-Here’s a full `README.md` you can paste straight in, with added sections for:
-
 * making the app easy to run on your machine, and
 * editing `~/.bashrc` so ROS + the workspace + Ignition paths are always sourced.
 
