@@ -1,139 +1,190 @@
-````markdown
-# ForestGuard – Handover: Code and Runbook
+ForestGuard Simulation Bringup
+==============================
 
-ForestGuard is a ROS 2 Humble-based simulation stack for a Husky-style UGV operating in a forest environment. It integrates LiDAR-based tree detection, Nav2 navigation, AMCL localisation, a custom Qt/PySide6 UI, and Xbox controller teleop.
+ForestGuard is a ROS 2 Humble–based simulation stack for a Husky-style UGV in a forest environment.
 
-This README documents how to install, run, and tune the final integrated code (branch: `main`).
+Everything (Ignition world, Nav2, SLAM, localisation, UI, joystick, autonomy) is brought up from a **single launch file**. You should almost never need extra terminals.
 
----
+This document explains:
 
-## Code Access
+- how to build and launch the demo
+- how to use the UI
+- how the forest world + trees were generated
+- what to check if something breaks
 
-GitHub repository:  
-https://github.com/prollylole/ForestGuard.git  
+--------------------------------------------------
+Quick start: build, source, run (single terminal)
+--------------------------------------------------
 
-Final integrated code lives on the `main` branch.
-
----
-
-## Prerequisites
-
-Assumed platform:
-
-- Ubuntu 22.04
-- ROS 2 Humble
-- Ignition Gazebo / Gazebo (ros-gz)
-
----
-
-## Installation
-
-### 1. System Dependencies
-
-In a terminal:
+Open a terminal and run:
 
 ```bash
-sudo apt update
+cd ~/git/RS1/ForestGuard
 
-# Colcon / tooling
-sudo apt install python3-colcon-common-extensions python3-rosdep python3-vcstool
-
-# Nav2 / teleop / joystick
-sudo apt install ros-humble-nav2-bringup ros-humble-xacro ros-humble-joy ros-humble-teleop-twist-joy
-
-# Robot model / localisation
-sudo apt install ros-humble-robot-state-publisher ros-humble-robot-localization
-
-# Gazebo bridge + sim
-sudo apt install ros-humble-ros-gz-bridge ros-humble-ros-gz-sim
-
-# Visualisation
-sudo apt install ros-humble-rviz2
-````
-
-### 2. Python Dependencies
-
-```bash
-pip install numpy opencv-python shapely matplotlib pyyaml trimesh PySide6
-```
-
----
-
-## Workspace Setup
-
-Assume a ROS 2 workspace at `~/git/RS1`:
-
-```bash
-# Create workspace
-mkdir -p ~/git/RS1/src
-cd ~/git/RS1/src
-
-# Clone repo
-git clone https://github.com/prollylole/ForestGuard.git
-
-cd ~/git/RS1
-```
-
-Install ROS dependencies:
-
-```bash
-rosdep update
-rosdep install --from-paths src --ignore-src -r -y
-```
-
-Build:
-
-```bash
+# 1. Build
+source /opt/ros/humble/setup.bash
 colcon build --symlink-install
-```
 
-Source the workspace:
-
-```bash
+# 2. Source the workspace
 source install/setup.bash
-```
 
-> If you are using a separate workspace folder called `main`, adjust the paths (e.g. `~/git/RS1/main` instead of `~/git/RS1`).
+# 3. Launch full demo (sim + UI + SLAM + Nav2 + autonomy hooks)
+ros2 launch forestguard_sim forestguardmission.launch.py \
+  rviz:=true ui:=true teleop:=true nav2:=true autonomy:=true
 
----
+What you should see:
 
-## Ignition Gazebo Environment Variables
+    Ignition/Gazebo: forest world with Husky
 
-Set the resource path so Ignition/Gazebo can find the worlds (update the path if your layout is different):
+    RViz: map, LiDAR scan, TF, costmaps, tree markers
 
-```bash
-export IGN_GAZEBO_RESOURCE_PATH=$IGN_GAZEBO_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds
-export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds
-```
+    ForestGuard UI: camera feed, LiDAR map, HSV tab, battery + joystick + mission controls
 
----
+You do not need to run any extra ros2 launch or ros2 run commands for the normal workflow.
+forestguardmission.launch.py already starts:
 
-## Making the ForestGuard App Easy to Run
+    Ignition sim
 
-You can create a small shell script so the app “exists” on your device as a one-shot command.
+    robot_state_publisher + EKF
 
-1. Create a `bin` directory (if you don’t already have one):
+    ros_gz_bridge
 
-```bash
-mkdir -p $HOME/bin
-```
+    SLAM toolbox + Nav2
 
-2. Create a script for the demo:
+    joystick / teleop stack
 
-```bash
-nano $HOME/bin/forestguard_demo.sh
-```
+    battery sim
 
-3. Paste this into the script (adjust paths if needed):
+    ForestGuard UI
 
-```bash
-#!/usr/bin/env bash
+    autonomy behaviour node
+
+Using the UI
+
+Once the UI window appears:
+
+Teleop (manual driving)
+
+    Plug in an Xbox-style controller (should show up as /dev/input/js0).
+
+    Hold RB (right bumper) → Teleop indicator in the UI turns green.
+
+    While RB is held, use the left stick to drive around the forest.
+
+    Use D-pad up/down to change speed. The UI shows the current speed scale.
+
+Camera views
+
+    Press Y on the controller (or use the UI toggle) to switch between:
+
+        normal RGB camera feed
+
+        HSV tuning view (to adjust colour thresholds for tree canopies)
+
+    There can be a small delay when switching feeds.
+
+Mission / autonomy
+
+    SLAM + Nav2 are already running in the background.
+
+    Use “Start mission” (or equivalent mission button in the UI) to hand control to the autonomy behaviour.
+
+    The autonomy node will:
+
+        wait for localisation to converge,
+
+        use LiDAR tree detections and Nav2,
+
+        execute the survey mission as defined in autonomy_params.yaml.
+
+    At any time you can take over with teleop by holding RB; the command mux gives teleop priority.
+
+Battery / status
+
+    The UI shows an estimated battery state of charge.
+
+    Driving fast (high linear/angular speeds) drains it more quickly.
+
+    This is simulated only, for UX and testing.
+
+You can run almost the entire demo just by:
+
+    Running the single launch command.
+
+    Using the UI + controller.
+
+World and tree generation workflow
+
+The forest world you see (forest_trees.sdf) is not hand-placed tree by tree. It is generated from:
+
+    A terrain mesh (DAE) with hills/ground.
+
+    A set of (x, y) tree positions, typically generated by a Poisson disk sampler so trees are nicely spaced.
+
+    Python scripts in scripts/ that:
+
+        snap tree positions onto the terrain height, and
+
+        write an SDF world file with the tree models placed at those coordinates.
+
+Key scripts (in ForestGuard/scripts):
+
+    mesh_height_to_sdf.py
+    Takes a terrain mesh and a list of tree (x, y) positions, casts rays down to find the correct z-height, and writes out an SDF with trees at the right height.
+
+    daeheightmap.py
+    Utility for working with DAE terrain and sampling heights / building heightmaps (used as part of the early world-building pipeline).
+
+Typical workflow to make your own forest variant:
+
+    Generate tree XY points
+
+        Either use the existing CSV of tree positions, or generate your own Poisson-disk set (e.g. in Python, MATLAB, etc.).
+
+        Make sure the coordinate frame matches the terrain mesh (usually metres in the same plane as the robot).
+
+    Snap trees to terrain and build a new SDF
+
+        Run mesh_height_to_sdf.py with your terrain mesh and tree CSV.
+
+        For example (exact arguments may differ, check --help):
+
+    cd ~/git/RS1/ForestGuard
+    python3 scripts/mesh_height_to_sdf.py --help
+    # then something like:
+    # python3 scripts/mesh_height_to_sdf.py \
+    #   --mesh forestguard_sim/worlds/forest_env.dae \
+    #   --trees data/trees_poisson.csv \
+    #   --output forestguard_sim/worlds/forest_trees_custom.sdf
+
+Point the launch file at your new world (optional)
+
+    In forestguard_sim/launch/forestguardmission.launch.py there is a line that sets:
+
+    world_path = os.path.join(pkg_path, 'worlds', 'forest_trees.sdf')
+
+    Change 'forest_trees.sdf' to your new file (e.g. 'forest_trees_custom.sdf'), or overwrite the existing one.
+
+Rebuild and run
+
+    cd ~/git/RS1/ForestGuard
+    colcon build --symlink-install
+    source install/setup.bash
+    ros2 launch forestguard_sim forestguardmission.launch.py rviz:=true ui:=true teleop:=true nav2:=true autonomy:=true
+
+You should now see your new tree layout in both Ignition and RViz (LiDAR tree markers, coloured trunks, etc.).
+Optional shortcuts (bashrc and helper script)
+
+If you are using this a lot, you can make it “feel” like an app installed on your machine.
+
+    Put this at the end of ~/.bashrc:
 
 # ROS 2 Humble
-source /opt/ros/humble/setup.bash
+if [ -f /opt/ros/humble/setup.bash ]; then
+  source /opt/ros/humble/setup.bash
+fi
 
 # ForestGuard workspace
-# If you built in ~/git/RS1/main, change this to that install path.
 if [ -f "$HOME/git/RS1/install/setup.bash" ]; then
   source "$HOME/git/RS1/install/setup.bash"
 fi
@@ -142,250 +193,88 @@ fi
 export IGN_GAZEBO_RESOURCE_PATH="$IGN_GAZEBO_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
 export GZ_SIM_RESOURCE_PATH="$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
 
-# Launch the main simulation + UI + RViz
-ros2 launch forestguard_sim JOHNAUTO2.launch.py \
-  rviz:=true ui:=true teleop:=true amcl:=true slam:=false map:=true
-```
-
-4. Make it executable:
-
-```bash
-chmod +x $HOME/bin/forestguard_demo.sh
-```
-
-5. (Optional) Add `~/bin` to your PATH (see next section). Then you can run:
-
-```bash
-forestguard_demo.sh
-```
-
-from any terminal to start the app.
-
----
-
-## Persisting Environment Setup in `~/.bashrc`
-
-To avoid manually sourcing ROS and the workspace every time, you can add this snippet to the end of your `~/.bashrc`.
-
-1. Open `~/.bashrc`:
-
-```bash
-nano ~/.bashrc
-```
-
-2. Add this block at the bottom (adjust paths to match your setup):
-
-```bash
-# ----- ROS 2 Humble -----
-if [ -f /opt/ros/humble/setup.bash ]; then
-  source /opt/ros/humble/setup.bash
-fi
-
-# ----- ForestGuard workspace -----
-# Change RS1 to RS1/main if that is where you built.
-if [ -f "$HOME/git/RS1/install/setup.bash" ]; then
-  source "$HOME/git/RS1/install/setup.bash"
-fi
-
-# ----- Ignition / Gazebo resources for ForestGuard -----
-export IGN_GAZEBO_RESOURCE_PATH="$IGN_GAZEBO_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
-export GZ_SIM_RESOURCE_PATH="$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
-
-# ----- User scripts (e.g. forestguard_demo.sh) -----
+# User scripts
 export PATH="$HOME/bin:$PATH"
-```
 
-3. Reload your shell config:
+    Create forestguard_demo.sh in ~/bin (as above).
+    After that, a new terminal is enough to run:
 
-```bash
-source ~/.bashrc
-```
+forestguard_demo.sh
 
-From now on, every new terminal will:
+and the whole stack comes up.
+If something breaks (dependencies and fixes)
 
-* have ROS 2 Humble sourced,
-* have the ForestGuard workspace sourced (if present),
-* have the Ignition/Gazebo resource paths set, and
-* have `$HOME/bin` in `PATH` so you can run `forestguard_demo.sh` directly.
+Most lab machines and dev environments for 41068 should already have the right stack.
+If you get errors, these are the main things to check.
 
----
+    colcon build fails with missing packages
 
-## Optional: Data Logging (rosbag2)
+Install the main ROS packages:
 
-```bash
-sudo apt install ros-humble-rosbag2 ros-humble-rosbag2-storage-default-plugins
-```
+sudo apt update
 
----
+sudo apt install \
+  python3-colcon-common-extensions python3-rosdep python3-vcstool \
+  ros-humble-nav2-bringup ros-humble-xacro ros-humble-joy ros-humble-teleop-twist-joy \
+  ros-humble-robot-state-publisher ros-humble-robot-localization \
+  ros-humble-ros-gz-bridge ros-humble-ros-gz-sim \
+  ros-humble-rviz2
 
-## Using a Joystick (Xbox Controller)
+    Python import errors
 
-Check that the joystick is detected:
+pip install numpy opencv-python shapely matplotlib pyyaml trimesh PySide6
 
-```bash
-ls /dev/input/js*
-```
+    Gazebo can’t find the world / models
 
-Start the ROS 2 joystick node (in a sourced terminal):
+Make sure the Ignition resource path is set (either via ~/.bashrc or before launching):
 
-```bash
-ros2 run joy joy_node
-```
+export IGN_GAZEBO_RESOURCE_PATH=$IGN_GAZEBO_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds
+export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds
 
-The ForestGuard UI expects an Xbox-style controller with:
+    Joystick does nothing
 
-* Right bumper (RB): teleop gate (hold to authorise manual movement)
-* Left stick: linear and angular velocity
-* D-pad up/down: speed scaling
-* Y button: camera feed toggle (normal vs HSV tuning)
+    Check the device exists:
 
----
+    ls /dev/input/js*
 
-## Main Launch Commands
+    Make sure your controller is seen as /dev/input/js0.
+    If not, adjust the joy_node parameters in the launch or unplug other gamepads.
 
-Open a terminal (with ROS + workspace sourced, either manually or via `.bashrc`).
+    Time / TF issues (RViz flashing, “Detected jump back in time”)
 
-### 1. Simulation + UI + RViz
+    Check you don’t have multiple Gazebo / Ignition instances running.
 
-```bash
-ros2 launch forestguard_sim JOHNAUTO2.launch.py \
-  rviz:=true ui:=true teleop:=true amcl:=true slam:=false map:=true
-```
+    Close any old sims, then re-run forestguardmission.launch.py.
 
-This should open three windows:
+    Rendering / Ogre / Qt issues
 
-1. **RViz** – live LiDAR scan, TF, costmaps, tree markers
-2. **ForestGuard UI** – live camera feed, HSV tuning, LiDAR map, costmap, joystick + battery status
-3. **Ignition/Gazebo** – simulated forest environment with robot model
+If Ignition complains about GL context or Qt platform, try:
 
-### 2. Autonomy / Behaviour Layer
+export QT_QPA_PLATFORM=xcb
 
-In a second sourced terminal:
+before launching the sim.
+Where to tune parameters
 
-```bash
-ros2 launch forestguard_behaviour autonomy_bringup.launch.py \
-  rviz:=true ui:=true teleop:=true amcl:=true slam:=false map:=true
-```
+Parameter files live mostly under:
 
-This brings up Nav2, AMCL, and the autonomy nodes that use the LiDAR tree detections and mission logic.
+    forestguard_sim/config
 
----
+    forestguard_behaviour/config
 
-## Running the Scenario (Xbox + UI)
+    forestguard_localisation/config
 
-1. Plug in the Xbox controller and ensure `/dev/input/js0` exists.
-2. Start `joy_node` (see above).
-3. With the UI running, **hold RB**:
+    perception configs in forestguard_perception
 
-   * The Teleop indicator in the UI should turn **green** while RB is held.
-   * While green, the robot will respond to joystick commands.
-4. Use the left stick to drive the robot in the Gazebo world.
-5. Use D-pad up/down to adjust speed; the UI shows the current speed scaling.
-6. Press `Y` to toggle between:
+Key files:
 
-   * Standard camera feed
-   * HSV tuning camera feed (for adjusting colour thresholds)
+    nav2_params.yaml – Nav2 + costmap settings
 
-Known behaviour:
+    slam_params.yaml – SLAM toolbox configuration
 
-* Switching camera feeds with `Y` can have a small delay before the new feed appears.
-* Teleop is only active while RB is held; if the indicator on the UI is not green, the robot will not move.
+    robot_localization.yaml – EKF for localisation
 
----
+    autonomy_params.yaml – mission logic (what autonomy does after “Start mission”)
 
-## Key Parameters
+    perception node parameters in the forestguard_perception package
 
-Below are the main parameters you may want to tune. Exact parameter files live under the relevant packages (e.g. `forestguard_localisation`, `forestguard_sim`, etc.).
-
-### Perception (LiDAR Tree Detection)
-
-| Parameter            | Purpose                                            | Example |
-| -------------------- | -------------------------------------------------- | ------- |
-| `min_sep_m`          | Minimum distance between tree detections (m)       | `3.0`   |
-| `deadzone_frac`      | Fraction of LiDAR scan ignored near robot          | `0.5`   |
-| `cluster_break_m`    | Distance threshold for LiDAR cluster splitting (m) | `0.20`  |
-| `adaptive_break_k`   | Adaptive scaling factor for cluster breaking       | `2.0`   |
-| `trunk_r_min_m`      | Minimum expected trunk radius (m)                  | `0.06`  |
-| `trunk_r_max_m`      | Maximum expected trunk radius (m)                  | `0.50`  |
-| `max_range_m`        | Maximum LiDAR detection range (m)                  | `12.0`  |
-| `min_arc_deg`        | Minimum arc span for detection (degrees)           | `20.0`  |
-| `max_cluster_span_m` | Maximum span of detected cluster (m)               | `1.2`   |
-| `circularity_min`    | Minimum circularity threshold for trunk detection  | `0.35`  |
-| `marker_scale_m`     | Size of visualisation markers                      | `0.35`  |
-| `marker_lifetime_s`  | Marker lifetime in RViz (0 = infinite)             | `0.0`   |
-
-### AMCL / Navigation
-
-| Parameter             | Purpose                                            | Example |
-| --------------------- | -------------------------------------------------- | ------- |
-| `cov_threshold`       | Covariance threshold for “converged” localisation  | `0.10`  |
-| `rotation_speed`      | Spin speed (rad/s) while waiting for convergence   | `0.50`  |
-| `transform_tolerance` | TF time tolerance (s) for `map`↔`odom`↔`base_link` | `1.0`   |
-| `update_min_a`        | Min rotation (rad) before filter update            | `0.20`  |
-| `update_min_d`        | Min translation (m) before filter update           | `0.25`  |
-| `max_particles`       | Max AMCL particles                                 | `2000`  |
-| `min_particles`       | Min AMCL particles                                 | `500`   |
-
-### Global / Local Costmap
-
-| Parameter                             | Purpose                               | Example |
-| ------------------------------------- | ------------------------------------- | ------- |
-| `update_frequency`                    | Costmap update frequency (Hz)         | `1.0`   |
-| `publish_frequency`                   | Costmap publish frequency (Hz)        | `1.0`   |
-| `track_unknown_space` (global)        | Track unknown space                   | `True`  |
-| `obstacle_layer.enabled`              | Enable obstacle layer                 | `True`  |
-| `obstacle_layer.max_obstacle_height`  | Max obstacle height (m)               | `2.0`   |
-| `inflation_layer.cost_scaling_factor` | Cost decay rate vs distance           | `3.0`   |
-| `inflation_layer.inflation_radius`    | Inflation radius around obstacles (m) | `0.55`  |
-
-### Xbox UI / Battery / Controller Model
-
-| Parameter            | Purpose                        | Example         |
-| -------------------- | ------------------------------ | --------------- |
-| `voltage_full`       | Fully charged voltage (V)      | `12.0`          |
-| `voltage_empty`      | Empty voltage (V)              | `5.0`           |
-| `idle_drain_per_sec` | Idle drain rate (1/s)          | `1.0/600.0`     |
-| `k_lin`              | Linear drain multiplier        | `3.0`           |
-| `k_ang`              | Angular drain multiplier       | `1.5`           |
-| `v_max`              | Max linear speed (m/s)         | `0.60`          |
-| `W_max`              | Max angular speed (rad/s)      | `1.5`           |
-| `initial_soc`        | Initial state of charge (0–1)  | `1.0`           |
-| `lin_scale`          | UI joystick linear scaling     | `0.5`           |
-| `ang_scale`          | UI joystick angular scaling    | `1.0`           |
-| `fallback_cameras`   | Priority list of camera topics | `/camera/image` |
-
-### Environment (Gazebo World)
-
-| Parameter               | Purpose                      | Example                  |
-| ----------------------- | ---------------------------- | ------------------------ |
-| `gravity`               | Gravitational acceleration   | `0 0 -9.81`              |
-| `magnetic_field`        | Environmental magnetic field | `6e-06 2.3e-05 -4.2e-05` |
-| `max_step_size`         | Physics time step            | `0.001`                  |
-| `real_time_update_rate` | Physics update rate (Hz)     | `1000`                   |
-| `ambient`               | Ambient light colour         | `0.4 0.4 0.4 0.4`        |
-| `background`            | Scene background colour      | `0.6 0.8 1.0 1.0`        |
-| `sun`                   | Directional light direction  | `-0.5 0.5 -1`            |
-| `Forest_env`            | Terrain model                | `model://forest_env`     |
-
----
-
-## Notes / Known Issues
-
-* Camera feed switching via the Xbox `Y` button may have a short delay.
-* Teleop is only active while RB is held; if the indicator on the UI is not green, the robot will not move.
-* If AMCL does not converge (high covariance), navigation goals may fail or behave erratically; check `cov_threshold`, initial pose, and sensor topics.
-
----
-
-## Further Development
-
-For further development and detailed tuning, see the parameter YAML files and launch files under the ForestGuard packages:
-
-* `forestguard_sim`
-* `forestguard_behaviour`
-* `forestguard_localisation`
-
-These contain the full configuration used in the final integrated system.
-
-```
-```
+These are the main knobs to tweak if you want to change how the robot drives, plans, or detects trees.
