@@ -63,13 +63,23 @@ Once the UI window appears:
 * While RB is held, use the **left stick** to drive around the forest.
 * Use **D-pad up/down** to change speed. The UI shows the current speed scale.
 
-### Camera views
+### Camera views and HSV mode
 
-* Press **Y** on the controller (or use the UI toggle) to switch between:
+* Press **A** to cycle the active camera view between:
 
-  * normal RGB camera feed
-  * HSV tuning view (to adjust colour thresholds for tree canopies)
-* There can be a small delay when switching feeds.
+  * **front**
+  * **rear**
+  * **left**
+  * **right**
+
+  The selected view is shown in the camera panel in the UI.
+
+* Press **Y** to toggle **HSV mode** on/off for the currently selected camera:
+
+  * HSV **off** → normal RGB camera feed.
+  * HSV **on** → HSV tuning view, with colours remapped for debugging and the HSV sliders active so you can tune canopy thresholds.
+
+There can be a small delay when switching views or toggling HSV mode.
 
 ### Mission / autonomy
 
@@ -186,41 +196,6 @@ export GZ_SIM_RESOURCE_PATH="$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard
 # User scripts
 export PATH="$HOME/bin:$PATH"
 ```
-
-### Helper script
-
-Create `forestguard_demo.sh` in `~/bin`:
-
-```bash
-mkdir -p "$HOME/bin"
-
-cat > "$HOME/bin/forestguard_demo.sh" << 'EOF'
-#!/usr/bin/env bash
-# Launch full ForestGuard demo from a single command
-
-source /opt/ros/humble/setup.bash
-
-if [ -f "$HOME/git/RS1/install/setup.bash" ]; then
-  source "$HOME/git/RS1/install/setup.bash"
-fi
-
-export IGN_GAZEBO_RESOURCE_PATH="$IGN_GAZEBO_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
-export GZ_SIM_RESOURCE_PATH="$GZ_SIM_RESOURCE_PATH:$HOME/git/RS1/src/ForestGuard/forestguard_sim/worlds"
-
-ros2 launch forestguard_sim forestguardmission.launch.py \
-  rviz:=true ui:=true teleop:=true nav2:=true autonomy:=true
-EOF
-
-chmod +x "$HOME/bin/forestguard_demo.sh"
-```
-
-After that, a new terminal is enough to run:
-
-```bash
-forestguard_demo.sh
-```
-
-and the whole stack comes up.
 
 ---
 
