@@ -1,0 +1,38 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Palette: light-on-dark UI -->
+  <defs>
+    <linearGradient id="g" x1="512" y1="64" x2="512" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDEDED"/>
+      <stop offset="1" stop-color="#CFCFCF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield silhouette -->
+  <path d="M512 80c145 76 255 76 360 40v338c0 226-175 373-360 486-185-113-360-260-360-486V120c105 36 215 36 360-40Z"
+        fill="url(#g)"/>
+
+  <!-- Inner cutout (shield rim) -->
+  <path d="M512 148c126 63 221 63 312 33v274c0 190-149 315-312 414-163-99-312-224-312-414V181c91 30 186 30 312-33Z"
+        fill="#111111"/>
+
+  <!-- Drone body (negative cut) -->
+  <g fill="#EDEDED">
+    <!-- central body -->
+    <circle cx="512" cy="470" r="70"/>
+    <!-- arms -->
+    <rect x="499" y="300" width="26" height="340" rx="13"/>
+    <rect x="340" y="457" width="344" height="26" rx="13"/>
+    <!-- motors / props (stylised) -->
+    <g opacity="0.98">
+      <circle cx="512" cy="300" r="42"/>
+      <circle cx="512" cy="640" r="42"/>
+      <circle cx="340" cy="470" r="42"/>
+      <circle cx="684" cy="470" r="42"/>
+      <!-- prop arcs -->
+      <path d="M512 242a58 58 0 0 1 58 58" stroke="#EDEDED" stroke-width="18" stroke-linecap="round"/>
+      <path d="M512 698a58 58 0 0 0 58-58" stroke="#EDEDED" stroke-width="18" stroke-linecap="round"/>
+      <path d="M282 470a58 58 0 0 0 58 58" stroke="#EDEDED" stroke-width="18" stroke-linecap="round"/>
+      <path d="M742 470a58 58 0 0 1-58 58" stroke="#EDEDED" stroke-width="18" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
