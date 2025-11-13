@@ -1,6 +1,3 @@
-* making the app easy to run on your machine, and
-* editing `~/.bashrc` so ROS + the workspace + Ignition paths are always sourced.
-
 ````markdown
 # ForestGuard – Handover: Code and Runbook
 
